@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 
+import SearchBar from '../components/search';
+
 class Taggable extends Component {
   render () {
     return (
-      <div>Hello world</div>
+      <div>
+        <SearchBar />
+      </div>
     );
   }
 }
