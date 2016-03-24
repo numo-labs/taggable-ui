@@ -3,7 +3,6 @@ module.exports = {
     javascript: './src/index.js',
     html: './src/index.html'
   },
-
   output: {
     filename: 'index.js',
     path: __dirname + '/dist'
