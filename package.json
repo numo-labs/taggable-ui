@@ -1,0 +1,47 @@
+{
+  "name": "taggable-ui",
+  "version": "1.0.0",
+  "description": "An effortless &amp; intuitive UI for the taggable (tagging) service. (React, Redux &amp; GraphQL)",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "npm run lint && mocha test/**/*.test.js --compilers js:babel-register",
+    "dev:serve": "webpack-dev-server --config --hot --inline ./webpack.config.js",
+    "build": "webpack --progress"
+  },
+  "lint": "semistandard",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/numo-labs/taggable-ui.git"
+  },
+  "keywords": [
+    "tag"
+  ],
+  "author": "Nikki Ravi & Jack Carlisle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/numo-labs/taggable-ui/issues"
+  },
+  "homepage": "https://github.com/numo-labs/taggable-ui#readme",
+  "devDependencies": {
+    "babel-core": "^6.7.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "file-loader": "^0.8.5",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-hot-loader": "^1.3.0",
+    "react-redux": "^4.4.1",
+    "redux": "^3.3.1",
+    "redux-logger": "^2.6.1",
+    "redux-thunk": "^2.0.1",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "semistandard": {
+    "globals": [
+      "describe",
+      "it"
+    ]
+  },
+}
