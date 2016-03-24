@@ -48,9 +48,13 @@
   },
   "dependencies": {
     "chai": "^3.5.0",
+    "css-loader": "^0.23.1",
     "enzyme": "^2.2.0",
+    "file-loader": "^0.8.5",
     "mocha": "^2.4.5",
     "semistandard": "^7.0.5",
-    "sinon": "^1.17.3"
+    "sinon": "^1.17.3",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7"
   }
 }
