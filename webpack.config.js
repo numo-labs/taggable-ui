@@ -1,3 +1,5 @@
+var NpmInstallPlugin = require('npm-install-webpack-plugin');
+
 module.exports = {
   entry: {
     javascript: './src/index.js',
@@ -17,7 +19,18 @@ module.exports = {
       {
         test: /\.html$/,
         loader: 'file?name=[name].[ext]'
+      },
+      {
+        test: /\.png$/,
+        loader: 'url-loader?mimetype=image/png'
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
       }
     ]
-  }
+  },
+  plugins: [
+    new NpmInstallPlugin()
+  ]
 };
