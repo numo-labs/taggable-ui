@@ -1,12 +1,10 @@
 import React from 'react';
-import jsdom from 'mocha-jsdom';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import TaggableContainer from '../../src/containers/taggable';
 
-describe('containers', function () {
-  jsdom();
+describe('Containers', function () {
   const wrapper = shallow(<TaggableContainer />);
   const children = wrapper.children().nodes;
   describe('<TaggableContainer />', function () {
