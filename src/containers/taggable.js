@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import TaggableUI from '../components/taggable-ui';
 
-import SearchBar from '../components/search';
-
-class Taggable extends Component {
-  render () {
-    return (
-      <div>
-        <SearchBar />
-      </div>
-    );
-  }
+function mapStateToProps (state) {
+  console.log(state);
+  const { taggable: { tags } } = state;
+  return {
+    tags
+  };
 }
 
-export default Taggable;
+export default connect(mapStateToProps)(TaggableUI);

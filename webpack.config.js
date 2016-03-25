@@ -31,6 +31,8 @@ module.exports = {
     ]
   },
   plugins: [
-    new NpmInstallPlugin()
+    new NpmInstallPlugin({
+      save: true
+    })
   ]
 };
