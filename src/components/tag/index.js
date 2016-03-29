@@ -8,7 +8,7 @@ class Tag extends Component {
     return (
       <Button className='tag'>
         <div onClick={onHandleClick}>
-          <h3>{tagName}</h3>
+          <h4>{tagName}</h4>
         </div>
       </Button>
     );
