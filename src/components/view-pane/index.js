@@ -27,15 +27,16 @@ class ViewPane extends Component {
       return (
         <Input key={item.key} wrapperClassName='wrapper'>
           <Row>
-            <Col xs={3}>
+            <Col xs={6}>
               <input type='text' className='form-control' value={item.key} />
             </Col>
-            <Col xs={3}>
+            <Col xs={6}>
               {item.values.map(value => {
                 return (
                   <input key={value} type='text' className='form-control' value={value} />
                 );
               })}
+              <input type='text' className='form-control' placeholder='add value'/>
             </Col>
           </Row>
         </Input>
@@ -43,18 +44,26 @@ class ViewPane extends Component {
     });
     return (
       <div>
-        <Input type='text' label='ID :' labelClassName='col-xs-2' wrapperClassName='col-xs-10' value={id}/>
-        <Input type='text' label='Display name :' labelClassName='col-xs-2' wrapperClassName='col-xs-10' value={displayName}/>
+        <Input type='text' label='ID :' labelClassName='col-xs-6' wrapperClassName='col-xs-10' value={id}/>
+        <Input type='text' label='Display name :' labelClassName='col-xs-6' wrapperClassName='col-xs-10' value={displayName}/>
         <div className='content'>
         <Row>
-          <Col xs={3}>
+          <Col xs={2}>
             <label>Keys</label>
           </Col>
-          <Col xs={3}>
+          <Col xs={12}>
             <label>Values</label>
           </Col>
         </Row>
         {metadataContent}
+        <Row>
+          <Col xs={6}>
+            <input type='text' className='form-control' placeholder='add new key' />
+          </Col>
+          <Col xs={6}>
+            <input type='text' className='form-control' placeholder='add value' />
+          </Col>
+          </Row>
         </div>
       </div>
     );
