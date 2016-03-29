@@ -7,7 +7,7 @@ class Tag extends Component {
     const { tagName, onHandleClick } = this.props;
     return (
       <Button className='tag' bsSize='small' onClick={onHandleClick}>
-        <h4>{tagName}</h4>
+        <h5>{tagName}</h5>
       </Button>
     );
   }
