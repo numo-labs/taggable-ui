@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Tag from '../tag';
 import Button from '../button';
+import './styles.css';
 
 class TagList extends Component {
   render () {
@@ -14,9 +15,9 @@ class TagList extends Component {
       );
     });
     return (
-      <ul>
+      <div className='list'>
         {list}
-      </ul>
+      </div>
     );
   }
 }

@@ -1,5 +1,3 @@
-.listItem {
-  text-align: center;
-  width: 100%;
-  display: inline-block;
+.list {
+  padding-left: 0.5em;
 }
