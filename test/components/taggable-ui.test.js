@@ -24,5 +24,9 @@ describe('Components', function () {
       expect(secondChild).to.deep.equal(linkedTags);
       done();
     });
+    it('should have props for tags', function (done) {
+      expect(wrapper.props().tags).to.be.defined;
+      done();
+    });
   });
 });
