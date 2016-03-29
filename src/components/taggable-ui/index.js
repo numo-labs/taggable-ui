@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import LinkedTags from '../linked-tags';
 import SearchPane from '../search-pane';
+import { Col } from 'react-bootstrap';
 
 require('./styles.css');
 class TaggableUI extends Component {
@@ -8,9 +9,15 @@ class TaggableUI extends Component {
     const { tags } = this.props;
     return (
       <div className='ui'>
-        <SearchPane listItems={tags} containerClass='ui__left_pane'/>
-        <LinkedTags listItems={tags} containerClass='ui__centre_pane'/>
-        <LinkedTags listItems={tags} containerClass='ui__right_pane'/>
+        <Col xs={4} md={4}>
+          <SearchPane listItems={tags}/>
+        </Col>
+        <Col xs={4} md={4}>
+          <LinkedTags listItems={tags}/>
+        </Col>
+        <Col xs={4} md={4}>
+          <LinkedTags listItems={tags}/>
+        </Col>
       </div>
     );
   }

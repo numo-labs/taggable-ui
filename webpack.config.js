@@ -1,4 +1,3 @@
-var NpmInstallPlugin = require('npm-install-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -29,10 +28,5 @@ module.exports = {
         loader: 'style-loader!css-loader'
       }
     ]
-  },
-  plugins: [
-    new NpmInstallPlugin({
-      save: true
-    })
-  ]
+  }
 };
