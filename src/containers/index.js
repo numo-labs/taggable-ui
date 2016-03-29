@@ -8,7 +8,6 @@ class Root extends Component {
 
   render () {
     const { store } = this.props;
-    console.log('Rendering Root');
     return (
       <Provider store={store}>
         <Taggable />

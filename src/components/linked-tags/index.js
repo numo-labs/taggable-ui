@@ -1,14 +1,39 @@
 import React, { Component, PropTypes } from 'react';
 import TagList from '../tag-list';
-import SearchBar from '../search';
+import SearchBar from '../search-bar';
+import { Button } from 'react-bootstrap';
 
+require('./styles.css');
 class LinkedTags extends Component {
+
+  constructor () {
+    super();
+    this.state = {
+      searchBarVisible: false
+    };
+    this.toggleSearchBarVisible = this.toggleSearchBarVisible.bind(this);
+  }
+
+  toggleSearchBarVisible () {
+    this.setState({ searchBarVisible: !this.state.searchBarVisible });
+  }
   render () {
-    const { listItems } = this.props;
+    const {
+      props: { listItems },
+      state: { searchBarVisible }
+     } = this;
+
     return (
       <div>
-        <TagList listItems={listItems} />
-        <SearchBar />
+        <TagList listItems={listItems} withButtons={true}/>
+        <Button
+          className='tagList__button'
+          onClick={this.toggleSearchBarVisible}
+          bsStyle='success'
+        >
+          + Add a new tag
+        </Button>
+        { searchBarVisible && <SearchBar /> }
       </div>
     );
   }

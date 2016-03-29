@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 // import sinon from 'sinon';
 
-import SearchBar from '../../src/components/search/';
+import SearchBar from '../../src/components/search-bar/';
 
 describe('Search Panel', () => {
   it('Renders a form and an input tag', (done) => {
