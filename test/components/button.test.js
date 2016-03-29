@@ -11,9 +11,9 @@ describe('Components', function () {
       expect(children).to.have.length(1);
       done();
     });
-    it('should render <h1>{symbol}</h1> as the first child', function (done) {
+    it('should render <div>{symbol}</div> as the first child', function (done) {
       const firstChild = children[0].type;
-      const symbol = wrapper.find('h1').node.type;
+      const symbol = wrapper.find('div').node.type;
       expect(firstChild).to.deep.equal(symbol);
       done();
     });

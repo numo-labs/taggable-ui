@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
+import './styles.css';
 
 class Button extends Component {
   render () {
     const { symbol, onHandleClick } = this.props;
     return (
-      <div onClick={onHandleClick}>
-        <h1>{symbol}</h1>
+      <div className='button' onClick={onHandleClick}>
+        <div>{symbol}</div>
       </div>
     );
   }
