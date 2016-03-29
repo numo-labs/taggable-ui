@@ -13,10 +13,10 @@
   outline-width: 0;
   outline: none !important;
   color: #000000;
-  padding:6px 15px 6px 30px;
 	margin:3px;
+  padding-left: 3em;
   background: url('./assets/search.png') no-repeat 8px 5px;
-  background-size: 2em 2em
+  background-size: 2em 2em;
 }
 
 .search__input--rounded {
