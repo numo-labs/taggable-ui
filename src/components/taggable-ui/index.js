@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import LinkedTags from '../linked-tags';
 import SearchBar from '../search';
+import ViewPane from '../view-pane';
 
 import './css/normalize.css';
 
@@ -11,6 +12,7 @@ class TaggableUI extends Component {
       <div>
         <SearchBar />
         <LinkedTags listItems={tags} />
+        <ViewPane />
       </div>
     );
   }
