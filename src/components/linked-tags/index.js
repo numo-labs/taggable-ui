@@ -3,9 +3,9 @@ import TagList from '../tag-list';
 
 class LinkedTags extends Component {
   render () {
-    const { listItems } = this.props;
+    const { listItems, containerClass } = this.props;
     return (
-      <div>
+      <div className={containerClass}>
         <TagList listItems={listItems} />
       </div>
     );
@@ -13,7 +13,8 @@ class LinkedTags extends Component {
 }
 
 LinkedTags.propTypes = {
-  listItems: PropTypes.array
+  listItems: PropTypes.array,
+  containerClass: PropTypes.string
 };
 
 export default LinkedTags;

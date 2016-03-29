@@ -5,7 +5,7 @@ class Tag extends Component {
     const { tagName } = this.props;
     return (
       <div>
-        <h1>{tagName}</h1>
+        <p>{tagName}</p>
       </div>
     );
   }

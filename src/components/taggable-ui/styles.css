@@ -1,0 +1,33 @@
+.ui {
+  width: 100%;
+  float: left;
+  min-height: 100%;
+  text-align: center;
+}
+.ui__left_pane {
+  position:absolute;
+  left:0;
+  top:0;
+  width: 33%;
+  border-right: 1px solid black;
+  min-height: 100%;
+}
+
+.ui__centre_pane {
+  min-height: 100%;
+  width: 33%;
+  margin-left: 33%;
+  margin-right: 33%;
+  border-right: 1px solid black;
+  top: 0;
+  position: absolute;
+}
+
+.ui__right_pane {
+  position:absolute;
+  right:0;
+  top:0;
+  width: 33%;
+  border-right: 1px solid black;
+  min-height: 100%;
+}
