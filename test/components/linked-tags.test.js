@@ -24,5 +24,9 @@ describe('Components', function () {
       expect(secondChild).to.deep.equal(SearchBar);
       done();
     });
+    it('should have props for listItems', function (done) {
+      expect(wrapper.props().listItems).to.be.defined;
+      done();
+    });
   });
 });

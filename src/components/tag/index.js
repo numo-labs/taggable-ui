@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 
 class Tag extends Component {
   render () {
-    const { tagName } = this.props;
+    const { tagName, onHandleClick } = this.props;
     return (
-      <div>
+      <div onClick={onHandleClick}>
         <h1>{tagName}</h1>
       </div>
     );
@@ -12,7 +12,8 @@ class Tag extends Component {
 }
 
 Tag.propTypes = {
-  tagName: PropTypes.string
+  tagName: PropTypes.string,
+  onHandleClick: PropTypes.func
 };
 
 export default Tag;

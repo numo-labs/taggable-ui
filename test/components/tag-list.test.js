@@ -33,5 +33,11 @@ describe('Components', function () {
       expect(children).to.have.length(numberOfTags);
       done();
     });
+    it('should have props for listItems, onHandleTagClick and onHandleButtonClick', function (done) {
+      expect(wrapper.props().listItems).to.be.defined;
+      expect(wrapper.props().onHandleTagClick).to.be.defined;
+      expect(wrapper.props().onHandleButtonClick).to.be.defined;
+      done();
+    });
   });
 });

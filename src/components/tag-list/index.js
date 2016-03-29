@@ -1,12 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import Tag from '../tag';
+import Button from '../button';
 
 class TagList extends Component {
   render () {
-    const { listItems } = this.props;
+    const { listItems, onHandleButtonClick, onHandleTagClick } = this.props;
     const list = listItems.map(listItem => {
       return (
-        <Tag key={listItem.tagId} tagName={listItem.tagId} />
+        <div>
+          <Tag key={listItem.tagId} tagName={listItem.tagId} onHandleClick={onHandleTagClick} />
+          <Button onHandleClick={onHandleButtonClick} symbol={'-'} />
+        </div>
       );
     });
     return (
@@ -18,7 +22,9 @@ class TagList extends Component {
 }
 
 TagList.propTypes = {
-  listItems: PropTypes.array
+  listItems: PropTypes.array,
+  onHandleButtonClick: PropTypes.func,
+  onHandleTagClick: PropTypes.func
 };
 
 export default TagList;

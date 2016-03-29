@@ -14,8 +14,13 @@ describe('Components', function () {
     });
     it('should render <h1>{tagName}</h1> as the first child', function (done) {
       const firstChild = children[0].type;
-      const h1 = wrapper.find('h1').node.type;
-      expect(firstChild).to.deep.equal(h1);
+      const tagName = wrapper.find('h1').node.type;
+      expect(firstChild).to.deep.equal(tagName);
+      done();
+    });
+    it('should have props for tagName and onHandleClick', function (done) {
+      expect(wrapper.props().tagName).to.be.defined;
+      expect(wrapper.props().onHandleClick).to.be.defined;
       done();
     });
   });
