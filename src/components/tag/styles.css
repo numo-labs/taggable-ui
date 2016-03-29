@@ -1,3 +1,6 @@
 .tag {
   display: inline-block;
+  width: 45%;
+  margin-bottom: 0.2em;
+  margin-top: 0.2em;
 }

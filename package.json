@@ -53,6 +53,7 @@
     "file-loader": "^0.8.5",
     "mocha": "^2.4.5",
     "normalize.css": "^4.0.0",
+    "react-bootstrap": "^0.28.4",
     "semistandard": "^7.0.5",
     "sinon": "^1.17.3",
     "style-loader": "^0.13.0",
