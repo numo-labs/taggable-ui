@@ -1,0 +1,21 @@
+.ui {
+  text-align: center;
+}
+
+.col-centered {
+  display:inline-block;
+  float:none;
+  text-align:center;
+  margin-right:-4px;
+}
+
+div[class*='col'] {
+  height:100%;
+  display: table-cell;
+  float: none;
+}
+
+.row {
+ display: table;
+ width: 100%
+}

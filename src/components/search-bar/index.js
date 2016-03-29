@@ -1,4 +1,12 @@
+/*
+* Search Bar component which takes two functions as props:
+* - onChangeText to capture the input text
+* - handleSubmit which is called when the return key is pressed on the form
+*/
+
 import React, { PropTypes, Component } from 'react';
+
+import { Input } from 'react-bootstrap';
 
 require('./styles.css');
 class SearchBar extends Component {
@@ -10,7 +18,6 @@ class SearchBar extends Component {
 
   handleSubmit (e) {
     const { handleSubmit } = this.props;
-    console.log('called twice', handleSubmit);
     e.preventDefault();
     handleSubmit !== undefined && handleSubmit();
   }
@@ -18,10 +25,10 @@ class SearchBar extends Component {
   render () {
     const { onChangeText } = this.props;
     return (
-      <form className='search' onSubmit={this.handleSubmit}>
-        <input
+      <form onSubmit={this.handleSubmit}>
+        <Input
           type='search'
-          className='search__input search__input--rounded'
+          className='search__input'
           placeholder='Search by id or displayName..'
           onChange={onChangeText}
         />
