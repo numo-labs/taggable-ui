@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 import './styles.css';
+
 class CustomButton extends Component {
   render () {
     const { symbol, onHandleClick } = this.props;

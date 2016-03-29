@@ -16,7 +16,7 @@ class SearchPane extends Component {
   }
 }
 
-SearchPane.PropTypes = {
+SearchPane.propTypes = {
   listItems: PropTypes.array
 };
 

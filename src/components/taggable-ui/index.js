@@ -2,8 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import LinkedTags from '../linked-tags';
 import SearchPane from '../search-pane';
 import { Col, PageHeader, Row, Grid } from 'react-bootstrap';
+
 require('./styles.css');
 import './css/normalize.css';
+
 class TaggableUI extends Component {
   render () {
     const { tags } = this.props;
