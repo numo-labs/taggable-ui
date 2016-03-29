@@ -14,13 +14,13 @@ class TaggableUI extends Component {
       <Grid fluid={true}>
         <PageHeader>Numo Labs Tag System</PageHeader>
         <Row>
-          <Col xs={4} md={4} className='col-centered'>
+          <Col xs={3} md={3} className='col-centered'>
             <SearchPane listItems={tags}/>
           </Col>
-          <Col xs={4} md={4} className='col-centered'>
+          <Col xs={3} md={3} className='col-centered'>
             <LinkedTags listItems={tags}/>
           </Col>
-          <Col xs={4} md={4} className='col-centered'>
+          <Col xs={6} md={6} className='col-centered'>
             <ViewPane listItems={tags}/>
           </Col>
         </Row>

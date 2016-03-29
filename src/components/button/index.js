@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 import './styles.css';
 
-class CustomButton extends Component {
+export class SymbolButton extends Component {
   render () {
     const { symbol, onHandleClick } = this.props;
     const buttonColour = symbol === '+' ? 'success' : 'danger';
@@ -14,9 +14,27 @@ class CustomButton extends Component {
   }
 }
 
-CustomButton.propTypes = {
+export class AddTagButton extends Component {
+  render() {
+    const { text, onClick } = this.props;
+    return (
+      <Button
+        className='tagList__button'
+        bsStyle='success'
+        onClick={onClick}
+      >
+        {text}
+      </Button>
+    );
+  }
+}
+
+SymbolButton.propTypes = {
   symbol: PropTypes.string,
   onHandleClick: PropTypes.func
 };
 
-export default CustomButton;
+AddTagButton.propTypes = {
+  text: PropTypes.string,
+  onClick: PropTypes.func
+};
