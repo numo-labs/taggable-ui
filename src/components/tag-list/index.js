@@ -8,7 +8,7 @@ class TagList extends Component {
     const { listItems, onHandleButtonClick, onHandleTagClick, withButtons } = this.props;
     const list = listItems.map(listItem => {
       return (
-        <div key={listItem.tagId} className='listItem'>
+        <div key={listItem.tagId}>
           <Tag key={listItem.tagId} tagName={listItem.tagId} onHandleClick={onHandleTagClick} />
            { withButtons && <Button onHandleClick={onHandleButtonClick} symbol={'-'} /> }
         </div>
