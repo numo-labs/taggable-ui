@@ -29,3 +29,11 @@
 .displayNameInput {
   display: inline-block;
 }
+
+.deleteButton {
+  display: inline-block;
+}
+
+.addValue {
+  display: inline-block;
+}

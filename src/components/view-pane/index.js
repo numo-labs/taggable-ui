@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { Input, Row, Col } from 'react-bootstrap';
+import { SymbolButton as Button } from '../button';
 import './styles.css';
 
 class ViewPane extends Component {
   render () {
-    const { id, displayName, metadata } = this.props;
+    const { id, displayName, metadata, onHandleButtonClick } = this.props;
 
     const metadataContent = metadata.map(item => {
       return (
@@ -13,15 +14,19 @@ class ViewPane extends Component {
             <Col xs={6}>
               <input type='text' className='form-control' value={item.key} />
             </Col>
-            <Col xs={6}>
+            <Col xs={4}>
               {item.values.map(value => {
                 return (
-                  <div className='metaValue'>
+                  <div className='form-horizontal'>
                     <input key={value} type='text' className='form-control' value={value} />
+                    <span className='input-group-button'>
+                      <Button onHandleClick={onHandleButtonClick} symbol={'-'} />
+                    </span>
                   </div>
                 );
               })}
               <input type='text' className='form-control' placeholder='add value'/>
+              <Button onHandleClick={onHandleButtonClick} symbol={'+'} />
             </Col>
           </Row>
         </Input>
@@ -64,7 +69,8 @@ class ViewPane extends Component {
 ViewPane.propTypes = {
   id: PropTypes.string,
   displayName: PropTypes.string,
-  metadata: PropTypes.array
+  metadata: PropTypes.array,
+  onHandleButtonClick: PropTypes.func
 };
 
 export default ViewPane;
