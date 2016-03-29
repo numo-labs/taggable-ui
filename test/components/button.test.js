@@ -1,5 +1,5 @@
 import React from 'react';
-import { expect }  from 'chai';
+import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import Button from '../../src/components/button';
 
