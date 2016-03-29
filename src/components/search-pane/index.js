@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 
 import Tags from '../tag-list/';
 import SearchBar from '../search-bar';
-import { Button } from 'react-bootstrap';
+import { AddTagButton as Button } from '../button';
 
 require('./styles.css');
 class SearchPane extends Component {
@@ -13,11 +13,9 @@ class SearchPane extends Component {
         <SearchBar />
         <Tags listItems={listItems}/>
         <Button
-          className='tagList__button'
-          bsStyle='success'
-        >
-          + Create new tag
-        </Button>
+          onClick={this.toggleSearchBarVisible}
+          text='+ Create a new tag'
+        />
       </div>
     );
   }
