@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import LinkedTags from '../linked-tags';
+import ViewPane from '../view-pane';
 import SearchPane from '../search-pane';
 import { Col, PageHeader, Row, Grid } from 'react-bootstrap';
 
@@ -20,7 +21,7 @@ class TaggableUI extends Component {
             <LinkedTags listItems={tags}/>
           </Col>
           <Col xs={4} md={4} className='col-centered'>
-            <LinkedTags listItems={tags}/>
+            <ViewPane listItems={tags}/>
           </Col>
         </Row>
       </Grid>
