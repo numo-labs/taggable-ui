@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import TagList from '../tag-list';
 import SearchBar from '../search-bar';
-import { Button } from 'react-bootstrap';
+import { AddTagButton as Button } from '../button';
 
 require('./styles.css');
 class LinkedTags extends Component {
@@ -27,12 +27,9 @@ class LinkedTags extends Component {
       <div>
         <TagList listItems={listItems} withButtons={true}/>
         <Button
-          className='tagList__button'
           onClick={this.toggleSearchBarVisible}
-          bsStyle='success'
-        >
-          + Add a new tag
-        </Button>
+          text='+ Add a new tag'
+        />
         { searchBarVisible && <SearchBar /> }
       </div>
     );
