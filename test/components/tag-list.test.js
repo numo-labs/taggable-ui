@@ -28,8 +28,8 @@ describe('Components', function () {
   const wrapper = shallow(<TagList listItems={mockTags}/>);
   const children = wrapper.children().nodes;
   const numberOfTags = mockTags.length;
-  describe('<TagsList />', function () {
-    it('should render our LinkedTagsList component', function (done) {
+  describe('<TagList />', function () {
+    it('should render our TagList component', function (done) {
       expect(children).to.have.length(numberOfTags);
       done();
     });

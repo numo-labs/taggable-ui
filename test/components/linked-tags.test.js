@@ -12,10 +12,10 @@ describe('Components', function () {
       expect(children).to.have.length(1);
       done();
     });
-    it('should render our <LinkedTagsList /> as the first child', function (done) {
+    it('should render our <TagList /> as the first child', function (done) {
       const firstChild = children[0].type;
-      const LinkedTagsList = wrapper.find('TagList').node.type;
-      expect(firstChild).to.deep.equal(LinkedTagsList);
+      const TagList = wrapper.find('TagList').node.type;
+      expect(firstChild).to.deep.equal(TagList);
       done();
     });
   });
