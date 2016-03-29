@@ -5,7 +5,9 @@
 */
 
 import React, { PropTypes, Component } from 'react';
-import { Navbar, Button } from 'react-bootstrap';
+
+import { Input } from 'react-bootstrap';
+
 require('./styles.css');
 class SearchBar extends Component {
 
@@ -23,14 +25,14 @@ class SearchBar extends Component {
   render () {
     const { onChangeText } = this.props;
     return (
-      <Navbar.Form type='text'>
-        <input
+      <form onSubmit={this.handleSubmit}>
+        <Input
           type='search'
-          className='search__input search__input--rounded'
+          className='search__input'
           placeholder='Search by id or displayName..'
           onChange={onChangeText}
         />
-      </Navbar.Form>
+      </form>
     );
   }
 }

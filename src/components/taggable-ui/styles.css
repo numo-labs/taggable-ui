@@ -1,3 +1,26 @@
 .ui {
   text-align: center;
 }
+
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:center;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+div[class*='col']
+       {
+           height:100%;
+         display: table-cell;
+         float: none
+       }
+       .row
+       {
+           /* height:500px; */
+         display: table;
+         width: 100%
+
+       }

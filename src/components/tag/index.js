@@ -6,7 +6,7 @@ class Tag extends Component {
   render () {
     const { tagName, onHandleClick } = this.props;
     return (
-      <Button className='tag'>
+      <Button className='tag' bsSize='small'>
         <div onClick={onHandleClick}>
           <h4>{tagName}</h4>
         </div>

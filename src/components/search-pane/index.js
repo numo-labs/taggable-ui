@@ -6,9 +6,9 @@ import SearchBar from '../search-bar';
 require('./styles.css');
 class SearchPane extends Component {
   render () {
-    const { listItems, containerClass } = this.props;
+    const { listItems } = this.props;
     return (
-      <div className={containerClass}>
+      <div>
         <SearchBar />
         <Tags listItems={listItems}/>
       </div>
@@ -17,8 +17,7 @@ class SearchPane extends Component {
 }
 
 SearchPane.PropTypes = {
-  listItems: PropTypes.array,
-  containerClass: PropTypes.string
+  listItems: PropTypes.array
 };
 
 export default SearchPane;
