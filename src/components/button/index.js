@@ -1,23 +1,22 @@
 import React, { Component, PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 import './styles.css';
-
-class Tag extends Component {
+class CustomButton extends Component {
   render () {
-    const { tagName, onHandleClick } = this.props;
+    const { symbol, onHandleClick } = this.props;
     return (
-      <Button className='tag'>
+      <Button className='button'>
         <div onClick={onHandleClick}>
-          <h4>{tagName}</h4>
+          <div>{symbol}</div>
         </div>
       </Button>
     );
   }
 }
 
-Tag.propTypes = {
-  tagName: PropTypes.string,
+CustomButton.propTypes = {
+  symbol: PropTypes.string,
   onHandleClick: PropTypes.func
 };
 
-export default Tag;
+export default CustomButton;

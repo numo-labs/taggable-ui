@@ -52,6 +52,7 @@
     "enzyme": "^2.2.0",
     "file-loader": "^0.8.5",
     "mocha": "^2.4.5",
+    "normalize.css": "^4.0.0",
     "react-bootstrap": "^0.28.4",
     "semistandard": "^7.0.5",
     "sinon": "^1.17.3",

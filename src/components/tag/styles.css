@@ -1,0 +1,10 @@
+.tag {
+  display: inline-block;
+  width: 33%;
+  margin-bottom: 0.2em;
+  margin-top: 0.2em;
+}
+
+.tag h1 {
+  margin-top: 0;
+}

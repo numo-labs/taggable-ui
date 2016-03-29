@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import TagList from '../tag-list';
+import SearchBar from '../search';
 
 class LinkedTags extends Component {
   render () {
@@ -7,6 +8,7 @@ class LinkedTags extends Component {
     return (
       <div className={containerClass}>
         <TagList listItems={listItems} />
+        <SearchBar />
       </div>
     );
   }
