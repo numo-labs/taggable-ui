@@ -1,4 +1,15 @@
-.button {
+.btn-group-sm>.btn, .btn-sm {
+    padding: 7px 14px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+.input-group .form-control {
+  float: none;
+}
+
+.Button {
   display: inline-block;
   float: right;
   margin-top: 1.25em;

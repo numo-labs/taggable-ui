@@ -4,9 +4,10 @@ import { SymbolButton as Button } from '../button';
 import './styles.css';
 
 class ViewPane extends Component {
-  render () {
-    const { id, displayName, metadata, onHandleButtonClick } = this.props;
-
+  renderMetadataContent () {
+    const { metadata, onHandleButtonClick } = this.props;
+    const deleteButton = <Button className='redButton' onHandleClick={onHandleButtonClick} symbol={'-'} />;
+    const addButton = <Button onHandleClick={onHandleButtonClick} symbol={'+'} />;
     const metadataContent = metadata.map(item => {
       return (
         <Input key={item.key} wrapperClassName='wrapper'>
@@ -14,24 +15,25 @@ class ViewPane extends Component {
             <Col xs={6}>
               <input type='text' className='form-control' value={item.key} />
             </Col>
-            <Col xs={4}>
+            <Col xs={6}>
               {item.values.map(value => {
                 return (
-                  <div className='form-horizontal'>
-                    <input key={value} type='text' className='form-control' value={value} />
-                    <span className='input-group-button'>
-                      <Button onHandleClick={onHandleButtonClick} symbol={'-'} />
-                    </span>
-                  </div>
+                    <div className='inputGroup'>
+                        <Input key={value} type='text' className='form-control' value={value} buttonAfter={deleteButton}/>
+                    </div>
                 );
               })}
-              <input type='text' className='form-control' placeholder='add value'/>
-              <Button onHandleClick={onHandleButtonClick} symbol={'+'} />
+              <Input type='text' className='form-control' placeholder='add value' buttonAfter={addButton} />
             </Col>
           </Row>
         </Input>
       );
     });
+    return metadataContent;
+  }
+  render () {
+    const { id, displayName, onHandleButtonClick } = this.props;
+    const addButton = <Button onHandleClick={onHandleButtonClick} symbol={'+'} />;
     return (
       <div>
       <div>
@@ -51,13 +53,13 @@ class ViewPane extends Component {
             <h4>Values:</h4>
           </Col>
         </Row>
-        {metadataContent}
+        {this.renderMetadataContent()}
         <Row>
           <Col xs={6}>
             <input type='text' className='form-control' placeholder='add new key' />
           </Col>
           <Col xs={6}>
-            <input type='text' className='form-control' placeholder='add value' />
+            <Input type='text' className='form-control addNewValue' placeholder='add value' buttonAfter={addButton}/>
           </Col>
           </Row>
         </div>
