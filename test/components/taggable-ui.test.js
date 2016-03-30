@@ -6,12 +6,20 @@ import TaggableUI from '../../src/components/taggable-ui';
 
 const props = {
   searchResults: [],
+  tagInView: {},
+  linkedTags: [],
+  search: () => {},
+  setTagInView: () => {},
+  setSelectedTagFromSearch: () => {},
+  setSearchTerm: () => {},
+  selectedTagFromSearch: {},
   selectedTag: {
     metadata: [],
     id: '',
     displayName: ''
   }
 };
+
 describe('Component', function () {
   describe('<TaggableUI />', function () {
     const wrapper = shallow(<TaggableUI {...props} />);
