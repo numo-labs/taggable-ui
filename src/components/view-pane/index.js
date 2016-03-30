@@ -5,7 +5,7 @@ import './styles.css';
 
 class ViewPane extends Component {
   renderMetadataContent () {
-    const { metadata, onHandleButtonClick } = this.props;
+    const { metadata, onHandleButtonClick, height } = this.props;
     const deleteButton = <Button className='redButton' onHandleClick={onHandleButtonClick} symbol={'x'} />;
     const addButton = <Button onHandleClick={onHandleButtonClick} symbol={'+'} />;
     const metadataContent = metadata.map(item => {
@@ -29,12 +29,35 @@ class ViewPane extends Component {
           </Input>
       );
     });
-    return metadataContent;
-  }
-  render () {
-    const { id, displayName, onHandleButtonClick, height, handleOnChange } = this.props;
-    const addButton = <Button onHandleClick={onHandleButtonClick} symbol={'+'} />;
     return (
+      <div className='content' style={{height: height}}>
+        {metadataContent}
+      </div>
+    );
+  }
+  renderAddNewKeyValue () {
+    const { onHandleButtonClick, handleOnChange } = this.props;
+    const addButton = <Button onHandleClick={onHandleButtonClick} symbol={'+'} />;
+    const test = (
+      <Row>
+        <div className='keyValueContainer'>
+          <h4 className='keyValuePair'>Add new key/value pair:</h4>
+          <div className='keyValueInput'>
+            <Col xs={6}>
+              <Input type='text' onChange={handleOnChange} className='form-control' placeholder='add new key' />
+            </Col>
+            <Col xs={6}>
+              <Input type='text' className='form-control addNewValue' placeholder='add value' buttonAfter={addButton}/>
+            </Col>
+          </div>
+        </div>
+      </Row>
+    );
+    return test;
+  }
+  renderTagContentHeader () {
+    const { id, displayName } = this.props;
+    const tagContentHeader = (
       <div>
         <div>
           <h4 className='tagId'>ID:</h4>
@@ -44,30 +67,24 @@ class ViewPane extends Component {
           <h4 className='displayName'>Display name:</h4>
           <Input className='displayNameInput' type='text' labelClassName='col-xs-9' wrapperClassName='col-xs-6' value={displayName}/>
         </div>
-          <Row>
-            <Col xs={2}>
-              <h4>Keys:</h4>
-            </Col>
-            <Col xs={12}>
-              <h4>Values:</h4>
-            </Col>
-          </Row>
-          <div className='content' style={{height: height}}>
+        <Row>
+          <Col xs={2}>
+            <h4>Keys:</h4>
+          </Col>
+          <Col xs={12}>
+            <h4>Values:</h4>
+          </Col>
+        </Row>
+      </div>
+    );
+    return tagContentHeader;
+  }
+  render () {
+    return (
+      <div>
+          {this.renderTagContentHeader()}
           {this.renderMetadataContent()}
-          </div>
-          <Row>
-            <div className='keyValueContainer'>
-              <h4 className='keyValuePair'>Add new key/value pair:</h4>
-              <div className='keyValueInput'>
-                <Col xs={6}>
-                  <Input type='text' onChange={handleOnChange} className='form-control' placeholder='add new key' />
-                </Col>
-                <Col xs={6}>
-                  <Input type='text' className='form-control addNewValue' placeholder='add value' buttonAfter={addButton}/>
-                </Col>
-              </div>
-            </div>
-          </Row>
+          {this.renderAddNewKeyValue()}
       </div>
     );
   }
