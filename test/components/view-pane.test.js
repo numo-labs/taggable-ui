@@ -21,7 +21,7 @@ const metadata = [
   }
 ];
 
-describe('Componens', function () {
+describe('Component', function () {
   const wrapper = shallow(<ViewPane metadata={metadata}/>);
   const children = wrapper.children().nodes;
   describe('<ViewPane />', function () {

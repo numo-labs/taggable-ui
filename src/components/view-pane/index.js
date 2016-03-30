@@ -75,4 +75,10 @@ ViewPane.propTypes = {
   onHandleButtonClick: PropTypes.func
 };
 
+ViewPane.defaultProps = {
+  id: '',
+  displayName: '',
+  metadata: []
+};
+
 export default ViewPane;

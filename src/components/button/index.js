@@ -15,7 +15,7 @@ export class SymbolButton extends Component {
 }
 
 export class AddTagButton extends Component {
-  render() {
+  render () {
     const { text, onClick } = this.props;
     return (
       <Button

@@ -26,19 +26,22 @@ import './css/normalize.css';
 
 class TaggableUI extends Component {
   render () {
-    const { tags } = this.props;
+    const {
+      searchResults,
+      selectedTag: { metadata, _id, displayName }
+    } = this.props;
     return (
-      <Grid fluid={true}>
+      <Grid fluid>
         <PageHeader>Numo Labs Tag System</PageHeader>
         <Row>
           <Col xs={3} md={3} className='col-centered'>
-            <SearchPane listItems={tags}/>
+            <SearchPane listItems={searchResults}/>
           </Col>
           <Col xs={3} md={3} className='col-centered'>
-            <LinkedTags listItems={tags}/>
+            <LinkedTags listItems={searchResults}/>
           </Col>
           <Col xs={6} md={6} className='col-centered'>
-            <ViewPane metadata={metadata}listItems={tags}/>
+            <ViewPane id={_id} displayName={displayName} metadata={metadata}/>
           </Col>
         </Row>
       </Grid>
@@ -47,7 +50,8 @@ class TaggableUI extends Component {
 }
 
 TaggableUI.propTypes = {
-  tags: PropTypes.array
+  searchResults: PropTypes.array,
+  selectedTag: PropTypes.object
 };
 
 export default TaggableUI;

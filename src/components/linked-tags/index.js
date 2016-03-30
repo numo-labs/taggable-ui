@@ -25,7 +25,7 @@ class LinkedTags extends Component {
 
     return (
       <div>
-        <TagList listItems={listItems} withButtons={true}/>
+        <TagList listItems={listItems} />
         <Button
           onClick={this.toggleSearchBarVisible}
           text='+ Add a new tag'
