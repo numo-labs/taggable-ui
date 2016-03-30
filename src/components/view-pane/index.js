@@ -6,7 +6,7 @@ import './styles.css';
 class ViewPane extends Component {
   renderMetadataContent () {
     const { metadata, onHandleButtonClick } = this.props;
-    const deleteButton = <Button className='redButton' onHandleClick={onHandleButtonClick} symbol={'-'} />;
+    const deleteButton = <Button className='redButton' onHandleClick={onHandleButtonClick} symbol={'x'} />;
     const addButton = <Button onHandleClick={onHandleButtonClick} symbol={'+'} />;
     const metadataContent = metadata.map(item => {
       return (
@@ -36,33 +36,33 @@ class ViewPane extends Component {
     const addButton = <Button onHandleClick={onHandleButtonClick} symbol={'+'} />;
     return (
       <div>
-      <div>
-        <h4 className='tagId'>ID:</h4>
-        <Input className='tagIdInput' type='text' labelClassName='col-xs-9' wrapperClassName='col-xs-6' value={id}/>
-      </div>
-      <div>
-        <h4 className='displayName'>Display name:</h4>
-        <Input className='displayNameInput' type='text' labelClassName='col-xs-9' wrapperClassName='col-xs-6' value={displayName}/>
-      </div>
-        <div className='content'>
-        <Row>
-          <Col xs={1}>
-            <h4>Keys:</h4>
-          </Col>
-          <Col xs={12}>
-            <h4>Values:</h4>
-          </Col>
-        </Row>
-        {this.renderMetadataContent()}
-        <Row>
-          <Col xs={6}>
-            <input type='text' className='form-control' placeholder='add new key' />
-          </Col>
-          <Col xs={6}>
-            <Input type='text' className='form-control addNewValue' placeholder='add value' buttonAfter={addButton}/>
-          </Col>
-          </Row>
+        <div>
+          <h4 className='tagId'>ID:</h4>
+          <Input className='tagIdInput' type='text' labelClassName='col-xs-9' wrapperClassName='col-xs-6' value={id}/>
         </div>
+        <div>
+          <h4 className='displayName'>Display name:</h4>
+          <Input className='displayNameInput' type='text' labelClassName='col-xs-9' wrapperClassName='col-xs-6' value={displayName}/>
+        </div>
+          <div className='content'>
+          <Row>
+            <Col xs={1}>
+              <h4>Keys:</h4>
+            </Col>
+            <Col xs={12}>
+              <h4>Values:</h4>
+            </Col>
+          </Row>
+          {this.renderMetadataContent()}
+          <Row>
+            <Col xs={6}>
+              <input type='text' className='form-control' placeholder='add new key' />
+            </Col>
+            <Col xs={6}>
+              <Input type='text' className='form-control addNewValue' placeholder='add value' buttonAfter={addButton}/>
+            </Col>
+            </Row>
+          </div>
       </div>
     );
   }

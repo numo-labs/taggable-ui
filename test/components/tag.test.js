@@ -12,10 +12,10 @@ describe('Components', function () {
       expect(children).to.have.length(1);
       done();
     });
-    it('should render a <div></div> as the first child', function (done) {
+    it('should render a <h5>{tagName}</h5> as the first child', function (done) {
       const firstChild = children[0].type;
-      const div = wrapper.find('div').node.type;
-      expect(firstChild).to.deep.equal(div);
+      const h5 = wrapper.find('h5').node.type;
+      expect(firstChild).to.deep.equal(h5);
       done();
     });
     it('should have props for tagName and onHandleClick', function (done) {

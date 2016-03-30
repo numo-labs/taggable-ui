@@ -18,10 +18,10 @@ describe('Components', function () {
       expect(firstChild).to.deep.equal(TagList);
       done();
     });
-    it('should render our <SearchBar /> as the second child', function (done) {
+    it('should render our <Button /> as the second child', function (done) {
       const secondChild = children[1].type;
-      const SearchBar = wrapper.find('SearchBar').node.type;
-      expect(secondChild).to.deep.equal(SearchBar);
+      const addTagButton = wrapper.find('AddTagButton').node.type;
+      expect(secondChild).to.deep.equal(addTagButton);
       done();
     });
     it('should have props for listItems', function (done) {
