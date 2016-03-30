@@ -1,3 +1,7 @@
+.addNewValue {
+  width: 25.5em;
+}
+
 .idInput {
   width: 50%;
 }
@@ -6,4 +10,63 @@
   margin: auto;
   margin-left: 1em;
   margin-top: 3em;
+}
+
+.metaValue {
+  margin-bottom: 0.5em;
+}
+
+.tagId {
+  width: 30%;
+  float: left;
+}
+
+.tagIdInput {
+  display: inline-block;
+}
+
+.displayName {
+  width: 30%;
+  float: left;
+}
+
+.displayNameInput {
+  display: inline-block;
+}
+
+.deleteButton {
+  display: inline-block;
+}
+
+.addValue {
+  display: inline-block;
+}
+
+.inputGroup {
+  width: 28em;
+  margin-bottom: 0.5em;
+}
+
+.input-group {
+  width: 28em;
+}
+
+.redButton {
+  font-size: 1.3em;
+  height: 1.2em;
+}
+
+.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group {
+  margin-left: 0.5em;
+}
+
+.input-group .form-control:last-child,
+.input-group-addon:last-child,
+.input-group-btn:first-child>.btn-group:not(:first-child)>.btn,
+.input-group-btn:first-child>.btn:not(:first-child),
+.input-group-btn:last-child>.btn,
+.input-group-btn:last-child>.btn-group>.btn,
+.input-group-btn:last-child>.dropdown-toggle {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
 }

@@ -10,7 +10,7 @@ class TagList extends Component {
       return (
         <div key={listItem.tagId}>
           <Tag key={listItem.tagId} tagName={listItem.tagId} onHandleClick={onHandleTagClick} />
-           { withButtons && <Button onHandleClick={onHandleButtonClick} symbol={'-'} /> }
+           { withButtons && <Button className='redButton' onHandleClick={onHandleButtonClick} symbol={'x'} /> }
         </div>
       );
     });
