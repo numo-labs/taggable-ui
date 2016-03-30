@@ -3,19 +3,17 @@
   width: 80%;
   margin-bottom: 0.2em;
   margin-top: 0.2em;
-  margin-right: 0.5em;
-  margin-left: 2em;
 }
 
 .tag__name {
   font-size: 1.3em;
   font-weight: bold;
-  margin: 0, auto;
+  margin: 0.2em auto;
 }
 
 .tag__id {
   font-size: 1em;
-  margin: 0, auto;
+  margin: 0.3em auto;
   font-style: italic;
 }
 
