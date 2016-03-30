@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import LinkedTags from '../linked-tags';
 import ViewPane from '../view-pane';
 import SearchPane from '../search-pane';
-import { Col, PageHeader, Row, Grid } from 'react-bootstrap';
+import { Col, Nav, NavItem, Navbar, Row, Grid } from 'react-bootstrap';
+import { AddTagButton as Button } from '../button';
 
 require('./styles.css');
 import './css/normalize.css';
@@ -14,8 +15,20 @@ class TaggableUI extends Component {
       selectedTag: { metadata, _id, displayName }
     } = this.props;
     return (
-      <Grid fluid>
-        <PageHeader>Numo Labs Tag System</PageHeader>
+    <div>
+      <Navbar inverse>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Nav>
+              <h2>Numo Labs Tag System</h2>
+            </Nav>
+          </Navbar.Brand>
+        </Navbar.Header>
+        <Nav pullRight>
+          <NavItem><Button text={'Save new configuration'} /></NavItem>
+        </Nav>
+      </Navbar>
+        <Grid fluid>
         <Row>
           <Col xs={3} md={3} className='col-centered'>
             <SearchPane listItems={searchResults}/>
@@ -28,6 +41,7 @@ class TaggableUI extends Component {
           </Col>
         </Row>
       </Grid>
+    </div>
     );
   }
 }

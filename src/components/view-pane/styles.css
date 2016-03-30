@@ -100,3 +100,9 @@
 .keyValueInput {
   margin-left: 1em;
 }
+
+.metadataTitle {
+  text-align: left;
+  display: inline-block;
+  float: left;
+}
