@@ -30,6 +30,12 @@ describe('<SearchPane />', () => {
     expect(thirdChild).to.deep.equal(button);
     done();
   });
+  it('Renders a <Modal> as the fourth child', (done) => {
+    const fourthChild = children[3].type;
+    const modal = wrapper.find('CreateTagModal').node.type;
+    expect(fourthChild).to.deep.equal(modal);
+    done();
+  });
   // it('Calls the onSubmit function prop when the form is submitted', (done) => {
   //   const props = {
   //     onChange: () => console.log('called')

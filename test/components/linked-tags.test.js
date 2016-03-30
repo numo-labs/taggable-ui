@@ -23,6 +23,12 @@ describe('<LinkedTags />', function () {
     expect(secondChild).to.deep.equal(button);
     done();
   });
+  it('should render a <SearchBar /> as the third child if the searchBarVisible state is true', function (done) {
+    expect(wrapper.find('SearchBar')).to.have.length(0);
+    wrapper.setState({searchBarVisible: true});
+    expect(wrapper.find('SearchBar')).to.have.length(1);
+    done();
+  });
   it('should have props for listItems', function (done) {
     expect(wrapper.props().listItems).to.be.defined;
     done();
