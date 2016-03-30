@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 
-import Tags from '../tag-list/';
+import TagList from '../tag-list/';
 import SearchBar from '../search-bar';
 import { AddTagButton as Button } from '../button';
 import Modal from '../create-tag-modal';
@@ -34,7 +34,7 @@ class SearchPane extends Component {
     return (
       <div>
         <SearchBar />
-        <Tags listItems={listItems}/>
+        <TagList listItems={listItems} withButtons={false}/>
         <Button
           onClick={this.showModal}
           text='+ Create a new tag'

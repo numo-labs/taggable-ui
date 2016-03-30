@@ -29,4 +29,8 @@ TagList.propTypes = {
   withButtons: PropTypes.bool
 };
 
+TagList.defaultProps = {
+  withButtons: true
+};
+
 export default TagList;
