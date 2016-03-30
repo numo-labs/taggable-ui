@@ -30,9 +30,5 @@ describe('Component', function () {
       expect(wrapper.find('SearchBar')).to.have.length(1);
       done();
     });
-    it('should have props for listItems', function (done) {
-      expect(wrapper.props().listItems).to.be.defined;
-      done();
-    });
   });
 });

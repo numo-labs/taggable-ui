@@ -24,10 +24,5 @@ describe('Component', function () {
       expect(firstChild).to.deep.equal(h5);
       done();
     });
-    it('should have props for tagName and onHandleClick', function (done) {
-      expect(wrapper.props().tagName).to.be.defined;
-      expect(wrapper.props().onHandleClick).to.be.defined;
-      done();
-    });
   });
 });

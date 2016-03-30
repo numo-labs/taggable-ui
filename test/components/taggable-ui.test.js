@@ -39,10 +39,5 @@ describe('Component', function () {
       expect(allColumnChildren).to.equal(true);
       done();
     });
-    it('should have props for searchResults and selectedTag', function (done) {
-      expect(wrapper.props().searchResults).to.be.defined;
-      expect(wrapper.props().selectedTag).to.be.defined;
-      done();
-    });
   });
 });
