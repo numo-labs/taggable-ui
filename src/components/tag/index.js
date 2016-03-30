@@ -7,7 +7,7 @@ class Tag extends Component {
     const { tagName, onClick, id } = this.props;
     return (
       <Button className='tag' bsSize='small' onClick={onClick.bind(null, id)}>
-        <h5>{tagName}</h5>
+        <p>{tagName}</p>
         <p>{id}</p>
       </Button>
     );
@@ -18,6 +18,10 @@ Tag.propTypes = {
   tagName: PropTypes.string,
   onClick: PropTypes.func,
   id: PropTypes.string
+};
+
+Tag.defaultProps = {
+  onClick: () => {}
 };
 
 export default Tag;
