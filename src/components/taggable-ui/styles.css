@@ -31,3 +31,7 @@ div[class*='col'] {
 .saveButton {
   right: 10em;
 }
+
+.title {
+  margin-bottom: 2em;
+}

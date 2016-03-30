@@ -45,7 +45,7 @@ class ViewPane extends Component {
           <Input className='displayNameInput' type='text' labelClassName='col-xs-9' wrapperClassName='col-xs-6' value={displayName}/>
         </div>
           <Row>
-            <Col xs={1}>
+            <Col xs={2}>
               <h4>Keys:</h4>
             </Col>
             <Col xs={12}>

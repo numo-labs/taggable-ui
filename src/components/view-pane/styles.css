@@ -14,9 +14,12 @@
 .content {
   margin: auto;
   margin-left: 1em;
-  margin-top: 1.5em;
+  margin-top: 1em;
   overflow-y: scroll;
   text-align: left;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 1em;
 }
 
 .metaValue {
@@ -87,7 +90,7 @@
 .keyValueContainer {
   margin: auto;
   margin-left: 1em;
-  margin-top: 5em;
+  margin-top: 2.5em;
   overflow-y: scroll;
   text-align: left;
 }
