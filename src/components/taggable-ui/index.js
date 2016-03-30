@@ -24,7 +24,7 @@ class TaggableUI extends Component {
             <LinkedTags listItems={searchResults}/>
           </Col>
           <Col xs={6} md={6} className='col-centered'>
-            <ViewPane id={_id} displayName={displayName} metadata={metadata}/>
+            <ViewPane height={'30vh'} id={_id} displayName={displayName} metadata={metadata}/>
           </Col>
         </Row>
       </Grid>
