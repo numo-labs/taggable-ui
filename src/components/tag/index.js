@@ -4,9 +4,9 @@ import './styles.css';
 
 class Tag extends Component {
   render () {
-    const { tagName, onClick, id } = this.props;
+    const { tagName, onClick, id, selected } = this.props;
     return (
-      <Button className='tag' bsSize='xsmall' onClick={onClick.bind(null, id)}>
+      <Button className='tag' bsSize='xsmall' bsStyle={selected ? 'primary' : 'default'} onClick={onClick.bind(null, id)}>
         <p className='tag__name'>{tagName}</p>
         <p className='tag__id'>{id}</p>
       </Button>
@@ -17,7 +17,8 @@ class Tag extends Component {
 Tag.propTypes = {
   tagName: PropTypes.string,
   onClick: PropTypes.func,
-  id: PropTypes.string
+  id: PropTypes.string,
+  selected: PropTypes.bool
 };
 
 Tag.defaultProps = {

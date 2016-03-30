@@ -9,12 +9,13 @@ class TagList extends Component {
       listItems,
       handleButtonClick,
       handleTagClick,
-      withButtons
+      withButtons,
+      selectedTagId
     } = this.props;
     const list = listItems.map(item => {
       return (
         <div key={item._id}>
-          <Tag key={item._id} id={item._id} tagName={item.displayName} onClick={handleTagClick} />
+          <Tag key={item._id} id={item._id} tagName={item.displayName} selected={item._id === selectedTagId} onClick={handleTagClick} />
            { withButtons && <Button className='redButton' onHandleClick={handleButtonClick} symbol={'x'} /> }
         </div>
       );
@@ -31,7 +32,8 @@ TagList.propTypes = {
   listItems: PropTypes.array,
   handleButtonClick: PropTypes.func,
   handleTagClick: PropTypes.func,
-  withButtons: PropTypes.bool
+  withButtons: PropTypes.bool,
+  selectedTagId: PropTypes.string
 };
 
 TagList.defaultProps = {

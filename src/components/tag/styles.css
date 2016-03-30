@@ -18,3 +18,8 @@
   margin: 0, auto;
   font-style: italic;
 }
+
+.tag__highlight {
+  background-color: #4d4d4d;
+  color: #ffffff
+}
