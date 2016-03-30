@@ -39,7 +39,7 @@ export default function taggable (state = initialState, action) {
       };
     case SET_SEARCH_TERM:
       return {
-        ...state,
+        ...initialState,
         searchTerm: action.text,
         searchResults: filterTags(action.text)
       };

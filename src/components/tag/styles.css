@@ -3,10 +3,21 @@
   width: 80%;
   margin-bottom: 0.2em;
   margin-top: 0.2em;
-  margin-right: 0.5em;
-  margin-left: 2em;
 }
 
-.tag h1 {
-  margin-top: 0;
+.tag__name {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin: 0.2em auto;
+}
+
+.tag__id {
+  font-size: 1em;
+  margin: 0.3em auto;
+  font-style: italic;
+}
+
+.tag__highlight {
+  background-color: #4d4d4d;
+  color: #ffffff
 }

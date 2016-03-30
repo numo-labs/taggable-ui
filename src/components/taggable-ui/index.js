@@ -17,7 +17,8 @@ class TaggableUI extends Component {
       search,
       setTagInView,
       setSelectedTagFromSearch,
-      setSearchTerm
+      setSearchTerm,
+      selectedTagFromSearch
     } = this.props;
     return (
     <div>
@@ -42,6 +43,7 @@ class TaggableUI extends Component {
               setSearchTerm={setSearchTerm}
               onTagClick={setSelectedTagFromSearch}
               listItems={searchResults}
+              selectedTagId={selectedTagFromSearch._id}
             />
           </Col>
           <Col xs={3} md={3} className='col-centered'>
@@ -49,6 +51,7 @@ class TaggableUI extends Component {
             <LinkedTags
               onTagClick={setTagInView}
               listItems={linkedTags}
+              selectedTagId={_id}
             />
           </Col>
           <Col xs={6} md={6} className='col-centered'>
@@ -70,7 +73,8 @@ TaggableUI.propTypes = {
   search: PropTypes.func,
   setTagInView: PropTypes.func,
   setSelectedTagFromSearch: PropTypes.func,
-  setSearchTerm: PropTypes.func
+  setSearchTerm: PropTypes.func,
+  selectedTagFromSearch: PropTypes.object
 };
 
 export default TaggableUI;
