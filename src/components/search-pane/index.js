@@ -30,11 +30,20 @@ class SearchPane extends Component {
   }
 
   render () {
-    const { props: { listItems }, state: { modalVisible } } = this;
+    const {
+      props: {
+        listItems,
+        onSearchSubmit,
+        setSearchTerm,
+        onTagClick
+      },
+      state: { modalVisible }
+    } = this;
+
     return (
       <div>
-        <SearchBar />
-        <TagList listItems={listItems} withButtons={false}/>
+        <SearchBar handleSubmit={onSearchSubmit} onChangeText={setSearchTerm}/>
+        <TagList listItems={listItems} withButtons={false} handleTagClick={onTagClick}/>
         <Button
           onClick={this.showModal}
           text='+ Create a new tag'
@@ -46,7 +55,10 @@ class SearchPane extends Component {
 }
 
 SearchPane.propTypes = {
-  listItems: PropTypes.array
+  listItems: PropTypes.array,
+  onSearchSubmit: PropTypes.func,
+  setSearchTerm: PropTypes.func,
+  onTagClick: PropTypes.func
 };
 
 export default SearchPane;
