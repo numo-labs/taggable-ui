@@ -32,7 +32,7 @@ class ViewPane extends Component {
     return metadataContent;
   }
   render () {
-    const { id, displayName, onHandleButtonClick, height } = this.props;
+    const { id, displayName, onHandleButtonClick, height, handleOnChange } = this.props;
     const addButton = <Button onHandleClick={onHandleButtonClick} symbol={'+'} />;
     return (
       <div>
@@ -60,7 +60,7 @@ class ViewPane extends Component {
               <h4 className='keyValuePair'>Add new key/value pair:</h4>
               <div className='keyValueInput'>
                 <Col xs={6}>
-                  <input type='text' className='form-control' placeholder='add new key' />
+                  <Input type='text' onChange={handleOnChange} className='form-control' placeholder='add new key' />
                 </Col>
                 <Col xs={6}>
                   <Input type='text' className='form-control addNewValue' placeholder='add value' buttonAfter={addButton}/>
