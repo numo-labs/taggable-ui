@@ -10,29 +10,29 @@ class ViewPane extends Component {
     const addButton = <Button onHandleClick={onHandleButtonClick} symbol={'+'} />;
     const metadataContent = metadata.map(item => {
       return (
-        <Input key={item.key} wrapperClassName='wrapper'>
-          <Row>
-            <Col xs={6}>
-              <input type='text' className='form-control' value={item.key} />
-            </Col>
-            <Col xs={6}>
-              {item.values.map(value => {
-                return (
-                    <div className='inputGroup'>
-                        <Input key={value} type='text' className='form-control' value={value} buttonAfter={deleteButton}/>
-                    </div>
-                );
-              })}
-              <Input type='text' className='form-control' placeholder='add value' buttonAfter={addButton} />
-            </Col>
-          </Row>
-        </Input>
+          <Input key={item.key} wrapperClassName='wrapper' className='metaContent'>
+            <Row>
+              <Col xs={6}>
+                <input type='text' className='form-control' value={item.key} />
+              </Col>
+              <Col xs={6}>
+                {item.values.map(value => {
+                  return (
+                      <div key={value} className='inputGroup'>
+                          <Input type='text' className='form-control' value={value} buttonAfter={deleteButton}/>
+                      </div>
+                  );
+                })}
+                <Input type='text' className='form-control' placeholder='add value' buttonAfter={addButton} />
+              </Col>
+            </Row>
+          </Input>
       );
     });
     return metadataContent;
   }
   render () {
-    const { id, displayName, onHandleButtonClick } = this.props;
+    const { id, displayName, onHandleButtonClick, height, handleOnChange } = this.props;
     const addButton = <Button onHandleClick={onHandleButtonClick} symbol={'+'} />;
     return (
       <div>
@@ -44,25 +44,30 @@ class ViewPane extends Component {
           <h4 className='displayName'>Display name:</h4>
           <Input className='displayNameInput' type='text' labelClassName='col-xs-9' wrapperClassName='col-xs-6' value={displayName}/>
         </div>
-          <div className='content'>
           <Row>
-            <Col xs={1}>
+            <Col xs={2}>
               <h4>Keys:</h4>
             </Col>
             <Col xs={12}>
               <h4>Values:</h4>
             </Col>
           </Row>
+          <div className='content' style={{height: height}}>
           {this.renderMetadataContent()}
-          <Row>
-            <Col xs={6}>
-              <input type='text' className='form-control' placeholder='add new key' />
-            </Col>
-            <Col xs={6}>
-              <Input type='text' className='form-control addNewValue' placeholder='add value' buttonAfter={addButton}/>
-            </Col>
-            </Row>
           </div>
+          <Row>
+            <div className='keyValueContainer'>
+              <h4 className='keyValuePair'>Add new key/value pair:</h4>
+              <div className='keyValueInput'>
+                <Col xs={6}>
+                  <Input type='text' onChange={handleOnChange} className='form-control' placeholder='add new key' />
+                </Col>
+                <Col xs={6}>
+                  <Input type='text' className='form-control addNewValue' placeholder='add value' buttonAfter={addButton}/>
+                </Col>
+              </div>
+            </div>
+          </Row>
       </div>
     );
   }
@@ -72,7 +77,9 @@ ViewPane.propTypes = {
   id: PropTypes.string,
   displayName: PropTypes.string,
   metadata: PropTypes.array,
-  onHandleButtonClick: PropTypes.func
+  onHandleButtonClick: PropTypes.func,
+  height: PropTypes.string,
+  handleOnChange: PropTypes.func
 };
 
 ViewPane.defaultProps = {

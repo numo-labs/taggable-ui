@@ -1,5 +1,10 @@
 .addNewValue {
-  width: 25.5em;
+  width: 28em;
+}
+
+.addKeyValue {
+  margin-top: 3em;
+  margin-left: 2em;
 }
 
 .idInput {
@@ -9,7 +14,12 @@
 .content {
   margin: auto;
   margin-left: 1em;
-  margin-top: 3em;
+  margin-top: 1em;
+  overflow-y: scroll;
+  text-align: left;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 1em;
 }
 
 .metaValue {
@@ -28,6 +38,7 @@
 .displayName {
   width: 30%;
   float: left;
+  margin-bottom: 3em;
 }
 
 .displayNameInput {
@@ -69,4 +80,27 @@
 .input-group-btn:last-child>.dropdown-toggle {
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
+}
+
+.keyValueContainer {
+  margin: auto;
+  margin-left: 1em;
+  margin-top: 2.5em;
+  overflow-y: scroll;
+  text-align: left;
+}
+
+.keyValuePair {
+  margin-bottom: 1.5em;
+  margin-left: 1em;
+}
+
+.keyValueInput {
+  margin-left: 1em;
+}
+
+.metadataTitle {
+  text-align: left;
+  display: inline-block;
+  float: left;
 }
