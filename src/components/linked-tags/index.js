@@ -19,13 +19,13 @@ class LinkedTags extends Component {
   }
   render () {
     const {
-      props: { listItems },
+      props: { listItems, onTagClick },
       state: { searchBarVisible }
      } = this;
 
     return (
       <div>
-        <TagList listItems={listItems} />
+        <TagList listItems={listItems} handleTagClick={onTagClick}/>
         <Button
           onClick={this.toggleSearchBarVisible}
           text='+ Add a new tag'
@@ -37,7 +37,8 @@ class LinkedTags extends Component {
 }
 
 LinkedTags.propTypes = {
-  listItems: PropTypes.array
+  listItems: PropTypes.array,
+  onTagClick: PropTypes.func
 };
 
 export default LinkedTags;
