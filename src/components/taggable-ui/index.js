@@ -53,7 +53,6 @@ TaggableUI.propTypes = {
   searchResults: PropTypes.array,
   selectedTag: PropTypes.object,
   tagInView: PropTypes.object,
-  selectedTagFromSearch: PropTypes.object,
   linkedTags: PropTypes.array,
   search: PropTypes.func,
   setTagInView: PropTypes.func,
