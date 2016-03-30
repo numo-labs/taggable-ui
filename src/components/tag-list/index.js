@@ -5,12 +5,17 @@ import './styles.css';
 
 class TagList extends Component {
   render () {
-    const { listItems, onHandleButtonClick, onHandleTagClick, withButtons } = this.props;
-    const list = listItems.map(listItem => {
+    const {
+      listItems,
+      handleButtonClick,
+      handleTagClick,
+      withButtons
+    } = this.props;
+    const list = listItems.map(item => {
       return (
-        <div key={listItem.tagId}>
-          <Tag key={listItem.tagId} tagName={listItem.tagId} onHandleClick={onHandleTagClick} />
-           { withButtons && <Button className='redButton' onHandleClick={onHandleButtonClick} symbol={'x'} /> }
+        <div key={item._id}>
+          <Tag key={item._id} id={item._id} tagName={item.displayName} onClick={handleTagClick} />
+           { withButtons && <Button className='redButton' onHandleClick={handleButtonClick} symbol={'x'} /> }
         </div>
       );
     });
@@ -24,13 +29,14 @@ class TagList extends Component {
 
 TagList.propTypes = {
   listItems: PropTypes.array,
-  onHandleButtonClick: PropTypes.func,
-  onHandleTagClick: PropTypes.func,
+  handleButtonClick: PropTypes.func,
+  handleTagClick: PropTypes.func,
   withButtons: PropTypes.bool
 };
 
 TagList.defaultProps = {
-  withButtons: true
+  withButtons: true,
+  listItems: []
 };
 
 export default TagList;

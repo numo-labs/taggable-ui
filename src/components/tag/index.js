@@ -4,10 +4,11 @@ import './styles.css';
 
 class Tag extends Component {
   render () {
-    const { tagName, onHandleClick } = this.props;
+    const { tagName, onClick, id } = this.props;
     return (
-      <Button className='tag' bsSize='small' onClick={onHandleClick}>
+      <Button className='tag' bsSize='small' onClick={onClick.bind(null, id)}>
         <h5>{tagName}</h5>
+        <p>{id}</p>
       </Button>
     );
   }
@@ -15,7 +16,8 @@ class Tag extends Component {
 
 Tag.propTypes = {
   tagName: PropTypes.string,
-  onHandleClick: PropTypes.func
+  onClick: PropTypes.func,
+  id: PropTypes.string
 };
 
 export default Tag;

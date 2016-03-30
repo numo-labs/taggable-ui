@@ -14,6 +14,7 @@ class SearchBar extends Component {
   constructor () {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTextInput = this.handleTextInput.bind(this);
   }
 
   handleSubmit (e) {
@@ -22,15 +23,20 @@ class SearchBar extends Component {
     handleSubmit !== undefined && handleSubmit();
   }
 
-  render () {
+  handleTextInput () {
     const { onChangeText } = this.props;
+    onChangeText(this.refs.input.getValue());
+  }
+
+  render () {
     return (
       <form onSubmit={this.handleSubmit}>
         <Input
+          ref='input'
           type='search'
           className='search__input'
           placeholder='Search by id or displayName..'
-          onChange={onChangeText}
+          onChange={this.handleTextInput}
         />
       </form>
     );
