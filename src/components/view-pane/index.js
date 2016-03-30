@@ -78,7 +78,8 @@ ViewPane.propTypes = {
   displayName: PropTypes.string,
   metadata: PropTypes.array,
   onHandleButtonClick: PropTypes.func,
-  height: PropTypes.string
+  height: PropTypes.string,
+  handleOnChange: PropTypes.func
 };
 
 ViewPane.defaultProps = {
