@@ -36,18 +36,4 @@ describe('<SearchPane />', () => {
     expect(fourthChild).to.deep.equal(modal);
     done();
   });
-  // it('Calls the onSubmit function prop when the form is submitted', (done) => {
-  //   const props = {
-  //     onChange: () => console.log('called')
-  //   };
-  //   const wrapper = shallow(<SearchBar {...props}/>);
-  //   // wrapper.find('input').simulate('keyDown', {key: 'Enter', keyCode: 13, which: 13});
-  //   wrapper.find('input').simulate('change', {target: {value: 'My new value'}});
-  //   expect(props.onSubmit.callCount).to.equal(1);
-  //   done();
-  // });
 });
-
-// expect(wrapper.find('form').length).to.equal(1);
-// expect(wrapper.find('input').length).to.equal(1);
-// expect(wrapper.find('form').children().first().type()).to.equal('input');
