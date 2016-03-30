@@ -14,7 +14,7 @@ class TaggableUI extends Component {
       selectedTag: { metadata, _id, displayName }
     } = this.props;
     return (
-      <Grid fluid={true}>
+      <Grid fluid>
         <PageHeader>Numo Labs Tag System</PageHeader>
         <Row>
           <Col xs={3} md={3} className='col-centered'>
