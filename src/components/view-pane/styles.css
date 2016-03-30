@@ -82,11 +82,6 @@
   border-bottom-left-radius: 3px;
 }
 
-.metaContent {
-  height: 1em;
-  overflow-y: auto;
-}
-
 .keyValueContainer {
   margin: auto;
   margin-left: 1em;
