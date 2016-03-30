@@ -3,14 +3,31 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 // import sinon from 'sinon';
 
-import SearchBar from '../../src/components/search-bar/';
+import SearchPane from '../../src/components/search-pane/';
 
-describe('Search Panel', () => {
-  it('Renders a form and an input tag', (done) => {
-    const wrapper = shallow(<SearchBar />);
-    expect(wrapper.find('form').length).to.equal(1);
-    expect(wrapper.find('input').length).to.equal(1);
-    expect(wrapper.find('form').children().first().type()).to.equal('input');
+describe('<SearchPane />', () => {
+  const wrapper = shallow(<SearchPane />);
+  const children = wrapper.children().nodes;
+  it('should render the <SearchPane /> component with the correct number of children', function (done) {
+    expect(children).to.have.length(4);
+    done();
+  });
+  it('Renders <SearchBar> as the first child', (done) => {
+    const firstChild = children[0].type;
+    const searchBar = wrapper.find('SearchBar').node.type;
+    expect(firstChild).to.deep.equal(searchBar);
+    done();
+  });
+  it('Renders <Tags> as the second child', (done) => {
+    const secondChild = children[1].type;
+    const tags = wrapper.find('TagList').node.type;
+    expect(secondChild).to.deep.equal(tags);
+    done();
+  });
+  it('Renders a <Button> as the third child', (done) => {
+    const thirdChild = children[2].type;
+    const button = wrapper.find('AddTagButton').node.type;
+    expect(thirdChild).to.deep.equal(button);
     done();
   });
   // it('Calls the onSubmit function prop when the form is submitted', (done) => {
@@ -24,3 +41,7 @@ describe('Search Panel', () => {
   //   done();
   // });
 });
+
+// expect(wrapper.find('form').length).to.equal(1);
+// expect(wrapper.find('input').length).to.equal(1);
+// expect(wrapper.find('form').children().first().type()).to.equal('input');

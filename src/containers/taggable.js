@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 import TaggableUI from '../components/taggable-ui';
 
 function mapStateToProps (state) {
-  const { taggable: { tags } } = state;
+  const { taggable: { searchResults, selectedTag } } = state;
   return {
-    tags
+    searchResults,
+    selectedTag
   };
 }
 
