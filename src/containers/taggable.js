@@ -7,7 +7,8 @@ function mapStateToProps (state) {
       searchResults,
       tagInView,
       selectedTagFromSearch,
-      linkedTags
+      linkedTags,
+      searchTerm
      }
    } = state;
 
@@ -15,7 +16,8 @@ function mapStateToProps (state) {
     tagInView,
     selectedTagFromSearch,
     searchResults,
-    linkedTags
+    linkedTags,
+    searchTerm
   };
 }
 

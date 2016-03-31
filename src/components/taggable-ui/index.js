@@ -32,7 +32,8 @@ class TaggableUI extends Component {
       search,
       setSelectedTagFromSearch,
       setSearchTerm,
-      selectedTagFromSearch
+      searchTerm,
+      tagInView: { _id }
     } = this.props;
     const searchPane = (
       <Col xs={3} md={3} className='col-centered'>
@@ -42,7 +43,8 @@ class TaggableUI extends Component {
           setSearchTerm={setSearchTerm}
           onTagClick={setSelectedTagFromSearch}
           listItems={searchResults}
-          selectedTagId={selectedTagFromSearch._id}
+          selectedTagId={_id}
+          searchTerm={searchTerm}
         />
       </Col>
     );
@@ -52,13 +54,13 @@ class TaggableUI extends Component {
     const {
       tagInView: { _id },
       linkedTags,
-      setTagInView
+      setSearchTerm
     } = this.props;
     const tagLinks = (
       <Col xs={3} md={3} className='col-centered'>
         <h1 className='title'>Linked Tags</h1>
         <LinkedTags
-          onTagClick={setTagInView}
+          onTagClick={setSearchTerm}
           listItems={linkedTags}
           selectedTagId={_id}
         />
@@ -85,8 +87,8 @@ class TaggableUI extends Component {
         <Grid fluid>
           <Row>
             {this.renderSearchPane()}
-            {this.renderLinkedTags()}
             {this.renderTagContent()}
+            {this.renderLinkedTags()}
           </Row>
         </Grid>
       </div>
@@ -100,10 +102,9 @@ TaggableUI.propTypes = {
   tagInView: PropTypes.object,
   linkedTags: PropTypes.array,
   search: PropTypes.func,
-  setTagInView: PropTypes.func,
   setSelectedTagFromSearch: PropTypes.func,
   setSearchTerm: PropTypes.func,
-  selectedTagFromSearch: PropTypes.object
+  searchTerm: PropTypes.string
 };
 
 export default TaggableUI;
