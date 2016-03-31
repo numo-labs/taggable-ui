@@ -35,3 +35,16 @@ div[class*='col'] {
 .title {
   margin-bottom: 2em;
 }
+
+.navi {
+  background-color: #303030;
+}
+
+.numoTitle {
+  color: #B5B5B5;
+  margin-top: 10px;
+}
+
+.numoTitle:hover {
+  color: #ffffff;
+}

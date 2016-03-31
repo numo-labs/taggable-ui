@@ -52,7 +52,7 @@ export const mockTags = [
         active: true
       },
       {
-        tagId: 'hotel:NE.wvHotelPartId.12345',
+        tagId: 'hotel:NE.wvHotelPartId.678910',
         tagType: 'hotel',
         source: 'master_hotel_mapping',
         active: true

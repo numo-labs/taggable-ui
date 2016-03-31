@@ -9,58 +9,87 @@ require('./styles.css');
 import './css/normalize.css';
 
 class TaggableUI extends Component {
-  render () {
+  renderNavbar () {
+    const navbar = (
+      <nav className='navbar navbar-default navi'>
+        <div className='navbar-header'>
+          <Navbar.Brand>
+            <Nav>
+              <h2 className='numoTitle'>Numo Labs Tag System</h2>
+            </Nav>
+          </Navbar.Brand>
+        </div>
+        <Nav pullRight>
+          <NavItem><Button text={'Save new configuration'} /></NavItem>
+        </Nav>
+      </nav>
+    );
+    return navbar;
+  }
+  renderSearchPane () {
     const {
       searchResults,
-      tagInView: { metadata, _id, displayName },
-      linkedTags,
       search,
-      setTagInView,
       setSelectedTagFromSearch,
       setSearchTerm,
       selectedTagFromSearch
     } = this.props;
+    const searchPane = (
+      <Col xs={3} md={3} className='col-centered'>
+        <h1 className='title'>Search Tags</h1>
+        <SearchPane
+          onSearchSubmit={search}
+          setSearchTerm={setSearchTerm}
+          onTagClick={setSelectedTagFromSearch}
+          listItems={searchResults}
+          selectedTagId={selectedTagFromSearch._id}
+        />
+      </Col>
+    );
+    return searchPane;
+  }
+  renderLinkedTags () {
+    const {
+      tagInView: { _id },
+      linkedTags,
+      setTagInView
+    } = this.props;
+    const tagLinks = (
+      <Col xs={3} md={3} className='col-centered'>
+        <h1 className='title'>Linked Tags</h1>
+        <LinkedTags
+          onTagClick={setTagInView}
+          listItems={linkedTags}
+          selectedTagId={_id}
+        />
+      </Col>
+    );
+    return tagLinks;
+  }
+  renderTagContent () {
+    const {
+      tagInView: { metadata, _id, displayName }
+    } = this.props;
+    const tagContent = (
+      <Col xs={6} md={6} className='col-centered'>
+        <h1 className='title'>Tag Content</h1>
+        <ViewPane height={'35vh'} id={_id} displayName={displayName} metadata={metadata}/>
+      </Col>
+    );
+    return tagContent;
+  }
+  render () {
     return (
-    <div>
-      <Navbar inverse>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Nav>
-              <h2>Numo Labs Tag System</h2>
-            </Nav>
-          </Navbar.Brand>
-        </Navbar.Header>
-        <Nav pullRight>
-          <NavItem><Button text={'Save new configuration'} /></NavItem>
-        </Nav>
-      </Navbar>
+      <div>
+        {this.renderNavbar()}
         <Grid fluid>
-        <Row>
-          <Col xs={3} md={3} className='col-centered'>
-          <h1 className='title'>Search Tags</h1>
-            <SearchPane
-              onSearchSubmit={search}
-              setSearchTerm={setSearchTerm}
-              onTagClick={setSelectedTagFromSearch}
-              listItems={searchResults}
-              selectedTagId={selectedTagFromSearch._id}
-            />
-          </Col>
-          <Col xs={3} md={3} className='col-centered'>
-          <h1 className='title'>Linked Tags</h1>
-            <LinkedTags
-              onTagClick={setTagInView}
-              listItems={linkedTags}
-              selectedTagId={_id}
-            />
-          </Col>
-          <Col xs={6} md={6} className='col-centered'>
-          <h1 className='title'>Tag Content</h1>
-            <ViewPane height={'35vh'} id={_id} displayName={displayName} metadata={metadata}/>
-          </Col>
-        </Row>
-      </Grid>
-    </div>
+          <Row>
+            {this.renderSearchPane()}
+            {this.renderLinkedTags()}
+            {this.renderTagContent()}
+          </Row>
+        </Grid>
+      </div>
     );
   }
 }
