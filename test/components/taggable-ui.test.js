@@ -6,12 +6,20 @@ import TaggableUI from '../../src/components/taggable-ui';
 
 const props = {
   searchResults: [],
+  tagInView: {},
+  linkedTags: [],
+  search: () => {},
+  setTagInView: () => {},
+  setSelectedTagFromSearch: () => {},
+  setSearchTerm: () => {},
+  selectedTagFromSearch: {},
   selectedTag: {
     metadata: [],
     id: '',
     displayName: ''
   }
 };
+
 describe('Component', function () {
   describe('<TaggableUI />', function () {
     const wrapper = shallow(<TaggableUI {...props} />);
@@ -20,16 +28,15 @@ describe('Component', function () {
       expect(children).to.have.length(2);
       done();
     });
-    it('should render a <PageHeader /> as the first child', function (done) {
-      const firstChild = children[0].type;
-      const pageHeader = wrapper.find('PageHeader').node.type;
-      expect(firstChild).to.deep.equal(pageHeader);
+    it('should render a <NavbarHeader />', function (done) {
+      const nav = wrapper.find('NavbarHeader');
+      expect(nav).to.have.length(1);
       done();
     });
-    it('should render a <Row /> as the second child', function (done) {
+    it('should render a <Grid /> as the second child', function (done) {
       const secondChild = children[1].type;
-      const row = wrapper.find('Row').node.type;
-      expect(secondChild).to.deep.equal(row);
+      const grid = wrapper.find('Grid').node.type;
+      expect(secondChild).to.deep.equal(grid);
       done();
     });
     it('should render three <Columns /> within the Row', function (done) {

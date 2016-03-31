@@ -49,4 +49,8 @@ LinkedTags.propTypes = {
   selectedTagId: PropTypes.string
 };
 
+LinkedTags.defaultProps = {
+  listItems: []
+};
+
 export default LinkedTags;

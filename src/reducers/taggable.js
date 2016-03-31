@@ -9,7 +9,7 @@ import {
 
 import { filterTags, findLinkedTags } from '../utils/searchHelper.js';
 
-const initialState = {
+export const initialState = {
   searchResults: [],
   selectedTagFromSearch: {},
   linkedTags: [],
