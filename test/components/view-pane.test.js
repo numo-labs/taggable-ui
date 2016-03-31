@@ -26,7 +26,7 @@ describe('Component', function () {
   const children = wrapper.children().nodes;
   describe('<ViewPane />', function () {
     it('should render our ViewPane component', function (done) {
-      expect(children).to.have.length(3);
+      expect(children).to.have.length(5);
       done();
     });
   });
