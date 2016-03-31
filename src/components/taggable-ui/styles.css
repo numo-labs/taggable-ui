@@ -23,17 +23,26 @@ div[class*='col'] {
   float: none;
 }
 
+.linkedTitle {
+  margin-bottom: 3.05em;
+}
+
 .row {
  display: table;
  width: 100%
 }
 
-.saveButton {
-  right: 10em;
+.nav>li>a:focus,
+.nav>li>a:hover {
+  background-color: #303030;
 }
 
-.title {
-  margin-bottom: 2em;
+.tagContentTitle {
+  margin-bottom: 1em;
+}
+
+.searchTagTitle {
+  margin-bottom: 1em;
 }
 
 .navi {

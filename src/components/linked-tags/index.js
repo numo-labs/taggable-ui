@@ -1,28 +1,33 @@
 import React, { Component, PropTypes } from 'react';
 import TagList from '../tag-list';
-import SearchBar from '../search-bar';
 import { AddTagButton as Button } from '../button';
+import Modal from '../manage-tags-modal';
 
 require('./styles.css');
 class LinkedTags extends Component {
-
   constructor () {
     super();
     this.state = {
-      searchBarVisible: false
+      manageTagsModalVisible: false
     };
-    this.toggleSearchBarVisible = this.toggleSearchBarVisible.bind(this);
+    this.showModal = this.showModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
-  toggleSearchBarVisible () {
-    this.setState({ searchBarVisible: !this.state.searchBarVisible });
+  showModal () {
+    this.setState({manageTagsModalVisible: true});
   }
+
+  closeModal () {
+    this.setState({manageTagsModalVisible: false});
+  }
+
   render () {
     const {
-      props: { listItems, onTagClick, selectedTagId },
-      state: { searchBarVisible }
+      props: { listItems, onTagClick, selectedTagId }
      } = this;
-
+    const { manageTagsModalVisible } = this.state;
+    console.log(listItems);
     return (
       <div>
         <TagList
@@ -30,14 +35,11 @@ class LinkedTags extends Component {
           handleTagClick={onTagClick}
           selectedTagId={selectedTagId}
         />
-        {
-          listItems.length > 0 &&
           <Button
-          onClick={this.toggleSearchBarVisible}
-          text='+ Add a new tag'
+          onClick={this.showModal}
+          text='Modify tags'
           />
-        }
-        { searchBarVisible && <SearchBar /> }
+        <Modal modalVisible={manageTagsModalVisible} closeModal={this.closeModal} saveChanges={this.saveChanges}/>
       </div>
     );
   }

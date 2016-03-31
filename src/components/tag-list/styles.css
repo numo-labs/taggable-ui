@@ -2,6 +2,9 @@
   width: 100%;
   margin: 0 auto;
   text-align: center;
+  height: 60vh;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
 }
 
 .customButton {

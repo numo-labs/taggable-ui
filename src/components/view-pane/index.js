@@ -4,6 +4,30 @@ import { SymbolButton as Button } from '../button';
 import './styles.css';
 
 class ViewPane extends Component {
+  renderTagContentHeader () {
+    const { id, displayName } = this.props;
+    const tagContentHeader = (
+      <div>
+        <div>
+          <h4 className='tagId'>ID:</h4>
+          <Input className='tagIdInput' type='text' labelClassName='col-xs-9' wrapperClassName='col-xs-6' value={id} />
+        </div>
+        <div>
+          <h4 className='displayName'>Display name:</h4>
+          <Input className='displayNameInput' type='text' labelClassName='col-xs-9' wrapperClassName='col-xs-6' value={displayName}/>
+        </div>
+        <Row>
+          <Col xs={2}>
+            <h4>Keys:</h4>
+          </Col>
+          <Col xs={12}>
+            <h4>Values:</h4>
+          </Col>
+        </Row>
+      </div>
+    );
+    return tagContentHeader;
+  }
   renderMetadataContent () {
     const { metadata, onHandleButtonClick, height } = this.props;
     const deleteButton = <Button className='redButton' onHandleClick={onHandleButtonClick} symbol={'x'} />;
@@ -41,7 +65,7 @@ class ViewPane extends Component {
     const addNewKeyValue = (
       <Row>
         <div className='keyValueContainer'>
-          <h4 className='keyValuePair'>Add new key/value pair:</h4>
+          <h4 className='keyValuePair'>Add new key value pair:</h4>
           <div className='keyValueInput'>
             <Col xs={6}>
               <Input type='text' onChange={handleOnChange} className='form-control' placeholder='add new key' />
@@ -54,30 +78,6 @@ class ViewPane extends Component {
       </Row>
     );
     return addNewKeyValue;
-  }
-  renderTagContentHeader () {
-    const { id, displayName } = this.props;
-    const tagContentHeader = (
-      <div>
-        <div>
-          <h4 className='tagId'>ID:</h4>
-          <Input className='tagIdInput' type='text' labelClassName='col-xs-9' wrapperClassName='col-xs-6' value={id}/>
-        </div>
-        <div>
-          <h4 className='displayName'>Display name:</h4>
-          <Input className='displayNameInput' type='text' labelClassName='col-xs-9' wrapperClassName='col-xs-6' value={displayName}/>
-        </div>
-        <Row>
-          <Col xs={2}>
-            <h4>Keys:</h4>
-          </Col>
-          <Col xs={12}>
-            <h4>Values:</h4>
-          </Col>
-        </Row>
-      </div>
-    );
-    return tagContentHeader;
   }
   render () {
     return (
