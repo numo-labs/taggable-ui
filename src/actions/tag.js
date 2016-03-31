@@ -18,3 +18,7 @@ export function setSearchTerm (text) {
 export function setSelectedTagFromSearch (tagID) {
   return { type: types.SET_SELECTED_TAG_FROM_SEARCH, tagID };
 }
+
+export function saveMetaDataInput (index, field, text) {
+  return { type: types.SAVE_METADATA_INPUT, index, field, text };
+}

@@ -27,7 +27,7 @@ class LinkedTags extends Component {
       props: { listItems, onTagClick, selectedTagId }
      } = this;
     const { manageTagsModalVisible } = this.state;
-    console.log(listItems);
+
     return (
       <div>
         <TagList
@@ -35,10 +35,10 @@ class LinkedTags extends Component {
           handleTagClick={onTagClick}
           selectedTagId={selectedTagId}
         />
-          <Button
+        <Button
           onClick={this.showModal}
           text='Modify tags'
-          />
+        />
         <Modal modalVisible={manageTagsModalVisible} closeModal={this.closeModal} saveChanges={this.saveChanges}/>
       </div>
     );
