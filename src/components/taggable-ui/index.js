@@ -9,19 +9,8 @@ require('./styles.css');
 import './css/normalize.css';
 
 class TaggableUI extends Component {
-  render () {
-    const {
-      searchResults,
-      tagInView: { metadata, _id, displayName },
-      linkedTags,
-      search,
-      setTagInView,
-      setSelectedTagFromSearch,
-      setSearchTerm,
-      selectedTagFromSearch
-    } = this.props;
-    return (
-    <div>
+  renderNavbar () {
+    const navbar = (
       <Navbar inverse>
         <Navbar.Header>
           <Navbar.Brand>
@@ -34,33 +23,73 @@ class TaggableUI extends Component {
           <NavItem><Button text={'Save new configuration'} /></NavItem>
         </Nav>
       </Navbar>
+    );
+    return navbar;
+  }
+  renderSearchPane () {
+    const {
+      searchResults,
+      search,
+      setSelectedTagFromSearch,
+      setSearchTerm,
+      selectedTagFromSearch
+    } = this.props;
+    const searchPane = (
+      <Col xs={3} md={3} className='col-centered'>
+      <h1 className='title'>Search Tags</h1>
+        <SearchPane
+          onSearchSubmit={search}
+          setSearchTerm={setSearchTerm}
+          onTagClick={setSelectedTagFromSearch}
+          listItems={searchResults}
+          selectedTagId={selectedTagFromSearch._id}
+        />
+      </Col>
+    );
+    return searchPane;
+  }
+  renderLinkedTags () {
+    const {
+      tagInView: { _id },
+      linkedTags,
+      setTagInView
+    } = this.props;
+    const tagLinks = (
+      <Col xs={3} md={3} className='col-centered'>
+      <h1 className='title'>Linked Tags</h1>
+        <LinkedTags
+          onTagClick={setTagInView}
+          listItems={linkedTags}
+          selectedTagId={_id}
+        />
+      </Col>
+    );
+    return tagLinks;
+  }
+  renderTagContent () {
+    const {
+      tagInView: { metadata, _id, displayName }
+    } = this.props;
+    const tagContent = (
+      <Col xs={6} md={6} className='col-centered'>
+      <h1 className='title'>Tag Content</h1>
+        <ViewPane height={'35vh'} id={_id} displayName={displayName} metadata={metadata}/>
+      </Col>
+    );
+    return tagContent;
+  }
+  render () {
+    return (
+      <div>
+        {this.renderNavbar()}
         <Grid fluid>
-        <Row>
-          <Col xs={3} md={3} className='col-centered'>
-          <h1 className='title'>Search Tags</h1>
-            <SearchPane
-              onSearchSubmit={search}
-              setSearchTerm={setSearchTerm}
-              onTagClick={setSelectedTagFromSearch}
-              listItems={searchResults}
-              selectedTagId={selectedTagFromSearch._id}
-            />
-          </Col>
-          <Col xs={3} md={3} className='col-centered'>
-          <h1 className='title'>Linked Tags</h1>
-            <LinkedTags
-              onTagClick={setTagInView}
-              listItems={linkedTags}
-              selectedTagId={_id}
-            />
-          </Col>
-          <Col xs={6} md={6} className='col-centered'>
-          <h1 className='title'>Tag Content</h1>
-            <ViewPane height={'35vh'} id={_id} displayName={displayName} metadata={metadata}/>
-          </Col>
-        </Row>
-      </Grid>
-    </div>
+          <Row>
+            {this.renderSearchPane()}
+            {this.renderLinkedTags()}
+            {this.renderTagContent()}
+          </Row>
+        </Grid>
+      </div>
     );
   }
 }

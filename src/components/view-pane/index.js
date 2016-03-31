@@ -38,7 +38,7 @@ class ViewPane extends Component {
   renderAddNewKeyValue () {
     const { onHandleButtonClick, handleOnChange } = this.props;
     const addButton = <Button onHandleClick={onHandleButtonClick} symbol={'+'} />;
-    const test = (
+    const addNewKeyValue = (
       <Row>
         <div className='keyValueContainer'>
           <h4 className='keyValuePair'>Add new key/value pair:</h4>
@@ -53,7 +53,7 @@ class ViewPane extends Component {
         </div>
       </Row>
     );
-    return test;
+    return addNewKeyValue;
   }
   renderTagContentHeader () {
     const { id, displayName } = this.props;
