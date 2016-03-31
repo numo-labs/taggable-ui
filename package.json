@@ -11,7 +11,7 @@
     "nocov": "mocha test/**/*.test.js --compilers js:babel-register"
   },
   "pre-commit": [
-    "lint"
+    "test"
   ],
   "repository": {
     "type": "git",
