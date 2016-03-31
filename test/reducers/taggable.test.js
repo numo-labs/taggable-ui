@@ -3,7 +3,7 @@ import taggable, { initialState } from '../../src/reducers/taggable.js';
 import { expect } from 'chai';
 import {
   SEARCH,
-  SET_TAG_IN_VIEW,
+  SET_SELECTED_TAG_FROM_SEARCH,
   SET_SEARCH_TERM
 } from '../../src/constants/action-types.js';
 
@@ -19,7 +19,7 @@ const mockHotelSearchResults = [
         active: true
       },
       {
-        tagId: 'hotel:NE.wvHotelPartId.12345',
+        tagId: 'hotel:NE.wvHotelPartId.678910',
         tagType: 'hotel',
         source: 'master_hotel_mapping',
         active: true
@@ -74,9 +74,14 @@ describe('Reducers: Taggable', () => {
     expect(state).to.deep.equal({...initialState, searchTerm: 'hotel', searchResults: mockHotelSearchResults});
     done();
   });
-  it('action:SET_TAG_IN_VIEW -> returns new state with a tag object set to tagInView', (done) => {
-    const state = taggable(undefined, {type: SET_TAG_IN_VIEW, tagID: 'hotel:NE.wvHotelPartId.12345'});
-    expect(state).to.deep.equal({...initialState, tagInView: mockHotelSearchResults[0]});
+  it('action:SET_SELECTED_TAG_FROM_SEARCH -> returns new state with a tag object set to tagInView and linkedTags', (done) => {
+    const state = taggable(undefined, {type: SET_SELECTED_TAG_FROM_SEARCH, tagID: 'hotel:NE.wvHotelPartId.678910'});
+    const expectedState = {
+      ...initialState,
+      tagInView: mockHotelSearchResults[1],
+      linkedTags: []
+    };
+    expect(state).to.deep.equal(expectedState);
     done();
   });
 });

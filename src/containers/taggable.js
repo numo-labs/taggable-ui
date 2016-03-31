@@ -6,15 +6,15 @@ function mapStateToProps (state) {
     taggable: {
       searchResults,
       tagInView,
-      selectedTagFromSearch,
+      searchTerm,
       linkedTags
      }
    } = state;
 
   return {
     tagInView,
-    selectedTagFromSearch,
     searchResults,
+    searchTerm,
     linkedTags
   };
 }

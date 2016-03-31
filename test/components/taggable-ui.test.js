@@ -28,8 +28,8 @@ describe('Component', function () {
       expect(children).to.have.length(2);
       done();
     });
-    it('should render a <NavbarHeader />', function (done) {
-      const nav = wrapper.find('NavbarHeader');
+    it('should render navbar as a <div/> with class .navi', function (done) {
+      const nav = wrapper.find('.navi');
       expect(nav).to.have.length(1);
       done();
     });

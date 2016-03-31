@@ -36,14 +36,19 @@ class SearchPane extends Component {
         onSearchSubmit,
         setSearchTerm,
         onTagClick,
-        selectedTagId
+        selectedTagId,
+        searchTerm
       },
       state: { modalVisible }
     } = this;
 
     return (
       <div>
-        <SearchBar handleSubmit={onSearchSubmit} onChangeText={setSearchTerm}/>
+        <SearchBar
+          handleSubmit={onSearchSubmit}
+          onChangeText={setSearchTerm}
+          searchTerm={searchTerm}
+        />
         <TagList
           listItems={listItems}
           withButtons={false}
@@ -65,7 +70,8 @@ SearchPane.propTypes = {
   onSearchSubmit: PropTypes.func,
   setSearchTerm: PropTypes.func,
   onTagClick: PropTypes.func,
-  selectedTagId: PropTypes.string
+  selectedTagId: PropTypes.string,
+  searchTerm: PropTypes.string
 };
 
 export default SearchPane;
