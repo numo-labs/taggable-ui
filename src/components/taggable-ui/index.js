@@ -58,14 +58,14 @@ class TaggableUI extends Component {
     const {
       tagInView: { _id },
       linkedTags,
-      setSearchTerm
+      searchLinkedTagDocument
     } = this.props;
 
     const tagLinks = (
       <Col xs={3} md={3} className='col-centered'>
         <h1 className='title'>Linked Tags</h1>
         <LinkedTags
-          onTagClick={setSearchTerm}
+          onTagClick={searchLinkedTagDocument}
           listItems={linkedTags}
           selectedTagId={_id}
         />
@@ -116,7 +116,8 @@ TaggableUI.propTypes = {
   setSelectedTagFromSearch: PropTypes.func,
   setSearchTerm: PropTypes.func,
   searchTerm: PropTypes.string,
-  linkedTags: PropTypes.array
+  linkedTags: PropTypes.array,
+  searchLinkedTagDocument: PropTypes.func
 };
 
 export default TaggableUI;

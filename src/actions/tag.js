@@ -4,12 +4,15 @@ export function search () {
   return { type: types.SEARCH };
 }
 
-export function setSearchTerm (text) {
-  return { type: types.SET_SEARCH_TERM, text };
+export function searchLinkedTagDocument (tagID) {
+  return (dispatch) => {
+    dispatch(setSearchTerm(tagID));
+    return dispatch(setSelectedTagFromSearch(tagID));
+  };
 }
 
-export function setTagInView (tagID) {
-  return { type: types.SET_TAG_IN_VIEW, tagID };
+export function setSearchTerm (text) {
+  return { type: types.SET_SEARCH_TERM, text };
 }
 
 export function setSelectedTagFromSearch (tagID) {
