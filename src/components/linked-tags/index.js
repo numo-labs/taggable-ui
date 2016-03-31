@@ -24,10 +24,17 @@ class LinkedTags extends Component {
 
   render () {
     const {
-      props: { listItems, onTagClick, selectedTagId }
-     } = this;
+       listItems,
+       onTagClick,
+       selectedTagId,
+       searchResults,
+       search,
+       setSelectedTagFromSearch,
+       setSearchTerm,
+       searchTerm
+    } = this.props;
+    console.log('******', listItems);
     const { manageTagsModalVisible } = this.state;
-    console.log(listItems);
     return (
       <div>
         <TagList
@@ -37,9 +44,19 @@ class LinkedTags extends Component {
         />
           <Button
           onClick={this.showModal}
-          text='Modify tags'
+          text='* Modify linked tags'
           />
-        <Modal modalVisible={manageTagsModalVisible} closeModal={this.closeModal} saveChanges={this.saveChanges}/>
+        <Modal
+          listItems={listItems}
+          modalVisible={manageTagsModalVisible}
+          closeModal={this.closeModal}
+          saveChanges={this.saveChanges}
+          onSearchSubmit={search}
+          setSearchTerm={setSearchTerm}
+          onTagClick={setSelectedTagFromSearch}
+          searchResults={searchResults}
+          searchTerm={searchTerm}
+        />
       </div>
     );
   }
@@ -48,7 +65,15 @@ class LinkedTags extends Component {
 LinkedTags.propTypes = {
   listItems: PropTypes.array,
   onTagClick: PropTypes.func,
-  selectedTagId: PropTypes.string
+  selectedTagId: PropTypes.string,
+  searchResults: PropTypes.array,
+  tagInView: PropTypes.object,
+  search: PropTypes.func,
+  setSelectedTagFromSearch: PropTypes.func,
+  setSearchTerm: PropTypes.func,
+  searchTerm: PropTypes.string,
+  linkedTags: PropTypes.array,
+  searchLinkedTagDocument: PropTypes.func
 };
 
 LinkedTags.defaultProps = {

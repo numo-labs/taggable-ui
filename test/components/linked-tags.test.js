@@ -15,7 +15,7 @@ describe('Component', function () {
     const wrapper = shallow(<LinkedTags {...props}/>);
     const children = wrapper.children().nodes;
     it('should render our LinkedTags component', function (done) {
-      expect(children).to.have.length(1);
+      expect(children).to.have.length(3);
       done();
     });
     it('should render the <TagList /> as the first child', function (done) {
@@ -24,16 +24,16 @@ describe('Component', function () {
       expect(firstChild).to.deep.equal(TagList);
       done();
     });
-    it('should render a <Button /> as the second child only if there are items in the list', function (done) {
-      expect(wrapper.find('AddTagButton')).to.have.length(0);
-      wrapper.setProps({listItems: [{}, {}]});
-      expect(wrapper.find('AddTagButton')).to.have.length(1);
+    it('should render a <Button /> as the second child', function (done) {
+      const secondChild = children[1].type;
+      const Button = wrapper.find('AddTagButton').node.type;
+      expect(secondChild).to.deep.equal(Button);
       done();
     });
-    it('should render a <SearchBar /> as the third child if the searchBarVisible state is true', function (done) {
-      expect(wrapper.find('SearchBar')).to.have.length(0);
-      wrapper.setState({searchBarVisible: true});
-      expect(wrapper.find('SearchBar')).to.have.length(1);
+    it('should render a <Modal /> as the third child', function (done) {
+      const thirdChild = children[2].type;
+      const Modal = wrapper.find('ManageTagsModal').node.type;
+      expect(thirdChild).to.deep.equal(Modal);
       done();
     });
   });

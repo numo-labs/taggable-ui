@@ -56,6 +56,11 @@ class TaggableUI extends Component {
 
   renderLinkedTags () {
     const {
+      searchResults,
+      search,
+      setSelectedTagFromSearch,
+      setSearchTerm,
+      searchTerm,
       tagInView: { _id },
       linkedTags,
       searchLinkedTagDocument
@@ -68,6 +73,12 @@ class TaggableUI extends Component {
           onTagClick={searchLinkedTagDocument}
           listItems={linkedTags}
           selectedTagId={_id}
+          onSearchSubmit={search}
+          setSearchTerm={setSearchTerm}
+          onTagClick={setSelectedTagFromSearch}
+          listItems={searchResults}
+          selectedTagId={_id}
+          searchTerm={searchTerm}
         />
       </Col>
     );
