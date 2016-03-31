@@ -36,7 +36,7 @@ class TaggableUI extends Component {
     } = this.props;
     const searchPane = (
       <Col xs={3} md={3} className='col-centered'>
-      <h1 className='title'>Search Tags</h1>
+        <h1 className='title'>Search Tags</h1>
         <SearchPane
           onSearchSubmit={search}
           setSearchTerm={setSearchTerm}
@@ -56,7 +56,7 @@ class TaggableUI extends Component {
     } = this.props;
     const tagLinks = (
       <Col xs={3} md={3} className='col-centered'>
-      <h1 className='title'>Linked Tags</h1>
+        <h1 className='title'>Linked Tags</h1>
         <LinkedTags
           onTagClick={setTagInView}
           listItems={linkedTags}
@@ -72,7 +72,7 @@ class TaggableUI extends Component {
     } = this.props;
     const tagContent = (
       <Col xs={6} md={6} className='col-centered'>
-      <h1 className='title'>Tag Content</h1>
+        <h1 className='title'>Tag Content</h1>
         <ViewPane height={'35vh'} id={_id} displayName={displayName} metadata={metadata}/>
       </Col>
     );
