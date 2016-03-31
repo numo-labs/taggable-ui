@@ -9,6 +9,7 @@ require('./styles.css');
 import './css/normalize.css';
 
 class TaggableUI extends Component {
+
   renderNavbar () {
     const navbar = (
       <nav className='navbar navbar-default navi'>
@@ -26,14 +27,17 @@ class TaggableUI extends Component {
     );
     return navbar;
   }
+
   renderSearchPane () {
     const {
       searchResults,
       search,
       setSelectedTagFromSearch,
       setSearchTerm,
-      selectedTagFromSearch
+      searchTerm,
+      tagInView: { _id }
     } = this.props;
+
     const searchPane = (
       <Col xs={3} md={3} className='col-centered'>
         <h1 className='searchTagTitle'>Search Tags</h1>
@@ -42,23 +46,26 @@ class TaggableUI extends Component {
           setSearchTerm={setSearchTerm}
           onTagClick={setSelectedTagFromSearch}
           listItems={searchResults}
-          selectedTagId={selectedTagFromSearch._id}
+          selectedTagId={_id}
+          searchTerm={searchTerm}
         />
       </Col>
     );
     return searchPane;
   }
+
   renderLinkedTags () {
     const {
       tagInView: { _id },
       linkedTags,
-      setTagInView
+      searchLinkedTagDocument
     } = this.props;
+
     const tagLinks = (
       <Col xs={3} md={3} className='col-centered'>
         <h1 className='linkedTitle title'>Linked Tags</h1>
         <LinkedTags
-          onTagClick={setTagInView}
+          onTagClick={searchLinkedTagDocument}
           listItems={linkedTags}
           selectedTagId={_id}
         />
@@ -66,18 +73,26 @@ class TaggableUI extends Component {
     );
     return tagLinks;
   }
+
   renderTagContent () {
     const {
       tagInView: { metadata, _id, displayName }
     } = this.props;
+
     const tagContent = (
       <Col xs={6} md={6} className='col-centered'>
         <h1 className='tagContentTitle'>Tag Content</h1>
-        <ViewPane height={'38vh'} id={_id} displayName={displayName} metadata={metadata}/>
+        <ViewPane
+          height={'35vh'}
+          id={_id}
+          displayName={displayName}
+          metadata={metadata}
+        />
       </Col>
     );
     return tagContent;
   }
+
   render () {
     return (
       <div>
@@ -96,14 +111,13 @@ class TaggableUI extends Component {
 
 TaggableUI.propTypes = {
   searchResults: PropTypes.array,
-  selectedTag: PropTypes.object,
   tagInView: PropTypes.object,
-  linkedTags: PropTypes.array,
   search: PropTypes.func,
-  setTagInView: PropTypes.func,
   setSelectedTagFromSearch: PropTypes.func,
   setSearchTerm: PropTypes.func,
-  selectedTagFromSearch: PropTypes.object
+  searchTerm: PropTypes.string,
+  linkedTags: PropTypes.array,
+  searchLinkedTagDocument: PropTypes.func
 };
 
 export default TaggableUI;

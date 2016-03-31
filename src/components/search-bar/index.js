@@ -29,6 +29,7 @@ class SearchBar extends Component {
   }
 
   render () {
+    const { searchTerm } = this.props;
     return (
       <form onSubmit={this.handleSubmit}>
         <Input
@@ -37,6 +38,7 @@ class SearchBar extends Component {
           className='search__input'
           placeholder='Search by id or displayName..'
           onChange={this.handleTextInput}
+          value={searchTerm}
         />
       </form>
     );
@@ -45,7 +47,8 @@ class SearchBar extends Component {
 
 SearchBar.propTypes = {
   handleSubmit: PropTypes.func,
-  onChangeText: PropTypes.func
+  onChangeText: PropTypes.func,
+  searchTerm: PropTypes.string
 };
 
 export default SearchBar;
