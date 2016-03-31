@@ -11,18 +11,18 @@ import './css/normalize.css';
 class TaggableUI extends Component {
   renderNavbar () {
     const navbar = (
-      <Navbar inverse>
-        <Navbar.Header>
+      <nav className='navbar navbar-default navi'>
+        <div className='navbar-header'>
           <Navbar.Brand>
             <Nav>
-              <h2>Numo Labs Tag System</h2>
+              <h2 className='numoTitle'>Numo Labs Tag System</h2>
             </Nav>
           </Navbar.Brand>
-        </Navbar.Header>
+        </div>
         <Nav pullRight>
           <NavItem><Button text={'Save new configuration'} /></NavItem>
         </Nav>
-      </Navbar>
+      </nav>
     );
     return navbar;
   }
