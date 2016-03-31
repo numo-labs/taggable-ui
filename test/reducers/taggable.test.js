@@ -3,7 +3,8 @@ import taggable, { initialState } from '../../src/reducers/taggable.js';
 import { expect } from 'chai';
 import {
   SEARCH,
-  SET_TAG_IN_VIEW
+  SET_TAG_IN_VIEW,
+  SET_SEARCH_TERM
 } from '../../src/constants/action-types.js';
 
 const mockHotelSearchResults = [
@@ -63,12 +64,17 @@ describe('Reducers: Taggable', () => {
     expect(state).to.deep.equal(initialState);
     done();
   });
-  it('action:SEARCH -> Returns an array of searchResults', (done) => {
+  it('action:SEARCH -> Returns new state with arrray of searchResults', (done) => {
     const state = taggable({...initialState, searchTerm: 'hotel'}, {type: SEARCH});
     expect(state).to.deep.equal({...initialState, searchResults: mockHotelSearchResults});
     done();
   });
-  it('action:SET_TAG_IN_VIEW -> Returns an array of searchResults', (done) => {
+  it('action:SET_SEARCH_TERM -> returns a new state with the searchTerm and searchResults', (done) => {
+    const state = taggable(undefined, {type: SET_SEARCH_TERM, text: 'hotel'});
+    expect(state).to.deep.equal({...initialState, searchTerm: 'hotel', searchResults: mockHotelSearchResults});
+    done();
+  });
+  it('action:SET_TAG_IN_VIEW -> returns new state with a tag object set to tagInView', (done) => {
     const state = taggable(undefined, {type: SET_TAG_IN_VIEW, tagID: 'hotel:NE.wvHotelPartId.12345'});
     expect(state).to.deep.equal({...initialState, tagInView: mockHotelSearchResults[0]});
     done();
