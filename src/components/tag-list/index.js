@@ -15,7 +15,7 @@ class TagList extends Component {
     const list = listItems.map(item => {
       return (
         <div key={item._id} className='tag__item'>
-          <Tag key={item._id} id={item._id} tagName={item.displayName} selected={item._id === selectedTagId} onClick={() => handleTagClick(item._id)} />
+          <Tag key={item._id} id={item._id} tagName={item.displayName} selected={item._id === selectedTagId} onClick={handleTagClick} />
            { withButtons && <Button className='redButton' onHandleClick={handleButtonClick} symbol={'x'} /> }
         </div>
       );
