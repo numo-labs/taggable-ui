@@ -3,7 +3,8 @@
 import {
   SEARCH,
   SET_SELECTED_TAG_FROM_SEARCH,
-  SET_SEARCH_TERM
+  SET_SEARCH_TERM,
+  SET_SEARCH_RESULTS
 } from '../constants/action-types.js';
 
 import { filterTags, findLinkedTags } from '../utils/searchHelper.js';
@@ -34,6 +35,11 @@ export default function taggable (state = initialState, action) {
         ...initialState,
         searchTerm: action.text,
         searchResults: filterTags(action.text)
+      };
+    case SET_SEARCH_RESULTS:
+      return {
+        ...initialState,
+        searchResults: action.tags
       };
     default:
       return state;
