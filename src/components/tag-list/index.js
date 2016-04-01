@@ -1,15 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import Tag from '../tag';
-import { SymbolButton as Button } from '../button';
 import './styles.css';
 
 class TagList extends Component {
   render () {
     const {
       listItems,
-      handleButtonClick,
       handleTagClick,
-      withButtons,
       selectedTagId
     } = this.props;
     const list = listItems.map(item => {

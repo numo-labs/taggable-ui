@@ -10,7 +10,7 @@ class ViewPane extends Component {
       <div>
         <div>
           <h4 className='tagId'>ID:</h4>
-          <Input className='tagIdInput' type='text' labelClassName='col-xs-9' wrapperClassName='col-xs-6' value={id} />
+          <Input className='tagIdInput' type='text' disabled labelClassName='col-xs-9' wrapperClassName='col-xs-6' value={id} />
         </div>
         <div>
           <h4 className='displayName'>Display name:</h4>

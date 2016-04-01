@@ -1,7 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 
-import TagList from '../tag-list/';
-import SearchBar from '../search-bar';
 import { AddTagButton as Button } from '../button';
 import Modal from '../create-tag-modal';
 import SearchList from '../search-list';

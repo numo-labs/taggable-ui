@@ -33,10 +33,4 @@ describe('<TagList />', function () {
     expect(wrapper.find('Tag')).to.have.length(numberOfTags);
     done();
   });
-  it('should render a <Button> component with each Tag component if the withButtons props is not set (defaults to true)', function (done) {
-    expect(wrapper.find('SymbolButton')).to.have.length(3);
-    wrapper.setProps({withButtons: false});
-    expect(wrapper.find('SymbolButton')).to.have.length(0);
-    done();
-  });
 });

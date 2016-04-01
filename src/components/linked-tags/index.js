@@ -31,7 +31,8 @@ class LinkedTags extends Component {
        search,
        setSelectedTagFromSearch,
        setSearchTerm,
-       searchTerm
+       searchTerm,
+       onClickTag
     } = this.props;
     console.log('******', listItems);
     const { manageTagsModalVisible } = this.state;
@@ -56,6 +57,7 @@ class LinkedTags extends Component {
           onTagClick={setSelectedTagFromSearch}
           searchResults={searchResults}
           searchTerm={searchTerm}
+          onClickTag={onClickTag}
         />
       </div>
     );
@@ -65,6 +67,7 @@ class LinkedTags extends Component {
 LinkedTags.propTypes = {
   listItems: PropTypes.array,
   onTagClick: PropTypes.func,
+  onClickTag: PropTypes.func,
   selectedTagId: PropTypes.string,
   searchResults: PropTypes.array,
   tagInView: PropTypes.object,

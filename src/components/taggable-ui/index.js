@@ -70,13 +70,12 @@ class TaggableUI extends Component {
       <Col xs={3} md={3} className='col-centered'>
         <h1 className='linkedTitle title'>Linked Tags</h1>
         <LinkedTags
-          onTagClick={searchLinkedTagDocument}
+          onClickTag={searchLinkedTagDocument}
           listItems={linkedTags}
-          selectedTagId={_id}
           onSearchSubmit={search}
           setSearchTerm={setSearchTerm}
           onTagClick={setSelectedTagFromSearch}
-          listItems={searchResults}
+          searchResults={searchResults}
           selectedTagId={_id}
           searchTerm={searchTerm}
         />
