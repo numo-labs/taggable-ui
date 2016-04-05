@@ -24,22 +24,22 @@ class LinkedTags extends Component {
 
   render () {
     const {
-       listItems,
+       items,
        onTagClick,
        selectedTagId,
        searchResults,
        search,
        setSelectedTagFromSearch,
        setSearchTerm,
-       searchTerm
+       searchTerm,
+       onClickTag
     } = this.props;
-    console.log('******', listItems);
     const { manageTagsModalVisible } = this.state;
     return (
       <div>
         <TagList
-          listItems={listItems}
-          handleTagClick={onTagClick}
+          items={items}
+          onTagClick={onTagClick}
           selectedTagId={selectedTagId}
         />
           <Button
@@ -47,7 +47,7 @@ class LinkedTags extends Component {
           text='* Modify linked tags'
           />
         <Modal
-          listItems={listItems}
+          items={items}
           modalVisible={manageTagsModalVisible}
           closeModal={this.closeModal}
           saveChanges={this.saveChanges}
@@ -56,6 +56,7 @@ class LinkedTags extends Component {
           onTagClick={setSelectedTagFromSearch}
           searchResults={searchResults}
           searchTerm={searchTerm}
+          onClickTag={onClickTag}
         />
       </div>
     );
@@ -63,8 +64,9 @@ class LinkedTags extends Component {
 }
 
 LinkedTags.propTypes = {
-  listItems: PropTypes.array,
+  items: PropTypes.array,
   onTagClick: PropTypes.func,
+  onClickTag: PropTypes.func,
   selectedTagId: PropTypes.string,
   searchResults: PropTypes.array,
   tagInView: PropTypes.object,
@@ -77,7 +79,7 @@ LinkedTags.propTypes = {
 };
 
 LinkedTags.defaultProps = {
-  listItems: []
+  items: []
 };
 
 export default LinkedTags;

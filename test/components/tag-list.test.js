@@ -25,18 +25,13 @@ const mockTags = [
 ];
 
 describe('<TagList />', function () {
-  const wrapper = shallow(<TagList listItems={mockTags}/>);
+  const wrapper = shallow(<TagList items={mockTags}/>);
   const children = wrapper.children().nodes;
+  console.log(children);
   const numberOfTags = mockTags.length;
   it('should render our TagList component with the correct number of Tag Components', function (done) {
-    expect(children).to.have.length(numberOfTags);
+    expect(children).to.have.length(2);
     expect(wrapper.find('Tag')).to.have.length(numberOfTags);
-    done();
-  });
-  it('should render a <Button> component with each Tag component if the withButtons props is not set (defaults to true)', function (done) {
-    expect(wrapper.find('SymbolButton')).to.have.length(3);
-    wrapper.setProps({withButtons: false});
-    expect(wrapper.find('SymbolButton')).to.have.length(0);
     done();
   });
 });

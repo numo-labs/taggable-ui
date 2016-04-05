@@ -1,18 +1,21 @@
 export const QUERY_SEARCH_TAGS = `
-query tagQuery($id: String) {
-	taggable(id: $id) {
-    _id,
-    displayName,
-    tags {
-      tagId,
-      tagType,
-      source,
-      active
-    }
-    metadata {
-      key,
-      value
-    }
+query tagQuery($id: String, $start: Int, $size: Int) {
+	taggable(searchString: $id, start: $start, size: $size) {
+		total,
+		items {
+			_id,
+	    displayName,
+	    tags {
+	      tagId,
+	      inherited,
+	      source,
+	      active
+	    }
+	    metadata {
+	      key,
+	      values
+	    }
+		}
   }
 }
 `;
@@ -31,7 +34,7 @@ mutation createTag($id: String, $displayName: String, $tags: [TagInputItem], $me
       }
       metadata {
         key,
-        value
+        values
       }
     }
   }

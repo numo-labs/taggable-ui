@@ -27,58 +27,82 @@ class TaggableUI extends Component {
     );
     return navbar;
   }
+  onSearchStringChange (text) {
+    this.props.setSearchString(text);
+  }
+  handleOnSubmit (text) {
+    this.props.setSearchString(text);
+    this.props.fetchTags(text, 0, 10);
+  }
+  handlePagination (index) {
+    console.log('props .......', this.props);
+    const start = index * 10;
+    this.props.fetchTags(this.props.searchString, start, 10);
+  }
 
   renderSearchPane () {
     const {
       searchResults,
-      search,
       setSelectedTagFromSearch,
-      setSearchTerm,
-      searchTerm,
-      tagInView: { _id }
+      searchString,
+      tagInView
     } = this.props;
-
+    console.log('PROPS!!!', this.props);
     const searchPane = (
       <Col xs={3} md={3} className='col-centered'>
         <h1 className='searchTagTitle'>Search Tags</h1>
         <SearchPane
-          onSearchSubmit={search}
-          setSearchTerm={setSearchTerm}
+          onSearchStringChange={this.onSearchStringChange.bind(this)}
           onTagClick={setSelectedTagFromSearch}
-          listItems={searchResults}
-          selectedTagId={_id}
-          searchTerm={searchTerm}
+          items={searchResults.items.map(result => {
+            console.log('+++++++++++++----', searchString);
+            return {
+              id: result._id,
+              displayName: result.displayName
+            };
+          })}
+          selectedTagId={tagInView}
+          searchString={searchString}
+          pagination={{
+            numberOfItems: Math.ceil(searchResults.total / 10),
+            maxButtons: 3,
+            onSelect: this.handlePagination.bind(this),
+            total: searchResults.total
+          }}
+          onSubmit={this.handleOnSubmit.bind(this)}
         />
       </Col>
     );
     return searchPane;
   }
-
+  renderLinkedTagList (tags) {
+    if (tags) {
+      return tags.map(result => {
+        return {
+          id: result.tagId
+        };
+      });
+    } else {
+      return [];
+    }
+  }
   renderLinkedTags () {
     const {
       searchResults,
       search,
-      setSelectedTagFromSearch,
-      setSearchTerm,
-      searchTerm,
-      tagInView: { _id },
-      linkedTags,
-      searchLinkedTagDocument
+      searchString,
+      tagInView
     } = this.props;
-
     const tagLinks = (
       <Col xs={3} md={3} className='col-centered'>
         <h1 className='linkedTitle title'>Linked Tags</h1>
         <LinkedTags
-          onTagClick={searchLinkedTagDocument}
-          listItems={linkedTags}
-          selectedTagId={_id}
+          items={this.renderLinkedTagList(tagInView.tags)}
           onSearchSubmit={search}
-          setSearchTerm={setSearchTerm}
-          onTagClick={setSelectedTagFromSearch}
-          listItems={searchResults}
-          selectedTagId={_id}
-          searchTerm={searchTerm}
+          onTagClick={this.handleOnSubmit.bind(this)}
+          searchResults={searchResults}
+          selectedTagId={tagInView}
+          searchString={searchString}
         />
       </Col>
     );
@@ -86,22 +110,35 @@ class TaggableUI extends Component {
   }
 
   renderTagContent () {
-    const {
-      tagInView: { metadata, _id, displayName }
-    } = this.props;
+    const { tagInView } = this.props;
 
     const tagContent = (
       <Col xs={6} md={6} className='col-centered'>
         <h1 className='tagContentTitle'>Tag Content</h1>
         <ViewPane
           height={'35vh'}
-          id={_id}
-          displayName={displayName}
-          metadata={metadata}
+          item={tagInView}
         />
       </Col>
     );
     return tagContent;
+  }
+
+  renderItemContent () {
+    const { tagInView } = this.props;
+    if (tagInView.metadata) {
+      return (
+        <div>
+          {this.renderTagContent()}
+          {this.renderLinkedTags()}
+        </div>
+      );
+    } else {
+      return (
+        <h1 className='well problems'>IF YOU'RE HAVING TAG PROBLEMS I FEEL BAD FOR YOU SON <br />
+        I'VE GOT 99 PROBLEMS BUT A LINK AIN'T 1</h1>
+      );
+    }
   }
 
   render () {
@@ -111,8 +148,7 @@ class TaggableUI extends Component {
         <Grid fluid>
           <Row>
             {this.renderSearchPane()}
-            {this.renderTagContent()}
-            {this.renderLinkedTags()}
+            {this.renderItemContent()}
           </Row>
         </Grid>
       </div>
@@ -125,10 +161,12 @@ TaggableUI.propTypes = {
   tagInView: PropTypes.object,
   search: PropTypes.func,
   setSelectedTagFromSearch: PropTypes.func,
-  setSearchTerm: PropTypes.func,
-  searchTerm: PropTypes.string,
+  fetchTags: PropTypes.func,
+  searchString: PropTypes.string,
   linkedTags: PropTypes.array,
-  searchLinkedTagDocument: PropTypes.func
+  searchLinkedTagDocument: PropTypes.func,
+  setSearchString: PropTypes.func
+
 };
 
 export default TaggableUI;

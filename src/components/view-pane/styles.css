@@ -34,6 +34,7 @@
 .tagIdInput {
   display: inline-block;
   cursor: not-allowed;
+  width: 24em;
 }
 
 .displayName {
@@ -44,6 +45,7 @@
 
 .displayNameInput {
   display: inline-block;
+  width: 24em;
 }
 
 .deleteButton {
@@ -68,9 +70,9 @@
   height: 1.2em;
 }
 
-/*.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group {
-  margin-left: 0.5em;
-}*/
+.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group {
+  z-index: 10;
+}
 
 .input-group .form-control:last-child,
 .input-group-addon:last-child,

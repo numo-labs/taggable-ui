@@ -1,5 +1,5 @@
 .search__input {
-  width: 70%;
+  width: 75%; !important
   height: 2em;
   margin: 0 auto;
   outline-width: 0;
@@ -7,4 +7,13 @@
   padding:6px 15px 6px 60px;
   background: url('./assets/search.png') no-repeat 8px 5px;
   background-size: 2em 2em;
+}
+
+.input-group .form-control:first-child {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.input-group .form-control {
+  width: 100%;
 }
