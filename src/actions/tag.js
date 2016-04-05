@@ -14,7 +14,6 @@ export function search () {
 * onChangeText function for the search input component
 */
 export function setSearchString (text) {
-  console.log(':::::::;;;;;;::::::;;;;;;;', text);
   return { type: types.SET_SEARCH_STRING, text };
 }
 
@@ -44,7 +43,6 @@ export function fetchTags (searchString, start, size) {
     console.log('STATE', state());
     return graphqlService.query(QUERY_SEARCH_TAGS, {id: searchString, start, size})
       .then(json => {
-        console.log('*****JSON*****', json);
         const items = json.data.taggable || [];
         return dispatch(setSearchResults(items));
       });
