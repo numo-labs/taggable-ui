@@ -10,13 +10,14 @@ class LinkedTagsList extends Component {
       handleButtonClick,
       handleTagClick,
       withButtons,
+      symbol,
       selectedTagId
     } = this.props;
     const list = items.map(item => {
       return (
         <div key={item.id} className='tag__item'>
           <Tag key={item.id} id={item.id} tagName={item.displayName} selected={item.id === selectedTagId} onClick={handleTagClick} />
-           { withButtons && <Button className='redButton' onHandleClick={handleButtonClick} symbol={'x'} /> }
+           { withButtons && <Button className='redButton' onHandleClick={handleButtonClick} symbol={symbol} /> }
         </div>
       );
     });
@@ -33,7 +34,8 @@ LinkedTagsList.propTypes = {
   handleButtonClick: PropTypes.func,
   handleTagClick: PropTypes.func,
   withButtons: PropTypes.bool,
-  selectedTagId: PropTypes.string
+  selectedTagId: PropTypes.string,
+  symbol: PropTypes.string
 };
 
 LinkedTagsList.defaultProps = {

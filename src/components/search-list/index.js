@@ -11,7 +11,9 @@ class SearchList extends Component {
       onTagClick,
       selectedTagId,
       searchString,
-      pagination
+      pagination,
+      symbol,
+      handleButtonClick
     } = this.props;
     return (
       <div>
@@ -26,6 +28,8 @@ class SearchList extends Component {
           onTagClick={onTagClick}
           selectedTagId={selectedTagId}
           pagination={pagination}
+          symbol={symbol}
+          handleButtonClick={handleButtonClick}
         />
       </div>
     );
@@ -40,7 +44,9 @@ SearchList.propTypes = {
   onTagClick: PropTypes.func,
   selectedTagId: PropTypes.string,
   onSearchStringChange: PropTypes.func,
-  pagination: PropTypes.object
+  pagination: PropTypes.object,
+  symbol: PropTypes.bool,
+  handleButtonClick: PropTypes.func
 };
 
 export default SearchList;

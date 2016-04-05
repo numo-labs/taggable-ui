@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Tag from '../tag';
 import { Pagination } from 'react-bootstrap';
+import { SymbolButton as Button } from '../button';
 import './styles.css';
 
 class TagList extends Component {
@@ -57,12 +58,16 @@ class TagList extends Component {
       items,
       onTagClick,
       selectedTagId,
-      pagination
+      pagination,
+      symbol,
+      handleButtonClick,
+      withButtons
     } = this.props;
     const list = items.map(item => {
       return (
         <div key={item.id} className='tag__item'>
           <Tag key={item.id} id={item.id} displayName={item.displayName} selected={item.id === selectedTagId} onClick={onTagClick} />
+            { withButtons && <Button className='redButton' onHandleClick={handleButtonClick} symbol={symbol} /> }
         </div>
       );
     });
@@ -82,7 +87,10 @@ TagList.propTypes = {
   onTagClick: PropTypes.func,
   selectedTagId: PropTypes.string,
   pagination: PropTypes.object,
-  onPaginationSelect: PropTypes.func
+  onPaginationSelect: PropTypes.func,
+  symbol: PropTypes.string,
+  handleButtonClick: PropTypes.func,
+  withButtons: PropTypes.bool
 };
 
 TagList.defaultProps = {

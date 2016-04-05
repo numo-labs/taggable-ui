@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Input, Row, Col, Nav, NavItem } from 'react-bootstrap';
 import { SymbolButton as Button } from '../button';
 import LinkedTagsList from '../linked-tags-list';
+import SearchList from '../search-list';
 import './styles.css';
 
 class ViewPane extends Component {
@@ -118,31 +119,40 @@ class ViewPane extends Component {
       height,
       items
     } = this.props;
-    if (item && this.state.activeKey === 1) {
-      return (
-        <div>
-          {this.renderTabs()}
-          {this.renderTagContentHeader(item)}
-          {this.renderMetadataContent(item, onButtonClick, height)}
-          {this.renderAddNewKeyValue(onButtonClick, onChange)}
-        </div>
-      );
-    } else if (this.state.activeKey === 2) {
-      return (
-        <div>
-          {this.renderTabs()}
-          <div className='listBuffer'>
-            <LinkedTagsList items={items} />
+    if (item) {
+      if (this.state.activeKey === 1) {
+        return (
+          <div>
+            {this.renderTabs()}
+            {this.renderTagContentHeader(item)}
+            {this.renderMetadataContent(item, onButtonClick, height)}
+            {this.renderAddNewKeyValue(onButtonClick, onChange)}
           </div>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          {this.renderTabs()}
-          <h1>children</h1>
-        </div>
-      );
+        );
+      } else if (this.state.activeKey === 2) {
+        return (
+          <div>
+            {this.renderTabs()}
+            <div className='listBuffer'>
+            <Row>
+              <Col xs={6}>
+                <SearchList symbol={'+'} withButtons={true} />
+              </Col>
+              <Col xs={6}>
+                <LinkedTagsList items={items} symbol={'x'} />
+              </Col>
+            </Row>
+            </div>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            {this.renderTabs()}
+            <h1>children</h1>
+          </div>
+        );
+      }
     }
   }
 
