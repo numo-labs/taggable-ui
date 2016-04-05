@@ -29,12 +29,14 @@
 .tagId {
   width: 30%;
   float: left;
+  margin-top: 2em;
 }
 
 .tagIdInput {
   display: inline-block;
   cursor: not-allowed;
   width: 24em;
+  margin-top: 2em;
 }
 
 .displayName {
@@ -87,8 +89,8 @@
 
 .keyValueContainer {
   margin: auto;
-  margin-left: 3em;
-  margin-top: 2.5em;
+  margin-left: 2em;
+  margin-top: 2em;
   overflow-y: scroll;
   text-align: left;
 }
@@ -102,8 +104,16 @@
   margin-left: 1em;
 }
 
+.listBuffer {
+  margin-top: 1.5em;
+}
+
 .metadataTitle {
   text-align: left;
   display: inline-block;
   float: left;
+}
+
+.tagTabs:hover {
+  color: #ffffff;
 }

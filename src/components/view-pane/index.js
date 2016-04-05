@@ -1,9 +1,16 @@
 import React, { Component, PropTypes } from 'react';
-import { Input, Row, Col } from 'react-bootstrap';
+import { Input, Row, Col, Nav, NavItem } from 'react-bootstrap';
 import { SymbolButton as Button } from '../button';
+import LinkedTagsList from '../linked-tags-list';
 import './styles.css';
 
 class ViewPane extends Component {
+  constructor () {
+    super();
+    this.state = {
+      activeKey: 1
+    };
+  }
   renderTagContentHeader (item) {
     const tagContentHeader = (
       <div>
@@ -47,22 +54,21 @@ class ViewPane extends Component {
     }
   }
   renderMetadataContent (item, onButtonClick, height) {
-    console.log(item.metadata);
     if (item.metadata) {
       const addButton = <Button onHandleClick={onButtonClick} symbol={'+'} />;
       const metadataContent = item.metadata.map((content, index) => {
         return (
-            <Input key={content.key} wrapperClassName='wrapper' className='metaContent'>
-              <Row>
-                <Col xs={6}>
-                  <input type='text' className='form-control' value={content.key} />
-                </Col>
-                <Col xs={6}>
-                  {this.renderValues(content, index, onButtonClick)}
-                  <Input type='text' className='form-control' placeholder='add value' buttonAfter={addButton} />
-                </Col>
-              </Row>
-            </Input>
+          <Input key={content.key} wrapperClassName='wrapper' className='metaContent'>
+            <Row>
+              <Col xs={6}>
+                <input type='text' className='form-control' value={content.key} />
+              </Col>
+              <Col xs={6}>
+                {this.renderValues(content, index, onButtonClick)}
+                <Input type='text' className='form-control' placeholder='add value' buttonAfter={addButton} />
+              </Col>
+            </Row>
+          </Input>
         );
       });
       return (
@@ -80,36 +86,78 @@ class ViewPane extends Component {
         <div className='keyValueContainer'>
           <h4 className='keyValuePair'>Add new key value pair:</h4>
           <div className='keyValueInput'>
+          <Row>
             <Col xs={6}>
               <Input type='text' onChange={onChange} className='form-control' placeholder='add new key' />
             </Col>
             <Col xs={6}>
               <Input type='text' className='form-control addNewValue' placeholder='add value' buttonAfter={addButton}/>
             </Col>
+          </Row>
           </div>
         </div>
       </Row>
     );
     return addNewKeyValue;
   }
-  render () {
+  renderTabs () {
+    return (
+      <Nav bsStyle='tabs' justified activeKey={this.state.activeKey} onSelect={this.handleSelect.bind(this)}>
+        <NavItem eventKey={1}>Tag Content</NavItem>
+        <NavItem eventKey={2}>Parents</NavItem>
+        <NavItem eventKey={3}>Children</NavItem>
+      </Nav>
+    );
+  }
+
+  renderContent () {
     const {
       item,
       onButtonClick,
       onChange,
-      height
+      height,
+      items
     } = this.props;
-    console.log('hkfhdtbbfnyvbrtfcnv', item);
-    if (item) {
+    if (item && this.state.activeKey === 1) {
       return (
         <div>
-            {this.renderTagContentHeader(item)}
-            {this.renderMetadataContent(item, onButtonClick, height)}
-            {this.renderAddNewKeyValue(onButtonClick, onChange)}
+          {this.renderTabs()}
+          {this.renderTagContentHeader(item)}
+          {this.renderMetadataContent(item, onButtonClick, height)}
+          {this.renderAddNewKeyValue(onButtonClick, onChange)}
+        </div>
+      );
+    } else if (this.state.activeKey === 2) {
+      return (
+        <div>
+          {this.renderTabs()}
+          <div className='listBuffer'>
+            <LinkedTagsList items={items} />
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          {this.renderTabs()}
+          <h1>children</h1>
         </div>
       );
     }
-    return;
+  }
+
+  handleSelect (selectedKey) {
+    console.log('SELECTED KEY', selectedKey);
+    this.setState({
+      activeKey: selectedKey
+    });
+  }
+  render () {
+    return (
+      <div>
+        {this.renderContent()}
+      </div>
+    );
   }
 }
 
@@ -118,7 +166,8 @@ ViewPane.propTypes = {
   onButtonClick: PropTypes.func,
   height: PropTypes.string,
   onChange: PropTypes.func,
-  item: PropTypes.object
+  item: PropTypes.object,
+  items: PropTypes.array
 };
 
 ViewPane.defaultProps = {

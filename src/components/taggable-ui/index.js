@@ -35,7 +35,6 @@ class TaggableUI extends Component {
     this.props.fetchTags(text, 0, 10);
   }
   handlePagination (index) {
-    console.log('props .......', this.props);
     const start = index * 10;
     this.props.fetchTags(this.props.searchString, start, 10);
   }
@@ -47,7 +46,6 @@ class TaggableUI extends Component {
       searchString,
       tagInView
     } = this.props;
-    console.log('PROPS!!!', this.props);
     const searchPane = (
       <Col xs={3} md={3} className='col-centered'>
         <h1 className='searchTagTitle'>Search Tags</h1>
@@ -55,7 +53,6 @@ class TaggableUI extends Component {
           onSearchStringChange={this.onSearchStringChange.bind(this)}
           onTagClick={setSelectedTagFromSearch}
           items={searchResults.items.map(result => {
-            console.log('+++++++++++++----', searchString);
             return {
               id: result._id,
               displayName: result.displayName
@@ -118,6 +115,7 @@ class TaggableUI extends Component {
         <ViewPane
           height={'35vh'}
           item={tagInView}
+          items={this.renderLinkedTagList(tagInView.tags)}
         />
       </Col>
     );

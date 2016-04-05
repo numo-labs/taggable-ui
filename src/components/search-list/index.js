@@ -13,7 +13,6 @@ class SearchList extends Component {
       searchString,
       pagination
     } = this.props;
-    console.log(this.props);
     return (
       <div>
         <SearchBar

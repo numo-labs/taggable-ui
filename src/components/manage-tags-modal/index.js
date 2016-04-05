@@ -14,7 +14,6 @@ class ManageTagsModal extends Component {
       handleTagClick,
       selectedTagId
      } = this.props;
-    console.log(listItems);
     return (
       <div className='static-modal'>
         <Modal show={modalVisible} onHide={closeModal} dialogClassName='manageTagsModal'>

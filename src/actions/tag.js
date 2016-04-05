@@ -21,7 +21,6 @@ export function setSearchString (text) {
 * onClick function for the tags in the search results
 */
 export function setSelectedTagFromSearch (id) {
-  console.log('setSelectedTagFromSearch called');
   return { type: types.SET_SELECTED_TAG_FROM_SEARCH, id };
 }
 
@@ -38,9 +37,7 @@ export function setSearchResults (items) {
 */
 
 export function fetchTags (searchString, start, size) {
-  console.log('fetchTags >>>>>>>', searchString, start, size);
   return (dispatch, state) => {
-    console.log('STATE', state());
     return graphqlService.query(QUERY_SEARCH_TAGS, {id: searchString, start, size})
       .then(json => {
         const items = json.data.taggable || [];

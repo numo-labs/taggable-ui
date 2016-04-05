@@ -7,7 +7,6 @@ import * as mockTags from '../../src/utils/mockTags';
 describe('Component', function () {
   const wrapper = shallow(<ViewPane item={mockTags}/>);
   const children = wrapper.children().nodes;
-  console.log('***CHILDREN***', children.length);
   describe('<ViewPane />', function () {
     it('should render our ViewPane component', function (done) {
       expect(children).to.have.length(2);

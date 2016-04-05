@@ -5,9 +5,7 @@
 */
 
 import React, { PropTypes, Component } from 'react';
-import { Input } from 'react-bootstrap';
-// import { SymbolButton as Button } from '../button';
-import { Button } from 'react-bootstrap';
+import { Input, Button } from 'react-bootstrap';
 
 require('./styles.css');
 class SearchBar extends Component {

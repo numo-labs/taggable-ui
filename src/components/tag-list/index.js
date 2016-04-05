@@ -8,7 +8,7 @@ class TagList extends Component {
     super(props);
     if (props.pagination) {
       this.state = {
-        activePage: props.pagination.activePage || 1
+        activePage: 1
       };
     }
   }
