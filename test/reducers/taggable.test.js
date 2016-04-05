@@ -2,14 +2,13 @@
 import taggable, { initialState } from '../../src/reducers/taggable.js';
 import { expect } from 'chai';
 import {
-  SEARCH,
   SET_SELECTED_TAG_FROM_SEARCH,
   SET_SEARCH_STRING
 } from '../../src/constants/action-types.js';
 
 const mockHotelSearchResults = {
   total: 2,
-  items : [
+  items: [
     {
       _id: 'hotel:NE.wvHotelPartId.12345',
       displayName: 'All Seasons',
@@ -59,8 +58,7 @@ const mockHotelSearchResults = {
       content: []
     }
   ]
-}
-
+};
 
 describe('Reducers: Taggable', () => {
   it('action:unknown -> Returns the initial state', (done) => {

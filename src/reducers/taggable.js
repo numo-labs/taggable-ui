@@ -1,13 +1,10 @@
 'use strict';
 import _ from 'lodash';
 import {
-  SEARCH,
   SET_SELECTED_TAG_FROM_SEARCH,
   SET_SEARCH_STRING,
   SET_SEARCH_RESULTS
 } from '../constants/action-types.js';
-
-import { filterTags } from '../utils/searchHelper.js';
 
 export const initialState = {
   searchResults: {
