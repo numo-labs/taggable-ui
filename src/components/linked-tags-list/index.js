@@ -3,7 +3,7 @@ import Tag from '../tag';
 import { SymbolButton as Button } from '../button';
 import './styles.css';
 
-class TagList extends Component {
+class LinkedTagsList extends Component {
   render () {
     const {
       listItems,
@@ -16,6 +16,7 @@ class TagList extends Component {
       return (
         <div key={item._id} className='tag__item'>
           <Tag key={item._id} id={item._id} tagName={item.displayName} selected={item._id === selectedTagId} onClick={handleTagClick} />
+           { withButtons && <Button className='redButton' onHandleClick={handleButtonClick} symbol={'x'} /> }
         </div>
       );
     });
@@ -27,7 +28,7 @@ class TagList extends Component {
   }
 }
 
-TagList.propTypes = {
+LinkedTagsList.propTypes = {
   listItems: PropTypes.array,
   handleButtonClick: PropTypes.func,
   handleTagClick: PropTypes.func,
@@ -35,9 +36,9 @@ TagList.propTypes = {
   selectedTagId: PropTypes.string
 };
 
-TagList.defaultProps = {
+LinkedTagsList.defaultProps = {
   withButtons: true,
   listItems: []
 };
 
-export default TagList;
+export default LinkedTagsList;

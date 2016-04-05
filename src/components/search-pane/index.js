@@ -4,6 +4,7 @@ import TagList from '../tag-list/';
 import SearchBar from '../search-bar';
 import { AddTagButton as Button } from '../button';
 import Modal from '../create-tag-modal';
+import SearchList from '../search-list';
 
 require('./styles.css');
 class SearchPane extends Component {
@@ -41,15 +42,14 @@ class SearchPane extends Component {
       },
       state: { modalVisible }
     } = this;
+    console.log(setSearchTerm);
 
     return (
       <div>
-        <SearchBar
+        <SearchList
           handleSubmit={onSearchSubmit}
           onChangeText={setSearchTerm}
           searchTerm={searchTerm}
-        />
-        <TagList
           listItems={listItems}
           withButtons={false}
           handleTagClick={onTagClick}
