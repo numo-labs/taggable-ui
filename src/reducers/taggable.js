@@ -1,45 +1,43 @@
 'use strict';
-
+import _ from 'lodash';
 import {
   SEARCH,
   SET_SELECTED_TAG_FROM_SEARCH,
-  SET_SEARCH_TERM,
+  SET_SEARCH_STRING,
   SET_SEARCH_RESULTS
 } from '../constants/action-types.js';
 
-import { filterTags, findLinkedTags } from '../utils/searchHelper.js';
+import { filterTags } from '../utils/searchHelper.js';
 
 export const initialState = {
-  searchResults: [],
+  searchResults: {
+    total: 0,
+    items: []
+  },
   linkedTags: [],
   tagInView: {},
-  searchTerm: ''
+  searchString: ''
 };
 
 export default function taggable (state = initialState, action) {
   switch (action.type) {
-    case SEARCH:
-      return {
-        ...initialState,
-        searchResults: filterTags(state.searchTerm)
-      };
     case SET_SELECTED_TAG_FROM_SEARCH:
-      const tag = filterTags(action.tagID)[0];
+      const item = _.find(state.searchResults.items, function (result) {
+        return result._id === action.id;
+      });
       return {
         ...state,
-        tagInView: tag,
-        linkedTags: findLinkedTags(tag.tags)
+        tagInView: item
       };
-    case SET_SEARCH_TERM:
+    case SET_SEARCH_STRING:
       return {
-        ...initialState,
-        searchTerm: action.text,
-        searchResults: filterTags(action.text)
+        ...state,
+        searchString: action.text
       };
     case SET_SEARCH_RESULTS:
       return {
-        ...initialState,
-        searchResults: action.tags
+        ...state,
+        searchResults: action.items
       };
     default:
       return state;

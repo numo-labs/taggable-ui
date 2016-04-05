@@ -5,26 +5,28 @@ import TagList from '../tag-list';
 class SearchList extends Component {
   render () {
     const {
-      listItems,
-      onSearchSubmit,
-      onChangeText,
-      handleTagClick,
+      items,
+      onSubmit,
+      onSearchStringChange,
+      onTagClick,
       selectedTagId,
-      searchTerm
+      searchString,
+      pagination
     } = this.props;
     console.log(this.props);
     return (
       <div>
         <SearchBar
-          handleSubmit={onSearchSubmit}
-          onChangeText={onChangeText}
-          searchTerm={searchTerm}
+          onSubmit={onSubmit}
+          onSearchStringChange={onSearchStringChange}
+          searchString={searchString}
         />
         <TagList
-          listItems={listItems}
+          items={items}
           withButtons={false}
-          handleTagClick={handleTagClick}
+          onTagClick={onTagClick}
           selectedTagId={selectedTagId}
+          pagination={pagination}
         />
       </div>
     );
@@ -32,12 +34,14 @@ class SearchList extends Component {
 }
 
 SearchList.propTypes = {
-  onSearchSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
   onChangeText: PropTypes.func,
-  searchTerm: PropTypes.string,
-  listItems: PropTypes.array,
-  handleTagClick: PropTypes.func,
-  selectedTagId: PropTypes.string
+  searchString: PropTypes.string,
+  items: PropTypes.array,
+  onTagClick: PropTypes.func,
+  selectedTagId: PropTypes.string,
+  onSearchStringChange: PropTypes.func,
+  pagination: PropTypes.object
 };
 
 export default SearchList;

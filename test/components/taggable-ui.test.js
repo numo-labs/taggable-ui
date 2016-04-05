@@ -5,7 +5,10 @@ import { shallow } from 'enzyme';
 import TaggableUI from '../../src/components/taggable-ui';
 
 const props = {
-  searchResults: [],
+  searchResults: {
+    total: 0,
+    items: []
+  },
   tagInView: {},
   linkedTags: [],
   search: () => {},
@@ -37,13 +40,6 @@ describe('Component', function () {
       const secondChild = children[1].type;
       const grid = wrapper.find('Grid').node.type;
       expect(secondChild).to.deep.equal(grid);
-      done();
-    });
-    it('should render three <Columns /> within the Row', function (done) {
-      const rowChildren = wrapper.find('Row').children().nodes;
-      const allColumnChildren = wrapper.find('Row').children().every('Col');
-      expect(rowChildren).to.have.length(3);
-      expect(allColumnChildren).to.equal(true);
       done();
     });
   });

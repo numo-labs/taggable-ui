@@ -5,50 +5,66 @@
 */
 
 import React, { PropTypes, Component } from 'react';
-
 import { Input } from 'react-bootstrap';
+// import { SymbolButton as Button } from '../button';
+import { Button } from 'react-bootstrap';
 
 require('./styles.css');
 class SearchBar extends Component {
 
-  constructor () {
-    super();
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleTextInput = this.handleTextInput.bind(this);
+  constructor (props) {
+    super(props);
+    this.state = {
+      text: props.searchString || ''
+    };
   }
 
-  handleSubmit (e) {
-    const { handleSubmit } = this.props;
-    e.preventDefault();
-    handleSubmit !== undefined && handleSubmit();
+  handleOnKeyUp (event) {
+    if (event.key === 'Enter') {
+      this.props.onSubmit(this.refs.input.getValue());
+    }
   }
 
-  handleTextInput () {
-    const { onChangeText } = this.props;
-    onChangeText(this.refs.input.getValue());
+  handleOnChange () {
+    this.setState({
+      text: this.refs.input.getValue()
+    });
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.searchString && nextProps.searchString !== this.state.text) {
+      this.setState({
+        text: nextProps.searchString
+      });
+    }
+  }
+
+  handleOnButtonClick () {
+    this.props.onSubmit(this.refs.input.getValue());
   }
 
   render () {
-    const { searchTerm } = this.props;
+    const searchButton = <Button onClick={this.handleOnButtonClick.bind(this)} bsStyle={'success'}>Search</Button>;
     return (
-      <form onSubmit={this.handleSubmit}>
         <Input
           ref='input'
           type='search'
           className='search__input'
           placeholder='Search by id or displayName..'
-          onChange={this.handleTextInput}
-          value={searchTerm}
+          onKeyUp={this.handleOnKeyUp.bind(this)}
+          buttonAfter={searchButton}
+          value={this.state.text}
+          onChange={this.handleOnChange.bind(this)}
         />
-      </form>
     );
   }
 }
 
 SearchBar.propTypes = {
-  handleSubmit: PropTypes.func,
-  onChangeText: PropTypes.func,
-  searchTerm: PropTypes.string
+  onSubmit: PropTypes.func,
+  onTextInputChange: PropTypes.func,
+  searchString: PropTypes.string,
+  onSearchStringChange: PropTypes.func
 };
 
 export default SearchBar;

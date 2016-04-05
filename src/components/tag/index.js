@@ -3,11 +3,14 @@ import { Button } from 'react-bootstrap';
 import './styles.css';
 
 class Tag extends Component {
+  handleOnClick () {
+    this.props.onClick(this.props.id);
+  }
   render () {
-    const { tagName, onClick, id, selected } = this.props;
+    const { id, displayName, selected } = this.props;
     return (
-      <Button className='tag' bsSize='xsmall' bsStyle={selected ? 'primary' : 'default'} onClick={onClick.bind(null, id)}>
-        <p className='tag__name'>{tagName}</p>
+      <Button className='tag' bsSize='xsmall' bsStyle={selected ? 'primary' : 'default'} onClick={this.handleOnClick.bind(this)}>
+        <p className='tag__name'>{displayName}</p>
         <p className='tag__id'>{id}</p>
       </Button>
     );
@@ -15,10 +18,10 @@ class Tag extends Component {
 }
 
 Tag.propTypes = {
-  tagName: PropTypes.string,
-  onClick: PropTypes.func,
-  id: PropTypes.string,
-  selected: PropTypes.bool
+  onClick: PropTypes.func.isRequired,
+  selected: PropTypes.bool,
+  displayName: PropTypes.string,
+  id: PropTypes.string
 };
 
 Tag.defaultProps = {

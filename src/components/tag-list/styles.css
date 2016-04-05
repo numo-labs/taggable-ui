@@ -2,7 +2,7 @@
   width: 100%;
   margin: 0 auto;
   text-align: center;
-  height: 60vh;
+  height: 55vh;
   border: 1px solid lightgrey;
   border-radius: 5px;
 }
@@ -21,4 +21,11 @@
 
 .tag__item {
   margin: 0.7em auto;
+}
+.total {
+  color: #337ab7;
+}
+
+.scroll {
+  overflow-y: auto;
 }

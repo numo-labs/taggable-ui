@@ -10,7 +10,8 @@ class SearchPane extends Component {
   constructor () {
     super();
     this.state = {
-      modalVisible: false
+      modalVisible: false,
+      activePage: 1
     };
     this.showModal = this.showModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -31,29 +32,30 @@ class SearchPane extends Component {
   render () {
     const {
       props: {
-        listItems,
-        onSearchSubmit,
-        setSearchTerm,
+        items,
+        onSearchStringChange,
         onTagClick,
         selectedTagId,
-        searchTerm
+        searchString,
+        pagination,
+        onSubmit
       },
       state: { modalVisible }
     } = this;
-    console.log(setSearchTerm);
-
     return (
       <div>
         <SearchList
-          handleSubmit={onSearchSubmit}
-          onChangeText={setSearchTerm}
-          searchTerm={searchTerm}
-          listItems={listItems}
+          onSearchStringChange={onSearchStringChange}
+          onSubmit={onSubmit}
+          searchString={searchString}
+          items={items}
           withButtons={false}
-          handleTagClick={onTagClick}
+          onTagClick={onTagClick}
           selectedTagId={selectedTagId}
+          pagination={pagination}
         />
         <Button
+          className='createTag'
           onClick={this.showModal}
           text='+ Create a new tag'
         />
@@ -64,12 +66,14 @@ class SearchPane extends Component {
 }
 
 SearchPane.propTypes = {
-  listItems: PropTypes.array,
-  onSearchSubmit: PropTypes.func,
+  items: PropTypes.array,
+  onSubmit: PropTypes.func,
   setSearchTerm: PropTypes.func,
   onTagClick: PropTypes.func,
   selectedTagId: PropTypes.string,
-  searchTerm: PropTypes.string
+  searchString: PropTypes.string,
+  onSearchStringChange: PropTypes.func,
+  pagination: PropTypes.object
 };
 
 export default SearchPane;
