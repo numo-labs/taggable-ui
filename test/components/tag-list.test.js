@@ -27,7 +27,6 @@ const mockTags = [
 describe('<TagList />', function () {
   const wrapper = shallow(<TagList items={mockTags}/>);
   const children = wrapper.children().nodes;
-  console.log(children);
   const numberOfTags = mockTags.length;
   it('should render our TagList component with the correct number of Tag Components', function (done) {
     expect(children).to.have.length(2);

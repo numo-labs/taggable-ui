@@ -30,14 +30,18 @@ class TaggableUI extends Component {
   onSearchStringChange (text) {
     this.props.setSearchString(text);
   }
-  handleOnSubmit (text) {
+  handleOnSubmit (text, queryType, tagType) {
     this.props.setSearchString(text);
-    this.props.fetchTags(text, 0, 10);
+    console.log('QUERYTYPE', queryType);
+    this.props.fetchTags(text, queryType, tagType, 0, 10);
   }
   handlePagination (index) {
-    console.log('props .......', this.props);
     const start = index * 10;
-    this.props.fetchTags(this.props.searchString, start, 10);
+    const { searchString, queryType, tagType } = this.props;
+    this.props.fetchTags(searchString, queryType, tagType, start, 10);
+  }
+  handleOnFilterButtonClick (queryType, tagType) {
+    this.props.setTagTypeAndQueryType(queryType, tagType);
   }
 
   renderSearchPane () {
@@ -45,9 +49,10 @@ class TaggableUI extends Component {
       searchResults,
       setSelectedTagFromSearch,
       searchString,
-      tagInView
+      tagInView,
+      queryType,
+      tagType
     } = this.props;
-    console.log('PROPS!!!', this.props);
     const searchPane = (
       <Col xs={3} md={3} className='col-centered'>
         <h1 className='searchTagTitle'>Search Tags</h1>
@@ -55,7 +60,6 @@ class TaggableUI extends Component {
           onSearchStringChange={this.onSearchStringChange.bind(this)}
           onTagClick={setSelectedTagFromSearch}
           items={searchResults.items.map(result => {
-            console.log('+++++++++++++----', searchString);
             return {
               id: result._id,
               displayName: result.displayName
@@ -70,6 +74,9 @@ class TaggableUI extends Component {
             total: searchResults.total
           }}
           onSubmit={this.handleOnSubmit.bind(this)}
+          queryType={queryType}
+          tagType={tagType}
+          onFilterButtonClick={this.handleOnFilterButtonClick.bind(this)}
         />
       </Col>
     );
@@ -118,6 +125,7 @@ class TaggableUI extends Component {
         <ViewPane
           height={'35vh'}
           item={tagInView}
+          items={this.renderLinkedTagList(tagInView.tags)}
         />
       </Col>
     );
@@ -157,7 +165,7 @@ class TaggableUI extends Component {
 }
 
 TaggableUI.propTypes = {
-  searchResults: PropTypes.array,
+  searchResults: PropTypes.object,
   tagInView: PropTypes.object,
   search: PropTypes.func,
   setSelectedTagFromSearch: PropTypes.func,
@@ -165,7 +173,10 @@ TaggableUI.propTypes = {
   searchString: PropTypes.string,
   linkedTags: PropTypes.array,
   searchLinkedTagDocument: PropTypes.func,
-  setSearchString: PropTypes.func
+  setSearchString: PropTypes.func,
+  queryType: PropTypes.string,
+  tagType: PropTypes.string,
+  setTagTypeAndQueryType: PropTypes.func
 
 };
 

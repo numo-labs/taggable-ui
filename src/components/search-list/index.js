@@ -11,15 +11,22 @@ class SearchList extends Component {
       onTagClick,
       selectedTagId,
       searchString,
-      pagination
+      pagination,
+      symbol,
+      handleButtonClick,
+      queryType,
+      tagType,
+      onFilterButtonClick
     } = this.props;
-    console.log(this.props);
     return (
       <div>
         <SearchBar
           onSubmit={onSubmit}
           onSearchStringChange={onSearchStringChange}
           searchString={searchString}
+          queryType={queryType}
+          tagType={tagType}
+          onFilterButtonClick={onFilterButtonClick}
         />
         <TagList
           items={items}
@@ -27,6 +34,8 @@ class SearchList extends Component {
           onTagClick={onTagClick}
           selectedTagId={selectedTagId}
           pagination={pagination}
+          symbol={symbol}
+          handleButtonClick={handleButtonClick}
         />
       </div>
     );
@@ -41,7 +50,12 @@ SearchList.propTypes = {
   onTagClick: PropTypes.func,
   selectedTagId: PropTypes.string,
   onSearchStringChange: PropTypes.func,
-  pagination: PropTypes.object
+  pagination: PropTypes.object,
+  symbol: PropTypes.bool,
+  handleButtonClick: PropTypes.func,
+  queryType: PropTypes.string,
+  tagType: PropTypes.string,
+  onFilterButtonClick: PropTypes.func
 };
 
 export default SearchList;

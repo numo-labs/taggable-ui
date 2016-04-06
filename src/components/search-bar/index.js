@@ -5,9 +5,8 @@
 */
 
 import React, { PropTypes, Component } from 'react';
-import { Input } from 'react-bootstrap';
-// import { SymbolButton as Button } from '../button';
-import { Button } from 'react-bootstrap';
+import { Input, Button } from 'react-bootstrap';
+import FilterButtons from '../filter-buttons';
 
 require('./styles.css');
 class SearchBar extends Component {
@@ -20,8 +19,9 @@ class SearchBar extends Component {
   }
 
   handleOnKeyUp (event) {
+    const { queryType, tagType } = this.props;
     if (event.key === 'Enter') {
-      this.props.onSubmit(this.refs.input.getValue());
+      this.props.onSubmit(this.refs.input.getValue(), queryType, tagType);
     }
   }
 
@@ -40,22 +40,32 @@ class SearchBar extends Component {
   }
 
   handleOnButtonClick () {
-    this.props.onSubmit(this.refs.input.getValue());
+    const { queryType, tagType } = this.props;
+    console.log('*********', this.props);
+    this.props.onSubmit(this.refs.input.getValue(), queryType, tagType);
   }
 
   render () {
+    const { queryType, tagType, onFilterButtonClick } = this.props;
     const searchButton = <Button onClick={this.handleOnButtonClick.bind(this)} bsStyle={'success'}>Search</Button>;
     return (
-        <Input
-          ref='input'
-          type='search'
-          className='search__input'
-          placeholder='Search by id or displayName..'
-          onKeyUp={this.handleOnKeyUp.bind(this)}
-          buttonAfter={searchButton}
-          value={this.state.text}
-          onChange={this.handleOnChange.bind(this)}
-        />
+    <div>
+      <FilterButtons
+        queryType={queryType}
+        tagType={tagType}
+        onFilterButtonClick={onFilterButtonClick}
+      />
+      <Input
+        ref='input'
+        type='search'
+        className='search__input'
+        placeholder='Search by id or displayName..'
+        onKeyUp={this.handleOnKeyUp.bind(this)}
+        buttonAfter={searchButton}
+        value={this.state.text}
+        onChange={this.handleOnChange.bind(this)}
+      />
+    </div>
     );
   }
 }
@@ -64,7 +74,10 @@ SearchBar.propTypes = {
   onSubmit: PropTypes.func,
   onTextInputChange: PropTypes.func,
   searchString: PropTypes.string,
-  onSearchStringChange: PropTypes.func
+  onSearchStringChange: PropTypes.func,
+  tagType: PropTypes.string,
+  queryType: PropTypes.string,
+  onFilterButtonClick: PropTypes.func
 };
 
 export default SearchBar;

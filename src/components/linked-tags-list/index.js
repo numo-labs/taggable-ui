@@ -6,17 +6,18 @@ import './styles.css';
 class LinkedTagsList extends Component {
   render () {
     const {
-      listItems,
+      items,
       handleButtonClick,
       handleTagClick,
       withButtons,
+      symbol,
       selectedTagId
     } = this.props;
-    const list = listItems.map(item => {
+    const list = items.map(item => {
       return (
-        <div key={item._id} className='tag__item'>
-          <Tag key={item._id} id={item._id} tagName={item.displayName} selected={item._id === selectedTagId} onClick={handleTagClick} />
-           { withButtons && <Button className='redButton' onHandleClick={handleButtonClick} symbol={'x'} /> }
+        <div key={item.id} className='tag__item'>
+          <Tag key={item.id} id={item.id} tagName={item.displayName} selected={item.id === selectedTagId} onClick={handleTagClick} />
+           { withButtons && <Button className='redButton' onHandleClick={handleButtonClick} symbol={symbol} /> }
         </div>
       );
     });
@@ -29,11 +30,12 @@ class LinkedTagsList extends Component {
 }
 
 LinkedTagsList.propTypes = {
-  listItems: PropTypes.array,
+  items: PropTypes.array,
   handleButtonClick: PropTypes.func,
   handleTagClick: PropTypes.func,
   withButtons: PropTypes.bool,
-  selectedTagId: PropTypes.string
+  selectedTagId: PropTypes.string,
+  symbol: PropTypes.string
 };
 
 LinkedTagsList.defaultProps = {
