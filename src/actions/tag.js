@@ -36,9 +36,9 @@ export function setSearchResults (items) {
 *  Function to retrieve tags based on a searchTerm
 */
 
-export function fetchTags (searchString, start, size) {
+export function fetchTags (searchString, queryType, tagType, start, size) {
   return (dispatch, state) => {
-    return graphqlService.query(QUERY_SEARCH_TAGS, {id: searchString, start, size})
+    return graphqlService.query(QUERY_SEARCH_TAGS, {id: searchString, queryType: 'QUERY_DISPLAYNAME', tagType: 'GEO', start, size})
       .then(json => {
         const items = json.data.taggable || [];
         return dispatch(setSearchResults(items));

@@ -136,9 +136,11 @@ class ViewPane extends Component {
             <div className='listBuffer'>
             <Row>
               <Col xs={6}>
+                <h3>Add Parent</h3>
                 <SearchList symbol={'+'} withButtons={true} />
               </Col>
               <Col xs={6}>
+              <h3>Parent List</h3>
                 <LinkedTagsList items={items} symbol={'x'} />
               </Col>
             </Row>

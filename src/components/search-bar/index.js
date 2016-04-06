@@ -6,6 +6,7 @@
 
 import React, { PropTypes, Component } from 'react';
 import { Input, Button } from 'react-bootstrap';
+import FilterButtons from '../filter-buttons';
 
 require('./styles.css');
 class SearchBar extends Component {
@@ -44,16 +45,19 @@ class SearchBar extends Component {
   render () {
     const searchButton = <Button onClick={this.handleOnButtonClick.bind(this)} bsStyle={'success'}>Search</Button>;
     return (
-        <Input
-          ref='input'
-          type='search'
-          className='search__input'
-          placeholder='Search by id or displayName..'
-          onKeyUp={this.handleOnKeyUp.bind(this)}
-          buttonAfter={searchButton}
-          value={this.state.text}
-          onChange={this.handleOnChange.bind(this)}
-        />
+    <div>
+      <FilterButtons />
+      <Input
+        ref='input'
+        type='search'
+        className='search__input'
+        placeholder='Search by id or displayName..'
+        onKeyUp={this.handleOnKeyUp.bind(this)}
+        buttonAfter={searchButton}
+        value={this.state.text}
+        onChange={this.handleOnChange.bind(this)}
+      />
+    </div>
     );
   }
 }

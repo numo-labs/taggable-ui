@@ -1,6 +1,6 @@
 export const QUERY_SEARCH_TAGS = `
-query tagQuery($id: String, $start: Int, $size: Int) {
-	taggable(searchString: $id, start: $start, size: $size) {
+query tagQuery($id: String, $queryType: QueryTypeEnum!, $tagType: TagTypeEnum, $start: Int, $size: Int) {
+	taggable(searchString: $id, queryType: $queryType, tagType: $tagType, start: $start, size: $size) {
 		total,
 		items {
 			_id,
