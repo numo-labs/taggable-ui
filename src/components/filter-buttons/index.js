@@ -4,15 +4,13 @@ import { filterButtonData } from '../../constants/filter-buttons';
 import './styles.css';
 
 class FilterButtons extends Component {
-  handleOnClick () {
-    this.props.onFilterButtonClick();
-  }
   render () {
     return (
       <ButtonGroup className='filterButtons'>
       {filterButtonData.map(button => {
+        const selected = this.props.tagType === button.tagType ? 'primary' : 'default';
         return (
-          <Button onClick={this.handleOnClick.bind(this)}>
+          <Button bsStyle={selected} onClick={() => this.props.onFilterButtonClick(button.queryType, button.tagType)}>
             <i className={button.icon}></i>
           </Button>
         );
@@ -23,7 +21,9 @@ class FilterButtons extends Component {
 }
 
 FilterButtons.propTypes = {
-  onFilterButtonClick: PropTypes.func
+  onFilterButtonClick: PropTypes.func,
+  tagType: PropTypes.string,
+  queryType: PropTypes.string
 };
 
 export default FilterButtons;

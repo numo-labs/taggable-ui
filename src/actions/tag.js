@@ -33,12 +33,21 @@ export function setSearchResults (items) {
 }
 
 /*
-*  Function to retrieve tags based on a searchTerm
+* Function to set the queryType and tagType of the query
+*/
+
+export function setTagTypeAndQueryType (queryType, tagType) {
+  return { type: types.SET_TAG_TYPE_AND_QUERY_TYPE, tagType, queryType };
+}
+/*
+*  Function to retrieve tags based on a searchString, queryType and tagType
 */
 
 export function fetchTags (searchString, queryType, tagType, start, size) {
-  return (dispatch, state) => {
-    return graphqlService.query(QUERY_SEARCH_TAGS, {id: searchString, queryType: 'QUERY_DISPLAYNAME', tagType: 'GEO', start, size})
+  return (dispatch, getState) => {
+    console.log('%%%%%%%%%', searchString, queryType, tagType);
+    const { taggable: { queryType, tagType } } = getState();
+    return graphqlService.query(QUERY_SEARCH_TAGS, {id: searchString, queryType, tagType, start, size})
       .then(json => {
         const items = json.data.taggable || [];
         return dispatch(setSearchResults(items));

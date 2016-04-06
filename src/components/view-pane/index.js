@@ -137,10 +137,10 @@ class ViewPane extends Component {
             <Row>
               <Col xs={6}>
                 <h3>Add Parent</h3>
-                <SearchList symbol={'+'} withButtons={true} />
+                <SearchList symbol={'+'} withButtons />
               </Col>
               <Col xs={6}>
-              <h3>Parent List</h3>
+              <h3 className='parentListTitle'>Parent List</h3>
                 <LinkedTagsList items={items} symbol={'x'} />
               </Col>
             </Row>

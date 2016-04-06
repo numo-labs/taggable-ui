@@ -114,6 +114,10 @@
   float: left;
 }
 
+.parentListTitle {
+  margin-bottom: 1em;
+}
+
 .tagTabs:hover {
   color: #ffffff;
 }

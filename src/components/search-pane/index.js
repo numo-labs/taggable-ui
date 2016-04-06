@@ -38,7 +38,10 @@ class SearchPane extends Component {
         selectedTagId,
         searchString,
         pagination,
-        onSubmit
+        onSubmit,
+        queryType,
+        tagType,
+        onFilterButtonClick
       },
       state: { modalVisible }
     } = this;
@@ -53,6 +56,9 @@ class SearchPane extends Component {
           onTagClick={onTagClick}
           selectedTagId={selectedTagId}
           pagination={pagination}
+          queryType={queryType}
+          tagType={tagType}
+          onFilterButtonClick={onFilterButtonClick}
         />
         <Button
           className='createTag'
@@ -73,7 +79,10 @@ SearchPane.propTypes = {
   selectedTagId: PropTypes.string,
   searchString: PropTypes.string,
   onSearchStringChange: PropTypes.func,
-  pagination: PropTypes.object
+  pagination: PropTypes.object,
+  queryType: PropTypes.string,
+  tagType: PropTypes.string,
+  onFilterButtonClick: PropTypes.func
 };
 
 export default SearchPane;

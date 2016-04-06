@@ -19,8 +19,9 @@ class SearchBar extends Component {
   }
 
   handleOnKeyUp (event) {
+    const { queryType, tagType } = this.props;
     if (event.key === 'Enter') {
-      this.props.onSubmit(this.refs.input.getValue());
+      this.props.onSubmit(this.refs.input.getValue(), queryType, tagType);
     }
   }
 
@@ -39,14 +40,21 @@ class SearchBar extends Component {
   }
 
   handleOnButtonClick () {
-    this.props.onSubmit(this.refs.input.getValue());
+    const { queryType, tagType } = this.props;
+    console.log('*********', this.props);
+    this.props.onSubmit(this.refs.input.getValue(), queryType, tagType);
   }
 
   render () {
+    const { queryType, tagType, onFilterButtonClick } = this.props;
     const searchButton = <Button onClick={this.handleOnButtonClick.bind(this)} bsStyle={'success'}>Search</Button>;
     return (
     <div>
-      <FilterButtons />
+      <FilterButtons
+        queryType={queryType}
+        tagType={tagType}
+        onFilterButtonClick={onFilterButtonClick}
+      />
       <Input
         ref='input'
         type='search'
@@ -66,7 +74,10 @@ SearchBar.propTypes = {
   onSubmit: PropTypes.func,
   onTextInputChange: PropTypes.func,
   searchString: PropTypes.string,
-  onSearchStringChange: PropTypes.func
+  onSearchStringChange: PropTypes.func,
+  tagType: PropTypes.string,
+  queryType: PropTypes.string,
+  onFilterButtonClick: PropTypes.func
 };
 
 export default SearchBar;

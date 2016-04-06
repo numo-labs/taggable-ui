@@ -26,6 +26,7 @@ export const filterButtonData = [
   },
   {
     icon: 'fa fa-key',
-    queryType: 'QUERY_ID'
+    queryType: 'QUERY_ID',
+    tagType: undefined
   }
 ];
