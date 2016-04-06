@@ -159,7 +159,6 @@ class ViewPane extends Component {
   }
 
   handleSelect (selectedKey) {
-    console.log('SELECTED KEY', selectedKey);
     this.setState({
       activeKey: selectedKey
     });

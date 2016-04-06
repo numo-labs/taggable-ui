@@ -41,7 +41,6 @@ class SearchBar extends Component {
 
   handleOnButtonClick () {
     const { queryType, tagType } = this.props;
-    console.log('*********', this.props);
     this.props.onSubmit(this.refs.input.getValue(), queryType, tagType);
   }
 

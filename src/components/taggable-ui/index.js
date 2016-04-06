@@ -30,15 +30,13 @@ class TaggableUI extends Component {
   onSearchStringChange (text) {
     this.props.setSearchString(text);
   }
-  handleOnSubmit (text, queryType, tagType) {
+  handleOnSubmit (text) {
     this.props.setSearchString(text);
-    console.log('QUERYTYPE', queryType);
-    this.props.fetchTags(text, queryType, tagType, 0, 10);
+    this.props.fetchTags(text, 0, 10);
   }
   handlePagination (index) {
     const start = index * 10;
-    const { searchString, queryType, tagType } = this.props;
-    this.props.fetchTags(searchString, queryType, tagType, start, 10);
+    this.props.fetchTags(this.props.searchString, start, 10);
   }
   handleOnFilterButtonClick (queryType, tagType) {
     this.props.setTagTypeAndQueryType(queryType, tagType);
