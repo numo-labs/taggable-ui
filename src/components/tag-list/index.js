@@ -16,7 +16,6 @@ class TagList extends Component {
   handleOnSelect (event, selectedEvent) {
     event.preventDefault();
     this.props.pagination.onSelect(selectedEvent.eventKey - 1);
-    console.log('selectedEvent.key', typeof selectedEvent);
     this.setState({
       activePage: selectedEvent.eventKey
     });

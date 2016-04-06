@@ -32,7 +32,6 @@ class TaggableUI extends Component {
   }
   handleOnSubmit (text, queryType, tagType) {
     this.props.setSearchString(text);
-    console.log('QUERYTYPE', queryType);
     this.props.fetchTags(text, queryType, tagType, 0, 10);
   }
   handlePagination (index) {

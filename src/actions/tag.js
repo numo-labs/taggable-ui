@@ -43,9 +43,8 @@ export function setTagTypeAndQueryType (queryType, tagType) {
 *  Function to retrieve tags based on a searchString, queryType and tagType
 */
 
-export function fetchTags (searchString, queryType, tagType, start, size) {
+export function fetchTags (searchString, start, size) {
   return (dispatch, getState) => {
-    console.log('%%%%%%%%%', searchString, queryType, tagType);
     const { taggable: { queryType, tagType } } = getState();
     return graphqlService.query(QUERY_SEARCH_TAGS, {id: searchString, queryType, tagType, start, size})
       .then(json => {
