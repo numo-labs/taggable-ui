@@ -10,9 +10,11 @@ class FilterButtons extends Component {
       {filterButtonData.map(button => {
         const selected = this.props.tagType === button.tagType ? 'primary' : 'default';
         return (
-          <Button key={button.tagType} bsStyle={selected} onClick={() => this.props.onFilterButtonClick(button.queryType, button.tagType)}>
-            <i className={button.icon}></i>
-          </Button>
+          <div key={button.tagType}>
+            <Button bsStyle={selected} onClick={() => this.props.onFilterButtonClick(button.queryType, button.tagType)}>
+              <i className={button.icon}></i>
+            </Button>
+          </div>
         );
       })}
       </ButtonGroup>
