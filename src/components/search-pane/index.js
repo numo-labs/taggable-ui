@@ -76,7 +76,7 @@ SearchPane.propTypes = {
   onSubmit: PropTypes.func,
   setSearchTerm: PropTypes.func,
   onTagClick: PropTypes.func,
-  selectedTagId: PropTypes.string,
+  selectedTagId: PropTypes.object,
   searchString: PropTypes.string,
   onSearchStringChange: PropTypes.func,
   pagination: PropTypes.object,

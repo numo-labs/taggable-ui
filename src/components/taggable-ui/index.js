@@ -165,7 +165,7 @@ class TaggableUI extends Component {
 }
 
 TaggableUI.propTypes = {
-  searchResults: PropTypes.array,
+  searchResults: PropTypes.object,
   tagInView: PropTypes.object,
   search: PropTypes.func,
   setSelectedTagFromSearch: PropTypes.func,

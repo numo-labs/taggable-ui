@@ -44,7 +44,7 @@ export default function taggable (state = initialState, action) {
         ...state,
         queryType: action.queryType,
         tagType: action.tagType
-      }
+      };
     default:
       return state;
   }
