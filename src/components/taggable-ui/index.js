@@ -142,7 +142,6 @@ class TaggableUI extends Component {
       return (
         <div>
           {this.renderTagContent()}
-          {this.renderLinkedTags()}
         </div>
       );
     } else {
@@ -159,8 +158,12 @@ class TaggableUI extends Component {
         {this.renderNavbar()}
         <Grid fluid>
           <Row>
-            {this.renderSearchPane()}
-            {this.renderItemContent()}
+            <Col xs={4}>
+              {this.renderSearchPane()}
+            </Col>
+            <Col xs={8}>
+              {this.renderItemContent()}
+            </Col>
           </Row>
         </Grid>
       </div>
