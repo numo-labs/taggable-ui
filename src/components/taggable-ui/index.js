@@ -147,8 +147,8 @@ class TaggableUI extends Component {
       );
     } else {
       return (
-        <h1 className='well problems'>IF YOU'RE HAVING TAG PROBLEMS I FEEL BAD FOR YOU SON <br />
-        I'VE GOT 99 PROBLEMS BUT A LINK AIN'T 1</h1>
+        <h1 className='well problems'>IF YOU&#39;RE HAVING TAG PROBLEMS I FEEL BAD FOR YOU SON <br />
+         I&#39;VE GOT 99 PROBLEMS BUT A LINK AIN&#39;T 1</h1>
       );
     }
   }
