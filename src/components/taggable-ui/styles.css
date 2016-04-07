@@ -63,3 +63,11 @@ div[class*='col'] {
   width: 80%;
   text-align: center;
 }
+
+.save {
+  padding: 0.8em;
+}
+
+.saveButton {
+  margin: 0.6em;
+}

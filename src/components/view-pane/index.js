@@ -13,6 +13,7 @@ class ViewPane extends Component {
     };
   }
   renderTagContentHeader (item) {
+    console.log(item.location);
     const tagContentHeader = (
       <div>
         <div>
@@ -22,6 +23,10 @@ class ViewPane extends Component {
         <div>
           <h4 className='displayName'>Display name:</h4>
           <Input className='displayNameInput' type='text' labelClassName='col-xs-9' wrapperClassName='col-xs-9' value={item.displayName}/>
+        </div>
+        <div>
+          <h4 className='location'>Location:</h4>
+          <Input className='locationInput' type='text' labelClassName='col-xs-9' wrapperClassName='col-xs-9' value={item.location}/>
         </div>
         <Row>
           <Col xs={2}>
@@ -106,7 +111,6 @@ class ViewPane extends Component {
       <Nav bsStyle='tabs' justified activeKey={this.state.activeKey} onSelect={this.handleSelect.bind(this)}>
         <NavItem eventKey={1}>Tag Content</NavItem>
         <NavItem eventKey={2}>Parents</NavItem>
-        <NavItem eventKey={3}>Children</NavItem>
       </Nav>
     );
   }
@@ -129,7 +133,7 @@ class ViewPane extends Component {
             {this.renderAddNewKeyValue(onButtonClick, onChange)}
           </div>
         );
-      } else if (this.state.activeKey === 2) {
+      } else {
         return (
           <div>
             {this.renderTabs()}
@@ -145,13 +149,6 @@ class ViewPane extends Component {
               </Col>
             </Row>
             </div>
-          </div>
-        );
-      } else {
-        return (
-          <div>
-            {this.renderTabs()}
-            <h1>children</h1>
           </div>
         );
       }

@@ -1,5 +1,5 @@
 import * as types from '../constants/action-types.js';
-import { QUERY_SEARCH_TAGS } from '../constants/queries.js';
+import { QUERY_SEARCH_TAGS, MUTATION_CREATE_TAG } from '../constants/queries.js';
 
 import * as graphqlService from '../services/graphql.js';
 
@@ -52,4 +52,24 @@ export function fetchTags (searchString, start, size) {
         return dispatch(setSearchResults(items));
       });
   };
+}
+
+/*
+* Function that will save a new tag configuration
+*/
+
+export function saveNewConfig () {
+  return (dispatch, getState) => {
+    const { tagInView: { id, displayName, location, tags, metadata } } = getState();
+    return graphqlService.query(MUTATION_CREATE_TAG, {id, displayName, location, tags, metadata})
+      .then(dispatch(saveConfiguration()));
+  };
+}
+
+/*
+* Function that will display a 'configuration saved' message
+*/
+
+export function saveConfiguration () {
+  return { type: types.SAVE_CONFIGURATION };
 }

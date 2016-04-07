@@ -42,7 +42,6 @@
 .displayName {
   width: 30%;
   float: left;
-  margin-bottom: 3em;
 }
 
 .displayNameInput {
@@ -52,6 +51,16 @@
 
 .deleteButton {
   display: inline-block;
+}
+
+.location {
+  width: 30%;
+  float: left;
+}
+
+.locationInput {
+  display: inline-block;
+  width: 24em;
 }
 
 .addValue {
