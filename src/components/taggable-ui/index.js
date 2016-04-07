@@ -3,14 +3,20 @@ import LinkedTags from '../linked-tags';
 import ViewPane from '../view-pane';
 import SearchPane from '../search-pane';
 import { Col, Nav, NavItem, Navbar, Row, Grid } from 'react-bootstrap';
-import { AddTagButton as Button } from '../button';
+import { Button } from 'react-bootstrap';
 
 require('./styles.css');
 import './css/normalize.css';
 
 class TaggableUI extends Component {
+  handleOnClick () {
+    this.props.saveConfiguration();
+  }
 
   renderNavbar () {
+    const { configurationSaved } = this.props;
+    console.log('******', this.props.tagInView);
+    const buttonAbility = configurationSaved ? 'default' : 'success';
     const navbar = (
       <nav className='navbar navbar-default navi'>
         <div className='navbar-header'>
@@ -21,7 +27,7 @@ class TaggableUI extends Component {
           </Navbar.Brand>
         </div>
         <Nav className='saveButton' pullRight>
-          <NavItem><Button text={'Save new configuration'} /></NavItem>
+          <NavItem><Button className='save' disabled={configurationSaved} bsStyle={buttonAbility} onClick={this.handleOnClick.bind(this)}>Save new configuration</Button></NavItem>
         </Nav>
       </nav>
     );
@@ -141,8 +147,8 @@ class TaggableUI extends Component {
       );
     } else {
       return (
-        <h1 className='well problems'>IF YOU'RE HAVING TAG PROBLEMS I FEEL BAD FOR YOU SON <br />
-        I'VE GOT 99 PROBLEMS BUT A LINK AIN'T 1</h1>
+        <h1 className='well problems'>IF YOU&#39;RE HAVING TAG PROBLEMS I FEEL BAD FOR YOU SON <br />
+         I&#39;VE GOT 99 PROBLEMS BUT A LINK AIN&#39;T 1</h1>
       );
     }
   }
@@ -174,8 +180,9 @@ TaggableUI.propTypes = {
   setSearchString: PropTypes.func,
   queryType: PropTypes.string,
   tagType: PropTypes.string,
-  setTagTypeAndQueryType: PropTypes.func
-
+  setTagTypeAndQueryType: PropTypes.func,
+  saveConfiguration: PropTypes.func,
+  configurationSaved: PropTypes.bool
 };
 
 export default TaggableUI;

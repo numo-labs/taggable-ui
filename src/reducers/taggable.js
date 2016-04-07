@@ -4,7 +4,8 @@ import {
   SET_SELECTED_TAG_FROM_SEARCH,
   SET_SEARCH_STRING,
   SET_SEARCH_RESULTS,
-  SET_TAG_TYPE_AND_QUERY_TYPE
+  SET_TAG_TYPE_AND_QUERY_TYPE,
+  SAVE_CONFIGURATION
 } from '../constants/action-types.js';
 
 export const initialState = {
@@ -16,7 +17,8 @@ export const initialState = {
   tagInView: {},
   searchString: '',
   tagType: null,
-  queryType: 'QUERY_DISPLAYNAME'
+  queryType: 'QUERY_DISPLAYNAME',
+  configurationSaved: true
 };
 
 export default function taggable (state = initialState, action) {
@@ -44,6 +46,11 @@ export default function taggable (state = initialState, action) {
         ...state,
         queryType: action.queryType,
         tagType: action.tagType
+      };
+    case SAVE_CONFIGURATION:
+      return {
+        ...state,
+        configurationSaved: true
       };
     default:
       return state;

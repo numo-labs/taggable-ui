@@ -21,14 +21,18 @@ query tagQuery($id: String, $queryType: QueryTypeEnum!, $tagType: TagTypeEnum, $
 `;
 
 export const MUTATION_CREATE_TAG = `
-mutation createTag($id: String, $displayName: String, $tags: [TagInputItem], $metadata: [MetaDataInputItem]) {
+mutation createTag($id: String, $displayName: String, $location: LocationInputType, $tags: [TagInputItem], $metadata: [MetaDataInputItem]) {
 	taggable {
-    tagData(_id: $id, displayName: $displayName, tags: $tags, metadata: $metadata) {
+    tagData(_id: $id, displayName: $displayName, location: $location, tags: $tags, metadata: $metadata) {
       _id,
       displayName,
+			location {
+				lat,
+				lon
+			},
       tags {
         tagId,
-        tagType,
+				inherited,
         source,
         active
       }
