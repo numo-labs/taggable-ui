@@ -15,7 +15,6 @@ class TaggableUI extends Component {
 
   renderNavbar () {
     const { configurationSaved } = this.props;
-    console.log('******', this.props.tagInView);
     const buttonAbility = configurationSaved ? 'default' : 'success';
     const navbar = (
       <nav className='navbar navbar-default navi'>
