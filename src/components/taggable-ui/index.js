@@ -57,6 +57,7 @@ class TaggableUI extends Component {
       tagType,
       inSearch
     } = this.props;
+    console.log('******', tagInView.metadata);
     const searchPane = (
       <Col xs={3} md={3} className='col-centered'>
         <h1 className='searchTagTitle'>Search Tags</h1>
