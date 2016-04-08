@@ -13,7 +13,6 @@ class ViewPane extends Component {
     };
   }
   renderTagContentHeader (item) {
-    console.log('location', item.location);
     const tagContentHeader = (
       <div>
         <div>
@@ -125,7 +124,6 @@ class ViewPane extends Component {
       height,
       items
     } = this.props;
-    console.log('ONDELETEVALUE', onDeleteValue);
     if (item) {
       if (this.state.activeKey === 1) {
         return (

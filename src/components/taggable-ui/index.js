@@ -57,7 +57,6 @@ class TaggableUI extends Component {
       tagType,
       inSearch
     } = this.props;
-    console.log('******', tagInView.metadata);
     const searchPane = (
       <Col xs={3} md={3} className='col-centered'>
         <h1 className='searchTagTitle'>Search Tags</h1>
@@ -124,7 +123,6 @@ class TaggableUI extends Component {
 
   renderTagContent () {
     const { tagInView, deleteValue, addValue } = this.props;
-    console.log('>>>><<<<<<', tagInView);
     const tagContent = (
       <Col xs={6} md={6} className='col-centered'>
         <h1 className='tagContentTitle'>Tag Content</h1>
