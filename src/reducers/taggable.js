@@ -5,7 +5,8 @@ import {
   SET_SEARCH_STRING,
   SET_SEARCH_RESULTS,
   SET_TAG_TYPE_AND_QUERY_TYPE,
-  SAVE_CONFIGURATION
+  SAVE_CONFIGURATION,
+  BUSY_SEARCHING
 } from '../constants/action-types.js';
 
 export const initialState = {
@@ -18,7 +19,8 @@ export const initialState = {
   searchString: '',
   tagType: null,
   queryType: 'QUERY_DISPLAYNAME',
-  configurationSaved: true
+  configurationSaved: true,
+  inSearch: false
 };
 
 export default function taggable (state = initialState, action) {
@@ -36,10 +38,16 @@ export default function taggable (state = initialState, action) {
         ...state,
         searchString: action.text
       };
+    case BUSY_SEARCHING:
+      return {
+        ...state,
+        inSearch: true
+      };
     case SET_SEARCH_RESULTS:
       return {
         ...state,
-        searchResults: action.items
+        searchResults: action.searchResults,
+        inSearch: false
       };
     case SET_TAG_TYPE_AND_QUERY_TYPE:
       return {
