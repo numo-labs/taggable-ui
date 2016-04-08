@@ -59,19 +59,19 @@ class ViewPane extends Component {
       );
     }
   }
-  renderMetadataContent (item, onDeleteValue, height) {
+  renderMetadataContent (item, onDeleteValue, onAddValue, height) {
     if (item.metadata) {
-      const addButton = <Button onHandleClick={onDeleteValue} symbol={'+'} />;
       const metadataContent = item.metadata.map((content, index) => {
+        const addButton = <Button onHandleClick={() => onAddValue(index, this.refs[index].getValue())} symbol={'+'} />;
         return (
           <Input key={content.key} wrapperClassName='wrapper' className='metaContent'>
             <Row>
               <Col xs={6}>
-                <input type='text' className='form-control' value={content.key} />
+                <Input type='text' className='form-control' value={content.key} />
               </Col>
               <Col xs={6}>
                 {this.renderValues(content, index, onDeleteValue)}
-                <Input type='text' className='form-control' placeholder='add value' buttonAfter={addButton} />
+                <Input ref={index} type='text' className='form-control' placeholder='add value' buttonAfter={addButton} />
               </Col>
             </Row>
           </Input>
@@ -118,6 +118,7 @@ class ViewPane extends Component {
   renderContent () {
     const {
       item,
+      onAddValue,
       onDeleteValue,
       onButtonClick,
       onChange,
@@ -131,7 +132,7 @@ class ViewPane extends Component {
           <div>
             {this.renderTabs()}
             {this.renderTagContentHeader(item)}
-            {this.renderMetadataContent(item, onDeleteValue, height)}
+            {this.renderMetadataContent(item, onDeleteValue, onAddValue, height)}
             {this.renderAddNewKeyValue(onButtonClick, onChange)}
           </div>
         );
@@ -175,6 +176,7 @@ ViewPane.propTypes = {
   metadata: PropTypes.array,
   onButtonClick: PropTypes.func,
   onDeleteValue: PropTypes.func,
+  onAddValue: PropTypes.func,
   height: PropTypes.string,
   onChange: PropTypes.func,
   item: PropTypes.object,

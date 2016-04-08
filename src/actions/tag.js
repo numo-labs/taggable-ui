@@ -92,3 +92,11 @@ export function saveConfiguration () {
 export function deleteValue (metaIndex, index) {
   return { type: types.DELETE_VALUE, metaIndex, index };
 }
+
+/*
+* Function that will add a specific value
+*/
+
+export function addValue (index, value) {
+  return { type: types.ADD_VALUE, index, value };
+}

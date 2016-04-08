@@ -123,7 +123,7 @@ class TaggableUI extends Component {
   }
 
   renderTagContent () {
-    const { tagInView, deleteValue } = this.props;
+    const { tagInView, deleteValue, addValue } = this.props;
     console.log('>>>><<<<<<', tagInView);
     const tagContent = (
       <Col xs={6} md={6} className='col-centered'>
@@ -133,6 +133,7 @@ class TaggableUI extends Component {
           item={tagInView}
           items={this.renderLinkedTagList(tagInView.tags)}
           onDeleteValue={deleteValue}
+          onAddValue={addValue}
         />
       </Col>
     );
@@ -190,7 +191,8 @@ TaggableUI.propTypes = {
   saveConfiguration: PropTypes.func,
   configurationSaved: PropTypes.bool,
   inSearch: PropTypes.bool,
-  deleteValue: PropTypes.func
+  deleteValue: PropTypes.func,
+  addValue: PropTypes.func
 };
 
 export default TaggableUI;
