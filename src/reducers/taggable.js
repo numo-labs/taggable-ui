@@ -6,7 +6,8 @@ import {
   SET_SEARCH_RESULTS,
   SET_TAG_TYPE_AND_QUERY_TYPE,
   SAVE_CONFIGURATION,
-  BUSY_SEARCHING
+  BUSY_SEARCHING,
+  DELETE_VALUE
 } from '../constants/action-types.js';
 
 export const initialState = {
@@ -59,6 +60,20 @@ export default function taggable (state = initialState, action) {
       return {
         ...state,
         configurationSaved: true
+      };
+    case DELETE_VALUE:
+      const metadataCopy = state.tagInView.metadata;
+      const contentCopy = state.tagInView.metadata[action.metaIndex];
+      const newValues = contentCopy.values;
+      newValues.splice(action.index, 1);
+      metadataCopy.splice(action.metaIndex, 1, {...contentCopy, values: newValues});
+      return {
+        ...state,
+        configurationSaved: false,
+        tagInView: {
+          ...state.tagInView,
+          metadata: metadataCopy
+        }
       };
     default:
       return state;
