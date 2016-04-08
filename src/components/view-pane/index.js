@@ -39,11 +39,10 @@ class ViewPane extends Component {
     );
     return tagContentHeader;
   }
-  renderValues (content, index, onButtonClick) {
-    const deleteButton = <Button className='redButton' onHandleClick={onButtonClick} symbol={'x'} />;
-    const addButton = <Button onHandleClick={onButtonClick} symbol={'+'} />;
+  renderValues (content, metaIndex, onDeleteValue) {
     if (content.values) {
-      return content.values.map(value => {
+      return content.values.map((value, index) => {
+        const deleteButton = <Button className='redButton' onHandleClick={() => onDeleteValue(metaIndex, index)} symbol={'x'} />;
         return (
             <div key={value} className='inputGroup'>
                 <Input type='text' className='form-control' value={value} buttonAfter={deleteButton}/>
@@ -51,16 +50,17 @@ class ViewPane extends Component {
           );
       });
     } else {
+      const addButton = <Button onHandleClick={onDeleteValue} symbol={'+'} />;
       return (
-        <div key={index} className='inputGroup'>
+        <div key={metaIndex} className='inputGroup'>
             <Input type='text' className='form-control' buttonAfter={addButton}/>
         </div>
       );
     }
   }
-  renderMetadataContent (item, onButtonClick, height) {
+  renderMetadataContent (item, onDeleteValue, height) {
     if (item.metadata) {
-      const addButton = <Button onHandleClick={onButtonClick} symbol={'+'} />;
+      const addButton = <Button onHandleClick={onDeleteValue} symbol={'+'} />;
       const metadataContent = item.metadata.map((content, index) => {
         return (
           <Input key={content.key} wrapperClassName='wrapper' className='metaContent'>
@@ -69,7 +69,7 @@ class ViewPane extends Component {
                 <input type='text' className='form-control' value={content.key} />
               </Col>
               <Col xs={6}>
-                {this.renderValues(content, index, onButtonClick)}
+                {this.renderValues(content, index, onDeleteValue)}
                 <Input type='text' className='form-control' placeholder='add value' buttonAfter={addButton} />
               </Col>
             </Row>
@@ -117,18 +117,20 @@ class ViewPane extends Component {
   renderContent () {
     const {
       item,
+      onDeleteValue,
       onButtonClick,
       onChange,
       height,
       items
     } = this.props;
+    console.log('ONDELETEVALUE', onDeleteValue);
     if (item) {
       if (this.state.activeKey === 1) {
         return (
           <div>
             {this.renderTabs()}
             {this.renderTagContentHeader(item)}
-            {this.renderMetadataContent(item, onButtonClick, height)}
+            {this.renderMetadataContent(item, onDeleteValue, height)}
             {this.renderAddNewKeyValue(onButtonClick, onChange)}
           </div>
         );
@@ -171,6 +173,7 @@ class ViewPane extends Component {
 ViewPane.propTypes = {
   metadata: PropTypes.array,
   onButtonClick: PropTypes.func,
+  onDeleteValue: PropTypes.func,
   height: PropTypes.string,
   onChange: PropTypes.func,
   item: PropTypes.object,
