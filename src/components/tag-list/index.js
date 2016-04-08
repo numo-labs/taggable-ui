@@ -3,16 +3,25 @@ import Tag from '../tag';
 import { Pagination } from 'react-bootstrap';
 import { SymbolButton as Button } from '../button';
 import './styles.css';
+import Spinner from '../spinner';
 
 class TagList extends Component {
   constructor (props) {
     super(props);
-    if (props.pagination) {
-      this.state = {
-        activePage: 1
-      };
+    this.state = {
+      noTagsFound: false,
+      activePage: 1
+    };
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (this.props.inSearch && !nextProps.inSearch && nextProps.items.length === 0) {
+      this.setState({noTagsFound: true});
+    } else {
+      this.setState({noTagsFound: false});
     }
   }
+
   handleOnSelect (event, selectedEvent) {
     event.preventDefault();
     this.props.pagination.onSelect(selectedEvent.eventKey - 1);
@@ -52,17 +61,20 @@ class TagList extends Component {
       <div></div>
     );
   }
-  render () {
+
+  renderTagList () {
     const {
-      items,
-      onTagClick,
-      selectedTagId,
-      pagination,
-      symbol,
-      handleButtonClick,
-      withButtons
-    } = this.props;
-    const list = items.map(item => {
+      props: {
+        items,
+        onTagClick,
+        selectedTagId,
+        symbol,
+        handleButtonClick,
+        withButtons
+      },
+      state: { noTagsFound }
+    } = this;
+    return noTagsFound ? <div>No matching tags found</div> : items.map(item => {
       return (
         <div key={item.id} className='tag__item'>
           <Tag
@@ -72,14 +84,30 @@ class TagList extends Component {
            selected={item.id === selectedTagId}
            onClick={onTagClick}
           />
-            { withButtons && <Button className='redButton' onHandleClick={handleButtonClick} symbol={symbol} /> }
+          { withButtons &&
+            <Button
+              className='redButton'
+              onHandleClick={handleButtonClick}
+              symbol={symbol}
+            />
+          }
         </div>
       );
     });
+  }
+
+  render () {
+    const {
+      props: {
+        pagination,
+        inSearch
+      }
+    } = this;
+    console.log('search', inSearch);
     return (
       <div>
         <div className='list scroll'>
-          {list}
+          { inSearch ? <Spinner /> : this.renderTagList() }
         </div>
         {pagination ? this.renderWithPagination() : this.renderWithoutPagination()}
       </div>
@@ -95,7 +123,8 @@ TagList.propTypes = {
   onPaginationSelect: PropTypes.func,
   symbol: PropTypes.string,
   handleButtonClick: PropTypes.func,
-  withButtons: PropTypes.bool
+  withButtons: PropTypes.bool,
+  inSearch: PropTypes.bool
 };
 
 TagList.defaultProps = {

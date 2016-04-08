@@ -55,8 +55,10 @@ class TaggableUI extends Component {
       searchString,
       tagInView,
       queryType,
-      tagType
+      tagType,
+      inSearch
     } = this.props;
+    console.log('props', this.props);
     const searchPane = (
       <Col xs={3} md={3} className='col-centered'>
         <h1 className='searchTagTitle'>Search Tags</h1>
@@ -69,6 +71,7 @@ class TaggableUI extends Component {
               displayName: result.displayName
             };
           })}
+          inSearch={inSearch}
           selectedTagId={tagInView}
           searchString={searchString}
           pagination={{
@@ -185,7 +188,8 @@ TaggableUI.propTypes = {
   tagType: PropTypes.string,
   setTagTypeAndQueryType: PropTypes.func,
   saveConfiguration: PropTypes.func,
-  configurationSaved: PropTypes.bool
+  configurationSaved: PropTypes.bool,
+  inSearch: PropTypes.bool
 };
 
 export default TaggableUI;

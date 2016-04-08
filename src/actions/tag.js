@@ -25,11 +25,20 @@ export function setSelectedTagFromSearch (id) {
 }
 
 /*
+* Function to set the inSearch state to true to show a loading spinner while
+* results are being fetched
+*/
+
+export function busySearching () {
+  return { type: types.BUSY_SEARCHING };
+}
+
+/*
 * Function to save the retrieved results from graphql to redux store
 */
 
-export function setSearchResults (items) {
-  return { type: types.SET_SEARCH_RESULTS, items };
+export function setSearchResults (searchResults) {
+  return { type: types.SET_SEARCH_RESULTS, searchResults };
 }
 
 /*
@@ -45,11 +54,13 @@ export function setTagTypeAndQueryType (queryType, tagType) {
 
 export function fetchTags (searchString, start, size) {
   return (dispatch, getState) => {
+    dispatch(busySearching());
     const { taggable: { queryType, tagType } } = getState();
     return graphqlService.query(QUERY_SEARCH_TAGS, {id: searchString, queryType, tagType, start, size})
       .then(json => {
-        const items = json.data.taggable || [];
-        return dispatch(setSearchResults(items));
+        console.log('tags json', json);
+        const searchResults = json.data.taggable.items ? json.data.taggable : {total: 0, items: []};
+        return dispatch(setSearchResults(searchResults));
       });
   };
 }

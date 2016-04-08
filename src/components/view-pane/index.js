@@ -13,7 +13,7 @@ class ViewPane extends Component {
     };
   }
   renderTagContentHeader (item) {
-    console.log(item.location);
+    console.log('location', item.location);
     const tagContentHeader = (
       <div>
         <div>

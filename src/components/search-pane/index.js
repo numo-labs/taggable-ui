@@ -41,7 +41,8 @@ class SearchPane extends Component {
         onSubmit,
         queryType,
         tagType,
-        onFilterButtonClick
+        onFilterButtonClick,
+        inSearch
       },
       state: { modalVisible }
     } = this;
@@ -59,6 +60,7 @@ class SearchPane extends Component {
           queryType={queryType}
           tagType={tagType}
           onFilterButtonClick={onFilterButtonClick}
+          inSearch={inSearch}
         />
         <Button
           className='createTag'
@@ -82,7 +84,8 @@ SearchPane.propTypes = {
   pagination: PropTypes.object,
   queryType: PropTypes.string,
   tagType: PropTypes.string,
-  onFilterButtonClick: PropTypes.func
+  onFilterButtonClick: PropTypes.func,
+  inSearch: PropTypes.func
 };
 
 export default SearchPane;
