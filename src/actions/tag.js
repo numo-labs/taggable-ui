@@ -84,3 +84,11 @@ export function saveNewConfig () {
 export function saveConfiguration () {
   return { type: types.SAVE_CONFIGURATION };
 }
+
+/*
+* Function that will remove a specific value
+*/
+
+export function deleteValue (metaIndex, index) {
+  return { type: types.DELETE_VALUE, metaIndex, index };
+}

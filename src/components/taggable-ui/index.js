@@ -57,7 +57,6 @@ class TaggableUI extends Component {
       tagType,
       inSearch
     } = this.props;
-    console.log('props', this.props);
     const searchPane = (
       <Col xs={3} md={3} className='col-centered'>
         <h1 className='searchTagTitle'>Search Tags</h1>
@@ -123,8 +122,8 @@ class TaggableUI extends Component {
   }
 
   renderTagContent () {
-    const { tagInView } = this.props;
-
+    const { tagInView, deleteValue } = this.props;
+    console.log('>>>><<<<<<', tagInView);
     const tagContent = (
       <Col xs={6} md={6} className='col-centered'>
         <h1 className='tagContentTitle'>Tag Content</h1>
@@ -132,6 +131,7 @@ class TaggableUI extends Component {
           height={'35vh'}
           item={tagInView}
           items={this.renderLinkedTagList(tagInView.tags)}
+          onDeleteValue={deleteValue}
         />
       </Col>
     );
@@ -188,7 +188,8 @@ TaggableUI.propTypes = {
   setTagTypeAndQueryType: PropTypes.func,
   saveConfiguration: PropTypes.func,
   configurationSaved: PropTypes.bool,
-  inSearch: PropTypes.bool
+  inSearch: PropTypes.bool,
+  deleteValue: PropTypes.func
 };
 
 export default TaggableUI;
