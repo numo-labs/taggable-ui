@@ -9,12 +9,11 @@ class SearchList extends Component {
       onSubmit,
       onSearchStringChange,
       onTagClick,
-      selectedTagId,
+      selectedTagIds,
       searchString,
       pagination,
       symbol,
       handleButtonClick,
-      queryType,
       tagType,
       onFilterButtonClick,
       inSearch
@@ -25,7 +24,6 @@ class SearchList extends Component {
           onSubmit={onSubmit}
           onSearchStringChange={onSearchStringChange}
           searchString={searchString}
-          queryType={queryType}
           tagType={tagType}
           onFilterButtonClick={onFilterButtonClick}
         />
@@ -33,7 +31,7 @@ class SearchList extends Component {
           items={items}
           withButtons={false}
           onTagClick={onTagClick}
-          selectedTagId={selectedTagId}
+          selectedTagIds={selectedTagIds}
           pagination={pagination}
           symbol={symbol}
           handleButtonClick={handleButtonClick}
@@ -50,10 +48,10 @@ SearchList.propTypes = {
   searchString: PropTypes.string,
   items: PropTypes.array,
   onTagClick: PropTypes.func,
-  selectedTagId: PropTypes.string,
+  selectedTagIds: PropTypes.array,
   onSearchStringChange: PropTypes.func,
   pagination: PropTypes.object,
-  symbol: PropTypes.bool,
+  symbol: PropTypes.string,
   handleButtonClick: PropTypes.func,
   queryType: PropTypes.string,
   tagType: PropTypes.string,

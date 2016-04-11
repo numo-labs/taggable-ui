@@ -13,8 +13,8 @@ export function search () {
 /*
 * onChangeText function for the search input component
 */
-export function setSearchString (text) {
-  return { type: types.SET_SEARCH_STRING, text };
+export function setSearchString (text, option) {
+  return { type: types.SET_SEARCH_STRING, text, option };
 }
 
 /*
@@ -29,38 +29,57 @@ export function setSelectedTagFromSearch (id) {
 * results are being fetched
 */
 
-export function busySearching () {
-  return { type: types.BUSY_SEARCHING };
+export function busySearching (option) {
+  return { type: types.BUSY_SEARCHING, option };
+}
+
+/*
+* Function to add a parent linked tag to the currently selected tag
+*/
+
+export function addParentTag (id) {
+  return { type: types.ADD_PARENT_TAG, id };
+}
+
+/*
+* Function to remove a parent linked tag to the currently selected tag
+*/
+
+export function removeParentTag (id) {
+  return { type: types.REMOVE_PARENT_TAG, id };
 }
 
 /*
 * Function to save the retrieved results from graphql to redux store
 */
 
-export function setSearchResults (searchResults) {
-  return { type: types.SET_SEARCH_RESULTS, searchResults };
+export function setSearchResults (searchResults, option) {
+  return { type: types.SET_SEARCH_RESULTS, searchResults, option };
 }
 
 /*
 * Function to set the queryType and tagType of the query
 */
 
-export function setTagTypeAndQueryType (queryType, tagType) {
-  return { type: types.SET_TAG_TYPE_AND_QUERY_TYPE, tagType, queryType };
+export function setTagTypeAndQueryType (queryType, tagType, option) {
+  return { type: types.SET_TAG_TYPE_AND_QUERY_TYPE, tagType, queryType, option };
 }
 /*
 *  Function to retrieve tags based on a searchString, queryType and tagType
 */
 
-export function fetchTags (searchString, start, size) {
+export function fetchTags (start, size, option) {
   return (dispatch, getState) => {
-    dispatch(busySearching());
-    const { taggable: { queryType, tagType } } = getState();
+    dispatch(busySearching(option));
+    const state = getState().taggable;
+    const { queryType, tagType } = state;
+    const searchString = option === 'parent' ? state.parentTagSearchString : state.searchString;
+    console.log('searchString', searchString);
     return graphqlService.query(QUERY_SEARCH_TAGS, {id: searchString, queryType, tagType, start, size})
       .then(json => {
         console.log('tags json', json);
         const searchResults = json.data.taggable.items ? json.data.taggable : {total: 0, items: []};
-        return dispatch(setSearchResults(searchResults));
+        return dispatch(setSearchResults(searchResults, option));
       });
   };
 }

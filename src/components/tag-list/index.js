@@ -4,6 +4,7 @@ import { Pagination } from 'react-bootstrap';
 import { SymbolButton as Button } from '../button';
 import './styles.css';
 import Spinner from '../spinner';
+import _ from 'lodash';
 
 class TagList extends Component {
   constructor (props) {
@@ -67,7 +68,7 @@ class TagList extends Component {
       props: {
         items,
         onTagClick,
-        selectedTagId,
+        selectedTagIds,
         symbol,
         handleButtonClick,
         withButtons
@@ -81,13 +82,13 @@ class TagList extends Component {
            key={item.id}
            id={item.id}
            displayName={item.displayName}
-           selected={item.id === selectedTagId}
-           onClick={onTagClick}
+           selected={_.includes(selectedTagIds, item.id)}
+           onClick={() => onTagClick(item.id)}
           />
           { withButtons &&
             <Button
               className='redButton'
-              onHandleClick={handleButtonClick}
+              onClick={handleButtonClick.bind(null, item.id)}
               symbol={symbol}
             />
           }
@@ -103,7 +104,6 @@ class TagList extends Component {
         inSearch
       }
     } = this;
-    console.log('search', inSearch);
     return (
       <div>
         <div className='list scroll'>
@@ -118,7 +118,7 @@ class TagList extends Component {
 TagList.propTypes = {
   items: PropTypes.array,
   onTagClick: PropTypes.func,
-  selectedTagId: PropTypes.string,
+  selectedTagIds: PropTypes.array,
   pagination: PropTypes.object,
   onPaginationSelect: PropTypes.func,
   symbol: PropTypes.string,

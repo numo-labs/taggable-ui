@@ -6,24 +6,26 @@ function mapStateToProps (state) {
     taggable: {
       searchResults,
       tagInView,
-      searchString,
       linkedTags,
-      queryType,
-      tagType,
       configurationSaved,
-      inSearch
+      inSearch,
+      parentTagSearchResults,
+      inParentTagSearch,
+      tagType,
+      parentTagTagType
      }
    } = state;
 
   return {
     tagInView,
     searchResults,
-    searchString,
     linkedTags,
-    queryType,
-    tagType,
     configurationSaved,
-    inSearch
+    inSearch,
+    parentTagSearchResults,
+    inParentTagSearch,
+    tagType,
+    parentTagTagType
   };
 }
 
