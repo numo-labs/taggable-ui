@@ -12,7 +12,8 @@ class ViewPane extends Component {
       activeKey: 1
     };
   }
-  renderTagContentHeader (item) {
+  renderTagContentHeader () {
+    const { item } = this.props;
     const tagContentHeader = (
       <div>
         <div>
@@ -55,7 +56,8 @@ class ViewPane extends Component {
       });
     }
   }
-  renderMetadataContent (item, onDeleteValue, onAddValue, height) {
+  renderMetadataContent () {
+    const { item, onDeleteValue, onAddValue, height } = this.props;
     const handleOnAddValue = (index, value, valuesLength) => {
       onAddValue(index, value);
     };
@@ -90,7 +92,6 @@ class ViewPane extends Component {
     };
     const { addKeyValuePair, setNewKeyString, setNewValueString, newKey, newValue } = this.props;
     const disableButton = newKey.length > 0 && newValue.length > 0;
-    console.log('newKey =', newKey.length);
     const keyValueStyle = disableButton ? 'success' : 'default';
     const addButton = <Button disabled={!disableButton} className='keyValueButton' bsStyle={keyValueStyle} onClick={() => handleAddKeyValuePair(this.refs.newKey.getValue(), this.refs.newValue.getValue())} symbol={'+'}>+</Button>;
     const addNewKeyValue = (
@@ -124,9 +125,6 @@ class ViewPane extends Component {
   renderContent () {
     const {
       item,
-      onAddValue,
-      onDeleteValue,
-      height,
       items
     } = this.props;
     if (item) {
@@ -134,8 +132,8 @@ class ViewPane extends Component {
         return (
           <div>
             {this.renderTabs()}
-            {this.renderTagContentHeader(item)}
-            {this.renderMetadataContent(item, onDeleteValue, onAddValue, height)}
+            {this.renderTagContentHeader()}
+            {this.renderMetadataContent()}
             {this.renderAddNewKeyValue()}
           </div>
         );
