@@ -91,7 +91,8 @@ export default function taggable (state = initialState, action) {
       const addContentCopy = state.tagInView.metadata[action.index];
       const targetValuesArray = state.tagInView.metadata[action.index].values;
       const newValuesArray = [...targetValuesArray, action.value];
-      addMetadataCopy.splice(action.metaIndex, 1, {...addContentCopy, values: newValuesArray});
+      addMetadataCopy.splice(action.index, 1, {...addContentCopy, values: newValuesArray});
+      console.log('NEWMETADATA', addMetadataCopy);
       return {
         ...state,
         configurationSaved: false,

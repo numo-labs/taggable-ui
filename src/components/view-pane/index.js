@@ -58,12 +58,9 @@ class ViewPane extends Component {
   }
   renderMetadataContent () {
     const { item, onDeleteValue, onAddValue, height } = this.props;
-    const handleOnAddValue = (index, value, valuesLength) => {
-      onAddValue(index, value);
-    };
     if (item.metadata) {
       const metadataContent = item.metadata.map((content, index) => {
-        const addButton = <SymbolButton onHandleClick={() => handleOnAddValue(index, this.refs[index].getValue())} symbol={'+'} />;
+        const addButton = <SymbolButton onHandleClick={() => onAddValue(index, this.refs[index].getValue())} symbol={'+'} />;
         return (
           <Input key={content.key} wrapperClassName='wrapper' className='metaContent'>
             <Row>
