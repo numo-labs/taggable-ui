@@ -99,3 +99,27 @@ export function deleteValue (metaIndex, index) {
 export function addValue (index, value) {
   return { type: types.ADD_VALUE, index, value };
 }
+
+/*
+* Function that will add a key value pair to the metadata array
+*/
+
+export function addKeyValuePair (key, value) {
+  return { type: types.ADD_KEY_VALUE_PAIR, key, value };
+}
+
+/*
+* Function that will set the newKey string
+*/
+
+export function setNewKeyString (keyString) {
+  return { type: types.SET_NEW_KEY_STRING, keyString };
+}
+
+/*
+* Function that will set the newValue string
+*/
+
+export function setNewValueString (valueString) {
+  return { type: types.SET_NEW_VALUE_STRING, valueString };
+}

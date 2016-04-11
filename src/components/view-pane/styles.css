@@ -29,24 +29,24 @@
 .tagId {
   width: 30%;
   float: left;
-  margin-top: 2em;
 }
 
 .tagIdInput {
   display: inline-block;
   cursor: not-allowed;
   width: 24em;
-  margin-top: 2em;
 }
 
 .displayName {
   width: 30%;
   float: left;
+  margin-top: 2em;
 }
 
 .displayNameInput {
   display: inline-block;
   width: 24em;
+  margin-top: 2em;
 }
 
 .deleteButton {

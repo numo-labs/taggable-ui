@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { Input, Row, Col, Nav, NavItem } from 'react-bootstrap';
-import { SymbolButton as Button } from '../button';
+import { Input, Row, Col, Nav, NavItem, Button } from 'react-bootstrap';
+import { SymbolButton } from '../button';
 import LinkedTagsList from '../linked-tags-list';
 import SearchList from '../search-list';
 import './styles.css';
@@ -16,13 +16,14 @@ class ViewPane extends Component {
     const tagContentHeader = (
       <div>
         <div>
-          <h4 className='tagId'>ID:</h4>
-          <Input className='tagIdInput' type='text' disabled labelClassName='col-xs-9' wrapperClassName='col-xs-9' value={item._id} />
-        </div>
-        <div>
           <h4 className='displayName'>Display name:</h4>
           <Input className='displayNameInput' type='text' labelClassName='col-xs-9' wrapperClassName='col-xs-9' value={item.displayName}/>
         </div>
+        <div>
+          <h4 className='tagId'>ID:</h4>
+          <Input className='tagIdInput' type='text' disabled labelClassName='col-xs-9' wrapperClassName='col-xs-9' value={item._id} />
+        </div>
+
         <div>
           <h4 className='location'>Location:</h4>
           <Input className='locationInput' type='text' labelClassName='col-xs-9' wrapperClassName='col-xs-9' value={item.location}/>
@@ -40,28 +41,27 @@ class ViewPane extends Component {
     return tagContentHeader;
   }
   renderValues (content, metaIndex, onDeleteValue) {
+    const handleOnDeleteValue = (metaIndex, index) => {
+      onDeleteValue(metaIndex, index);
+    };
     if (content.values) {
       return content.values.map((value, index) => {
-        const deleteButton = <Button className='redButton' onHandleClick={() => onDeleteValue(metaIndex, index)} symbol={'x'} />;
+        const deleteButton = <SymbolButton className='redButton' onHandleClick={() => handleOnDeleteValue(metaIndex, index)} symbol={'x'} />;
         return (
             <div key={value} className='inputGroup'>
                 <Input type='text' className='form-control' value={value} buttonAfter={deleteButton}/>
             </div>
           );
       });
-    } else {
-      const addButton = <Button onHandleClick={onDeleteValue} symbol={'+'} />;
-      return (
-        <div key={metaIndex} className='inputGroup'>
-            <Input type='text' className='form-control' buttonAfter={addButton}/>
-        </div>
-      );
     }
   }
   renderMetadataContent (item, onDeleteValue, onAddValue, height) {
+    const handleOnAddValue = (index, value, valuesLength) => {
+      onAddValue(index, value);
+    };
     if (item.metadata) {
       const metadataContent = item.metadata.map((content, index) => {
-        const addButton = <Button onHandleClick={() => onAddValue(index, this.refs[index].getValue())} symbol={'+'} />;
+        const addButton = <SymbolButton onHandleClick={() => handleOnAddValue(index, this.refs[index].getValue())} symbol={'+'} />;
         return (
           <Input key={content.key} wrapperClassName='wrapper' className='metaContent'>
             <Row>
@@ -84,8 +84,15 @@ class ViewPane extends Component {
     }
     return;
   }
-  renderAddNewKeyValue (onButtonClick, onChange) {
-    const addButton = <Button onHandleClick={onButtonClick} symbol={'+'} />;
+  renderAddNewKeyValue () {
+    const handleAddKeyValuePair = (key, value) => {
+      addKeyValuePair(key, value);
+    };
+    const { addKeyValuePair, setNewKeyString, setNewValueString, newKey, newValue } = this.props;
+    const disableButton = newKey.length > 0 && newValue.length > 0;
+    console.log('newKey =', newKey.length);
+    const keyValueStyle = disableButton ? 'success' : 'default';
+    const addButton = <Button disabled={!disableButton} className='keyValueButton' bsStyle={keyValueStyle} onClick={() => handleAddKeyValuePair(this.refs.newKey.getValue(), this.refs.newValue.getValue())} symbol={'+'}>+</Button>;
     const addNewKeyValue = (
       <Row>
         <div className='keyValueContainer'>
@@ -93,10 +100,10 @@ class ViewPane extends Component {
           <div className='keyValueInput'>
           <Row>
             <Col xs={6}>
-              <Input type='text' onChange={onChange} className='form-control' placeholder='add new key' />
+              <Input type='text' onChange={(e) => setNewKeyString(e.target.value)} ref='newKey' className='form-control' placeholder='add new key' />
             </Col>
             <Col xs={6}>
-              <Input type='text' className='form-control addNewValue' placeholder='add value' buttonAfter={addButton}/>
+              <Input type='text' onChange={(e) => setNewValueString(e.target.value)} ref='newValue' className='form-control addNewValue' placeholder='add value' buttonAfter={addButton}/>
             </Col>
           </Row>
           </div>
@@ -119,8 +126,6 @@ class ViewPane extends Component {
       item,
       onAddValue,
       onDeleteValue,
-      onButtonClick,
-      onChange,
       height,
       items
     } = this.props;
@@ -131,7 +136,7 @@ class ViewPane extends Component {
             {this.renderTabs()}
             {this.renderTagContentHeader(item)}
             {this.renderMetadataContent(item, onDeleteValue, onAddValue, height)}
-            {this.renderAddNewKeyValue(onButtonClick, onChange)}
+            {this.renderAddNewKeyValue()}
           </div>
         );
       } else {
@@ -178,7 +183,13 @@ ViewPane.propTypes = {
   height: PropTypes.string,
   onChange: PropTypes.func,
   item: PropTypes.object,
-  items: PropTypes.array
+  items: PropTypes.array,
+  addKeyValuePair: PropTypes.func,
+  setNewKeyString: PropTypes.func,
+  setNewValueString: PropTypes.func,
+  newKey: PropTypes.string,
+  newValue: PropTypes.string,
+  removeKey: PropTypes.func
 };
 
 ViewPane.defaultProps = {

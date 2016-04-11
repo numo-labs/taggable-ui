@@ -122,7 +122,15 @@ class TaggableUI extends Component {
   }
 
   renderTagContent () {
-    const { tagInView, deleteValue, addValue } = this.props;
+    const { tagInView,
+      deleteValue,
+      addValue,
+      addKeyValuePair,
+      setNewKeyString,
+      setNewValueString,
+      newKey,
+      newValue
+    } = this.props;
     const tagContent = (
       <Col xs={6} md={6} className='col-centered'>
         <h1 className='tagContentTitle'>Tag Content</h1>
@@ -132,6 +140,11 @@ class TaggableUI extends Component {
           items={this.renderLinkedTagList(tagInView.tags)}
           onDeleteValue={deleteValue}
           onAddValue={addValue}
+          addKeyValuePair={addKeyValuePair}
+          setNewKeyString={setNewKeyString}
+          setNewValueString={setNewValueString}
+          newKey={newKey}
+          newValue={newValue}
         />
       </Col>
     );
@@ -190,7 +203,13 @@ TaggableUI.propTypes = {
   configurationSaved: PropTypes.bool,
   inSearch: PropTypes.bool,
   deleteValue: PropTypes.func,
-  addValue: PropTypes.func
+  addValue: PropTypes.func,
+  addKeyValuePair: PropTypes.func,
+  setNewKeyString: PropTypes.func,
+  setNewValueString: PropTypes.func,
+  newKey: PropTypes.string,
+  newValue: PropTypes.string,
+  removeKey: PropTypes.func
 };
 
 export default TaggableUI;

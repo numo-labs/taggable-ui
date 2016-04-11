@@ -11,7 +11,9 @@ function mapStateToProps (state) {
       queryType,
       tagType,
       configurationSaved,
-      inSearch
+      inSearch,
+      newKey,
+      newValue
      }
    } = state;
 
@@ -23,7 +25,9 @@ function mapStateToProps (state) {
     queryType,
     tagType,
     configurationSaved,
-    inSearch
+    inSearch,
+    newKey,
+    newValue
   };
 }
 
