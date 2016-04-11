@@ -58,7 +58,7 @@ class TaggableUI extends Component {
       inSearch
     } = this.props;
     const searchPane = (
-      <Col xs={3} md={3} className='col-centered'>
+      <Col xs={3} md={3} className='col-centered searchPaneContainer'>
         <h1 className='searchTagTitle'>Search Tags</h1>
         <SearchPane
           onSearchStringChange={this.onSearchStringChange.bind(this)}
