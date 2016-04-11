@@ -122,7 +122,8 @@ class TaggableUI extends Component {
   }
 
   renderTagContent () {
-    const { tagInView,
+    const {
+      tagInView,
       deleteValue,
       addValue,
       addKeyValuePair,
@@ -208,8 +209,7 @@ TaggableUI.propTypes = {
   setNewKeyString: PropTypes.func,
   setNewValueString: PropTypes.func,
   newKey: PropTypes.string,
-  newValue: PropTypes.string,
-  removeKey: PropTypes.func
+  newValue: PropTypes.string
 };
 
 export default TaggableUI;
