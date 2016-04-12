@@ -123,7 +123,10 @@ class TaggableUI extends Component {
       inParentTagSearch,
       addParentTag,
       removeParentTag,
-      parentTagTagType
+      parentTagTagType,
+      setSearchString,
+      fetchTags,
+      setTagTypeAndQueryType
     } = this.props;
     console.log('>>>><<<<<<', this.props);
     const tagContent = (
@@ -153,6 +156,9 @@ class TaggableUI extends Component {
           }}
           onSubmit={this.handleOnSubmit.bind(this, 'parent')}
           onFilterButtonClick={this.handleOnFilterButtonClick.bind(this, 'parent')}
+          setSearchString={setSearchString}
+          fetchTags={fetchTags}
+          setTagTypeAndQueryType={setTagTypeAndQueryType}
         />
       </Col>
     );

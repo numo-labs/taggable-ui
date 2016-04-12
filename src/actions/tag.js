@@ -12,6 +12,7 @@ export function search () {
 
 /*
 * onChangeText function for the search input component
+* option is either 'tag' or 'parent'
 */
 export function setSearchString (text, option) {
   return { type: types.SET_SEARCH_STRING, text, option };

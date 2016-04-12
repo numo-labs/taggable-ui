@@ -20,7 +20,7 @@ class LinkedTagsList extends Component {
            id={item.id}
            tagName={item.displayName}
            selected={item.id === selectedTagId}
-           onClick={handleTagClick}
+           onClick={() => handleTagClick(item.id)}
           />
           <Button
             className='redButton'

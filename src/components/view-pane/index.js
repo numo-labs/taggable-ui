@@ -191,6 +191,9 @@ class ViewPane extends Component {
       linkedTags,
       handleButtonClick,
       tagType
+      // fetchTags,
+      // setSearchString,
+      // setTagTypeAndQueryType
     } = this.props;
     if (item) {
       if (this.state.activeKey === 1) {
@@ -230,6 +233,7 @@ class ViewPane extends Component {
                   items={linkedTags}
                   symbol={'x'}
                   handleButtonClick={handleButtonClick}
+                  // handleTagClick={(id) => { setSearchString(id, 'tag'); setTagTypeAndQueryType('QUERY_ID', undefined, 'tag'); fetchTags(0, 10, 'tag'); }}
                 />
               </Col>
             </Row>
@@ -270,7 +274,10 @@ ViewPane.propTypes = {
   inSearch: PropTypes.bool,
   linkedTags: PropTypes.array,
   handleButtonClick: PropTypes.func,
-  tagType: PropTypes.string
+  tagType: PropTypes.string,
+  fetchTags: PropTypes.func,
+  setSearchString: PropTypes.func,
+  setTagTypeAndQueryType: PropTypes.func
 };
 
 ViewPane.defaultProps = {
