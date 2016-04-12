@@ -80,6 +80,7 @@ export default function taggable (state = initialState, action) {
       return {
         ...state,
         [action.option]: {
+          ...state[action.option],
           tagType: action.tagType,
           queryType: action.queryType
         }
