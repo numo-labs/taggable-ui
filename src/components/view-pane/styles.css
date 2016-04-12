@@ -98,7 +98,7 @@
 .keyValueContainer {
   margin: auto;
   margin-left: 2em;
-  margin-top: 2em;
+  margin-top: 0.5em;
   overflow-y: scroll;
   text-align: left;
 }
