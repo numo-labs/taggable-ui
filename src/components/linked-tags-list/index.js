@@ -9,7 +9,6 @@ class LinkedTagsList extends Component {
       items,
       handleButtonClick,
       handleTagClick,
-      withButtons,
       symbol,
       selectedTagId
     } = this.props;
@@ -21,9 +20,13 @@ class LinkedTagsList extends Component {
            id={item.id}
            tagName={item.displayName}
            selected={item.id === selectedTagId}
-           onClick={handleTagClick}
+           onClick={() => handleTagClick(item.id)}
           />
-           { withButtons && <Button className='redButton' onHandleClick={handleButtonClick} symbol={symbol} /> }
+          <Button
+            className='redButton'
+            onHandleClick={() => handleButtonClick(item.id)}
+            symbol={symbol}
+          />
         </div>
       );
     });

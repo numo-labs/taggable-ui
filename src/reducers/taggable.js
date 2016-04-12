@@ -8,6 +8,8 @@ import {
   SAVE_CONFIGURATION,
   BUSY_SEARCHING,
   DELETE_VALUE,
+  ADD_PARENT_TAG,
+  REMOVE_PARENT_TAG,
   ADD_VALUE,
   ADD_KEY_VALUE_PAIR,
   SET_NEW_KEY_STRING,
@@ -20,11 +22,18 @@ import {
 } from '../constants/action-types.js';
 
 export const initialState = {
-  searchResults: {
-    total: 0,
-    items: []
+  // state for search component in the search pane
+  tag: {
+    searchResults: {
+      total: 0,
+      items: []
+    },
+    linkedTags: [],
+    searchString: '',
+    tagType: null,
+    queryType: 'QUERY_DISPLAYNAME',
+    inSearch: false
   },
-  linkedTags: [],
   tagInView: {
     id: '',
     displayName: '',
@@ -38,8 +47,19 @@ export const initialState = {
   searchString: '',
   tagType: null,
   queryType: 'QUERY_DISPLAYNAME',
+  // state for parent search component inside the view pane
+  parent: {
+    searchResults: {
+      total: 0,
+      items: []
+    },
+    searchString: '',
+    inSearch: false,
+    tagType: null,
+    queryType: 'QUERY_DISPLAYNAME'
+  },
+  // state for the view pane
   configurationSaved: true,
-  inSearch: false,
   newKey: '',
   newValue: '',
   createMode: true
@@ -48,7 +68,7 @@ export const initialState = {
 export default function taggable (state = initialState, action) {
   switch (action.type) {
     case SET_SELECTED_TAG_FROM_SEARCH:
-      const item = _.find(state.searchResults.items, function (result) {
+      const item = _.find(state.tag.searchResults.items, function (result) {
         return result._id === action.id;
       });
       return {
@@ -59,24 +79,59 @@ export default function taggable (state = initialState, action) {
     case SET_SEARCH_STRING:
       return {
         ...state,
-        searchString: action.text
+        [action.option]: {
+          ...state[action.option],
+          searchString: action.text
+        }
       };
     case BUSY_SEARCHING:
       return {
         ...state,
-        inSearch: true
+        [action.option]: {
+          ...state[action.option],
+          inSearch: true
+        }
       };
     case SET_SEARCH_RESULTS:
       return {
         ...state,
-        searchResults: action.searchResults,
-        inSearch: false
+        [action.option]: {
+          ...state[action.option],
+          searchResults: action.searchResults,
+          inSearch: false
+        }
       };
     case SET_TAG_TYPE_AND_QUERY_TYPE:
       return {
         ...state,
-        queryType: action.queryType,
-        tagType: action.tagType
+        [action.option]: {
+          ...state[action.option],
+          tagType: action.tagType,
+          queryType: action.queryType
+        }
+      };
+    case ADD_PARENT_TAG:
+      const newParentTag = {
+        tagId: action.id,
+        source: 'taggable_ui',
+        active: true,
+        inherited: false
+      };
+      const tags = [...state.tagInView.tags, newParentTag];
+      return {
+        ...state,
+        tagInView: {
+          ...state.tagInView,
+          tags: _.uniqBy(tags, 'tagId') // prevent duplicate links
+        }
+      };
+    case REMOVE_PARENT_TAG:
+      return {
+        ...state,
+        tagInView: {
+          ...state.tagInView,
+          tags: state.tagInView.tags.filter(tag => tag.tagId !== action.id)
+        }
       };
     case SAVE_CONFIGURATION:
       return {

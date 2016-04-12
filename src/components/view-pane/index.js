@@ -45,9 +45,8 @@ class ViewPane extends Component {
             wrapperClassName='col-xs-9'
             onChange={(e) => updateId(e.target.value)}
             value={item._id}
-        />
+          />
         </div>
-
         <div>
             <h4 className='location'>Latitude:</h4>
             <Input
@@ -80,32 +79,32 @@ class ViewPane extends Component {
     );
     return tagContentHeader;
   }
-  renderValues (content, metaIndex, onDeleteValue) {
-    const handleOnDeleteValue = (metaIndex, index) => {
-      onDeleteValue(metaIndex, index);
-    };
+
+  renderValues (content, metaIndex) {
+    const { onDeleteValue } = this.props;
     if (content.values) {
       return content.values.map((value, index) => {
         const deleteButton = <SymbolButton
          className='redButton'
-         onHandleClick={() => handleOnDeleteValue(metaIndex, index)}
+         onHandleClick={() => onDeleteValue(metaIndex, index)}
          symbol={'x'}
         />;
         return (
-            <div key={value} className='inputGroup'>
-                <Input
-                 type='text'
-                 className='form-control'
-                 value={value}
-                 buttonAfter={deleteButton}
-                />
+            <div key={index} className='inputGroup'>
+              <Input
+               type='text'
+               className='form-control'
+               value={value}
+               buttonAfter={deleteButton}
+              />
             </div>
           );
       });
     }
   }
+
   renderMetadataContent () {
-    const { item, onDeleteValue, onAddValue, height } = this.props;
+    const { item, onAddValue, height } = this.props;
     if (item.metadata) {
       const metadataContent = item.metadata.map((content, index) => {
         const addButton = <SymbolButton
@@ -114,26 +113,26 @@ class ViewPane extends Component {
         />;
         return (
           <Input
-           key={content.key}
-           wrapperClassName='wrapper'
-           className='metaContent'
+            key={content.key}
+            wrapperClassName='wrapper'
+            className='metaContent'
           >
             <Row>
               <Col xs={6}>
                 <Input
-                 type='text'
-                 className='form-control'
-                 value={content.key}
+                  type='text'
+                  className='form-control'
+                  value={content.key}
                 />
               </Col>
               <Col xs={6}>
-                {this.renderValues(content, index, onDeleteValue)}
+                {this.renderValues(content, index)}
                 <Input
-                 ref={index}
-                 type='text'
-                 className='form-control'
-                 placeholder='add value'
-                 buttonAfter={addButton}
+                  ref={index}
+                  type='text'
+                  className='form-control'
+                  placeholder='add value'
+                  buttonAfter={addButton}
                 />
               </Col>
             </Row>
@@ -167,6 +166,7 @@ class ViewPane extends Component {
      bsStyle={keyValueStyle}
      onClick={() => handleAddKeyValuePair(this.refs.newKey.getValue(), this.refs.newValue.getValue())}
      symbol={'+'}>+</Button>;
+
     const addNewKeyValue = (
       <Row>
         <div className='keyValueContainer'>
@@ -175,21 +175,21 @@ class ViewPane extends Component {
           <Row>
             <Col xs={6}>
               <Input
-               type='text'
-               onChange={(e) => setNewKeyString(e.target.value)}
-               ref='newKey'
-               className='form-control'
-               placeholder='add new key'
+                type='text'
+                onChange={(e) => setNewKeyString(e.target.value)}
+                ref='newKey'
+                className='form-control'
+                placeholder='add new key'
               />
             </Col>
             <Col xs={6}>
               <Input
-               type='text'
-               onChange={(e) => setNewValueString(e.target.value)}
-               ref='newValue'
-               className='form-control addNewValue'
-               placeholder='add value'
-               buttonAfter={addButton}
+                type='text'
+                onChange={(e) => setNewValueString(e.target.value)}
+                ref='newValue'
+                className='form-control addNewValue'
+                placeholder='add value'
+                buttonAfter={addButton}
               />
             </Col>
           </Row>
@@ -216,7 +216,19 @@ class ViewPane extends Component {
   renderContent () {
     const {
       item,
-      items
+      onSearchStringChange,
+      onSubmit,
+      items,
+      onTagClick,
+      pagination,
+      onFilterButtonClick,
+      inSearch,
+      linkedTags,
+      handleButtonClick,
+      tagType
+      // fetchTags,
+      // setSearchString,
+      // setTagTypeAndQueryType
     } = this.props;
     if (item) {
       if (this.state.activeKey === 1) {
@@ -236,11 +248,28 @@ class ViewPane extends Component {
             <Row>
               <Col xs={6}>
                 <h3>Add Parent</h3>
-                <SearchList symbol={'+'} withButtons />
+                <SearchList
+                  symbol={'+'}
+                  withButtons
+                  onSearchStringChange={onSearchStringChange}
+                  onSubmit={onSubmit}
+                  items={items}
+                  onTagClick={onTagClick}
+                  pagination={pagination}
+                  onFilterButtonClick={onFilterButtonClick}
+                  inSearch={inSearch}
+                  selectedTagIds={linkedTags.map(tag => tag.id)}
+                  tagType={tagType}
+                />
               </Col>
               <Col xs={6}>
               <h3 className='parentListTitle'>Parent List</h3>
-                <LinkedTagsList items={items} symbol={'x'} />
+                <LinkedTagsList
+                  items={linkedTags}
+                  symbol={'x'}
+                  handleButtonClick={handleButtonClick}
+                  // handleTagClick={(id) => { setSearchString(id, 'tag'); setTagTypeAndQueryType(undefined, 'QUERY_ID', 'tag'); fetchTags(0, 10, 'tag'); }}
+                />
               </Col>
             </Row>
             </div>
@@ -273,6 +302,18 @@ ViewPane.propTypes = {
   onChange: PropTypes.func,
   item: PropTypes.object,
   items: PropTypes.array,
+  onSearchStringChange: PropTypes.func,
+  onSubmit: PropTypes.func,
+  onTagClick: PropTypes.func,
+  pagination: PropTypes.object,
+  onFilterButtonClick: PropTypes.func,
+  inSearch: PropTypes.bool,
+  linkedTags: PropTypes.array,
+  handleButtonClick: PropTypes.func,
+  tagType: PropTypes.string,
+  fetchTags: PropTypes.func,
+  setSearchString: PropTypes.func,
+  setTagTypeAndQueryType: PropTypes.func,
   addKeyValuePair: PropTypes.func,
   setNewKeyString: PropTypes.func,
   setNewValueString: PropTypes.func,

@@ -26,34 +26,41 @@ class TaggableUI extends Component {
           </Navbar.Brand>
         </div>
         <Nav className='saveButton' pullRight>
-          <NavItem><Button className='save' disabled={configurationSaved} bsStyle={buttonAbility} onClick={this.handleOnClick.bind(this)}>Save new configuration</Button></NavItem>
+          <NavItem>
+            <Button
+              className='save'
+              disabled={configurationSaved}
+              bsStyle={buttonAbility}
+              onClick={this.handleOnClick.bind(this)}
+            >
+              Save new configuration
+            </Button>
+          </NavItem>
         </Nav>
       </nav>
     );
     return navbar;
   }
-  onSearchStringChange (text) {
-    this.props.setSearchString(text);
+  onSearchStringChange (option, text) {
+    this.props.setSearchString(text, option);
   }
-  handleOnSubmit (text) {
-    this.props.setSearchString(text);
-    this.props.fetchTags(text, 0, 10);
+  handleOnSubmit (option, text) {
+    this.props.setSearchString(text, option);
+    this.props.fetchTags(0, 10, option);
   }
-  handlePagination (index) {
+  handlePagination (option, index) {
     const start = index * 10;
-    this.props.fetchTags(this.props.searchString, start, 10);
+    this.props.fetchTags(start, 10, option);
   }
-  handleOnFilterButtonClick (queryType, tagType) {
-    this.props.setTagTypeAndQueryType(queryType, tagType);
+  handleOnFilterButtonClick (option, queryType, tagType) {
+    this.props.setTagTypeAndQueryType(tagType, queryType, option);
   }
 
   renderSearchPane () {
     const {
       searchResults,
       setSelectedTagFromSearch,
-      searchString,
       tagInView,
-      queryType,
       tagType,
       inSearch,
       createMode
@@ -62,7 +69,7 @@ class TaggableUI extends Component {
       <Col xs={3} md={3} className='col-centered searchPaneContainer'>
         <h1 className='searchTagTitle'>Search Tags</h1>
         <SearchPane
-          onSearchStringChange={this.onSearchStringChange.bind(this)}
+          onSearchStringChange={this.onSearchStringChange.bind(this, 'tag')}
           onTagClick={setSelectedTagFromSearch}
           items={searchResults.items.map(result => {
             return {
@@ -71,25 +78,23 @@ class TaggableUI extends Component {
             };
           })}
           inSearch={inSearch}
-          selectedTagId={tagInView}
-          searchString={searchString}
+          selectedTagIds={[tagInView._id]}
           pagination={{
             numberOfItems: Math.ceil(searchResults.total / 10),
             maxButtons: 3,
-            onSelect: this.handlePagination.bind(this),
+            onSelect: this.handlePagination.bind(this, 'tag'),
             total: searchResults.total
           }}
-          onSubmit={this.handleOnSubmit.bind(this)}
-          queryType={queryType}
           tagType={tagType}
-          onFilterButtonClick={this.handleOnFilterButtonClick.bind(this)}
           createMode={createMode}
+          onSubmit={this.handleOnSubmit.bind(this, 'tag')}
+          onFilterButtonClick={this.handleOnFilterButtonClick.bind(this, 'tag')}
         />
       </Col>
     );
     return searchPane;
   }
-  renderLinkedTagList (tags) {
+  createLinkedTagsArray (tags) {
     if (tags) {
       return tags.map(result => {
         return {
@@ -100,11 +105,18 @@ class TaggableUI extends Component {
       return [];
     }
   }
-
   renderTagContent () {
     const {
       tagInView,
       deleteValue,
+      parentTagSearchResults,
+      inParentTagSearch,
+      addParentTag,
+      removeParentTag,
+      parentTagTagType,
+      setSearchString,
+      fetchTags,
+      setTagTypeAndQueryType,
       addValue,
       addKeyValuePair,
       setNewKeyString,
@@ -133,8 +145,30 @@ class TaggableUI extends Component {
         <ViewPane
           height={'32vh'}
           item={tagInView}
-          items={this.renderLinkedTagList(tagInView.tags)}
+          linkedTags={this.createLinkedTagsArray(tagInView.tags)}
           onDeleteValue={deleteValue}
+          onSearchStringChange={this.onSearchStringChange.bind(this, 'parent')}
+          onTagClick={addParentTag}
+          handleButtonClick={removeParentTag}
+          items={parentTagSearchResults.items.map(result => {
+            return {
+              id: result._id,
+              displayName: result.displayName
+            };
+          })}
+          tagType={parentTagTagType}
+          inSearch={inParentTagSearch}
+          pagination={{
+            numberOfItems: Math.ceil(parentTagSearchResults.total / 10),
+            maxButtons: 3,
+            onSelect: this.handlePagination.bind(this, 'parent'),
+            total: parentTagSearchResults.total
+          }}
+          onSubmit={this.handleOnSubmit.bind(this, 'parent')}
+          onFilterButtonClick={this.handleOnFilterButtonClick.bind(this, 'parent')}
+          setSearchString={setSearchString}
+          fetchTags={fetchTags}
+          setTagTypeAndQueryType={setTagTypeAndQueryType}
           onAddValue={addValue}
           addKeyValuePair={addKeyValuePair}
           setNewKeyString={setNewKeyString}
@@ -193,17 +227,20 @@ TaggableUI.propTypes = {
   search: PropTypes.func,
   setSelectedTagFromSearch: PropTypes.func,
   fetchTags: PropTypes.func,
-  searchString: PropTypes.string,
   linkedTags: PropTypes.array,
   searchLinkedTagDocument: PropTypes.func,
   setSearchString: PropTypes.func,
-  queryType: PropTypes.string,
-  tagType: PropTypes.string,
   setTagTypeAndQueryType: PropTypes.func,
   saveConfiguration: PropTypes.func,
   configurationSaved: PropTypes.bool,
   inSearch: PropTypes.bool,
   deleteValue: PropTypes.func,
+  parentTagSearchResults: PropTypes.object,
+  inParentTagSearch: PropTypes.bool,
+  addParentTag: PropTypes.func,
+  removeParentTag: PropTypes.func,
+  tagType: PropTypes.string,
+  parentTagTagType: PropTypes.string,
   addValue: PropTypes.func,
   addKeyValuePair: PropTypes.func,
   setNewKeyString: PropTypes.func,
