@@ -5,7 +5,7 @@ import ViewPane from '../../src/components/view-pane';
 import * as mockTags from '../../src/utils/mockTags';
 
 describe('Component', function () {
-  const wrapper = shallow(<ViewPane item={mockTags}/>);
+  const wrapper = shallow(<ViewPane newKey={''} newValue={''} item={mockTags}/>);
   const children = wrapper.children().nodes;
   describe('<ViewPane />', function () {
     it('should render our ViewPane component', function (done) {

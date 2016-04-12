@@ -9,11 +9,7 @@
   margin-right:-4px;
 }
 
-.col-centered:nth-child(1) {
-  border-right: 1px solid #d3d3d3
-}
-
-.col-centered:nth-child(2) {
+.searchPaneContainer {
   border-right: 1px solid #d3d3d3
 }
 

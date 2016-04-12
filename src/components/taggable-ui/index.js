@@ -57,9 +57,8 @@ class TaggableUI extends Component {
       tagType,
       inSearch
     } = this.props;
-    console.log('******', tagInView.metadata);
     const searchPane = (
-      <Col xs={3} md={3} className='col-centered'>
+      <Col xs={3} md={3} className='col-centered searchPaneContainer'>
         <h1 className='searchTagTitle'>Search Tags</h1>
         <SearchPane
           onSearchStringChange={this.onSearchStringChange.bind(this)}
@@ -123,8 +122,16 @@ class TaggableUI extends Component {
   }
 
   renderTagContent () {
-    const { tagInView, deleteValue } = this.props;
-    console.log('>>>><<<<<<', tagInView);
+    const {
+      tagInView,
+      deleteValue,
+      addValue,
+      addKeyValuePair,
+      setNewKeyString,
+      setNewValueString,
+      newKey,
+      newValue
+    } = this.props;
     const tagContent = (
       <Col xs={6} md={6} className='col-centered'>
         <h1 className='tagContentTitle'>Tag Content</h1>
@@ -133,6 +140,12 @@ class TaggableUI extends Component {
           item={tagInView}
           items={this.renderLinkedTagList(tagInView.tags)}
           onDeleteValue={deleteValue}
+          onAddValue={addValue}
+          addKeyValuePair={addKeyValuePair}
+          setNewKeyString={setNewKeyString}
+          setNewValueString={setNewValueString}
+          newKey={newKey}
+          newValue={newValue}
         />
       </Col>
     );
@@ -190,7 +203,13 @@ TaggableUI.propTypes = {
   saveConfiguration: PropTypes.func,
   configurationSaved: PropTypes.bool,
   inSearch: PropTypes.bool,
-  deleteValue: PropTypes.func
+  deleteValue: PropTypes.func,
+  addValue: PropTypes.func,
+  addKeyValuePair: PropTypes.func,
+  setNewKeyString: PropTypes.func,
+  setNewValueString: PropTypes.func,
+  newKey: PropTypes.string,
+  newValue: PropTypes.string
 };
 
 export default TaggableUI;

@@ -103,7 +103,6 @@ class TagList extends Component {
         inSearch
       }
     } = this;
-    console.log('search', inSearch);
     return (
       <div>
         <div className='list scroll'>
