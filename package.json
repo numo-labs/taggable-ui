@@ -4,13 +4,14 @@
   "description": "An effortless &amp; intuitive UI for the taggable (tagging) service. (React, Redux &amp; GraphQL)",
   "main": "src/index.js",
   "scripts": {
-    "test": "npm run lint && mocha test/**/*.test.js --compilers js:babel-register",
+    "test": "npm run lint && npm run coverage",
     "dev:serve": "webpack-dev-server --config ./webpack.config.js --hot --inline ",
     "build": "npm run clean && ./node_modules/.bin/webpack --config ./webpack.production.config.js",
     "lint": "semistandard",
     "nocov": "mocha test/**/*.test.js --compilers js:babel-register",
     "clean": "rm -rf public && mkdir -p public/",
-    "deploy": "gulp deploy"
+    "deploy": "gulp deploy",
+    "coverage": "./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha ./test/**/*.test.js --report lcov -- -R spec"
   },
   "pre-commit": [
     "test"
@@ -30,6 +31,8 @@
   "homepage": "https://github.com/numo-labs/taggable-ui#readme",
   "devDependencies": {
     "aws-sdk": "^2.2.48",
+    "babel-cli": "^6.7.5",
+    "babel-istanbul": "^0.6.0",
     "babel-core": "^6.7.4",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-object-rest-spread": "^6.6.5",
