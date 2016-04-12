@@ -42,7 +42,8 @@ class SearchPane extends Component {
         queryType,
         tagType,
         onFilterButtonClick,
-        inSearch
+        inSearch,
+        cleanSearchPane
       },
       state: { modalVisible }
     } = this;
@@ -61,10 +62,11 @@ class SearchPane extends Component {
           tagType={tagType}
           onFilterButtonClick={onFilterButtonClick}
           inSearch={inSearch}
+          cleanSearchPane={cleanSearchPane}
         />
         <Button
           className='createTag'
-          onClick={this.showModal}
+          onClick={ () => { cleanSearchPane(); this.showModal(); } }
           text='+ Create a new tag'
         />
         <Modal modalVisible={modalVisible} closeModal={this.closeModal} saveChanges={this.saveChanges}/>
@@ -85,7 +87,8 @@ SearchPane.propTypes = {
   queryType: PropTypes.string,
   tagType: PropTypes.string,
   onFilterButtonClick: PropTypes.func,
-  inSearch: PropTypes.func
+  inSearch: PropTypes.func,
+  cleanSearchPane: PropTypes.func
 };
 
 export default SearchPane;

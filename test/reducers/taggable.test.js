@@ -3,7 +3,8 @@ import taggable, { initialState } from '../../src/reducers/taggable.js';
 import { expect } from 'chai';
 import {
   SET_SELECTED_TAG_FROM_SEARCH,
-  SET_SEARCH_STRING
+  SET_SEARCH_STRING,
+  CLEAN_SEARCH_PANE
 } from '../../src/constants/action-types.js';
 
 const mockHotelSearchResults = {
@@ -77,6 +78,18 @@ describe('Reducers: Taggable', () => {
       ...initialState,
       tagInView: mockHotelSearchResults[1],
       linkedTags: []
+    };
+    expect(state).to.deep.equal(expectedState);
+    done();
+  });
+  it('action:CLEAN_SEARCH_PANE -> returns new state without searchResults', (done) => {
+    const state = taggable(undefined, {type: CLEAN_SEARCH_PANE});
+    const expectedState = {
+      ...initialState,
+      searchResults: {
+        total: 0,
+        items: []
+      }
     };
     expect(state).to.deep.equal(expectedState);
     done();

@@ -55,7 +55,8 @@ class TaggableUI extends Component {
       tagInView,
       queryType,
       tagType,
-      inSearch
+      inSearch,
+      cleanSearchPane
     } = this.props;
     const searchPane = (
       <Col xs={3} md={3} className='col-centered searchPaneContainer'>
@@ -82,6 +83,7 @@ class TaggableUI extends Component {
           queryType={queryType}
           tagType={tagType}
           onFilterButtonClick={this.handleOnFilterButtonClick.bind(this)}
+          cleanSearchPane={cleanSearchPane}
         />
       </Col>
     );
@@ -209,7 +211,8 @@ TaggableUI.propTypes = {
   setNewKeyString: PropTypes.func,
   setNewValueString: PropTypes.func,
   newKey: PropTypes.string,
-  newValue: PropTypes.string
+  newValue: PropTypes.string,
+  cleanSearchPane: PropTypes.func
 };
 
 export default TaggableUI;

@@ -123,3 +123,11 @@ export function setNewKeyString (keyString) {
 export function setNewValueString (valueString) {
   return { type: types.SET_NEW_VALUE_STRING, valueString };
 }
+
+/**
+ * Function that will clean the search results pane
+ */
+
+export function cleanSearchPane () {
+  return { type: types.CLEAN_SEARCH_PANE };
+}
