@@ -4,6 +4,7 @@ import ViewPane from '../view-pane';
 import SearchPane from '../search-pane';
 import { Col, Nav, NavItem, Navbar, Row, Grid } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
+import SavingNotificationModal from '../saving-notification-modal';
 
 require('./styles.css');
 import './css/normalize.css';
@@ -11,10 +12,28 @@ import './css/normalize.css';
 class TaggableUI extends Component {
   handleOnClick () {
     this.props.saveConfiguration();
+    this.showConfirmationModal();
+  }
+
+  constructor () {
+    super();
+    this.state = {
+      confirmationDialog: false
+    };
+    this.showConfirmationModal = this.showConfirmationModal.bind(this);
+    this.closeConfirmationModal = this.closeConfirmationModal.bind(this);
+  }
+
+  showConfirmationModal () {
+    this.setState({confirmationDialog: true});
+  }
+
+  closeConfirmationModal () {
+    this.setState({confirmationDialog: false});
   }
 
   renderNavbar () {
-    const { configurationSaved } = this.props;
+    const { props: { configurationSaved }, state: { confirmationDialog } } = this;
     const buttonAbility = configurationSaved ? 'default' : 'success';
     const navbar = (
       <nav className='navbar navbar-default navi'>
@@ -26,8 +45,14 @@ class TaggableUI extends Component {
           </Navbar.Brand>
         </div>
         <Nav className='saveButton' pullRight>
-          <NavItem><Button className='save' disabled={configurationSaved} bsStyle={buttonAbility} onClick={this.handleOnClick.bind(this)}>Save new configuration</Button></NavItem>
+          <NavItem>
+            <Button
+              className='save'
+              disabled={configurationSaved}
+              bsStyle={buttonAbility}
+              onClick={this.handleOnClick.bind(this)}>Save new configuration</Button></NavItem>
         </Nav>
+        <SavingNotificationModal modalVisible={confirmationDialog} closeModal={this.closeConfirmationModal}/>
       </nav>
     );
     return navbar;
@@ -212,7 +237,8 @@ TaggableUI.propTypes = {
   setNewValueString: PropTypes.func,
   newKey: PropTypes.string,
   newValue: PropTypes.string,
-  cleanSearchPane: PropTypes.func
+  cleanSearchPane: PropTypes.func,
+  displayDialog: PropTypes.bool
 };
 
 export default TaggableUI;
