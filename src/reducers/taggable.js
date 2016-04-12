@@ -9,7 +9,11 @@ import {
   BUSY_SEARCHING,
   DELETE_VALUE,
   ADD_PARENT_TAG,
-  REMOVE_PARENT_TAG
+  REMOVE_PARENT_TAG,
+  ADD_VALUE,
+  ADD_KEY_VALUE_PAIR,
+  SET_NEW_KEY_STRING,
+  SET_NEW_VALUE_STRING
 } from '../constants/action-types.js';
 
 export const initialState = {
@@ -38,7 +42,9 @@ export const initialState = {
   },
   // state for the view pane
   tagInView: {},
-  configurationSaved: true
+  configurationSaved: true,
+  newKey: '',
+  newValue: ''
 };
 
 export default function taggable (state = initialState, action) {
@@ -114,11 +120,16 @@ export default function taggable (state = initialState, action) {
         configurationSaved: true
       };
     case DELETE_VALUE:
+
       const metadataCopy = state.tagInView.metadata;
       const contentCopy = state.tagInView.metadata[action.metaIndex];
       const newValues = contentCopy.values;
-      newValues.splice(action.index, 1);
-      metadataCopy.splice(action.metaIndex, 1, {...contentCopy, values: newValues});
+      if (newValues.length === 1) {
+        metadataCopy.splice(action.metaIndex, 1);
+      } else {
+        newValues.splice(action.index, 1);
+        metadataCopy.splice(action.metaIndex, 1, {...contentCopy, values: newValues});
+      }
       return {
         ...state,
         configurationSaved: false,
@@ -126,6 +137,45 @@ export default function taggable (state = initialState, action) {
           ...state.tagInView,
           metadata: metadataCopy
         }
+      };
+    case ADD_VALUE:
+      const addMetadataCopy = state.tagInView.metadata;
+      const addContentCopy = state.tagInView.metadata[action.index];
+      const targetValuesArray = state.tagInView.metadata[action.index].values;
+      const newValuesArray = [...targetValuesArray, action.value];
+      addMetadataCopy.splice(action.index, 1, {...addContentCopy, values: newValuesArray});
+      return {
+        ...state,
+        configurationSaved: false,
+        tagInView: {
+          ...state.tagInView,
+          metadata: addMetadataCopy
+        }
+      };
+    case ADD_KEY_VALUE_PAIR:
+      const metaCopy = state.tagInView.metadata;
+      const newKeyValue = {
+        key: action.key,
+        values: [action.value]
+      };
+      const newMeta = [...metaCopy, newKeyValue];
+      return {
+        ...state,
+        configurationSaved: false,
+        tagInView: {
+          ...state.tagInView,
+          metadata: newMeta
+        }
+      };
+    case SET_NEW_KEY_STRING:
+      return {
+        ...state,
+        newKey: action.keyString
+      };
+    case SET_NEW_VALUE_STRING:
+      return {
+        ...state,
+        newValue: action.valueString
       };
     default:
       return state;

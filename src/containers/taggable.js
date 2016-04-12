@@ -16,7 +16,9 @@ function mapStateToProps (state) {
         tagType: parentTagTagType
       },
       tagInView,
-      configurationSaved
+      configurationSaved,
+      newKey,
+      newValue
      }
    } = state;
 
@@ -29,7 +31,9 @@ function mapStateToProps (state) {
     parentTagSearchResults,
     inParentTagSearch,
     tagType,
-    parentTagTagType
+    parentTagTagType,
+    newKey,
+    newValue
   };
 }
 

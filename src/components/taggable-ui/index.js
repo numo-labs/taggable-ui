@@ -65,7 +65,7 @@ class TaggableUI extends Component {
       tagType
     } = this.props;
     const searchPane = (
-      <Col xs={3} md={3} className='col-centered'>
+      <Col xs={3} md={3} className='col-centered searchPaneContainer'>
         <h1 className='searchTagTitle'>Search Tags</h1>
         <SearchPane
           onSearchStringChange={this.onSearchStringChange.bind(this, 'tag')}
@@ -135,7 +135,13 @@ class TaggableUI extends Component {
       parentTagTagType,
       setSearchString,
       fetchTags,
-      setTagTypeAndQueryType
+      setTagTypeAndQueryType,
+      addValue,
+      addKeyValuePair,
+      setNewKeyString,
+      setNewValueString,
+      newKey,
+      newValue
     } = this.props;
     const tagContent = (
       <Col xs={6} md={6} className='col-centered'>
@@ -167,6 +173,12 @@ class TaggableUI extends Component {
           setSearchString={setSearchString}
           fetchTags={fetchTags}
           setTagTypeAndQueryType={setTagTypeAndQueryType}
+          onAddValue={addValue}
+          addKeyValuePair={addKeyValuePair}
+          setNewKeyString={setNewKeyString}
+          setNewValueString={setNewValueString}
+          newKey={newKey}
+          newValue={newValue}
         />
       </Col>
     );
@@ -227,7 +239,13 @@ TaggableUI.propTypes = {
   addParentTag: PropTypes.func,
   removeParentTag: PropTypes.func,
   tagType: PropTypes.string,
-  parentTagTagType: PropTypes.string
+  parentTagTagType: PropTypes.string,
+  addValue: PropTypes.func,
+  addKeyValuePair: PropTypes.func,
+  setNewKeyString: PropTypes.func,
+  setNewValueString: PropTypes.func,
+  newKey: PropTypes.string,
+  newValue: PropTypes.string
 };
 
 export default TaggableUI;
