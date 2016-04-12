@@ -233,7 +233,7 @@ class ViewPane extends Component {
                   items={linkedTags}
                   symbol={'x'}
                   handleButtonClick={handleButtonClick}
-                  // handleTagClick={(id) => { setSearchString(id, 'tag'); setTagTypeAndQueryType('QUERY_ID', undefined, 'tag'); fetchTags(0, 10, 'tag'); }}
+                  // handleTagClick={(id) => { setSearchString(id, 'tag'); setTagTypeAndQueryType(undefined, 'QUERY_ID', 'tag'); fetchTags(0, 10, 'tag'); }}
                 />
               </Col>
             </Row>

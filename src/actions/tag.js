@@ -71,14 +71,14 @@ export function setSearchResults (searchResults, option) {
 
 /**
 * Function to set the queryType and tagType of the query
-* @param {String} - queryType e.g. QUERY_ID, QUERY_DISPLAYNAME
 * @param (String) - tagType e.g. 'GEO', 'MARKETING', 'AMENITY'
+* @param {String} - queryType e.g. QUERY_ID, QUERY_DISPLAYNAME
 * @param {String} - option is either 'tag' or 'parent'. This corresponds to the
 * search field in either the search pane (search for a 'tag'), or the view-pane
 * (search for a 'parent' tag)
 */
 
-export function setTagTypeAndQueryType (queryType, tagType, option) {
+export function setTagTypeAndQueryType (tagType, queryType, option) {
   return { type: types.SET_TAG_TYPE_AND_QUERY_TYPE, tagType, queryType, option };
 }
 

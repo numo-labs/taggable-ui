@@ -26,7 +26,16 @@ class TaggableUI extends Component {
           </Navbar.Brand>
         </div>
         <Nav className='saveButton' pullRight>
-          <NavItem><Button className='save' disabled={configurationSaved} bsStyle={buttonAbility} onClick={this.handleOnClick.bind(this)}>Save new configuration</Button></NavItem>
+          <NavItem>
+            <Button
+              className='save'
+              disabled={configurationSaved}
+              bsStyle={buttonAbility}
+              onClick={this.handleOnClick.bind(this)}
+            >
+              Save new configuration
+            </Button>
+          </NavItem>
         </Nav>
       </nav>
     );
@@ -44,7 +53,7 @@ class TaggableUI extends Component {
     this.props.fetchTags(start, 10, option);
   }
   handleOnFilterButtonClick (option, queryType, tagType) {
-    this.props.setTagTypeAndQueryType(queryType, tagType, option);
+    this.props.setTagTypeAndQueryType(tagType, queryType, option);
   }
 
   renderSearchPane () {
@@ -128,7 +137,6 @@ class TaggableUI extends Component {
       fetchTags,
       setTagTypeAndQueryType
     } = this.props;
-    console.log('>>>><<<<<<', this.props);
     const tagContent = (
       <Col xs={6} md={6} className='col-centered'>
         <h1 className='tagContentTitle'>Tag Content</h1>
