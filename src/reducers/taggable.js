@@ -13,35 +13,38 @@ import {
 } from '../constants/action-types.js';
 
 export const initialState = {
-  searchResults: {
-    total: 0,
-    items: []
+  // state for search component in the search pane
+  tag: {
+    searchResults: {
+      total: 0,
+      items: []
+    },
+    linkedTags: [],
+    searchString: '',
+    tagType: null,
+    queryType: 'QUERY_DISPLAYNAME',
+    inSearch: false
   },
-  linkedTags: [],
+  // state for parent search component inside the view pane
+  parent: {
+    searchResults: {
+      total: 0,
+      items: []
+    },
+    searchString: '',
+    inSearch: false,
+    tagType: null,
+    queryType: 'QUERY_DISPLAYNAME'
+  },
+  // state for the view pane
   tagInView: {},
-  searchString: '',
-  tagType: null,
-  queryType: 'QUERY_DISPLAYNAME',
-  configurationSaved: true,
-  inSearch: false,
-  // state fpr parent search component inside the view pane
-  parentTagSearchResults: {
-    total: 0,
-    items: []
-  },
-  parentTagSearchString: '',
-  inParentTagSearch: false,
-  parentTagTagType: null,
-  parentTagQueryType: 'QUERY_DISPLAYNAME'
+  configurationSaved: true
 };
 
 export default function taggable (state = initialState, action) {
-  const tagInView = state.tagInView;
-  const searchState = action.option === 'parent' ? 'inParentTagSearch' : 'inSearch';
-
   switch (action.type) {
     case SET_SELECTED_TAG_FROM_SEARCH:
-      const item = _.find(state.searchResults.items, function (result) {
+      const item = _.find(state.tag.searchResults.items, function (result) {
         return result._id === action.id;
       });
       return {
@@ -49,30 +52,37 @@ export default function taggable (state = initialState, action) {
         tagInView: item
       };
     case SET_SEARCH_STRING:
-      const searchStringState = action.option === 'parent' ? 'parentTagSearchString' : 'searchString';
       return {
         ...state,
-        [searchStringState]: action.text
+        [action.option]: {
+          ...state[action.option],
+          searchString: action.text
+        }
       };
     case BUSY_SEARCHING:
       return {
         ...state,
-        [searchState]: true
+        [action.option]: {
+          ...state[action.option],
+          inSearch: true
+        }
       };
     case SET_SEARCH_RESULTS:
-      const searchResultsState = action.option === 'parent' ? 'parentTagSearchResults' : 'searchResults';
       return {
         ...state,
-        [searchResultsState]: action.searchResults,
-        [searchState]: false
+        [action.option]: {
+          ...state[action.option],
+          searchResults: action.searchResults,
+          inSearch: false
+        }
       };
     case SET_TAG_TYPE_AND_QUERY_TYPE:
-      const tagTypeState = action.option === 'parent' ? 'parentTagTagType' : 'tagType';
-      const queryTypeState = action.option === 'parent' ? 'parentTagQueryType' : 'queryType';
       return {
         ...state,
-        [queryTypeState]: action.queryType,
-        [tagTypeState]: action.tagType
+        [action.option]: {
+          tagType: action.tagType,
+          queryType: action.queryType
+        }
       };
     case ADD_PARENT_TAG:
       const newParentTag = {
@@ -81,7 +91,7 @@ export default function taggable (state = initialState, action) {
         active: true,
         inherited: false
       };
-      const tags = [...tagInView.tags, newParentTag];
+      const tags = [...state.tagInView.tags, newParentTag];
       return {
         ...state,
         tagInView: {

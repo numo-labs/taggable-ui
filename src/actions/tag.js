@@ -72,8 +72,8 @@ export function fetchTags (start, size, option) {
   return (dispatch, getState) => {
     dispatch(busySearching(option));
     const state = getState().taggable;
-    const { queryType, tagType } = state;
-    const searchString = option === 'parent' ? state.parentTagSearchString : state.searchString;
+    const { tag: { queryType, tagType } } = state;
+    const searchString = state[option].searchString;
     console.log('searchString', searchString);
     return graphqlService.query(QUERY_SEARCH_TAGS, {id: searchString, queryType, tagType, start, size})
       .then(json => {

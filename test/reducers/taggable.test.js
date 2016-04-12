@@ -66,17 +66,16 @@ describe('Reducers: Taggable', () => {
     expect(state).to.deep.equal(initialState);
     done();
   });
-  it('action:SET_SEARCH_STRING -> returns a new state with the searchTerm and searchResults', (done) => {
-    const state = taggable(undefined, {type: SET_SEARCH_STRING, text: 'hotel'});
-    expect(state).to.deep.equal({...initialState, searchString: 'hotel'});
+  it('action:SET_SEARCH_STRING -> returns a new state with the searchString set for the tag or parent depending on the option ariable', (done) => {
+    const state = taggable(undefined, {type: SET_SEARCH_STRING, text: 'hotel', option: 'tag'});
+    expect(state).to.deep.equal({...initialState, tag: {...initialState.tag, searchString: 'hotel'}});
     done();
   });
-  it('action:SET_SELECTED_TAG_FROM_SEARCH -> returns new state with a tag object set to tagInView and linkedTags', (done) => {
+  it('action:SET_SELECTED_TAG_FROM_SEARCH -> returns new state with a tag object set to tagInView', (done) => {
     const state = taggable(undefined, {type: SET_SELECTED_TAG_FROM_SEARCH, tagID: 'hotel:NE.wvHotelPartId.678910'});
     const expectedState = {
       ...initialState,
-      tagInView: mockHotelSearchResults[1],
-      linkedTags: []
+      tagInView: mockHotelSearchResults[1]
     };
     expect(state).to.deep.equal(expectedState);
     done();
