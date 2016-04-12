@@ -65,7 +65,11 @@ class SearchPane extends Component {
           onClick={this.showModal}
           text='+ Create a new tag'
         />
-        <Modal modalVisible={modalVisible} closeModal={this.closeModal} saveChanges={this.saveChanges}/>
+        <Modal
+          modalVisible={modalVisible}
+          closeModal={this.closeModal}
+          saveChanges={this.saveChanges}
+        />
       </div>
     );
   }
