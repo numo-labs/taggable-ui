@@ -12,7 +12,11 @@ import {
   ADD_KEY_VALUE_PAIR,
   SET_NEW_KEY_STRING,
   SET_NEW_VALUE_STRING,
-  EMPTY_TAG_IN_VIEW
+  EMPTY_TAG_IN_VIEW,
+  UPDATE_DISPLAYNAME,
+  UPDATE_ID,
+  UPDATE_LATITUDE,
+  UPDATE_LONGITUDE
 } from '../constants/action-types.js';
 
 export const initialState = {
@@ -24,7 +28,10 @@ export const initialState = {
   tagInView: {
     id: '',
     displayName: '',
-    location: '',
+    location: {
+      lat: '',
+      lon: ''
+    },
     metadata: [],
     tags: []
   },
@@ -139,6 +146,44 @@ export default function taggable (state = initialState, action) {
         ...state,
         tagInView: initialState.tagInView,
         createMode: true
+      };
+    case UPDATE_DISPLAYNAME:
+      return {
+        ...state,
+        tagInView: {
+          ...state.tagInView,
+          displayName: action.displayName
+        }
+      };
+    case UPDATE_ID:
+      return {
+        ...state,
+        tagInView: {
+          ...state.tagInView,
+          id: action.id
+        }
+      };
+    case UPDATE_LATITUDE:
+      return {
+        ...state,
+        tagInView: {
+          ...state.tagInView,
+          location: {
+            ...state.tagInView.location,
+            lat: action.latitude
+          }
+        }
+      };
+    case UPDATE_LONGITUDE:
+      return {
+        ...state,
+        tagInView: {
+          ...state.tagInView,
+          location: {
+            ...state.tagInView.location,
+            lon: action.longitude
+          }
+        }
       };
     default:
       return state;

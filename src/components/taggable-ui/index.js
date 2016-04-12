@@ -112,7 +112,11 @@ class TaggableUI extends Component {
       newKey,
       newValue,
       createMode,
-      emptyTagInView
+      emptyTagInView,
+      updateDisplayName,
+      updateId,
+      updateLatitude,
+      updateLongitude
     } = this.props;
     const tagTitle = createMode ? 'Create a New Tag' : 'Tag Content';
     const h1Class = createMode ? 'tagContentTitle' : 'tagContentWithoutButton';
@@ -127,7 +131,7 @@ class TaggableUI extends Component {
             />}
           </div>
         <ViewPane
-          height={'35vh'}
+          height={'32vh'}
           item={tagInView}
           items={this.renderLinkedTagList(tagInView.tags)}
           onDeleteValue={deleteValue}
@@ -138,6 +142,10 @@ class TaggableUI extends Component {
           newKey={newKey}
           newValue={newValue}
           createMode={createMode}
+          updateDisplayName={updateDisplayName}
+          updateId={updateId}
+          updateLongitude={updateLongitude}
+          updateLatitude={updateLatitude}
         />
       </Col>
     );
@@ -203,7 +211,11 @@ TaggableUI.propTypes = {
   newKey: PropTypes.string,
   newValue: PropTypes.string,
   createMode: PropTypes.bool,
-  emptyTagInView: PropTypes.func
+  emptyTagInView: PropTypes.func,
+  updateDisplayName: PropTypes.func,
+  updateId: PropTypes.func,
+  updateLatitude: PropTypes.func,
+  updateLongitude: PropTypes.func
 };
 
 export default TaggableUI;

@@ -13,7 +13,15 @@ class ViewPane extends Component {
     };
   }
   renderTagContentHeader () {
-    const { item, createMode } = this.props;
+    const {
+       item,
+       createMode,
+       updateDisplayName,
+       updateId,
+       updateLatitude,
+       updateLongitude
+      } = this.props;
+    console.log('TAG_IN_VIEW', item.location);
     const tagContentHeader = (
       <div>
         <div>
@@ -23,6 +31,7 @@ class ViewPane extends Component {
             type='text'
             labelClassName='col-xs-9'
             wrapperClassName='col-xs-9'
+            onChange={(e) => updateDisplayName(e.target.value)}
             value={item.displayName}
           />
         </div>
@@ -34,19 +43,30 @@ class ViewPane extends Component {
             disabled={!createMode}
             labelClassName='col-xs-9'
             wrapperClassName='col-xs-9'
+            onChange={(e) => updateId(e.target.value)}
             value={item._id}
         />
         </div>
 
         <div>
-          <h4 className='location'>Location:</h4>
-          <Input
-            className='locationInput'
-            type='text'
-            labelClassName='col-xs-9'
-            wrapperClassName='col-xs-9'
-            value={item.location}
-          />
+            <h4 className='location'>Latitude:</h4>
+            <Input
+              className='locationInput'
+              type='text'
+              labelClassName='col-xs-9'
+              wrapperClassName='col-xs-9'
+              onChange={(e) => updateLatitude(e.target.value)}
+            />
+        </div>
+        <div>
+            <h4 className='location'>Longitude:</h4>
+            <Input
+              className='locationInput'
+              type='text'
+              labelClassName='col-xs-9'
+              wrapperClassName='col-xs-9'
+              onChange={(e) => updateLongitude(e.target.value)}
+            />
         </div>
         <Row>
           <Col xs={2}>
@@ -259,7 +279,11 @@ ViewPane.propTypes = {
   newKey: PropTypes.string,
   newValue: PropTypes.string,
   removeKey: PropTypes.func,
-  createMode: PropTypes.bool
+  createMode: PropTypes.bool,
+  updateDisplayName: PropTypes.func,
+  updateId: PropTypes.func,
+  updateLatitude: PropTypes.func,
+  updateLongitude: PropTypes.func
 };
 
 ViewPane.defaultProps = {

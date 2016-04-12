@@ -131,3 +131,35 @@ export function setNewValueString (valueString) {
 export function emptyTagInView () {
   return { type: types.EMPTY_TAG_IN_VIEW };
 }
+
+/*
+* Function that will update the displayName
+*/
+
+export function updateDisplayName (displayName) {
+  return { type: types.UPDATE_DISPLAYNAME, displayName };
+}
+
+/*
+* Function that will update the tag id
+*/
+
+export function updateId (id) {
+  return { type: types.UPDATE_ID, id };
+}
+
+/*
+* Function that will update the tag latitude
+*/
+
+export function updateLatitude (latitude) {
+  return { type: types.UPDATE_LATITUDE, latitude };
+}
+
+/*
+* Function that will update the tag longitude
+*/
+
+export function updateLongitude (longitude) {
+  return { type: types.UPDATE_LONGITUDE, longitude };
+}

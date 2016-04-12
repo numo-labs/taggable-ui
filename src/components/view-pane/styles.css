@@ -55,6 +55,7 @@
 .location {
   width: 30%;
   float: left;
+  display: inline-block;
 }
 
 .locationInput {
