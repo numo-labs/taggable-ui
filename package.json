@@ -32,6 +32,7 @@
   "devDependencies": {
     "aws-sdk": "^2.2.48",
     "babel-cli": "^6.7.5",
+    "babel-istanbul": "^0.6.0",
     "babel-core": "^6.7.4",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-object-rest-spread": "^6.6.5",
