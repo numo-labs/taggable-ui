@@ -13,7 +13,8 @@ function mapStateToProps (state) {
       configurationSaved,
       inSearch,
       newKey,
-      newValue
+      newValue,
+      createMode
      }
    } = state;
 
@@ -27,7 +28,8 @@ function mapStateToProps (state) {
     configurationSaved,
     inSearch,
     newKey,
-    newValue
+    newValue,
+    createMode
   };
 }
 

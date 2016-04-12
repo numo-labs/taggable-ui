@@ -76,7 +76,8 @@ describe('Reducers: Taggable', () => {
     const expectedState = {
       ...initialState,
       tagInView: mockHotelSearchResults[1],
-      linkedTags: []
+      linkedTags: [],
+      createMode: false
     };
     expect(state).to.deep.equal(expectedState);
     done();

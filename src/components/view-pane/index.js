@@ -13,7 +13,7 @@ class ViewPane extends Component {
     };
   }
   renderTagContentHeader () {
-    const { item } = this.props;
+    const { item, createMode } = this.props;
     const tagContentHeader = (
       <div>
         <div>
@@ -31,7 +31,7 @@ class ViewPane extends Component {
           <Input
             className='tagIdInput'
             type='text'
-            disabled
+            disabled={!createMode}
             labelClassName='col-xs-9'
             wrapperClassName='col-xs-9'
             value={item._id}
@@ -258,7 +258,8 @@ ViewPane.propTypes = {
   setNewValueString: PropTypes.func,
   newKey: PropTypes.string,
   newValue: PropTypes.string,
-  removeKey: PropTypes.func
+  removeKey: PropTypes.func,
+  createMode: PropTypes.bool
 };
 
 ViewPane.defaultProps = {

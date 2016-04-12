@@ -11,7 +11,8 @@ import {
   ADD_VALUE,
   ADD_KEY_VALUE_PAIR,
   SET_NEW_KEY_STRING,
-  SET_NEW_VALUE_STRING
+  SET_NEW_VALUE_STRING,
+  EMPTY_TAG_IN_VIEW
 } from '../constants/action-types.js';
 
 export const initialState = {
@@ -20,14 +21,21 @@ export const initialState = {
     items: []
   },
   linkedTags: [],
-  tagInView: {},
+  tagInView: {
+    id: '',
+    displayName: '',
+    location: '',
+    metadata: [],
+    tags: []
+  },
   searchString: '',
   tagType: null,
   queryType: 'QUERY_DISPLAYNAME',
   configurationSaved: true,
   inSearch: false,
   newKey: '',
-  newValue: ''
+  newValue: '',
+  createMode: true
 };
 
 export default function taggable (state = initialState, action) {
@@ -38,7 +46,8 @@ export default function taggable (state = initialState, action) {
       });
       return {
         ...state,
-        tagInView: item
+        tagInView: item,
+        createMode: false
       };
     case SET_SEARCH_STRING:
       return {
@@ -124,6 +133,12 @@ export default function taggable (state = initialState, action) {
       return {
         ...state,
         newValue: action.valueString
+      };
+    case EMPTY_TAG_IN_VIEW:
+      return {
+        ...state,
+        tagInView: initialState.tagInView,
+        createMode: true
       };
     default:
       return state;

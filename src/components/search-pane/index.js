@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 
-import { AddTagButton as Button } from '../button';
 import Modal from '../create-tag-modal';
 import SearchList from '../search-list';
 
@@ -62,12 +61,11 @@ class SearchPane extends Component {
           onFilterButtonClick={onFilterButtonClick}
           inSearch={inSearch}
         />
-        <Button
-          className='createTag'
-          onClick={this.showModal}
-          text='+ Create a new tag'
+        <Modal
+         modalVisible={modalVisible}
+         closeModal={this.closeModal}
+         saveChanges={this.saveChanges}
         />
-        <Modal modalVisible={modalVisible} closeModal={this.closeModal} saveChanges={this.saveChanges}/>
       </div>
     );
   }

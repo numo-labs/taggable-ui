@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import LinkedTags from '../linked-tags';
 import ViewPane from '../view-pane';
 import SearchPane from '../search-pane';
 import { Col, Nav, NavItem, Navbar, Row, Grid } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
+import { AddTagButton } from '../button';
 
 require('./styles.css');
 import './css/normalize.css';
@@ -55,7 +55,8 @@ class TaggableUI extends Component {
       tagInView,
       queryType,
       tagType,
-      inSearch
+      inSearch,
+      createMode
     } = this.props;
     const searchPane = (
       <Col xs={3} md={3} className='col-centered searchPaneContainer'>
@@ -82,6 +83,7 @@ class TaggableUI extends Component {
           queryType={queryType}
           tagType={tagType}
           onFilterButtonClick={this.handleOnFilterButtonClick.bind(this)}
+          createMode={createMode}
         />
       </Col>
     );
@@ -98,28 +100,6 @@ class TaggableUI extends Component {
       return [];
     }
   }
-  renderLinkedTags () {
-    const {
-      searchResults,
-      search,
-      searchString,
-      tagInView
-    } = this.props;
-    const tagLinks = (
-      <Col xs={3} md={3} className='col-centered'>
-        <h1 className='linkedTitle title'>Linked Tags</h1>
-        <LinkedTags
-          items={this.renderLinkedTagList(tagInView.tags)}
-          onSearchSubmit={search}
-          onTagClick={this.handleOnSubmit.bind(this)}
-          searchResults={searchResults}
-          selectedTagId={tagInView}
-          searchString={searchString}
-        />
-      </Col>
-    );
-    return tagLinks;
-  }
 
   renderTagContent () {
     const {
@@ -130,11 +110,22 @@ class TaggableUI extends Component {
       setNewKeyString,
       setNewValueString,
       newKey,
-      newValue
+      newValue,
+      createMode,
+      emptyTagInView
     } = this.props;
+    const tagTitle = createMode ? 'Create a New Tag' : 'Tag Content';
+    const h1Class = createMode ? 'tagContentTitle' : 'tagContentWithoutButton';
     const tagContent = (
       <Col xs={6} md={6} className='col-centered'>
-        <h1 className='tagContentTitle'>Tag Content</h1>
+          <h1 className={h1Class}>{tagTitle}</h1>
+          <div className='newTagButton'>
+            {!createMode && <AddTagButton
+              className='createTag'
+              onClick={emptyTagInView}
+              text='+ Create a new tag'
+            />}
+          </div>
         <ViewPane
           height={'35vh'}
           item={tagInView}
@@ -146,6 +137,7 @@ class TaggableUI extends Component {
           setNewValueString={setNewValueString}
           newKey={newKey}
           newValue={newValue}
+          createMode={createMode}
         />
       </Col>
     );
@@ -209,7 +201,9 @@ TaggableUI.propTypes = {
   setNewKeyString: PropTypes.func,
   setNewValueString: PropTypes.func,
   newKey: PropTypes.string,
-  newValue: PropTypes.string
+  newValue: PropTypes.string,
+  createMode: PropTypes.bool,
+  emptyTagInView: PropTypes.func
 };
 
 export default TaggableUI;

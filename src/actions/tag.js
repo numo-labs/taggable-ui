@@ -123,3 +123,11 @@ export function setNewKeyString (keyString) {
 export function setNewValueString (valueString) {
   return { type: types.SET_NEW_VALUE_STRING, valueString };
 }
+
+/*
+* Function that will empty the tagInView properties
+*/
+
+export function emptyTagInView () {
+  return { type: types.EMPTY_TAG_IN_VIEW };
+}
