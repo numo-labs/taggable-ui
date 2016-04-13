@@ -13,7 +13,8 @@ import {
   ADD_VALUE,
   ADD_KEY_VALUE_PAIR,
   SET_NEW_KEY_STRING,
-  SET_NEW_VALUE_STRING
+  SET_NEW_VALUE_STRING,
+  CLEAN_SEARCH_PANE
 } from '../constants/action-types.js';
 
 export const initialState = {
@@ -176,6 +177,14 @@ export default function taggable (state = initialState, action) {
       return {
         ...state,
         newValue: action.valueString
+      };
+    case CLEAN_SEARCH_PANE:
+      return {
+        ...state,
+        searchResults: {
+          total: 0,
+          items: []
+        }
       };
     default:
       return state;

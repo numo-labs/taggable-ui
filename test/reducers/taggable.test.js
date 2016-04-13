@@ -4,6 +4,7 @@ import { expect } from 'chai';
 import {
   SET_SELECTED_TAG_FROM_SEARCH,
   SET_SEARCH_STRING,
+  CLEAN_SEARCH_PANE,
   BUSY_SEARCHING,
   SET_SEARCH_RESULTS,
   SET_TAG_TYPE_AND_QUERY_TYPE
@@ -116,6 +117,18 @@ describe('Reducers: Taggable', () => {
     const expectedState = {
       ...initialState,
       tagInView: mockHotelSearchResults[1]
+    };
+    expect(state).to.deep.equal(expectedState);
+    done();
+  });
+  it('action:CLEAN_SEARCH_PANE -> returns new state without searchResults', (done) => {
+    const state = taggable(undefined, {type: CLEAN_SEARCH_PANE});
+    const expectedState = {
+      ...initialState,
+      searchResults: {
+        total: 0,
+        items: []
+      }
     };
     expect(state).to.deep.equal(expectedState);
     done();

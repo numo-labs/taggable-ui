@@ -4,6 +4,7 @@ import ViewPane from '../view-pane';
 import SearchPane from '../search-pane';
 import { Col, Nav, NavItem, Navbar, Row, Grid } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
+import SavingNotificationModal from '../saving-notification-modal';
 
 require('./styles.css');
 import './css/normalize.css';
@@ -11,10 +12,28 @@ import './css/normalize.css';
 class TaggableUI extends Component {
   handleOnClick () {
     this.props.saveConfiguration();
+    this.showConfirmationModal();
+  }
+
+  constructor () {
+    super();
+    this.state = {
+      confirmationDialog: false
+    };
+    this.showConfirmationModal = this.showConfirmationModal.bind(this);
+    this.closeConfirmationModal = this.closeConfirmationModal.bind(this);
+  }
+
+  showConfirmationModal () {
+    this.setState({confirmationDialog: true});
+  }
+
+  closeConfirmationModal () {
+    this.setState({confirmationDialog: false});
   }
 
   renderNavbar () {
-    const { configurationSaved } = this.props;
+    const { props: { configurationSaved }, state: { confirmationDialog } } = this;
     const buttonAbility = configurationSaved ? 'default' : 'success';
     const navbar = (
       <nav className='navbar navbar-default navi'>
@@ -37,6 +56,7 @@ class TaggableUI extends Component {
             </Button>
           </NavItem>
         </Nav>
+        <SavingNotificationModal modalVisible={confirmationDialog} closeModal={this.closeConfirmationModal}/>
       </nav>
     );
     return navbar;
@@ -61,8 +81,9 @@ class TaggableUI extends Component {
       searchResults,
       setSelectedTagFromSearch,
       tagInView,
+      tagType,
       inSearch,
-      tagType
+      cleanSearchPane
     } = this.props;
     const searchPane = (
       <Col xs={3} md={3} className='col-centered searchPaneContainer'>
@@ -85,6 +106,7 @@ class TaggableUI extends Component {
             total: searchResults.total
           }}
           tagType={tagType}
+          cleanSearchPane={cleanSearchPane}
           onSubmit={this.handleOnSubmit.bind(this, 'tag')}
           onFilterButtonClick={this.handleOnFilterButtonClick.bind(this, 'tag')}
         />
@@ -245,7 +267,9 @@ TaggableUI.propTypes = {
   setNewKeyString: PropTypes.func,
   setNewValueString: PropTypes.func,
   newKey: PropTypes.string,
-  newValue: PropTypes.string
+  newValue: PropTypes.string,
+  cleanSearchPane: PropTypes.func,
+  displayDialog: PropTypes.bool
 };
 
 export default TaggableUI;
