@@ -127,7 +127,7 @@ describe('Reducers: Taggable', () => {
     const expectedState = {
       ...initialState,
       tag: {
-        ...state.tag,
+        ...initialState.tag,
         searchResults: {
           total: 0,
           items: []

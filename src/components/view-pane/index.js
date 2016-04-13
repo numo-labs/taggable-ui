@@ -224,10 +224,10 @@ class ViewPane extends Component {
       inSearch,
       linkedTags,
       handleButtonClick,
-      tagType
-      // fetchTags,
-      // setSearchString,
-      // setTagTypeAndQueryType
+      tagType,
+      fetchTags,
+      setSearchString,
+      setTagTypeAndQueryType
     } = this.props;
     if (item) {
       if (this.state.activeKey === 1) {
@@ -267,7 +267,11 @@ class ViewPane extends Component {
                   items={linkedTags}
                   symbol={'x'}
                   handleButtonClick={handleButtonClick}
-                  // handleTagClick={(id) => { setSearchString(id, 'tag'); setTagTypeAndQueryType(undefined, 'QUERY_ID', 'tag'); fetchTags(0, 10, 'tag'); }}
+                  handleTagClick={(id) => {
+                    setSearchString(id, 'tag');
+                    setTagTypeAndQueryType(undefined, 'QUERY_ID', 'tag');
+                    fetchTags(0, 10, 'tag');
+                  }}
                 />
               </Col>
             </Row>

@@ -140,7 +140,6 @@ export default function taggable (state = initialState, action) {
         configurationSaved: true
       };
     case DELETE_VALUE:
-
       const metadataCopy = state.tagInView.metadata;
       const contentCopy = state.tagInView.metadata[action.metaIndex];
       const newValues = contentCopy.values;
