@@ -35,15 +35,14 @@ class SearchPane extends Component {
         items,
         onSearchStringChange,
         onTagClick,
-        selectedTagId,
+        selectedTagIds,
         searchString,
         pagination,
         onSubmit,
-        queryType,
-        tagType,
         onFilterButtonClick,
         inSearch,
-        cleanSearchPane
+        cleanSearchPane,
+        tagType
       },
       state: { modalVisible }
     } = this;
@@ -56,20 +55,23 @@ class SearchPane extends Component {
           items={items}
           withButtons={false}
           onTagClick={onTagClick}
-          selectedTagId={selectedTagId}
+          selectedTagIds={selectedTagIds}
           pagination={pagination}
-          queryType={queryType}
-          tagType={tagType}
           onFilterButtonClick={onFilterButtonClick}
           inSearch={inSearch}
           cleanSearchPane={cleanSearchPane}
+          tagType={tagType}
         />
         <Button
           className='createTag'
           onClick={ () => { cleanSearchPane(); this.showModal(); } }
           text='+ Create a new tag'
         />
-        <Modal modalVisible={modalVisible} closeModal={this.closeModal} saveChanges={this.saveChanges}/>
+        <Modal
+          modalVisible={modalVisible}
+          closeModal={this.closeModal}
+          saveChanges={this.saveChanges}
+        />
       </div>
     );
   }
@@ -80,15 +82,15 @@ SearchPane.propTypes = {
   onSubmit: PropTypes.func,
   setSearchTerm: PropTypes.func,
   onTagClick: PropTypes.func,
-  selectedTagId: PropTypes.object,
+  selectedTagIds: PropTypes.array,
   searchString: PropTypes.string,
   onSearchStringChange: PropTypes.func,
   pagination: PropTypes.object,
   queryType: PropTypes.string,
   tagType: PropTypes.string,
   onFilterButtonClick: PropTypes.func,
-  inSearch: PropTypes.func,
-  cleanSearchPane: PropTypes.func
+  cleanSearchPane: PropTypes.func,
+  inSearch: PropTypes.bool
 };
 
 export default SearchPane;

@@ -7,8 +7,13 @@ export class SymbolButton extends Component {
     const { symbol, onHandleClick } = this.props;
     const buttonColour = symbol === '+' ? 'success' : 'danger';
     return (
-      <Button onClick={onHandleClick} className='button' bsStyle={buttonColour} bsSize='small'>
-        <div>{symbol}</div>
+      <Button
+        onClick={onHandleClick}
+        className='button'
+        bsStyle={buttonColour}
+        bsSize='small'>
+        <div>{symbol}</div
+      >
       </Button>
     );
   }
