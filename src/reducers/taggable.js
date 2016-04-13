@@ -18,7 +18,8 @@ import {
   UPDATE_DISPLAYNAME,
   UPDATE_ID,
   UPDATE_LATITUDE,
-  UPDATE_LONGITUDE
+  UPDATE_LONGITUDE,
+  CLEAN_SEARCH_PANE
 } from '../constants/action-types.js';
 
 export const initialState = {
@@ -243,6 +244,11 @@ export default function taggable (state = initialState, action) {
           }
         },
         configurationSaved: false
+      };
+    case CLEAN_SEARCH_PANE:
+      return {
+        ...state,
+        tag: initialState.tag
       };
     default:
       return state;

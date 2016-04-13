@@ -9,6 +9,9 @@
   font-size: 1.3em;
   font-weight: bold;
   margin: 0.2em auto;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .tag__id {

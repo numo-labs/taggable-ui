@@ -4,6 +4,7 @@ import SearchPane from '../search-pane';
 import { Col, Nav, NavItem, Navbar, Row, Grid } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { AddTagButton } from '../button';
+import SavingNotificationModal from '../saving-notification-modal';
 
 require('./styles.css');
 import './css/normalize.css';
@@ -11,10 +12,28 @@ import './css/normalize.css';
 class TaggableUI extends Component {
   handleOnClick () {
     this.props.saveConfiguration();
+    this.showConfirmationModal();
+  }
+
+  constructor () {
+    super();
+    this.state = {
+      confirmationDialog: false
+    };
+    this.showConfirmationModal = this.showConfirmationModal.bind(this);
+    this.closeConfirmationModal = this.closeConfirmationModal.bind(this);
+  }
+
+  showConfirmationModal () {
+    this.setState({confirmationDialog: true});
+  }
+
+  closeConfirmationModal () {
+    this.setState({confirmationDialog: false});
   }
 
   renderNavbar () {
-    const { configurationSaved } = this.props;
+    const { props: { configurationSaved }, state: { confirmationDialog } } = this;
     const buttonAbility = configurationSaved ? 'default' : 'success';
     const navbar = (
       <nav className='navbar navbar-default navi'>
@@ -37,6 +56,7 @@ class TaggableUI extends Component {
             </Button>
           </NavItem>
         </Nav>
+        <SavingNotificationModal modalVisible={confirmationDialog} closeModal={this.closeConfirmationModal}/>
       </nav>
     );
     return navbar;
@@ -63,7 +83,8 @@ class TaggableUI extends Component {
       tagInView,
       tagType,
       inSearch,
-      createMode
+      createMode,
+      cleanSearchPane
     } = this.props;
     const searchPane = (
       <Col xs={3} md={3} className='col-centered searchPaneContainer'>
@@ -87,6 +108,7 @@ class TaggableUI extends Component {
           }}
           tagType={tagType}
           createMode={createMode}
+          cleanSearchPane={cleanSearchPane}
           onSubmit={this.handleOnSubmit.bind(this, 'tag')}
           onFilterButtonClick={this.handleOnFilterButtonClick.bind(this, 'tag')}
         />
@@ -104,6 +126,12 @@ class TaggableUI extends Component {
     } else {
       return [];
     }
+  }
+  handleOnCreateClick () {
+    const { emptyTagInView, cleanSearchPane } = this.props;
+    console.log(this.props);
+    emptyTagInView();
+    cleanSearchPane();
   }
   renderTagContent () {
     const {
@@ -124,7 +152,6 @@ class TaggableUI extends Component {
       newKey,
       newValue,
       createMode,
-      emptyTagInView,
       updateDisplayName,
       updateId,
       updateLatitude,
@@ -138,7 +165,7 @@ class TaggableUI extends Component {
           <div className='newTagButton'>
             {!createMode && <AddTagButton
               className='createTag'
-              onClick={emptyTagInView}
+              onClick={this.handleOnCreateClick.bind(this)}
               text='+ Create a new tag'
             />}
           </div>
@@ -194,11 +221,6 @@ class TaggableUI extends Component {
           {this.renderTagContent()}
         </div>
       );
-    } else {
-      return (
-        <h1 className='well problems'>IF YOU&#39;RE HAVING TAG PROBLEMS I FEEL BAD FOR YOU SON <br />
-         I&#39;VE GOT 99 PROBLEMS BUT A LINK AIN&#39;T 1</h1>
-      );
     }
   }
 
@@ -252,7 +274,9 @@ TaggableUI.propTypes = {
   updateDisplayName: PropTypes.func,
   updateId: PropTypes.func,
   updateLatitude: PropTypes.func,
-  updateLongitude: PropTypes.func
+  updateLongitude: PropTypes.func,
+  cleanSearchPane: PropTypes.func,
+  displayDialog: PropTypes.bool
 };
 
 export default TaggableUI;

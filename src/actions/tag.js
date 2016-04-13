@@ -205,3 +205,10 @@ export function updateLatitude (latitude) {
 export function updateLongitude (longitude) {
   return { type: types.UPDATE_LONGITUDE, longitude };
 }
+/**
+ * Function that will clean the search results pane
+ */
+
+export function cleanSearchPane () {
+  return { type: types.CLEAN_SEARCH_PANE };
+}

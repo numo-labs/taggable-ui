@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 
-import Modal from '../create-tag-modal';
 import SearchList from '../search-list';
 
 require('./styles.css');
@@ -40,9 +39,9 @@ class SearchPane extends Component {
         onSubmit,
         onFilterButtonClick,
         inSearch,
+        cleanSearchPane,
         tagType
-      },
-      state: { modalVisible }
+      }
     } = this;
     return (
       <div>
@@ -57,12 +56,8 @@ class SearchPane extends Component {
           pagination={pagination}
           onFilterButtonClick={onFilterButtonClick}
           inSearch={inSearch}
+          cleanSearchPane={cleanSearchPane}
           tagType={tagType}
-        />
-        <Modal
-         modalVisible={modalVisible}
-         closeModal={this.closeModal}
-         saveChanges={this.saveChanges}
         />
       </div>
     );
@@ -81,6 +76,7 @@ SearchPane.propTypes = {
   queryType: PropTypes.string,
   tagType: PropTypes.string,
   onFilterButtonClick: PropTypes.func,
+  cleanSearchPane: PropTypes.func,
   inSearch: PropTypes.bool
 };
 
