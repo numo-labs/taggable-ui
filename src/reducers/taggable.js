@@ -181,7 +181,7 @@ export default function taggable (state = initialState, action) {
     case CLEAN_SEARCH_PANE:
       return {
         ...state,
-        tag:{
+        tag: {
           searchResults: {
             total: 0,
             items: []
