@@ -125,9 +125,12 @@ describe('Reducers: Taggable', () => {
     const state = taggable(undefined, {type: CLEAN_SEARCH_PANE});
     const expectedState = {
       ...initialState,
-      searchResults: {
-        total: 0,
-        items: []
+      tag: {
+        ...initialState.tag,
+        searchResults: {
+          total: 0,
+          items: []
+        }
       }
     };
     expect(state).to.deep.equal(expectedState);

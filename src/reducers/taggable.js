@@ -13,8 +13,7 @@ import {
   ADD_VALUE,
   ADD_KEY_VALUE_PAIR,
   SET_NEW_KEY_STRING,
-  SET_NEW_VALUE_STRING,
-  CLEAN_SEARCH_PANE
+  SET_NEW_VALUE_STRING
 } from '../constants/action-types.js';
 
 export const initialState = {
@@ -121,7 +120,6 @@ export default function taggable (state = initialState, action) {
         configurationSaved: true
       };
     case DELETE_VALUE:
-
       const metadataCopy = state.tagInView.metadata;
       const contentCopy = state.tagInView.metadata[action.metaIndex];
       const newValues = contentCopy.values;
@@ -177,14 +175,6 @@ export default function taggable (state = initialState, action) {
       return {
         ...state,
         newValue: action.valueString
-      };
-    case CLEAN_SEARCH_PANE:
-      return {
-        ...state,
-        searchResults: {
-          total: 0,
-          items: []
-        }
       };
     default:
       return state;
