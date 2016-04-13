@@ -9,6 +9,10 @@
   margin-right:-4px;
 }
 
+.createTag {
+  left: 0;
+}
+
 .searchPaneContainer {
   border-right: 1px solid #d3d3d3
 }
@@ -34,15 +38,27 @@ div[class*='col'] {
 }
 
 .tagContentTitle {
-  margin-bottom: 1em;
+  margin-bottom: 2.23em;
+}
+
+.tagContentWithoutButton {
+  margin-bottom: 0.5em;
 }
 
 .searchTagTitle {
   margin-bottom: 0.5em;
 }
 
+.navbar {
+  margin-bottom: 0;
+}
+
 .navi {
   background-color: #303030;
+}
+
+.newTagButton {
+  margin-bottom: 1em;
 }
 
 .numoTitle {

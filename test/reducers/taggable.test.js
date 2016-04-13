@@ -116,7 +116,8 @@ describe('Reducers: Taggable', () => {
     const state = taggable(undefined, {type: SET_SELECTED_TAG_FROM_SEARCH, tagID: 'hotel:NE.wvHotelPartId.678910'});
     const expectedState = {
       ...initialState,
-      tagInView: mockHotelSearchResults[1]
+      tagInView: mockHotelSearchResults[1],
+      createMode: false
     };
     expect(state).to.deep.equal(expectedState);
     done();
