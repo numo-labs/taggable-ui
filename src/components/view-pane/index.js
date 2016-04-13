@@ -21,7 +21,6 @@ class ViewPane extends Component {
        updateLatitude,
        updateLongitude
       } = this.props;
-    console.log('TAG_IN_VIEW', item.location);
     const tagContentHeader = (
       <div>
         <div>

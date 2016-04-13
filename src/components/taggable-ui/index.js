@@ -129,7 +129,6 @@ class TaggableUI extends Component {
   }
   handleOnCreateClick () {
     const { emptyTagInView, cleanSearchPane } = this.props;
-    console.log(this.props);
     emptyTagInView();
     cleanSearchPane();
   }

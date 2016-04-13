@@ -97,7 +97,6 @@ export function fetchTags (start, size, option) {
     const state = getState().taggable;
     const { tag: { queryType, tagType } } = state;
     const searchString = state[option].searchString;
-    console.log('searchString', searchString);
     return graphqlService.query(QUERY_SEARCH_TAGS, {id: searchString, queryType, tagType, start, size})
       .then(json => {
         const searchResults = json.data.taggable.items ? json.data.taggable : {total: 0, items: []};
