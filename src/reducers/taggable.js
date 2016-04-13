@@ -208,7 +208,8 @@ export default function taggable (state = initialState, action) {
         tagInView: {
           ...state.tagInView,
           displayName: action.displayName
-        }
+        },
+        configurationSaved: false
       };
     case UPDATE_ID:
       return {
@@ -216,7 +217,8 @@ export default function taggable (state = initialState, action) {
         tagInView: {
           ...state.tagInView,
           id: action.id
-        }
+        },
+        configurationSaved: false
       };
     case UPDATE_LATITUDE:
       return {
@@ -227,7 +229,8 @@ export default function taggable (state = initialState, action) {
             ...state.tagInView.location,
             lat: action.latitude
           }
-        }
+        },
+        configurationSaved: false
       };
     case UPDATE_LONGITUDE:
       return {
@@ -238,7 +241,8 @@ export default function taggable (state = initialState, action) {
             ...state.tagInView.location,
             lon: action.longitude
           }
-        }
+        },
+        configurationSaved: false
       };
     default:
       return state;
