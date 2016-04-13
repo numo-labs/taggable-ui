@@ -26,8 +26,7 @@ class FilterButtons extends Component {
 
 FilterButtons.propTypes = {
   onFilterButtonClick: PropTypes.func,
-  tagType: PropTypes.string,
-  queryType: PropTypes.string
+  tagType: PropTypes.string
 };
 
 export default FilterButtons;

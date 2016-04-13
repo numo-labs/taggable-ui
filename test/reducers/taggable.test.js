@@ -4,7 +4,10 @@ import { expect } from 'chai';
 import {
   SET_SELECTED_TAG_FROM_SEARCH,
   SET_SEARCH_STRING,
-  CLEAN_SEARCH_PANE
+  CLEAN_SEARCH_PANE,
+  BUSY_SEARCHING,
+  SET_SEARCH_RESULTS,
+  SET_TAG_TYPE_AND_QUERY_TYPE
 } from '../../src/constants/action-types.js';
 
 const mockHotelSearchResults = {
@@ -67,17 +70,53 @@ describe('Reducers: Taggable', () => {
     expect(state).to.deep.equal(initialState);
     done();
   });
-  it('action:SET_SEARCH_STRING -> returns a new state with the searchTerm and searchResults', (done) => {
-    const state = taggable(undefined, {type: SET_SEARCH_STRING, text: 'hotel'});
-    expect(state).to.deep.equal({...initialState, searchString: 'hotel'});
+  it('action:SET_SEARCH_STRING -> sets the searchString set inside the tag object when action.option = "tag"', (done) => {
+    const state = taggable(undefined, {type: SET_SEARCH_STRING, text: 'hotel', option: 'tag'});
+    expect(state).to.deep.equal({...initialState, tag: {...initialState.tag, searchString: 'hotel'}});
     done();
   });
-  it('action:SET_SELECTED_TAG_FROM_SEARCH -> returns new state with a tag object set to tagInView and linkedTags', (done) => {
+  it('action:SET_SEARCH_STRING -> sets the searchString set inside the parent object when action.option = "parent"', (done) => {
+    const state = taggable(undefined, {type: SET_SEARCH_STRING, text: 'hotel', option: 'parent'});
+    expect(state).to.deep.equal({...initialState, parent: {...initialState.parent, searchString: 'hotel'}});
+    done();
+  });
+  it('action:BUSY_SEARCHING -> sets inSearch to true inside tag object when action.option = "tag"', (done) => {
+    const state = taggable(undefined, {type: BUSY_SEARCHING, option: 'tag'});
+    expect(state).to.deep.equal({...initialState, tag: {...initialState.tag, inSearch: true}});
+    done();
+  });
+  it('action:BUSY_SEARCHING -> sets inSearch to true inside parent object when action.option = "parent"', (done) => {
+    const state = taggable(undefined, {type: BUSY_SEARCHING, option: 'parent'});
+    expect(state).to.deep.equal({...initialState, parent: {...initialState.parent, inSearch: true}});
+    done();
+  });
+  it('action:SET_SEARCH_RESULTS -> sets inSearch and searchResults inside parent object when action.option = "parent"', (done) => {
+    const results = {total: 0, items: []};
+    const state = taggable(undefined, {type: SET_SEARCH_RESULTS, option: 'parent', searchResults: results});
+    expect(state).to.deep.equal({...initialState, parent: {...initialState.parent, inSearch: false, searchResults: results}});
+    done();
+  });
+  it('action:SET_SEARCH_RESULTS -> sets inSearch and searchResults inside tag object when action.option = "tag"', (done) => {
+    const results = {total: 0, items: []};
+    const state = taggable(undefined, {type: SET_SEARCH_RESULTS, option: 'tag', searchResults: results});
+    expect(state).to.deep.equal({...initialState, tag: {...initialState.tag, inSearch: false, searchResults: results}});
+    done();
+  });
+  it('action:SET_TAG_TYPE_AND_QUERY_TYPE -> sets tagType and queryType inside tag object when action.option = "tag"', (done) => {
+    const state = taggable(undefined, {type: SET_TAG_TYPE_AND_QUERY_TYPE, option: 'tag', tagType: 'GEO', queryType: 'QUERY_ID'});
+    expect(state).to.deep.equal({...initialState, tag: {...initialState.tag, tagType: 'GEO', queryType: 'QUERY_ID'}});
+    done();
+  });
+  it('action:SET_TAG_TYPE_AND_QUERY_TYPE -> sets tagType and queryType inside parent object when action.option = "parent"', (done) => {
+    const state = taggable(undefined, {type: SET_TAG_TYPE_AND_QUERY_TYPE, option: 'parent', tagType: 'GEO', queryType: 'QUERY_ID'});
+    expect(state).to.deep.equal({...initialState, parent: {...initialState.parent, tagType: 'GEO', queryType: 'QUERY_ID'}});
+    done();
+  });
+  it('action:SET_SELECTED_TAG_FROM_SEARCH -> sets tagInView state to the selected tag object', (done) => {
     const state = taggable(undefined, {type: SET_SELECTED_TAG_FROM_SEARCH, tagID: 'hotel:NE.wvHotelPartId.678910'});
     const expectedState = {
       ...initialState,
-      tagInView: mockHotelSearchResults[1],
-      linkedTags: []
+      tagInView: mockHotelSearchResults[1]
     };
     expect(state).to.deep.equal(expectedState);
     done();

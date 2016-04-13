@@ -4,14 +4,19 @@ import * as Actions from '../actions/tag.js';
 function mapStateToProps (state) {
   const {
     taggable: {
-      searchResults,
+      tag: {
+        searchResults,
+        linkedTags,
+        inSearch,
+        tagType
+      },
+      parent: {
+        searchResults: parentTagSearchResults,
+        inSearch: inParentTagSearch,
+        tagType: parentTagTagType
+      },
       tagInView,
-      searchString,
-      linkedTags,
-      queryType,
-      tagType,
       configurationSaved,
-      inSearch,
       newKey,
       newValue
      }
@@ -20,12 +25,13 @@ function mapStateToProps (state) {
   return {
     tagInView,
     searchResults,
-    searchString,
     linkedTags,
-    queryType,
-    tagType,
     configurationSaved,
     inSearch,
+    parentTagSearchResults,
+    inParentTagSearch,
+    tagType,
+    parentTagTagType,
     newKey,
     newValue
   };
