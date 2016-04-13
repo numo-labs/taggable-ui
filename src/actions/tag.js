@@ -97,7 +97,6 @@ export function fetchTags (start, size, option) {
     const state = getState().taggable;
     const { tag: { queryType, tagType } } = state;
     const searchString = state[option].searchString;
-    console.log('searchString', searchString);
     return graphqlService.query(QUERY_SEARCH_TAGS, {id: searchString, queryType, tagType, start, size})
       .then(json => {
         const searchResults = json.data.taggable.items ? json.data.taggable : {total: 0, items: []};
@@ -166,6 +165,45 @@ export function setNewValueString (valueString) {
   return { type: types.SET_NEW_VALUE_STRING, valueString };
 }
 
+/*
+* Function that will empty the tagInView properties
+*/
+
+export function emptyTagInView () {
+  return { type: types.EMPTY_TAG_IN_VIEW };
+}
+
+/*
+* Function that will update the displayName
+*/
+
+export function updateDisplayName (displayName) {
+  return { type: types.UPDATE_DISPLAYNAME, displayName };
+}
+
+/*
+* Function that will update the tag id
+*/
+
+export function updateId (id) {
+  return { type: types.UPDATE_ID, id };
+}
+
+/*
+* Function that will update the tag latitude
+*/
+
+export function updateLatitude (latitude) {
+  return { type: types.UPDATE_LATITUDE, latitude };
+}
+
+/*
+* Function that will update the tag longitude
+*/
+
+export function updateLongitude (longitude) {
+  return { type: types.UPDATE_LONGITUDE, longitude };
+}
 /**
  * Function that will clean the search results pane
  */

@@ -1,7 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 
-import { AddTagButton as Button } from '../button';
-import Modal from '../create-tag-modal';
 import SearchList from '../search-list';
 
 require('./styles.css');
@@ -43,8 +41,7 @@ class SearchPane extends Component {
         inSearch,
         cleanSearchPane,
         tagType
-      },
-      state: { modalVisible }
+      }
     } = this;
     return (
       <div>
@@ -61,16 +58,6 @@ class SearchPane extends Component {
           inSearch={inSearch}
           cleanSearchPane={cleanSearchPane}
           tagType={tagType}
-        />
-        <Button
-          className='createTag'
-          onClick={ () => { cleanSearchPane(); this.showModal(); } }
-          text='+ Create a new tag'
-        />
-        <Modal
-          modalVisible={modalVisible}
-          closeModal={this.closeModal}
-          saveChanges={this.saveChanges}
         />
       </div>
     );

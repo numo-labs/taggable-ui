@@ -33,7 +33,6 @@
 
 .tagIdInput {
   display: inline-block;
-  cursor: not-allowed;
   width: 24em;
 }
 
@@ -56,6 +55,7 @@
 .location {
   width: 30%;
   float: left;
+  display: inline-block;
 }
 
 .locationInput {
@@ -99,7 +99,7 @@
 .keyValueContainer {
   margin: auto;
   margin-left: 2em;
-  margin-top: 2em;
+  margin-top: 0.5em;
   overflow-y: scroll;
   text-align: left;
 }

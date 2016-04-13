@@ -14,6 +14,11 @@ import {
   ADD_KEY_VALUE_PAIR,
   SET_NEW_KEY_STRING,
   SET_NEW_VALUE_STRING,
+  EMPTY_TAG_IN_VIEW,
+  UPDATE_DISPLAYNAME,
+  UPDATE_ID,
+  UPDATE_LATITUDE,
+  UPDATE_LONGITUDE,
   CLEAN_SEARCH_PANE
 } from '../constants/action-types.js';
 
@@ -30,6 +35,19 @@ export const initialState = {
     queryType: 'QUERY_DISPLAYNAME',
     inSearch: false
   },
+  tagInView: {
+    id: '',
+    displayName: '',
+    location: {
+      lat: '',
+      lon: ''
+    },
+    metadata: [],
+    tags: []
+  },
+  searchString: '',
+  tagType: null,
+  queryType: 'QUERY_DISPLAYNAME',
   // state for parent search component inside the view pane
   parent: {
     searchResults: {
@@ -42,10 +60,10 @@ export const initialState = {
     queryType: 'QUERY_DISPLAYNAME'
   },
   // state for the view pane
-  tagInView: {},
   configurationSaved: true,
   newKey: '',
-  newValue: ''
+  newValue: '',
+  createMode: true
 };
 
 export default function taggable (state = initialState, action) {
@@ -56,7 +74,8 @@ export default function taggable (state = initialState, action) {
       });
       return {
         ...state,
-        tagInView: item
+        tagInView: item,
+        createMode: false
       };
     case SET_SEARCH_STRING:
       return {
@@ -178,13 +197,58 @@ export default function taggable (state = initialState, action) {
         ...state,
         newValue: action.valueString
       };
+    case EMPTY_TAG_IN_VIEW:
+      return {
+        ...state,
+        tagInView: initialState.tagInView,
+        createMode: true
+      };
+    case UPDATE_DISPLAYNAME:
+      return {
+        ...state,
+        tagInView: {
+          ...state.tagInView,
+          displayName: action.displayName
+        },
+        configurationSaved: false
+      };
+    case UPDATE_ID:
+      return {
+        ...state,
+        tagInView: {
+          ...state.tagInView,
+          id: action.id
+        },
+        configurationSaved: false
+      };
+    case UPDATE_LATITUDE:
+      return {
+        ...state,
+        tagInView: {
+          ...state.tagInView,
+          location: {
+            ...state.tagInView.location,
+            lat: action.latitude
+          }
+        },
+        configurationSaved: false
+      };
+    case UPDATE_LONGITUDE:
+      return {
+        ...state,
+        tagInView: {
+          ...state.tagInView,
+          location: {
+            ...state.tagInView.location,
+            lon: action.longitude
+          }
+        },
+        configurationSaved: false
+      };
     case CLEAN_SEARCH_PANE:
       return {
         ...state,
-        searchResults: {
-          total: 0,
-          items: []
-        }
+        tag: initialState.tag
       };
     default:
       return state;

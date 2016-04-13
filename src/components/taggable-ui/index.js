@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import LinkedTags from '../linked-tags';
 import ViewPane from '../view-pane';
 import SearchPane from '../search-pane';
 import { Col, Nav, NavItem, Navbar, Row, Grid } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
+import { AddTagButton } from '../button';
 import SavingNotificationModal from '../saving-notification-modal';
 
 require('./styles.css');
@@ -83,6 +83,7 @@ class TaggableUI extends Component {
       tagInView,
       tagType,
       inSearch,
+      createMode,
       cleanSearchPane
     } = this.props;
     const searchPane = (
@@ -106,6 +107,7 @@ class TaggableUI extends Component {
             total: searchResults.total
           }}
           tagType={tagType}
+          createMode={createMode}
           cleanSearchPane={cleanSearchPane}
           onSubmit={this.handleOnSubmit.bind(this, 'tag')}
           onFilterButtonClick={this.handleOnFilterButtonClick.bind(this, 'tag')}
@@ -125,27 +127,11 @@ class TaggableUI extends Component {
       return [];
     }
   }
-  renderLinkedTags () {
-    const {
-      searchResults,
-      search,
-      tagInView
-    } = this.props;
-    const tagLinks = (
-      <Col xs={3} md={3} className='col-centered'>
-        <h1 className='linkedTitle title'>Linked Tags</h1>
-        <LinkedTags
-          items={this.createLinkedTagsArray(tagInView.tags)}
-          onSearchSubmit={search}
-          onTagClick={this.handleOnSubmit.bind(this)}
-          searchResults={searchResults}
-          selectedTagId={tagInView}
-        />
-      </Col>
-    );
-    return tagLinks;
+  handleOnCreateClick () {
+    const { emptyTagInView, cleanSearchPane } = this.props;
+    emptyTagInView();
+    cleanSearchPane();
   }
-
   renderTagContent () {
     const {
       tagInView,
@@ -163,13 +149,27 @@ class TaggableUI extends Component {
       setNewKeyString,
       setNewValueString,
       newKey,
-      newValue
+      newValue,
+      createMode,
+      updateDisplayName,
+      updateId,
+      updateLatitude,
+      updateLongitude
     } = this.props;
+    const tagTitle = createMode ? 'Create a New Tag' : 'Tag Content';
+    const h1Class = createMode ? 'tagContentTitle' : 'tagContentWithoutButton';
     const tagContent = (
       <Col xs={6} md={6} className='col-centered'>
-        <h1 className='tagContentTitle'>Tag Content</h1>
+          <h1 className={h1Class}>{tagTitle}</h1>
+          <div className='newTagButton'>
+            {!createMode && <AddTagButton
+              className='createTag'
+              onClick={this.handleOnCreateClick.bind(this)}
+              text='+ Create a new tag'
+            />}
+          </div>
         <ViewPane
-          height={'35vh'}
+          height={'32vh'}
           item={tagInView}
           linkedTags={this.createLinkedTagsArray(tagInView.tags)}
           onDeleteValue={deleteValue}
@@ -201,6 +201,11 @@ class TaggableUI extends Component {
           setNewValueString={setNewValueString}
           newKey={newKey}
           newValue={newValue}
+          createMode={createMode}
+          updateDisplayName={updateDisplayName}
+          updateId={updateId}
+          updateLongitude={updateLongitude}
+          updateLatitude={updateLatitude}
         />
       </Col>
     );
@@ -214,11 +219,6 @@ class TaggableUI extends Component {
         <div>
           {this.renderTagContent()}
         </div>
-      );
-    } else {
-      return (
-        <h1 className='well problems'>IF YOU&#39;RE HAVING TAG PROBLEMS I FEEL BAD FOR YOU SON <br />
-         I&#39;VE GOT 99 PROBLEMS BUT A LINK AIN&#39;T 1</h1>
       );
     }
   }
@@ -268,6 +268,12 @@ TaggableUI.propTypes = {
   setNewValueString: PropTypes.func,
   newKey: PropTypes.string,
   newValue: PropTypes.string,
+  createMode: PropTypes.bool,
+  emptyTagInView: PropTypes.func,
+  updateDisplayName: PropTypes.func,
+  updateId: PropTypes.func,
+  updateLatitude: PropTypes.func,
+  updateLongitude: PropTypes.func,
   cleanSearchPane: PropTypes.func,
   displayDialog: PropTypes.bool
 };
