@@ -18,7 +18,8 @@ function mapStateToProps (state) {
       tagInView,
       configurationSaved,
       newKey,
-      newValue
+      newValue,
+      createMode
      }
    } = state;
 
@@ -33,7 +34,8 @@ function mapStateToProps (state) {
     tagType,
     parentTagTagType,
     newKey,
-    newValue
+    newValue,
+    createMode
   };
 }
 

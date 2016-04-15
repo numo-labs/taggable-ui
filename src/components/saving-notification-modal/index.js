@@ -1,22 +1,22 @@
+'use strict';
+
 import React, { Component, PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import LinkedTags from '../linked-tags';
 
-class ManageTagsModal extends Component {
+class SavingNotificationModal extends Component {
   render () {
-    const { modalVisible, closeModal, saveChanges } = this.props;
+    const { modalVisible, closeModal } = this.props;
     return (
       <div className='static-modal'>
         <Modal show={modalVisible} onHide={closeModal}>
           <Modal.Header>
-            <Modal.Title>Create a new Tag</Modal.Title>
+            <Modal.Title>Changes successfully saved</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <LinkedTags />
+            <p>Your changes has been successfully saved.</p>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={closeModal}>Close</Button>
-            <Button onClick={() => { saveChanges(); closeModal(); }} bsStyle='primary'>Save changes</Button>
           </Modal.Footer>
         </Modal>
       </div>
@@ -24,10 +24,9 @@ class ManageTagsModal extends Component {
   }
 }
 
-ManageTagsModal.propTypes = {
+SavingNotificationModal.propTypes = {
   modalVisible: PropTypes.bool,
-  saveChanges: PropTypes.func,
   closeModal: PropTypes.func
 };
 
-export default ManageTagsModal;
+export default SavingNotificationModal;
