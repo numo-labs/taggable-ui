@@ -99,7 +99,7 @@ export function fetchTags (start, size, option) {
     const searchString = state[option].searchString;
     return graphqlService.query(QUERY_SEARCH_TAGS, {id: searchString, queryType, tagType, start, size})
       .then(json => {
-        const searchResults = json.data.taggable.items ? json.data.taggable : {total: 0, items: []};
+        const searchResults = json.data.taggable.search.items ? json.data.taggable.search : {total: 0, items: []};
         return dispatch(setSearchResults(searchResults, option));
       });
   };
@@ -111,9 +111,13 @@ export function fetchTags (start, size, option) {
 
 export function saveNewConfig () {
   return (dispatch, getState) => {
-    const { tagInView: { id, displayName, location, tags, metadata } } = getState();
+    const { taggable: { tagInView: { _id: id, displayName, location, tags, metadata } } } = getState();
+    console.log('tag', {id, displayName, location, tags, metadata});
     return graphqlService.query(MUTATION_CREATE_TAG, {id, displayName, location, tags, metadata})
-      .then(dispatch(saveConfiguration()));
+      .then(json => {
+        console.log('tag updated', json);
+        dispatch(saveConfiguration());
+      });
   };
 }
 
