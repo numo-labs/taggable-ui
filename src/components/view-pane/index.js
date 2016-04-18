@@ -54,6 +54,7 @@ class ViewPane extends Component {
               labelClassName='col-xs-9'
               wrapperClassName='col-xs-9'
               onChange={(e) => updateLatitude(e.target.value)}
+              value={item.location.lat}
             />
         </div>
         <div>
@@ -64,6 +65,7 @@ class ViewPane extends Component {
               labelClassName='col-xs-9'
               wrapperClassName='col-xs-9'
               onChange={(e) => updateLongitude(e.target.value)}
+              value={item.location.lon}
             />
         </div>
         <Row>

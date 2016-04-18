@@ -11,7 +11,7 @@ import './css/normalize.css';
 
 class TaggableUI extends Component {
   handleOnClick () {
-    this.props.saveConfiguration();
+    this.props.saveNewConfig();
     this.showConfirmationModal();
   }
 
@@ -275,7 +275,8 @@ TaggableUI.propTypes = {
   updateLatitude: PropTypes.func,
   updateLongitude: PropTypes.func,
   cleanSearchPane: PropTypes.func,
-  displayDialog: PropTypes.bool
+  displayDialog: PropTypes.bool,
+  saveNewConfig: PropTypes.func
 };
 
 export default TaggableUI;

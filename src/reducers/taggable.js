@@ -124,7 +124,8 @@ export default function taggable (state = initialState, action) {
         tagInView: {
           ...state.tagInView,
           tags: _.uniqBy(tags, 'tagId') // prevent duplicate links
-        }
+        },
+        configurationSaved: false
       };
     case REMOVE_PARENT_TAG:
       return {
@@ -132,7 +133,8 @@ export default function taggable (state = initialState, action) {
         tagInView: {
           ...state.tagInView,
           tags: state.tagInView.tags.filter(tag => tag.tagId !== action.id)
-        }
+        },
+        configurationSaved: false
       };
     case SAVE_CONFIGURATION:
       return {
