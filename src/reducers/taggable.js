@@ -36,7 +36,7 @@ export const initialState = {
     inSearch: false
   },
   tagInView: {
-    id: '',
+    _id: '',
     displayName: '',
     location: {
       lat: '',
@@ -218,7 +218,7 @@ export default function taggable (state = initialState, action) {
         ...state,
         tagInView: {
           ...state.tagInView,
-          id: action.id
+          _id: action.id
         },
         configurationSaved: false
       };
