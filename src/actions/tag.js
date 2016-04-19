@@ -112,7 +112,7 @@ export function fetchTags (start, size, option) {
 export function saveNewConfig () {
   return (dispatch, getState) => {
     const { taggable: { tagInView: { _id: id, displayName, location, tags, metadata } } } = getState();
-    console.log('tag', {id, displayName, location, tags, metadata});
+    console.log('tag', getState().taggable.tagInView);
     return graphqlService.query(MUTATION_CREATE_TAG, {id, displayName, location, tags, metadata})
       .then(json => {
         console.log('tag updated', json);
