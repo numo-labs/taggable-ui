@@ -214,6 +214,17 @@ class ViewPane extends Component {
     );
   }
 
+  handleTagClick (id) {
+    const {
+      fetchTags,
+      setSearchString,
+      setTagTypeAndQueryType
+    } = this.props;
+    setSearchString(id, 'tag');
+    setTagTypeAndQueryType(undefined, 'QUERY_ID', 'tag');
+    fetchTags(0, 10, 'tag');
+  }
+
   renderContent () {
     const {
       item,
@@ -226,10 +237,7 @@ class ViewPane extends Component {
       inSearch,
       linkedTags,
       handleButtonClick,
-      tagType,
-      fetchTags,
-      setSearchString,
-      setTagTypeAndQueryType
+      tagType
     } = this.props;
     if (item) {
       if (this.state.activeKey === 1) {
@@ -265,15 +273,19 @@ class ViewPane extends Component {
               </Col>
               <Col xs={6}>
               <h3 className='parentListTitle'>Parent List</h3>
+                <h4 className='displayName'>Direct Links</h4>
                 <LinkedTagsList
-                  items={linkedTags}
+                  items={linkedTags.filter(tag => !tag.inherited)}
                   symbol={'x'}
                   handleButtonClick={handleButtonClick}
-                  handleTagClick={(id) => {
-                    setSearchString(id, 'tag');
-                    setTagTypeAndQueryType(undefined, 'QUERY_ID', 'tag');
-                    fetchTags(0, 10, 'tag');
-                  }}
+                  handleTagClick={this.handleTagClick}
+                />
+                <h4 className='displayName'>Inherited Links</h4>
+                <LinkedTagsList
+                  items={linkedTags.filter(tag => tag.inherited)}
+                  symbol={'x'}
+                  handleButtonClick={handleButtonClick}
+                  handleTagClick={this.handleTagClick}
                 />
               </Col>
             </Row>
@@ -299,37 +311,42 @@ class ViewPane extends Component {
 }
 
 ViewPane.propTypes = {
-  metadata: PropTypes.array,
-  onButtonClick: PropTypes.func,
-  onDeleteValue: PropTypes.func,
-  onAddValue: PropTypes.func,
-  height: PropTypes.string,
-  onChange: PropTypes.func,
-  item: PropTypes.object,
-  items: PropTypes.array,
-  onSearchStringChange: PropTypes.func,
-  onSubmit: PropTypes.func,
-  onTagClick: PropTypes.func,
-  pagination: PropTypes.object,
+  // search pane
   onFilterButtonClick: PropTypes.func,
   inSearch: PropTypes.bool,
-  linkedTags: PropTypes.array,
-  handleButtonClick: PropTypes.func,
   tagType: PropTypes.string,
   fetchTags: PropTypes.func,
   setSearchString: PropTypes.func,
   setTagTypeAndQueryType: PropTypes.func,
+  linkedTags: PropTypes.array,
+  onSearchStringChange: PropTypes.func,
+  onSubmit: PropTypes.func,
+  onTagClick: PropTypes.func,
+  items: PropTypes.array, // items returned from search
+
+  // tag in view linked tag list
+  handleButtonClick: PropTypes.func,
+  pagination: PropTypes.object,
+
+  // tag in view content
+  newKey: PropTypes.string,
+  newValue: PropTypes.string,
+  metadata: PropTypes.array,
+  item: PropTypes.object, // selected tag
+
+  // tag in view update methods
   addKeyValuePair: PropTypes.func,
   setNewKeyString: PropTypes.func,
   setNewValueString: PropTypes.func,
-  newKey: PropTypes.string,
-  newValue: PropTypes.string,
+  onDeleteValue: PropTypes.func,
+  onAddValue: PropTypes.func,
   removeKey: PropTypes.func,
   createMode: PropTypes.bool,
   updateDisplayName: PropTypes.func,
   updateId: PropTypes.func,
   updateLatitude: PropTypes.func,
-  updateLongitude: PropTypes.func
+  updateLongitude: PropTypes.func,
+  height: PropTypes.string // height of metadata content field
 };
 
 ViewPane.defaultProps = {

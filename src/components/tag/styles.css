@@ -5,6 +5,10 @@
   margin-top: 0.2em;
 }
 
+.tag_inactive {
+  background-color: #d3d3d3;
+}
+
 .tag__name {
   font-size: 1.3em;
   font-weight: bold;
