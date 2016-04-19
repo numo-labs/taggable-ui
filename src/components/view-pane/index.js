@@ -265,8 +265,20 @@ class ViewPane extends Component {
               </Col>
               <Col xs={6}>
               <h3 className='parentListTitle'>Parent List</h3>
+                <h4 className='displayName'>Direct Links</h4>
                 <LinkedTagsList
-                  items={linkedTags}
+                  items={linkedTags.filter(tag => !tag.inherited)}
+                  symbol={'x'}
+                  handleButtonClick={handleButtonClick}
+                  handleTagClick={(id) => {
+                    setSearchString(id, 'tag');
+                    setTagTypeAndQueryType(undefined, 'QUERY_ID', 'tag');
+                    fetchTags(0, 10, 'tag');
+                  }}
+                />
+                <h4 className='displayName'>Inherited Links</h4>
+                <LinkedTagsList
+                  items={linkedTags.filter(tag => tag.inherited)}
                   symbol={'x'}
                   handleButtonClick={handleButtonClick}
                   handleTagClick={(id) => {
@@ -329,7 +341,8 @@ ViewPane.propTypes = {
   updateDisplayName: PropTypes.func,
   updateId: PropTypes.func,
   updateLatitude: PropTypes.func,
-  updateLongitude: PropTypes.func
+  updateLongitude: PropTypes.func,
+  toggleTagActive: PropTypes.func
 };
 
 ViewPane.defaultProps = {

@@ -248,7 +248,6 @@ TaggableUI.propTypes = {
   search: PropTypes.func,
   setSelectedTagFromSearch: PropTypes.func,
   fetchTags: PropTypes.func,
-  linkedTags: PropTypes.array,
   searchLinkedTagDocument: PropTypes.func,
   setSearchString: PropTypes.func,
   setTagTypeAndQueryType: PropTypes.func,

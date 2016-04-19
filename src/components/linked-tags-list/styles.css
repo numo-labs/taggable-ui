@@ -1,8 +1,8 @@
-.list {
+.linked_list {
   width: 100%;
   margin: 0 auto;
   text-align: center;
-  height: 50vh;
+  height: 25vh;
   border: 1px solid lightgrey;
   border-radius: 5px;
   overflow: auto;

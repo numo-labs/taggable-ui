@@ -16,11 +16,11 @@ class LinkedTagsList extends Component {
       return (
         <div key={item.id} className='tag__item'>
           <Tag
-           key={item.id}
-           id={item.id}
-           tagName={item.displayName}
-           selected={item.id === selectedTagId}
-           onClick={() => handleTagClick(item.id)}
+            key={item.id}
+            id={item.id}
+            selected={item.id === selectedTagId}
+            onClick={() => handleTagClick(item.id)}
+            active={item.active}
           />
           <Button
             className='redButton'
@@ -31,7 +31,7 @@ class LinkedTagsList extends Component {
       );
     });
     return (
-      <div className='list'>
+      <div className='linked_list'>
         {list}
       </div>
     );
