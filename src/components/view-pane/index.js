@@ -278,14 +278,14 @@ class ViewPane extends Component {
                   items={linkedTags.filter(tag => !tag.inherited)}
                   symbol={'x'}
                   handleButtonClick={handleButtonClick}
-                  handleTagClick={this.handleTagClick}
+                  handleTagClick={this.handleTagClick.bind(this)}
                 />
                 <h4 className='displayName'>Inherited Links</h4>
                 <LinkedTagsList
                   items={linkedTags.filter(tag => tag.inherited)}
                   symbol={'x'}
                   handleButtonClick={handleButtonClick}
-                  handleTagClick={this.handleTagClick}
+                  handleTagClick={this.handleTagClick.bind(this)}
                 />
               </Col>
             </Row>
