@@ -9,8 +9,8 @@ mutation createTag($id: String, $displayName: String, $location: LocationInputTy
 				lon
 			},
       tags {
-        tagId,
-				inherited,
+        node,
+				displayName,
         source,
         active
       }

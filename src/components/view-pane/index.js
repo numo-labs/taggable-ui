@@ -4,6 +4,7 @@ import { SymbolButton } from '../button';
 import LinkedTagsList from '../linked-tags-list';
 import SearchList from '../search-list';
 import './styles.css';
+import ContentEditor from '../content-editor';
 
 class ViewPane extends Component {
   constructor () {
@@ -237,16 +238,15 @@ class ViewPane extends Component {
       inSearch,
       linkedTags,
       handleButtonClick,
-      tagType
+      tagType,
+      saveTagContent
     } = this.props;
     if (item) {
       if (this.state.activeKey === 1) {
         return (
           <div>
             {this.renderTabs()}
-            {this.renderTagContentHeader()}
-            {this.renderMetadataContent()}
-            {this.renderAddNewKeyValue()}
+            <ContentEditor tagDoc={item} onSubmit={saveTagContent}/>
           </div>
         );
       } else {
@@ -325,7 +325,8 @@ ViewPane.propTypes = {
   newKey: PropTypes.string,
   newValue: PropTypes.string,
   metadata: PropTypes.array,
-  item: PropTypes.object, // selected tag
+  item: PropTypes.object, // selected tag,
+  saveTagContent: PropTypes.func,
 
   // tag in view update methods
   addKeyValuePair: PropTypes.func,

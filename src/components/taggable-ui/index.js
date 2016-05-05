@@ -143,7 +143,8 @@ class TaggableUI extends Component {
       updateDisplayName,
       updateId,
       updateLatitude,
-      updateLongitude
+      updateLongitude,
+      saveTagContent
     } = this.props;
     const tagTitle = createMode ? 'Create a New Tag' : 'Tag Content';
     const h1Class = createMode ? 'tagContentTitle' : 'tagContentWithoutButton';
@@ -165,6 +166,7 @@ class TaggableUI extends Component {
           onSearchStringChange={this.onSearchStringChange.bind(this, 'parent')}
           onTagClick={addParentTag}
           handleButtonClick={removeParentTag}
+          saveTagContent={saveTagContent}
           items={parentTagSearchResults.items.map(result => {
             return {
               id: result.tagid,
@@ -232,6 +234,7 @@ class TaggableUI extends Component {
 }
 
 TaggableUI.propTypes = {
+  saveTagContent: PropTypes.func,
   searchResults: PropTypes.object,
   tagInView: PropTypes.object,
   search: PropTypes.func,

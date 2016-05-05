@@ -113,14 +113,59 @@ export function fetchTagDoc (tagid) {
     return graphqlService.query(QUERY_SEARCH_TAG, {tagid})
       .then(json => {
         console.log('fetchTagDoc, json', json);
+        const tagDoc = json.data.taggable.search;
+        const markets = JSON.parse(tagDoc.markets);
         const doc = {
           ...json.data.taggable.search,
-          markets: JSON.parse(json.data.taggable.search.markets)
+          markets: formatMarketsToEdit(markets)
         };
         return dispatch(setSelectedTagFromSearch(doc));
       });
   };
 }
+
+function formatMarketsToSave (markets) {
+  return markets.reduce((result, marketObj) => {
+    return {
+      ...result,
+      [marketObj.market]: {
+        [marketObj.language]: {
+          label: marketObj.label,
+          values: marketObj.values
+        }
+      }
+    };
+  }, {});
+}
+
+function formatMarketsToEdit (markets) {
+  const marketArray = [];
+  Object.keys(markets).forEach(market => {
+    const languages = Object.keys(markets[market]);
+    languages.forEach(language => {
+      marketArray.push({
+        market,
+        language,
+        label: markets[market][language].label,
+        values: markets[market][language].values
+      });
+    });
+  });
+  return marketArray;
+}
+
+export function saveTagContent (tagDoc) {
+  return (dispatch) => {
+    dispatch(saveTagDoc(tagDoc));
+    return dispatch(saveNewConfig());
+  };
+}
+
+function saveTagDoc (tagDoc) {
+  return { type: types.SAVE_TAG_CONTENT, tagDoc };
+}
+
+ // {"markets":[{"market":"dk","language":"da","label":"SPain","values":["Spainen","Spain"]}]}
 
 /*
 * Function that will save a new tag configuration
@@ -128,9 +173,10 @@ export function fetchTagDoc (tagid) {
 
 export function saveNewConfig () {
   return (dispatch, getState) => {
-    const { taggable: { tagInView: { _id: id, displayName, location, tags, metadata } } } = getState();
-    console.log('tag update request', getState().taggable.tagInView);
-    return graphqlService.query(MUTATION_CREATE_TAG, {id, displayName, location, tags, metadata})
+    const { taggable: { tagInView: { _id: id, displayName, location, tags, metadata, markets } } } = getState();
+    const variables = {id, displayName, location, tags, metadata, markets: JSON.stringify(formatMarketsToSave(markets))};
+    console.log('tag update request', variables);
+    return graphqlService.query(MUTATION_CREATE_TAG, variables)
       .then(json => {
         console.log('tag update response', json);
         dispatch(saveConfiguration());

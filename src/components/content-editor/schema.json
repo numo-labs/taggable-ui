@@ -1,0 +1,161 @@
+
+{
+ "title": "",
+ "description": "A form based on a schema",
+ "type": "object",
+ "required": [
+   "id",
+   "displayName"
+ ],
+ "x-hints": {
+   "form": {
+     "classes": "my-nice-form"
+   }
+ },
+ "properties": {
+   "_id": {
+     "title": "Tag Id",
+     "description": "Tag id, e.g. tile:article.lolloandbernie",
+     "type": "string",
+     "minLength": 3,
+     "maxLength": 40,
+     "pattern": "^(tile:|amenity:|hotel:|geo:|marketing:)([a-z0-9]*)([.])([a-z0-9]*)"
+   },
+   "displayName": {
+     "title": "Display Name",
+     "type": "string",
+     "minLength": 1,
+     "maxLength": 200
+   },
+   "active": {
+     "title": "Active",
+     "type": "boolean"
+   },
+   "markets": {
+     "title": "Search Terms and Labels per market and language",
+     "type": "array",
+     "items": {
+       "type": "object",
+       "properties": {
+         "market": {
+           "title": "Market",
+           "type": "string",
+           "enum": [
+             "dk",
+             "de",
+             "gb",
+             "es",
+             "fi",
+             "fr",
+             "nl",
+             "no",
+             "ru",
+             "sv",
+             "cn"
+           ]
+         },
+         "language": {
+           "title": "Language",
+           "type": "string",
+           "enum": [
+             "da",
+             "de",
+             "en",
+             "es",
+             "fi",
+             "fr",
+             "nl",
+             "no",
+             "ru",
+             "sv",
+             "zh"
+           ]
+         },
+         "label": {
+           "title": "Label",
+           "description": "UI Display Label",
+           "type": "string",
+           "minLength": 1,
+           "maxLength": 100
+         },
+         "values": {
+           "title": "search terms",
+           "type": "array",
+           "items": {
+             "type": "string"
+           }
+         }
+       }
+     }
+   },
+   "content": {
+     "title": "Content",
+     "type": "array",
+     "items": {
+       "type": "object",
+       "properties": {
+         "market": {
+           "title": "Market",
+           "type": "string",
+           "enum": [
+             "dk",
+             "de",
+             "gb",
+             "es",
+             "fi",
+             "fr",
+             "nl",
+             "no",
+             "ru",
+             "sv",
+             "cn"
+           ]
+         },
+         "language": {
+           "title": "Language",
+           "type": "string",
+           "enum": [
+             "da",
+             "de",
+             "en",
+             "es",
+             "fi",
+             "fr",
+             "nl",
+             "no",
+             "ru",
+             "sv",
+             "zh"
+           ]
+         },
+         "url": {
+           "title": "Deeplink URL",
+           "description": "UI Display Label",
+           "type": "string"
+         },
+         "sections": {
+           "title": "Sections",
+           "type": "array",
+           "items": {
+             "type": "object",
+             "properties": {
+               "title": {
+                 "title": "Title",
+                 "type": "string"
+               },
+               "text": {
+                 "title": "Text",
+                 "type": "string"
+               },
+               "image": {
+                 "title": "Image URL",
+                 "type": "string"
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+ }
+}

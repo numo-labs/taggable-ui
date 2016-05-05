@@ -19,6 +19,7 @@ module.exports = {
         test: /\.html$/,
         loader: 'file?name=[name].[ext]'
       },
+      { test: /\.json$/, loader: 'json-loader' },
       {
         test: /\.png$/,
         loader: 'url-loader?mimetype=image/png'

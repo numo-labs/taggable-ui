@@ -19,7 +19,8 @@ import {
   UPDATE_ID,
   UPDATE_LATITUDE,
   UPDATE_LONGITUDE,
-  CLEAN_SEARCH_PANE
+  CLEAN_SEARCH_PANE,
+  SAVE_TAG_CONTENT
 } from '../constants/action-types.js';
 
 export const initialState = {
@@ -73,6 +74,11 @@ export default function taggable (state = initialState, action) {
         ...state,
         tagInView: action.tagDoc,
         createMode: false
+      };
+    case SAVE_TAG_CONTENT:
+      return {
+        ...state,
+        tagInView: action.tagDoc
       };
     case SET_SEARCH_STRING:
       return {
