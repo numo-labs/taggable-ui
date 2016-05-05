@@ -1,5 +1,6 @@
 import * as types from '../constants/action-types.js';
-import { QUERY_SEARCH_TAGS, MUTATION_CREATE_TAG } from '../constants/queries.js';
+import { QUERY_SUGGEST_TAGS, QUERY_SEARCH_TAG } from '../constants/queries.js';
+import { MUTATION_CREATE_TAG } from '../constants/mutations.js';
 
 import * as graphqlService from '../services/graphql.js';
 
@@ -25,8 +26,8 @@ export function setSearchString (text, option) {
 * onClick function for the tags in the search results
 * @param {String} - id of the selected tag
 */
-export function setSelectedTagFromSearch (id) {
-  return { type: types.SET_SELECTED_TAG_FROM_SEARCH, id };
+export function setSelectedTagFromSearch (tagDoc) {
+  return { type: types.SET_SELECTED_TAG_FROM_SEARCH, tagDoc };
 }
 
 /**
@@ -95,12 +96,28 @@ export function fetchTags (start, size, option) {
   return (dispatch, getState) => {
     dispatch(busySearching(option));
     const state = getState().taggable;
-    const { tag: { queryType, tagType } } = state;
+    // const { tag: { queryType, tagType } } = state;
     const searchString = state[option].searchString;
-    return graphqlService.query(QUERY_SEARCH_TAGS, {id: searchString, queryType, tagType, start, size})
+    return graphqlService.query(QUERY_SUGGEST_TAGS, {text: searchString, size})
       .then(json => {
-        const searchResults = json.data.taggable.search.items ? json.data.taggable.search : {total: 0, items: []};
+        console.log('fetchTags json', json);
+        const searchResults = json.data.taggable.suggest.items ? json.data.taggable.suggest : {total: 0, items: []};
         return dispatch(setSearchResults(searchResults, option));
+      });
+  };
+}
+
+export function fetchTagDoc (tagid) {
+  console.log('id', tagid);
+  return (dispatch) => {
+    return graphqlService.query(QUERY_SEARCH_TAG, {tagid})
+      .then(json => {
+        console.log('fetchTagDoc, json', json);
+        const doc = {
+          ...json.data.taggable.search,
+          markets: JSON.parse(json.data.taggable.search.markets)
+        };
+        return dispatch(setSelectedTagFromSearch(doc));
       });
   };
 }

@@ -250,6 +250,7 @@ class ViewPane extends Component {
           </div>
         );
       } else {
+        console.log('search', items);
         return (
           <div>
             {this.renderTabs()}
@@ -267,22 +268,14 @@ class ViewPane extends Component {
                   pagination={pagination}
                   onFilterButtonClick={onFilterButtonClick}
                   inSearch={inSearch}
-                  selectedTagIds={linkedTags.map(tag => tag.id)}
+                  selectedTagIds={linkedTags.map(tag => tag.node)}
                   tagType={tagType}
                 />
               </Col>
               <Col xs={6}>
               <h3 className='parentListTitle'>Parent List</h3>
-                <h4 className='displayName'>Direct Links</h4>
                 <LinkedTagsList
-                  items={linkedTags.filter(tag => !tag.inherited)}
-                  symbol={'x'}
-                  handleButtonClick={handleButtonClick}
-                  handleTagClick={this.handleTagClick.bind(this)}
-                />
-                <h4 className='displayName'>Inherited Links</h4>
-                <LinkedTagsList
-                  items={linkedTags.filter(tag => tag.inherited)}
+                  items={linkedTags}
                   symbol={'x'}
                   handleButtonClick={handleButtonClick}
                   handleTagClick={this.handleTagClick.bind(this)}

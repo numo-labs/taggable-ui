@@ -69,12 +69,9 @@ export const initialState = {
 export default function taggable (state = initialState, action) {
   switch (action.type) {
     case SET_SELECTED_TAG_FROM_SEARCH:
-      const item = _.find(state.tag.searchResults.items, function (result) {
-        return result._id === action.id;
-      });
       return {
         ...state,
-        tagInView: item,
+        tagInView: action.tagDoc,
         createMode: false
       };
     case SET_SEARCH_STRING:

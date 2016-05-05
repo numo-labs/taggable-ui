@@ -14,17 +14,18 @@ class LinkedTagsList extends Component {
     } = this.props;
     const list = items.map(item => {
       return (
-        <div key={item.id} className='tag__item'>
+        <div key={item.node} className='tag__item'>
           <Tag
-            key={item.id}
-            id={item.id}
-            selected={item.id === selectedTagId}
-            onClick={() => handleTagClick(item.id)}
+            key={item.node}
+            id={item.node}
+            displayName={item.displayName}
+            selected={item.node === selectedTagId}
+            onClick={() => handleTagClick(item.node)}
             active={item.active}
           />
           <Button
             className='redButton'
-            onHandleClick={() => handleButtonClick(item.id)}
+            onHandleClick={() => handleButtonClick(item.node)}
             symbol={symbol}
           />
         </div>

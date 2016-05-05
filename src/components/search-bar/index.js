@@ -25,6 +25,7 @@ class SearchBar extends Component {
   }
 
   handleOnChange () {
+    console.log('val', this.refs.input.getValue());
     this.setState({
       text: this.refs.input.getValue()
     });

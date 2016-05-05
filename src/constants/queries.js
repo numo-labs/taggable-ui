@@ -1,50 +1,41 @@
-export const QUERY_SEARCH_TAGS = `
-query tagQuery($id: String, $queryType: QueryTypeEnum!, $tagType: TagTypeEnum, $start: Int, $size: Int) {
-	taggable {
-		search(searchString: $id, queryType: $queryType, tagType: $tagType, start: $start, size: $size) {
-			total,
-			items {
-				_id,
-				displayName,
-				location {
-					lat,
-					lon
-				},
-				tags {
-					tagId,
-					inherited,
-					source,
-					active
-				}
-				metadata {
-					key,
-					values
-				}
-			}
-		}
-	}
+export const QUERY_SEARCH_TAG = `
+query tagQuery ($tagid: String) {
+  taggable {
+    search(id: $tagid) {
+      _id,
+      displayName,
+      location {
+        lat,
+        lon
+      },
+      metadata {
+        values,
+        key
+      },
+      markets,
+      tags {
+      	node,
+        displayName,
+        active,
+        source
+      }
+    }
+  }
 }
 `;
 
-export const MUTATION_CREATE_TAG = `
-mutation createTag($id: String, $displayName: String, $location: LocationInputType, $tags: [TagInputItem], $metadata: [MetaDataInputItem]) {
-	taggable {
-    tagData(_id: $id, displayName: $displayName, location: $location, tags: $tags, metadata: $metadata) {
-      _id,
-      displayName,
-			location {
-				lat,
-				lon
-			},
-      tags {
-        tagId,
-				inherited,
-        source,
-        active
-      }
-      metadata {
-        key,
-        values
+export const QUERY_SUGGEST_TAGS = `
+query tagSuggest ($text: String, $size: Int) {
+  taggable {
+    suggest(text: $text, size: $size) {
+      total,
+      items {
+        tagid,
+        active,
+        label,
+        name,
+        context,
+        boost
       }
     }
   }
