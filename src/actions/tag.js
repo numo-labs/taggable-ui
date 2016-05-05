@@ -156,14 +156,14 @@ function formatMarketsToEdit (markets) {
 
 export function saveTagContent (tagDoc) {
   return (dispatch) => {
-    dispatch(saveTagDoc(tagDoc));
-    return dispatch(saveNewConfig());
+    // dispatch(saveTagDoc(tagDoc));
+    return dispatch(saveNewConfig(tagDoc));
   };
 }
 
-function saveTagDoc (tagDoc) {
-  return { type: types.SAVE_TAG_CONTENT, tagDoc };
-}
+// function saveTagDoc (tagDoc) {
+//   return { type: types.SAVE_TAG_CONTENT, tagDoc };
+// }
 
  // {"markets":[{"market":"dk","language":"da","label":"SPain","values":["Spainen","Spain"]}]}
 
@@ -171,10 +171,12 @@ function saveTagDoc (tagDoc) {
 * Function that will save a new tag configuration
 */
 
-export function saveNewConfig () {
+export function saveNewConfig (tagDoc) {
   return (dispatch, getState) => {
-    const { taggable: { tagInView: { _id: id, displayName, location, tags, metadata, markets } } } = getState();
-    const variables = {id, displayName, location, tags, metadata, markets: JSON.stringify(formatMarketsToSave(markets))};
+    // const { taggable: { tagInView: { _id: id, displayName, location, tags, metadata, markets, content } } } = getState();
+    const { _id: id, displayName, location, tags, metadata, markets, content } = tagDoc;
+    console.log('markets', markets);
+    const variables = {id, displayName, location, tags, metadata, markets: JSON.stringify(formatMarketsToSave(markets)), content};
     console.log('tag update request', variables);
     return graphqlService.query(MUTATION_CREATE_TAG, variables)
       .then(json => {

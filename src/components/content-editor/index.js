@@ -6,6 +6,7 @@ import './styles.css';
 export default class ContentEditor extends Component {
 
   onSubmit (data, buttonValue, errors) {
+    console.log('data', data);
     const error = Object.keys(errors).length > 0;
     /*eslint-disable no-undef */
     if (error) {
