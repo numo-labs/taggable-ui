@@ -6,11 +6,14 @@ import './styles.css';
 export default class ContentEditor extends Component {
 
   onSubmit (data, buttonValue, errors) {
+    const error = Object.keys(errors).length > 0;
     /*eslint-disable no-undef */
-    alert('Errors: ', JSON.stringify(errors));
+    if (error) {
+      alert('Errors: ', JSON.stringify(errors));
+    }
     /* eslint-enable no-undef */
     console.log('errors', errors);
-    if (buttonValue === 'Submit' && Object.keys(errors).length === 0) {
+    if (buttonValue === 'Submit' && !error) {
       this.props.onSubmit(data);
     }
   }
