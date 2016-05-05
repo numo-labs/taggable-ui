@@ -1,21 +1,16 @@
 import React, { Component, PropTypes } from 'react';
-import Form from 'react-json-editor';
+// import Form from 'react-json-editor';
+import Form from 'react-jsonschema-form';
 import Schema from './schema.json';
 import './styles.css';
 
 export default class ContentEditor extends Component {
 
-  onSubmit (data, buttonValue, errors) {
-    console.log('data', data);
-    const error = Object.keys(errors).length > 0;
-    /*eslint-disable no-undef */
-    if (error) {
-      alert('Errors: ', JSON.stringify(errors));
-    }
-    /* eslint-enable no-undef */
-    console.log('errors', errors);
-    if (buttonValue === 'Submit' && !error) {
-      this.props.onSubmit(data);
+  onSubmit (data) {
+    console.log('data', data.formData);
+
+    if (data.errors.length === 0) {
+      this.props.onSubmit(data.formData);
     }
   }
 
@@ -25,7 +20,7 @@ export default class ContentEditor extends Component {
       <Form
         schema={Schema}
         onSubmit={this.onSubmit.bind(this)}
-        values={tagDoc}
+        formData={tagDoc}
       />
     );
   }

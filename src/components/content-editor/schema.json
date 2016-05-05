@@ -4,7 +4,7 @@
  "description": "A form based on a schema",
  "type": "object",
  "required": [
-   "id",
+   "_id",
    "displayName"
  ],
  "x-hints": {
