@@ -3,6 +3,7 @@ import ViewPane from '../view-pane';
 import SearchPane from '../search-pane';
 import { Col, Nav, Navbar, Row, Grid } from 'react-bootstrap';
 import { AddTagButton } from '../button';
+import SavingNotificationModal from '../saving-notification-modal';
 
 require('./styles.css');
 import './css/normalize.css';
@@ -94,20 +95,12 @@ class TaggableUI extends Component {
       setSearchString,
       fetchTags,
       setTagTypeAndQueryType,
-      addValue,
-      addKeyValuePair,
-      setNewKeyString,
-      setNewValueString,
-      newKey,
-      newValue,
       createMode,
-      updateDisplayName,
-      updateId,
-      updateLatitude,
-      updateLongitude,
       saveTagContent,
       configurationSaved,
-      saveNewConfig
+      saveNewConfig,
+      modalVisible,
+      toggleSaveModalState
     } = this.props;
     const tagContent = (
       <Col xs={6} md={6}>
@@ -118,6 +111,7 @@ class TaggableUI extends Component {
             text='+ Create a new tag'
           />
         </div>
+        <SavingNotificationModal modalVisible={modalVisible} closeModal={toggleSaveModalState}/>
         <ViewPane
           saveNewConfig={saveNewConfig}
           configurationSaved={configurationSaved}
@@ -148,17 +142,7 @@ class TaggableUI extends Component {
           setSearchString={setSearchString}
           fetchTags={fetchTags}
           setTagTypeAndQueryType={setTagTypeAndQueryType}
-          onAddValue={addValue}
-          addKeyValuePair={addKeyValuePair}
-          setNewKeyString={setNewKeyString}
-          setNewValueString={setNewValueString}
-          newKey={newKey}
-          newValue={newValue}
           createMode={createMode}
-          updateDisplayName={updateDisplayName}
-          updateId={updateId}
-          updateLongitude={updateLongitude}
-          updateLatitude={updateLatitude}
         />
       </Col>
     );
@@ -216,18 +200,10 @@ TaggableUI.propTypes = {
   removeParentTag: PropTypes.func,
   tagType: PropTypes.string,
   parentTagTagType: PropTypes.string,
-  addValue: PropTypes.func,
-  addKeyValuePair: PropTypes.func,
-  setNewKeyString: PropTypes.func,
-  setNewValueString: PropTypes.func,
-  newKey: PropTypes.string,
-  newValue: PropTypes.string,
+  modalVisible: PropTypes.boolean,
+  toggleSaveModalState: PropTypes.func,
   createMode: PropTypes.bool,
   emptyTagInView: PropTypes.func,
-  updateDisplayName: PropTypes.func,
-  updateId: PropTypes.func,
-  updateLatitude: PropTypes.func,
-  updateLongitude: PropTypes.func,
   cleanSearchPane: PropTypes.func,
   displayDialog: PropTypes.bool,
   saveNewConfig: PropTypes.func

@@ -20,7 +20,8 @@ import {
   UPDATE_LATITUDE,
   UPDATE_LONGITUDE,
   CLEAN_SEARCH_PANE,
-  SAVE_TAG_CONTENT
+  SAVE_TAG_CONTENT,
+  TOGGLE_SAVE_MODAL_STATE
 } from '../constants/action-types.js';
 
 export const initialState = {
@@ -48,7 +49,10 @@ export const initialState = {
     links: {
       incoming: [],
       outgoing: []
-    }
+    },
+    markets: [],
+    content: [],
+    description: ''
   },
   searchString: '',
   tagType: null,
@@ -68,7 +72,8 @@ export const initialState = {
   configurationSaved: true,
   newKey: '',
   newValue: '',
-  createMode: true
+  createMode: true,
+  modalVisible: false
 };
 
 export default function taggable (state = initialState, action) {
@@ -117,6 +122,11 @@ export default function taggable (state = initialState, action) {
           tagType: action.tagType,
           queryType: action.queryType
         }
+      };
+    case TOGGLE_SAVE_MODAL_STATE:
+      return {
+        ...state,
+        modalVisible: !this.state.modalVisible
       };
     case ADD_PARENT_TAG:
       const newParentTag = {

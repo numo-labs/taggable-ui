@@ -4,7 +4,6 @@ import LinkedTagsList from '../linked-tags-list';
 import SearchList from '../search-list';
 import './styles.css';
 import ContentEditor from '../content-editor';
-import SavingNotificationModal from '../saving-notification-modal';
 import { Button } from 'react-bootstrap';
 
 class ViewPane extends Component {
@@ -16,21 +15,10 @@ class ViewPane extends Component {
       confirmationDialog: false
     };
     this.renderLinksView = this.renderLinksView.bind(this);
-    this.showConfirmationModal = this.showConfirmationModal.bind(this);
-    this.closeConfirmationModal = this.closeConfirmationModal.bind(this);
   }
 
   handleOnClick () {
     this.props.saveNewConfig();
-    this.showConfirmationModal();
-  }
-
-  showConfirmationModal () {
-    this.setState({confirmationDialog: true});
-  }
-
-  closeConfirmationModal () {
-    this.setState({confirmationDialog: false});
   }
 
   renderTabs () {
@@ -53,8 +41,8 @@ class ViewPane extends Component {
        activeKey={this.state.activeLinksKey}
        onSelect={this.handleSelect.bind(this, 'activeLinksKey')}
       >
-        <NavItem eventKey={1}>Incoming</NavItem>
-        <NavItem eventKey={2}>Outgoing</NavItem>
+        <NavItem eventKey={1}>Outgoing</NavItem>
+        <NavItem eventKey={2}>Incoming</NavItem>
       </Nav>
     );
   }
@@ -72,7 +60,7 @@ class ViewPane extends Component {
 
   renderLinksView () {
     const { item, handleButtonClick } = this.props;
-    if (this.state.activeLinksKey === 1) {
+    if (this.state.activeLinksKey === 2) {
       return (
         <LinkedTagsList
           items={item.links.incoming}
@@ -108,9 +96,6 @@ class ViewPane extends Component {
         tagType,
         saveTagContent,
         configurationSaved
-      },
-      state: {
-        confirmationDialog
       }
     } = this;
     const buttonAbility = configurationSaved ? 'default' : 'success';
@@ -157,7 +142,6 @@ class ViewPane extends Component {
                 >
                   Save current  configuration
                 </Button>
-                <SavingNotificationModal modalVisible={confirmationDialog} closeModal={this.closeConfirmationModal}/>
               </Col>
             </Row>
             </div>

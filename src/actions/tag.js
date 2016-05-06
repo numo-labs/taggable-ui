@@ -180,17 +180,19 @@ export function saveNewConfig () {
     console.log('tag update request', variables);
     return graphqlService.query(MUTATION_CREATE_TAG, variables)
       .then(json => {
-        console.log('tag update response', json);
-        const tagDoc = json.data.taggable.tagData;
-        const markets = JSON.parse(tagDoc.markets);
-        const doc = {
-          ...tagDoc,
-          markets: formatMarketsToEdit(markets)
-        };
-        dispatch(setSelectedTagFromSearch(doc));
-        return dispatch(saveConfiguration());
+        if (json.errors) {
+          console.log('Error saving new tag config', json.errors);
+        } else {
+          console.log('tag update response', json);
+          dispatch(toggleSaveModalState());
+          return dispatch(saveConfiguration());
+        }
       });
   };
+}
+
+export function toggleSaveModalState () {
+  return { type: types.TOGGLE_SAVE_MODAL_STATE };
 }
 
 /*

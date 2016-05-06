@@ -20,6 +20,16 @@ query ($tagid: String) {
         source
       },
       description,
+      content {
+        url,
+        market,
+        language,
+        sections {
+          text,
+          title,
+          image
+        }
+      },
       links {
         incoming {
           node {
