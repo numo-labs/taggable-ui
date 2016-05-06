@@ -70,9 +70,9 @@ query ($tagid: String) {
 `;
 
 export const QUERY_SUGGEST_TAGS = `
-query tagSuggest ($text: String, $size: Int) {
+query tagSuggest ($text: String, $size: Int, $start: Int) {
   taggable {
-    suggest(text: $text, size: $size) {
+    suggest(text: $text, size: $size, start: $start) {
       total,
       items {
         tagid,

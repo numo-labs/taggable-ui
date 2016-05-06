@@ -86,7 +86,6 @@ class TaggableUI extends Component {
   renderTagContent () {
     const {
       tagInView,
-      deleteValue,
       parentTagSearchResults,
       inParentTagSearch,
       addParentTag,
@@ -118,7 +117,6 @@ class TaggableUI extends Component {
           height={'32vh'}
           item={tagInView}
           linkedTags={tagInView.tags}
-          onDeleteValue={deleteValue}
           onSearchStringChange={this.onSearchStringChange.bind(this, 'parent')}
           onTagClick={addParentTag}
           handleButtonClick={removeParentTag}
@@ -181,32 +179,32 @@ class TaggableUI extends Component {
 }
 
 TaggableUI.propTypes = {
+  // view pane
   saveTagContent: PropTypes.func,
-  searchResults: PropTypes.object,
   tagInView: PropTypes.object,
-  search: PropTypes.func,
-  fetchTagDoc: PropTypes.func,
-  fetchTags: PropTypes.func,
-  searchLinkedTagDocument: PropTypes.func,
-  setSearchString: PropTypes.func,
-  setTagTypeAndQueryType: PropTypes.func,
   saveConfiguration: PropTypes.func,
   configurationSaved: PropTypes.bool,
-  inSearch: PropTypes.bool,
-  deleteValue: PropTypes.func,
   parentTagSearchResults: PropTypes.object,
   inParentTagSearch: PropTypes.bool,
   addParentTag: PropTypes.func,
   removeParentTag: PropTypes.func,
-  tagType: PropTypes.string,
   parentTagTagType: PropTypes.string,
   modalVisible: PropTypes.boolean,
+  saveNewConfig: PropTypes.func,
   toggleSaveModalState: PropTypes.func,
   createMode: PropTypes.bool,
+  // search pane
+  searchResults: PropTypes.object,
+  search: PropTypes.func,
+  fetchTagDoc: PropTypes.func,
+  fetchTags: PropTypes.func,
+  setSearchString: PropTypes.func,
+  setTagTypeAndQueryType: PropTypes.func,
+  inSearch: PropTypes.bool,
+  tagType: PropTypes.string,
   emptyTagInView: PropTypes.func,
   cleanSearchPane: PropTypes.func,
-  displayDialog: PropTypes.bool,
-  saveNewConfig: PropTypes.func
+  displayDialog: PropTypes.bool
 };
 
 export default TaggableUI;

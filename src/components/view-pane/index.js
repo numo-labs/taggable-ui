@@ -11,8 +11,7 @@ class ViewPane extends Component {
     super();
     this.state = {
       activeKey: 1,
-      activeLinksKey: 1,
-      confirmationDialog: false
+      activeLinksKey: 1
     };
     this.renderLinksView = this.renderLinksView.bind(this);
   }
@@ -50,11 +49,11 @@ class ViewPane extends Component {
   handleTagClick (id) {
     const {
       fetchTags,
-      setSearchString,
-      setTagTypeAndQueryType
+      setSearchString
+      // setTagTypeAndQueryType
     } = this.props;
     setSearchString(id, 'tag');
-    setTagTypeAndQueryType(undefined, 'QUERY_ID', 'tag');
+    // setTagTypeAndQueryType(undefined, 'QUERY_ID', 'tag');
     fetchTags(0, 10, 'tag');
   }
 

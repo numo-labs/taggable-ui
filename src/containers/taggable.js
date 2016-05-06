@@ -17,8 +17,6 @@ function mapStateToProps (state) {
       },
       tagInView,
       configurationSaved,
-      newKey,
-      newValue,
       createMode,
       modalVisible
      }
@@ -34,8 +32,6 @@ function mapStateToProps (state) {
     inParentTagSearch,
     tagType,
     parentTagTagType,
-    newKey,
-    newValue,
     createMode,
     modalVisible
   };
