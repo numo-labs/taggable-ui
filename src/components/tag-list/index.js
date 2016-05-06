@@ -75,7 +75,6 @@ class TagList extends Component {
       },
       state: { noTagsFound }
     } = this;
-    console.log('parent search items', items);
     return noTagsFound ? <div>No matching tags found</div> : items.map(item => {
       return (
         <div key={item.id} className='tag__item'>

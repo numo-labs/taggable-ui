@@ -1,40 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import ViewPane from '../view-pane';
 import SearchPane from '../search-pane';
-import { Col, Nav, NavItem, Navbar, Row, Grid } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import { Col, Nav, Navbar, Row, Grid } from 'react-bootstrap';
 import { AddTagButton } from '../button';
-import SavingNotificationModal from '../saving-notification-modal';
 
 require('./styles.css');
 import './css/normalize.css';
 
 class TaggableUI extends Component {
-  handleOnClick () {
-    this.props.saveNewConfig();
-    this.showConfirmationModal();
-  }
-
-  constructor () {
-    super();
-    this.state = {
-      confirmationDialog: false
-    };
-    this.showConfirmationModal = this.showConfirmationModal.bind(this);
-    this.closeConfirmationModal = this.closeConfirmationModal.bind(this);
-  }
-
-  showConfirmationModal () {
-    this.setState({confirmationDialog: true});
-  }
-
-  closeConfirmationModal () {
-    this.setState({confirmationDialog: false});
-  }
 
   renderNavbar () {
-    const { props: { configurationSaved }, state: { confirmationDialog } } = this;
-    const buttonAbility = configurationSaved ? 'default' : 'success';
     const navbar = (
       <nav className='navbar navbar-default navi'>
         <div className='navbar-header'>
@@ -44,19 +19,6 @@ class TaggableUI extends Component {
             </Nav>
           </Navbar.Brand>
         </div>
-        <Nav className='saveButton' pullRight>
-          <NavItem>
-            <Button
-              className='save'
-              disabled={configurationSaved}
-              bsStyle={buttonAbility}
-              onClick={this.handleOnClick.bind(this)}
-            >
-              Save new configuration
-            </Button>
-          </NavItem>
-        </Nav>
-        <SavingNotificationModal modalVisible={confirmationDialog} closeModal={this.closeConfirmationModal}/>
       </nav>
     );
     return navbar;
@@ -143,18 +105,22 @@ class TaggableUI extends Component {
       updateId,
       updateLatitude,
       updateLongitude,
-      saveTagContent
+      saveTagContent,
+      configurationSaved,
+      saveNewConfig
     } = this.props;
     const tagContent = (
       <Col xs={6} md={6}>
-          <div className='newTagButton'>
-            <AddTagButton
-              className='createTag'
-              onClick={this.handleOnCreateClick.bind(this)}
-              text='+ Create a new tag'
-            />
-          </div>
+        <div className='newTagButton'>
+          <AddTagButton
+            className='createTag'
+            onClick={this.handleOnCreateClick.bind(this)}
+            text='+ Create a new tag'
+          />
+        </div>
         <ViewPane
+          saveNewConfig={saveNewConfig}
+          configurationSaved={configurationSaved}
           height={'32vh'}
           item={tagInView}
           linkedTags={tagInView.tags}

@@ -4,13 +4,33 @@ import LinkedTagsList from '../linked-tags-list';
 import SearchList from '../search-list';
 import './styles.css';
 import ContentEditor from '../content-editor';
+import SavingNotificationModal from '../saving-notification-modal';
+import { Button } from 'react-bootstrap';
 
 class ViewPane extends Component {
   constructor () {
     super();
     this.state = {
-      activeKey: 1
+      activeKey: 1,
+      activeLinksKey: 1,
+      confirmationDialog: false
     };
+    this.renderLinksView = this.renderLinksView.bind(this);
+    this.showConfirmationModal = this.showConfirmationModal.bind(this);
+    this.closeConfirmationModal = this.closeConfirmationModal.bind(this);
+  }
+
+  handleOnClick () {
+    this.props.saveNewConfig();
+    this.showConfirmationModal();
+  }
+
+  showConfirmationModal () {
+    this.setState({confirmationDialog: true});
+  }
+
+  closeConfirmationModal () {
+    this.setState({confirmationDialog: false});
   }
 
   renderTabs () {
@@ -18,10 +38,23 @@ class ViewPane extends Component {
       <Nav
        bsStyle='pills'
        activeKey={this.state.activeKey}
-       onSelect={this.handleSelect.bind(this)}
+       onSelect={this.handleSelect.bind(this, 'activeKey')}
       >
         <NavItem eventKey={1}>Tag Content</NavItem>
-        <NavItem eventKey={2}>Parents</NavItem>
+        <NavItem eventKey={2}>Links</NavItem>
+      </Nav>
+    );
+  }
+
+  renderLinkTabs () {
+    return (
+      <Nav
+       bsStyle='pills'
+       activeKey={this.state.activeLinksKey}
+       onSelect={this.handleSelect.bind(this, 'activeLinksKey')}
+      >
+        <NavItem eventKey={1}>Incoming</NavItem>
+        <NavItem eventKey={2}>Outgoing</NavItem>
       </Nav>
     );
   }
@@ -37,21 +70,50 @@ class ViewPane extends Component {
     fetchTags(0, 10, 'tag');
   }
 
+  renderLinksView () {
+    const { item, handleButtonClick } = this.props;
+    if (this.state.activeLinksKey === 1) {
+      return (
+        <LinkedTagsList
+          items={item.links.incoming}
+          symbol={'x'}
+          handleTagClick={this.handleTagClick.bind(this)}
+          withButtons={false}
+        />
+      );
+    } else {
+      return (
+        <LinkedTagsList
+          items={item.links.outgoing}
+          symbol={'x'}
+          handleButtonClick={handleButtonClick}
+          handleTagClick={this.handleTagClick.bind(this)}
+        />
+      );
+    }
+  }
+
   renderContent () {
     const {
-      item,
-      onSearchStringChange,
-      onSubmit,
-      items,
-      onTagClick,
-      pagination,
-      onFilterButtonClick,
-      inSearch,
-      linkedTags,
-      handleButtonClick,
-      tagType,
-      saveTagContent
-    } = this.props;
+      props: {
+        item,
+        onSearchStringChange,
+        onSubmit,
+        items,
+        onTagClick,
+        pagination,
+        onFilterButtonClick,
+        inSearch,
+        linkedTags,
+        tagType,
+        saveTagContent,
+        configurationSaved
+      },
+      state: {
+        confirmationDialog
+      }
+    } = this;
+    const buttonAbility = configurationSaved ? 'default' : 'success';
     if (item) {
       if (this.state.activeKey === 1) {
         return (
@@ -69,7 +131,7 @@ class ViewPane extends Component {
             <div className='listBuffer'>
             <Row>
               <Col xs={6}>
-                <h3>Add Outgoing Link</h3>
+                <h4>Add Outgoing Link</h4>
                 <SearchList
                   symbol={'+'}
                   withButtons
@@ -85,21 +147,17 @@ class ViewPane extends Component {
                 />
               </Col>
               <Col xs={6}>
-              <h3 className='parentListTitle'>Links</h3>
-                  <h4 className='displayName'>Incoming</h4>
-                  <LinkedTagsList
-                    items={item.links.incoming}
-                    symbol={'x'}
-                    handleTagClick={this.handleTagClick.bind(this)}
-                    withButtons={false}
-                  />
-                 <h4 className='displayName'>Outgoing</h4>
-                 <LinkedTagsList
-                   items={item.links.outgoing}
-                   symbol={'x'}
-                   handleButtonClick={handleButtonClick}
-                   handleTagClick={this.handleTagClick.bind(this)}
-                 />
+                {this.renderLinkTabs()}
+                {this.renderLinksView()}
+                <Button
+                  className='save'
+                  disabled={configurationSaved}
+                  bsStyle={buttonAbility}
+                  onClick={this.handleOnClick.bind(this)}
+                >
+                  Save current  configuration
+                </Button>
+                <SavingNotificationModal modalVisible={confirmationDialog} closeModal={this.closeConfirmationModal}/>
               </Col>
             </Row>
             </div>
@@ -109,9 +167,9 @@ class ViewPane extends Component {
     }
   }
 
-  handleSelect (selectedKey) {
+  handleSelect (state, selectedKey) {
     this.setState({
-      activeKey: selectedKey
+      [state]: selectedKey
     });
   }
   render () {
@@ -142,25 +200,11 @@ ViewPane.propTypes = {
   pagination: PropTypes.object,
 
   // tag in view content
-  newKey: PropTypes.string,
-  newValue: PropTypes.string,
-  metadata: PropTypes.array,
   item: PropTypes.object, // selected tag,
   saveTagContent: PropTypes.func,
-
-  // tag in view update methods
-  addKeyValuePair: PropTypes.func,
-  setNewKeyString: PropTypes.func,
-  setNewValueString: PropTypes.func,
-  onDeleteValue: PropTypes.func,
-  onAddValue: PropTypes.func,
-  removeKey: PropTypes.func,
   createMode: PropTypes.bool,
-  updateDisplayName: PropTypes.func,
-  updateId: PropTypes.func,
-  updateLatitude: PropTypes.func,
-  updateLongitude: PropTypes.func,
-  height: PropTypes.string // height of metadata content field
+  configurationSaved: PropTypes.bool,
+  saveNewConfig: PropTypes.func
 };
 
 ViewPane.defaultProps = {
