@@ -126,7 +126,7 @@ export default function taggable (state = initialState, action) {
     case TOGGLE_SAVE_MODAL_STATE:
       return {
         ...state,
-        modalVisible: !this.state.modalVisible
+        modalVisible: !state.modalVisible
       };
     case ADD_PARENT_TAG:
       const newParentTag = {

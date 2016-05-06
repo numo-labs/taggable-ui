@@ -173,10 +173,10 @@ function saveTagDoc (tagDoc) {
 
 export function saveNewConfig () {
   return (dispatch, getState) => {
-    const { taggable: { tagInView: { _id: id, displayName, location, tags, metadata, markets, content } } } = getState();
+    const { taggable: { tagInView: { _id: id, displayName, location, tags, metadata, markets, content, description } } } = getState();
     // const { _id: id, displayName, location, tags, metadata, markets, content } = tagDoc;
     console.log('markets', markets);
-    const variables = {id, displayName, location, tags, metadata, markets: JSON.stringify(formatMarketsToSave(markets)), content};
+    const variables = {id, displayName, location, tags, metadata, description, markets: JSON.stringify(formatMarketsToSave(markets)), content};
     console.log('tag update request', variables);
     return graphqlService.query(MUTATION_CREATE_TAG, variables)
       .then(json => {

@@ -1,7 +1,7 @@
 export const MUTATION_CREATE_TAG = `
-mutation createTag($id: String, $displayName: String, $location: LocationInputType, $tags: [TagInputItem], $metadata: [MetaDataInputItem], $markets: String, $content: [ContentInputItem]) {
+mutation createTag($id: String, $displayName: String, $location: LocationInputType, $tags: [TagInputItem], $metadata: [MetaDataInputItem], $markets: String, $description: String, $content: [ContentInputItem]) {
 	taggable {
-    tagData(_id: $id, displayName: $displayName, location: $location, tags: $tags, metadata: $metadata, markets: $markets, content: $content) {
+    tagData(_id: $id, displayName: $displayName, location: $location, tags: $tags, metadata: $metadata, markets: $markets, content: $content, description: $description) {
 			_id,
        location {
          lat,
