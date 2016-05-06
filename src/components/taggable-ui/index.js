@@ -79,23 +79,22 @@ class TaggableUI extends Component {
   renderSearchPane () {
     const {
       searchResults,
-      setSelectedTagFromSearch,
       tagInView,
       tagType,
       inSearch,
       createMode,
-      cleanSearchPane
+      cleanSearchPane,
+      fetchTagDoc
     } = this.props;
     const searchPane = (
       <Col xs={3} md={3} className='col-centered searchPaneContainer'>
-        <h1 className='searchTagTitle'>Search Tags</h1>
         <SearchPane
           onSearchStringChange={this.onSearchStringChange.bind(this, 'tag')}
-          onTagClick={setSelectedTagFromSearch}
+          onTagClick={fetchTagDoc}
           items={searchResults.items.map(result => {
             return {
-              id: result._id,
-              displayName: result.displayName
+              id: result.tagid,
+              name: result.name
             };
           })}
           inSearch={inSearch}
@@ -115,17 +114,6 @@ class TaggableUI extends Component {
       </Col>
     );
     return searchPane;
-  }
-  createLinkedTagsArray (tags) {
-    if (tags) {
-      return tags.map(result => {
-        return {
-          id: result.tagId
-        };
-      });
-    } else {
-      return [];
-    }
   }
   handleOnCreateClick () {
     const { emptyTagInView, cleanSearchPane } = this.props;
@@ -154,32 +142,31 @@ class TaggableUI extends Component {
       updateDisplayName,
       updateId,
       updateLatitude,
-      updateLongitude
+      updateLongitude,
+      saveTagContent
     } = this.props;
-    const tagTitle = createMode ? 'Create a New Tag' : 'Tag Content';
-    const h1Class = createMode ? 'tagContentTitle' : 'tagContentWithoutButton';
     const tagContent = (
-      <Col xs={6} md={6} className='col-centered'>
-          <h1 className={h1Class}>{tagTitle}</h1>
+      <Col xs={6} md={6}>
           <div className='newTagButton'>
-            {!createMode && <AddTagButton
+            <AddTagButton
               className='createTag'
               onClick={this.handleOnCreateClick.bind(this)}
               text='+ Create a new tag'
-            />}
+            />
           </div>
         <ViewPane
           height={'32vh'}
           item={tagInView}
-          linkedTags={this.createLinkedTagsArray(tagInView.tags)}
+          linkedTags={tagInView.tags}
           onDeleteValue={deleteValue}
           onSearchStringChange={this.onSearchStringChange.bind(this, 'parent')}
           onTagClick={addParentTag}
           handleButtonClick={removeParentTag}
+          saveTagContent={saveTagContent}
           items={parentTagSearchResults.items.map(result => {
             return {
-              id: result._id,
-              displayName: result.displayName
+              id: result.tagid,
+              name: result.name
             };
           })}
           tagType={parentTagTagType}
@@ -227,26 +214,28 @@ class TaggableUI extends Component {
     return (
       <div>
         {this.renderNavbar()}
+        <br/>
         <Grid fluid>
           <Row>
-            <Col xs={4}>
+            <Col xs={3} >
               {this.renderSearchPane()}
             </Col>
-            <Col xs={8}>
+            <Col xs={9}>
               {this.renderItemContent()}
             </Col>
           </Row>
         </Grid>
-      </div>
+        </div>
     );
   }
 }
 
 TaggableUI.propTypes = {
+  saveTagContent: PropTypes.func,
   searchResults: PropTypes.object,
   tagInView: PropTypes.object,
   search: PropTypes.func,
-  setSelectedTagFromSearch: PropTypes.func,
+  fetchTagDoc: PropTypes.func,
   fetchTags: PropTypes.func,
   searchLinkedTagDocument: PropTypes.func,
   setSearchString: PropTypes.func,

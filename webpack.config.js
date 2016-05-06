@@ -1,3 +1,4 @@
+var webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -8,6 +9,9 @@ module.exports = {
     filename: 'index.js',
     path: __dirname + '/dist'
   },
+  plugins: [
+    new webpack.IgnorePlugin(/^(buffertools)$/) // unwanted "deeper" dependency
+  ],
   module: {
     loaders: [
       {
@@ -19,6 +23,7 @@ module.exports = {
         test: /\.html$/,
         loader: 'file?name=[name].[ext]'
       },
+      { test: /\.json$/, loader: 'json-loader' },
       {
         test: /\.png$/,
         loader: 'url-loader?mimetype=image/png'

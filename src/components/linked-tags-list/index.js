@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Tag from '../tag';
+import LinkedTag from '../linked-tag';
 import { SymbolButton as Button } from '../button';
 import './styles.css';
 
@@ -10,23 +10,32 @@ class LinkedTagsList extends Component {
       handleButtonClick,
       handleTagClick,
       symbol,
-      selectedTagId
+      selectedTagId,
+      withButtons
     } = this.props;
     const list = items.map(item => {
+      const {
+        node: { properties: { id, name } },
+        relationship: { properties: { active }, type }
+      } = item;
       return (
-        <div key={item.id} className='tag__item'>
-          <Tag
-            key={item.id}
-            id={item.id}
-            selected={item.id === selectedTagId}
-            onClick={() => handleTagClick(item.id)}
-            active={item.active}
+        <div key={id} className='tag__item'>
+          <LinkedTag
+            key={id}
+            id={id}
+            displayName={name}
+            relationType={type}
+            selected={id === selectedTagId}
+            onClick={() => handleTagClick(name)}
+            active={active}
           />
-          <Button
-            className='redButton'
-            onHandleClick={() => handleButtonClick(item.id)}
-            symbol={symbol}
-          />
+          { withButtons &&
+            <Button
+              className='redButton'
+              onHandleClick={() => handleButtonClick(id)}
+              symbol={symbol}
+            />
+          }
         </div>
       );
     });

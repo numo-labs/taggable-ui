@@ -28,7 +28,7 @@ describe('Component', function () {
     const wrapper = shallow(<TaggableUI {...props} />);
     const children = wrapper.children().nodes;
     it('should render our TaggableUI component', function (done) {
-      expect(children).to.have.length(2);
+      expect(children).to.have.length(3);
       done();
     });
     it('should render navbar as a <div/> with class .navi', function (done) {
@@ -36,8 +36,8 @@ describe('Component', function () {
       expect(nav).to.have.length(1);
       done();
     });
-    it('should render a <Grid /> as the second child', function (done) {
-      const secondChild = children[1].type;
+    it('should render a <Grid /> as the third child', function (done) {
+      const secondChild = children[2].type;
       const grid = wrapper.find('Grid').node.type;
       expect(secondChild).to.deep.equal(grid);
       done();

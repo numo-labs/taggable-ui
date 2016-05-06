@@ -19,7 +19,8 @@ import {
   UPDATE_ID,
   UPDATE_LATITUDE,
   UPDATE_LONGITUDE,
-  CLEAN_SEARCH_PANE
+  CLEAN_SEARCH_PANE,
+  SAVE_TAG_CONTENT
 } from '../constants/action-types.js';
 
 export const initialState = {
@@ -43,7 +44,11 @@ export const initialState = {
       lon: ''
     },
     metadata: [],
-    tags: []
+    tags: [],
+    links: {
+      incoming: [],
+      outgoing: []
+    }
   },
   searchString: '',
   tagType: null,
@@ -69,13 +74,15 @@ export const initialState = {
 export default function taggable (state = initialState, action) {
   switch (action.type) {
     case SET_SELECTED_TAG_FROM_SEARCH:
-      const item = _.find(state.tag.searchResults.items, function (result) {
-        return result._id === action.id;
-      });
       return {
         ...state,
-        tagInView: item,
+        tagInView: action.tagDoc,
         createMode: false
+      };
+    case SAVE_TAG_CONTENT:
+      return {
+        ...state,
+        tagInView: action.tagDoc
       };
     case SET_SEARCH_STRING:
       return {
@@ -113,17 +120,38 @@ export default function taggable (state = initialState, action) {
       };
     case ADD_PARENT_TAG:
       const newParentTag = {
-        tagId: action.id,
+        node: action.node,
+        displayName: action.name,
         source: 'taggable_ui',
-        active: true,
-        inherited: false
+        active: true
+      };
+      const newOutGoingLink = {
+        node: {
+          properties: {
+            name: action.name,
+            id: action.node
+          }
+        },
+        relationship: {
+          properties: {
+            active: true
+          },
+          type: 'Pending'
+        }
       };
       const tags = [...state.tagInView.tags, newParentTag];
       return {
         ...state,
         tagInView: {
           ...state.tagInView,
-          tags: _.uniqBy(tags, 'tagId') // prevent duplicate links
+          links: {
+            ...state.tagInView.links,
+            outgoing: [
+              ...state.tagInView.links.outgoing,
+              newOutGoingLink
+            ]
+          },
+          tags: _.uniqBy(tags, 'node') // prevent duplicate links
         },
         configurationSaved: false
       };
@@ -132,7 +160,11 @@ export default function taggable (state = initialState, action) {
         ...state,
         tagInView: {
           ...state.tagInView,
-          tags: state.tagInView.tags.filter(tag => tag.tagId !== action.id)
+          tags: state.tagInView.tags.filter(tag => tag.node !== action.node),
+          links: {
+            ...state.tagInView.links,
+            outgoing: state.tagInView.links.outgoing.filter(link => link.node.properties.id !== action.node)
+          }
         },
         configurationSaved: false
       };

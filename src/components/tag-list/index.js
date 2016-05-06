@@ -75,15 +75,16 @@ class TagList extends Component {
       },
       state: { noTagsFound }
     } = this;
+    console.log('parent search items', items);
     return noTagsFound ? <div>No matching tags found</div> : items.map(item => {
       return (
         <div key={item.id} className='tag__item'>
           <Tag
            key={item.id}
            id={item.id}
-           displayName={item.displayName}
+           displayName={item.name}
            selected={_.includes(selectedTagIds, item.id)}
-           onClick={() => onTagClick(item.id)}
+           onClick={() => onTagClick(item.id, item.name)}
           />
           { withButtons &&
             <Button

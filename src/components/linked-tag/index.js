@@ -2,38 +2,40 @@ import React, { Component, PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 import './styles.css';
 
-class Tag extends Component {
+class LinkedTag extends Component {
   handleOnClick () {
     this.props.onClick(this.props.id);
   }
   render () {
-    const { id, displayName, selected, active } = this.props;
+    const { id, displayName, active, relationType } = this.props;
     const statusClass = active ? '' : 'tag_inactive';
     return (
       <Button
         className={`tag ${statusClass}`}
         bsSize='xsmall'
-        bsStyle={selected ? 'primary' : 'default'}
+        bsStyle={'default'}
         onClick={this.handleOnClick.bind(this)}
       >
-        <p className='tag__name tag__normalWrap'>{displayName}</p>
+        <p className='tag__name'>{displayName}</p>
         <p className='tag__id'>{id}</p>
+        <p className='tag__id'>{'type:' + relationType}</p>
       </Button>
     );
   }
 }
 
-Tag.propTypes = {
+LinkedTag.propTypes = {
   onClick: PropTypes.func.isRequired,
   selected: PropTypes.bool,
   displayName: PropTypes.string,
   id: PropTypes.string,
-  active: PropTypes.bool
+  active: PropTypes.bool,
+  relationType: PropTypes.string
 };
 
-Tag.defaultProps = {
+LinkedTag.defaultProps = {
   onClick: () => {},
   active: true
 };
 
-export default Tag;
+export default LinkedTag;
