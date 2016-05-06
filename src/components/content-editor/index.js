@@ -5,23 +5,30 @@ import './styles.css';
 
 export default class ContentEditor extends Component {
 
+  formatFormData (data) {
+    return {
+      ...data,
+      markets: data.markets ? data.markets : [],
+      content: data.content ? data.content : [],
+      active: data.active ? data.active : true,
+      description: data.description ? data.description : ''
+    };
+  }
   onSubmit (data) {
-    console.log('data', data.formData);
-
+    const tagDoc = this.formatFormData(data.formData);
     if (data.errors.length === 0) {
-      this.props.onSubmit(data.formData);
+      this.props.onSubmit(tagDoc);
     }
   }
 
   render () {
     const { tagDoc } = this.props;
     return (
-        <Form
-          schema={Schema}
-          onSubmit={this.onSubmit.bind(this)}
-          formData={tagDoc}
-        />
-
+      <Form
+        schema={Schema}
+        onSubmit={this.onSubmit.bind(this)}
+        formData={tagDoc}
+      />
     );
   }
 }
