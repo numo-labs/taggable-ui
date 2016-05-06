@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Tag from '../tag';
+import LinkedTag from '../linked-tag';
 import { SymbolButton as Button } from '../button';
 import './styles.css';
 
@@ -13,15 +13,20 @@ class LinkedTagsList extends Component {
       selectedTagId
     } = this.props;
     const list = items.map(item => {
+      const {
+        node: { properties: { id, name } },
+        relationship: { properties: { active }, type }
+      } = item;
       return (
-        <div key={item.node} className='tag__item'>
-          <Tag
-            key={item.node}
-            id={item.node}
-            displayName={item.displayName}
-            selected={item.node === selectedTagId}
-            onClick={() => handleTagClick(item.node)}
-            active={item.active}
+        <div key={id} className='tag__item'>
+          <LinkedTag
+            key={id}
+            id={id}
+            displayName={name}
+            relationType={type}
+            selected={id === selectedTagId}
+            onClick={() => handleTagClick(id)}
+            active={active}
           />
           <Button
             className='redButton'

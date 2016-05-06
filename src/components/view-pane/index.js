@@ -241,6 +241,7 @@ class ViewPane extends Component {
       tagType,
       saveTagContent
     } = this.props;
+    console.log('tag item', item);
     if (item) {
       if (this.state.activeKey === 1) {
         return (
@@ -250,14 +251,13 @@ class ViewPane extends Component {
           </div>
         );
       } else {
-        console.log('search', items);
         return (
           <div>
             {this.renderTabs()}
             <div className='listBuffer'>
             <Row>
               <Col xs={6}>
-                <h3>Add Parent</h3>
+                <h3>Add Outgoing Link</h3>
                 <SearchList
                   symbol={'+'}
                   withButtons
@@ -273,13 +273,21 @@ class ViewPane extends Component {
                 />
               </Col>
               <Col xs={6}>
-              <h3 className='parentListTitle'>Parent List</h3>
-                <LinkedTagsList
-                  items={linkedTags}
-                  symbol={'x'}
-                  handleButtonClick={handleButtonClick}
-                  handleTagClick={this.handleTagClick.bind(this)}
-                />
+              <h3 className='parentListTitle'>Links</h3>
+                  <h4 className='displayName'>Incoming</h4>
+                  <LinkedTagsList
+                    items={item.links.incoming}
+                    symbol={'x'}
+                    handleButtonClick={handleButtonClick}
+                    handleTagClick={this.handleTagClick.bind(this)}
+                  />
+                 <h4 className='displayName'>Outgoing</h4>
+                 <LinkedTagsList
+                   items={item.links.outgoing}
+                   symbol={'x'}
+                   handleButtonClick={handleButtonClick}
+                   handleTagClick={this.handleTagClick.bind(this)}
+                 />
               </Col>
             </Row>
             </div>

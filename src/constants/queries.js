@@ -1,5 +1,5 @@
 export const QUERY_SEARCH_TAG = `
-query tagQuery ($tagid: String) {
+query ($tagid: String) {
   taggable {
     search(id: $tagid) {
       _id,
@@ -18,6 +18,40 @@ query tagQuery ($tagid: String) {
         displayName,
         active,
         source
+      },
+      links {
+        incoming {
+          node {
+            labels,
+            properties {
+              name,
+              id
+            }
+          }
+          relationship {
+            type,
+            properties {
+              active,
+              type
+            }
+          }
+        },
+        outgoing {
+          node {
+            labels,
+            properties {
+              name,
+              id
+            }
+          }
+          relationship {
+            type,
+            properties {
+              active,
+              type
+            }
+          }
+        }
       }
     }
   }

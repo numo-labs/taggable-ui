@@ -1,0 +1,30 @@
+.tag {
+  display: inline-block;
+  width: 80%;
+  margin-bottom: 0.2em;
+  margin-top: 0.2em;
+}
+
+.tag_inactive {
+  background-color: #d3d3d3;
+}
+
+.tag__name {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin: 0.2em auto;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.tag__id {
+  font-size: 1em;
+  margin: 0.3em auto;
+  font-style: italic;
+}
+
+.tag__highlight {
+  background-color: #4d4d4d;
+  color: #ffffff
+}
