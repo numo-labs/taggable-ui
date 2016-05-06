@@ -19,13 +19,18 @@
      "title": "Display Name",
      "type": "string",
      "minLength": 1,
-     "maxLength": 200
-   },
-   "description": {
-     "title": "Description",
-     "type": "string",
-     "minLength": 0,
      "maxLength": 500
+   },
+   "location": {
+     "type": "object",
+     "properties": {
+     	"lat": {
+          "type":"string"
+        },
+        "lon": {
+          "type":"string"
+        }
+     }
    },
    "active": {
      "title": "Active",
