@@ -10,7 +10,8 @@ class LinkedTagsList extends Component {
       handleButtonClick,
       handleTagClick,
       symbol,
-      selectedTagId
+      selectedTagId,
+      withButtons
     } = this.props;
     const list = items.map(item => {
       const {
@@ -25,14 +26,16 @@ class LinkedTagsList extends Component {
             displayName={name}
             relationType={type}
             selected={id === selectedTagId}
-            onClick={() => handleTagClick(id)}
+            onClick={() => handleTagClick(name)}
             active={active}
           />
-          <Button
-            className='redButton'
-            onHandleClick={() => handleButtonClick(item.node)}
-            symbol={symbol}
-          />
+          { withButtons &&
+            <Button
+              className='redButton'
+              onHandleClick={() => handleButtonClick(id)}
+              symbol={symbol}
+            />
+          }
         </div>
       );
     });

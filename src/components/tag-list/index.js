@@ -84,7 +84,7 @@ class TagList extends Component {
            id={item.id}
            displayName={item.name}
            selected={_.includes(selectedTagIds, item.id)}
-           onClick={() => onTagClick(item.id)}
+           onClick={() => onTagClick(item.id, item.name)}
           />
           { withButtons &&
             <Button

@@ -7,13 +7,13 @@ class LinkedTag extends Component {
     this.props.onClick(this.props.id);
   }
   render () {
-    const { id, displayName, selected, active, relationType } = this.props;
+    const { id, displayName, active, relationType } = this.props;
     const statusClass = active ? '' : 'tag_inactive';
     return (
       <Button
         className={`tag ${statusClass}`}
         bsSize='xsmall'
-        bsStyle={selected ? 'primary' : 'default'}
+        bsStyle={'default'}
         onClick={this.handleOnClick.bind(this)}
       >
         <p className='tag__name'>{displayName}</p>

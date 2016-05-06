@@ -45,8 +45,8 @@ export function busySearching (option) {
 * @param {String} - id of the selected tag
 */
 
-export function addParentTag (id) {
-  return { type: types.ADD_PARENT_TAG, id };
+export function addParentTag (node, name) {
+  return { type: types.ADD_PARENT_TAG, node, name };
 }
 
 /**
@@ -57,8 +57,8 @@ export function addParentTag (id) {
 * (search for a 'parent' tag)
 */
 
-export function removeParentTag (id) {
-  return { type: types.REMOVE_PARENT_TAG, id };
+export function removeParentTag (node) {
+  return { type: types.REMOVE_PARENT_TAG, node };
 }
 
 /**
@@ -156,14 +156,14 @@ function formatMarketsToEdit (markets) {
 
 export function saveTagContent (tagDoc) {
   return (dispatch) => {
-    // dispatch(saveTagDoc(tagDoc));
-    return dispatch(saveNewConfig(tagDoc));
+    dispatch(saveTagDoc(tagDoc));
+    return dispatch(saveNewConfig());
   };
 }
 
-// function saveTagDoc (tagDoc) {
-//   return { type: types.SAVE_TAG_CONTENT, tagDoc };
-// }
+function saveTagDoc (tagDoc) {
+  return { type: types.SAVE_TAG_CONTENT, tagDoc };
+}
 
  // {"markets":[{"market":"dk","language":"da","label":"SPain","values":["Spainen","Spain"]}]}
 
@@ -171,10 +171,10 @@ export function saveTagContent (tagDoc) {
 * Function that will save a new tag configuration
 */
 
-export function saveNewConfig (tagDoc) {
+export function saveNewConfig () {
   return (dispatch, getState) => {
-    // const { taggable: { tagInView: { _id: id, displayName, location, tags, metadata, markets, content } } } = getState();
-    const { _id: id, displayName, location, tags, metadata, markets, content } = tagDoc;
+    const { taggable: { tagInView: { _id: id, displayName, location, tags, metadata, markets, content } } } = getState();
+    // const { _id: id, displayName, location, tags, metadata, markets, content } = tagDoc;
     console.log('markets', markets);
     const variables = {id, displayName, location, tags, metadata, markets: JSON.stringify(formatMarketsToSave(markets)), content};
     console.log('tag update request', variables);

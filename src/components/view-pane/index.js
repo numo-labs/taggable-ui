@@ -241,7 +241,6 @@ class ViewPane extends Component {
       tagType,
       saveTagContent
     } = this.props;
-    console.log('tag item', item);
     if (item) {
       if (this.state.activeKey === 1) {
         return (
@@ -278,8 +277,8 @@ class ViewPane extends Component {
                   <LinkedTagsList
                     items={item.links.incoming}
                     symbol={'x'}
-                    handleButtonClick={handleButtonClick}
                     handleTagClick={this.handleTagClick.bind(this)}
+                    withButtons={false}
                   />
                  <h4 className='displayName'>Outgoing</h4>
                  <LinkedTagsList
