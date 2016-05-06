@@ -73,6 +73,7 @@
     "pre-commit": "^1.1.2",
     "react-bootstrap": "^0.28.4",
     "react-json-editor": "^0.2.0",
+    "react-schema-form": "^0.2.8",
     "semistandard": "^7.0.5",
     "sinon": "^1.17.3",
     "style-loader": "^0.13.0",
