@@ -11,6 +11,15 @@
   width: 50%;
 }
 
+.save {
+  padding: 0.8em;
+  margin: 2em;
+}
+
+.saveButton {
+  margin: 0.6em;
+}
+
 .content {
   margin: auto;
   margin-left: 1em;
@@ -121,10 +130,6 @@
   text-align: left;
   display: inline-block;
   float: left;
-}
-
-.parentListTitle {
-  margin-bottom: 1em;
 }
 
 .tagTabs:hover {

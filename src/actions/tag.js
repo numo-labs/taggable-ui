@@ -98,7 +98,7 @@ export function fetchTags (start, size, option) {
     const state = getState().taggable;
     // const { tag: { queryType, tagType } } = state;
     const searchString = state[option].searchString;
-    return graphqlService.query(QUERY_SUGGEST_TAGS, {text: searchString, size})
+    return graphqlService.query(QUERY_SUGGEST_TAGS, {text: searchString, size, start})
       .then(json => {
         console.log('fetchTags json', json);
         const searchResults = json.data.taggable.suggest.items ? json.data.taggable.suggest : {total: 0, items: []};
@@ -116,7 +116,7 @@ export function fetchTagDoc (tagid) {
         const tagDoc = json.data.taggable.search;
         const markets = JSON.parse(tagDoc.markets);
         const doc = {
-          ...json.data.taggable.search,
+          ...tagDoc,
           markets: formatMarketsToEdit(markets)
         };
         return dispatch(setSelectedTagFromSearch(doc));
@@ -173,17 +173,26 @@ function saveTagDoc (tagDoc) {
 
 export function saveNewConfig () {
   return (dispatch, getState) => {
-    const { taggable: { tagInView: { _id: id, displayName, location, tags, metadata, markets, content } } } = getState();
+    const { taggable: { tagInView: { _id: id, displayName, location, tags, metadata, markets, content, description } } } = getState();
     // const { _id: id, displayName, location, tags, metadata, markets, content } = tagDoc;
     console.log('markets', markets);
-    const variables = {id, displayName, location, tags, metadata, markets: JSON.stringify(formatMarketsToSave(markets)), content};
+    const variables = {id, displayName, location, tags, metadata, description, markets: JSON.stringify(formatMarketsToSave(markets)), content};
     console.log('tag update request', variables);
     return graphqlService.query(MUTATION_CREATE_TAG, variables)
       .then(json => {
-        console.log('tag update response', json);
-        dispatch(saveConfiguration());
+        if (json.errors) {
+          console.log('Error saving new tag config', json.errors);
+        } else {
+          console.log('tag update response', json);
+          dispatch(toggleSaveModalState());
+          return dispatch(saveConfiguration());
+        }
       });
   };
+}
+
+export function toggleSaveModalState () {
+  return { type: types.TOGGLE_SAVE_MODAL_STATE };
 }
 
 /*
@@ -194,85 +203,10 @@ export function saveConfiguration () {
   return { type: types.SAVE_CONFIGURATION };
 }
 
-/*
-* Function that will remove a specific value of a key in the metadata array
-*/
-
-export function deleteValue (metaIndex, index) {
-  return { type: types.DELETE_VALUE, metaIndex, index };
-}
-
-/*
-* Function that will add a specific value
-*/
-
-export function addValue (index, value) {
-  return { type: types.ADD_VALUE, index, value };
-}
-
-/*
-* Function that will add a key value pair to the metadata array
-*/
-
-export function addKeyValuePair (key, value) {
-  return { type: types.ADD_KEY_VALUE_PAIR, key, value };
-}
-
-/*
-* Function that will set the newKey string
-*/
-
-export function setNewKeyString (keyString) {
-  return { type: types.SET_NEW_KEY_STRING, keyString };
-}
-
-/*
-* Function that will set the newValue string
-*/
-
-export function setNewValueString (valueString) {
-  return { type: types.SET_NEW_VALUE_STRING, valueString };
-}
-
-/*
-* Function that will empty the tagInView properties
-*/
-
 export function emptyTagInView () {
   return { type: types.EMPTY_TAG_IN_VIEW };
 }
 
-/*
-* Function that will update the displayName
-*/
-
-export function updateDisplayName (displayName) {
-  return { type: types.UPDATE_DISPLAYNAME, displayName };
-}
-
-/*
-* Function that will update the tag id
-*/
-
-export function updateId (id) {
-  return { type: types.UPDATE_ID, id };
-}
-
-/*
-* Function that will update the tag latitude
-*/
-
-export function updateLatitude (latitude) {
-  return { type: types.UPDATE_LATITUDE, latitude };
-}
-
-/*
-* Function that will update the tag longitude
-*/
-
-export function updateLongitude (longitude) {
-  return { type: types.UPDATE_LONGITUDE, longitude };
-}
 /**
  * Function that will clean the search results pane
  */

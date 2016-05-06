@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ViewPane from '../view-pane';
 import SearchPane from '../search-pane';
-import { Col, Nav, NavItem, Navbar, Row, Grid } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import { Col, Nav, Navbar, Row, Grid } from 'react-bootstrap';
 import { AddTagButton } from '../button';
 import SavingNotificationModal from '../saving-notification-modal';
 
@@ -10,31 +9,8 @@ require('./styles.css');
 import './css/normalize.css';
 
 class TaggableUI extends Component {
-  handleOnClick () {
-    this.props.saveNewConfig();
-    this.showConfirmationModal();
-  }
-
-  constructor () {
-    super();
-    this.state = {
-      confirmationDialog: false
-    };
-    this.showConfirmationModal = this.showConfirmationModal.bind(this);
-    this.closeConfirmationModal = this.closeConfirmationModal.bind(this);
-  }
-
-  showConfirmationModal () {
-    this.setState({confirmationDialog: true});
-  }
-
-  closeConfirmationModal () {
-    this.setState({confirmationDialog: false});
-  }
 
   renderNavbar () {
-    const { props: { configurationSaved }, state: { confirmationDialog } } = this;
-    const buttonAbility = configurationSaved ? 'default' : 'success';
     const navbar = (
       <nav className='navbar navbar-default navi'>
         <div className='navbar-header'>
@@ -44,19 +20,6 @@ class TaggableUI extends Component {
             </Nav>
           </Navbar.Brand>
         </div>
-        <Nav className='saveButton' pullRight>
-          <NavItem>
-            <Button
-              className='save'
-              disabled={configurationSaved}
-              bsStyle={buttonAbility}
-              onClick={this.handleOnClick.bind(this)}
-            >
-              Save new configuration
-            </Button>
-          </NavItem>
-        </Nav>
-        <SavingNotificationModal modalVisible={confirmationDialog} closeModal={this.closeConfirmationModal}/>
       </nav>
     );
     return navbar;
@@ -123,7 +86,6 @@ class TaggableUI extends Component {
   renderTagContent () {
     const {
       tagInView,
-      deleteValue,
       parentTagSearchResults,
       inParentTagSearch,
       addParentTag,
@@ -132,33 +94,29 @@ class TaggableUI extends Component {
       setSearchString,
       fetchTags,
       setTagTypeAndQueryType,
-      addValue,
-      addKeyValuePair,
-      setNewKeyString,
-      setNewValueString,
-      newKey,
-      newValue,
       createMode,
-      updateDisplayName,
-      updateId,
-      updateLatitude,
-      updateLongitude,
-      saveTagContent
+      saveTagContent,
+      configurationSaved,
+      saveNewConfig,
+      modalVisible,
+      toggleSaveModalState
     } = this.props;
     const tagContent = (
       <Col xs={6} md={6}>
-          <div className='newTagButton'>
-            <AddTagButton
-              className='createTag'
-              onClick={this.handleOnCreateClick.bind(this)}
-              text='+ Create a new tag'
-            />
-          </div>
+        <div className='newTagButton'>
+          <AddTagButton
+            className='createTag'
+            onClick={this.handleOnCreateClick.bind(this)}
+            text='+ Create a new tag'
+          />
+        </div>
+        <SavingNotificationModal modalVisible={modalVisible} closeModal={toggleSaveModalState}/>
         <ViewPane
+          saveNewConfig={saveNewConfig}
+          configurationSaved={configurationSaved}
           height={'32vh'}
           item={tagInView}
           linkedTags={tagInView.tags}
-          onDeleteValue={deleteValue}
           onSearchStringChange={this.onSearchStringChange.bind(this, 'parent')}
           onTagClick={addParentTag}
           handleButtonClick={removeParentTag}
@@ -182,17 +140,7 @@ class TaggableUI extends Component {
           setSearchString={setSearchString}
           fetchTags={fetchTags}
           setTagTypeAndQueryType={setTagTypeAndQueryType}
-          onAddValue={addValue}
-          addKeyValuePair={addKeyValuePair}
-          setNewKeyString={setNewKeyString}
-          setNewValueString={setNewValueString}
-          newKey={newKey}
-          newValue={newValue}
           createMode={createMode}
-          updateDisplayName={updateDisplayName}
-          updateId={updateId}
-          updateLongitude={updateLongitude}
-          updateLatitude={updateLatitude}
         />
       </Col>
     );
@@ -231,40 +179,32 @@ class TaggableUI extends Component {
 }
 
 TaggableUI.propTypes = {
+  // view pane
   saveTagContent: PropTypes.func,
-  searchResults: PropTypes.object,
   tagInView: PropTypes.object,
-  search: PropTypes.func,
-  fetchTagDoc: PropTypes.func,
-  fetchTags: PropTypes.func,
-  searchLinkedTagDocument: PropTypes.func,
-  setSearchString: PropTypes.func,
-  setTagTypeAndQueryType: PropTypes.func,
   saveConfiguration: PropTypes.func,
   configurationSaved: PropTypes.bool,
-  inSearch: PropTypes.bool,
-  deleteValue: PropTypes.func,
   parentTagSearchResults: PropTypes.object,
   inParentTagSearch: PropTypes.bool,
   addParentTag: PropTypes.func,
   removeParentTag: PropTypes.func,
-  tagType: PropTypes.string,
   parentTagTagType: PropTypes.string,
-  addValue: PropTypes.func,
-  addKeyValuePair: PropTypes.func,
-  setNewKeyString: PropTypes.func,
-  setNewValueString: PropTypes.func,
-  newKey: PropTypes.string,
-  newValue: PropTypes.string,
+  modalVisible: PropTypes.boolean,
+  saveNewConfig: PropTypes.func,
+  toggleSaveModalState: PropTypes.func,
   createMode: PropTypes.bool,
+  // search pane
+  searchResults: PropTypes.object,
+  search: PropTypes.func,
+  fetchTagDoc: PropTypes.func,
+  fetchTags: PropTypes.func,
+  setSearchString: PropTypes.func,
+  setTagTypeAndQueryType: PropTypes.func,
+  inSearch: PropTypes.bool,
+  tagType: PropTypes.string,
   emptyTagInView: PropTypes.func,
-  updateDisplayName: PropTypes.func,
-  updateId: PropTypes.func,
-  updateLatitude: PropTypes.func,
-  updateLongitude: PropTypes.func,
   cleanSearchPane: PropTypes.func,
-  displayDialog: PropTypes.bool,
-  saveNewConfig: PropTypes.func
+  displayDialog: PropTypes.bool
 };
 
 export default TaggableUI;

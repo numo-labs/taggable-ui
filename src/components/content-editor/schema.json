@@ -21,6 +21,12 @@
      "minLength": 1,
      "maxLength": 200
    },
+   "description": {
+     "title": "Description",
+     "type": "string",
+     "minLength": 0,
+     "maxLength": 500
+   },
    "active": {
      "title": "Active",
      "type": "boolean"
