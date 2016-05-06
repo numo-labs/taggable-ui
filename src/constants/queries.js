@@ -19,6 +19,7 @@ query ($tagid: String) {
         active,
         source
       },
+      description,
       links {
         incoming {
           node {

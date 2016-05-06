@@ -116,7 +116,7 @@ export function fetchTagDoc (tagid) {
         const tagDoc = json.data.taggable.search;
         const markets = JSON.parse(tagDoc.markets);
         const doc = {
-          ...json.data.taggable.search,
+          ...tagDoc,
           markets: formatMarketsToEdit(markets)
         };
         return dispatch(setSelectedTagFromSearch(doc));
@@ -181,7 +181,14 @@ export function saveNewConfig () {
     return graphqlService.query(MUTATION_CREATE_TAG, variables)
       .then(json => {
         console.log('tag update response', json);
-        dispatch(saveConfiguration());
+        const tagDoc = json.data.taggable.tagData;
+        const markets = JSON.parse(tagDoc.markets);
+        const doc = {
+          ...tagDoc,
+          markets: formatMarketsToEdit(markets)
+        };
+        dispatch(setSelectedTagFromSearch(doc));
+        return dispatch(saveConfiguration());
       });
   };
 }
