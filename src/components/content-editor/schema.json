@@ -1,17 +1,11 @@
 
 {
  "title": "",
- "description": "A form based on a schema",
  "type": "object",
  "required": [
    "_id",
    "displayName"
  ],
- "x-hints": {
-   "form": {
-     "classes": "my-nice-form"
-   }
- },
  "properties": {
    "_id": {
      "title": "Tag Id",

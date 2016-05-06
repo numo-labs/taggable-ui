@@ -6,7 +6,6 @@
 
 import React, { PropTypes, Component } from 'react';
 import { Input, Button } from 'react-bootstrap';
-import FilterButtons from '../filter-buttons';
 
 require('./styles.css');
 class SearchBar extends Component {
@@ -40,15 +39,9 @@ class SearchBar extends Component {
   }
 
   render () {
-    const { queryType, tagType, onFilterButtonClick } = this.props;
     const searchButton = <Button onClick={() => this.props.onSubmit(this.refs.input.getValue())} bsStyle={'success'}>Search</Button>;
     return (
     <div>
-      <FilterButtons
-        queryType={queryType}
-        tagType={tagType}
-        onFilterButtonClick={onFilterButtonClick}
-      />
       <Input
         ref='input'
         type='search'

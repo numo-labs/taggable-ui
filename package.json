@@ -73,7 +73,6 @@
     "normalize.css": "^4.0.0",
     "pre-commit": "^1.1.2",
     "react-bootstrap": "^0.28.4",
-    "react-json-editor": "^0.2.0",
     "react-jsonschema-form": "^0.29.1",
     "semistandard": "^7.0.5",
     "sinon": "^1.17.3",

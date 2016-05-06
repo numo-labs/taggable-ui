@@ -88,7 +88,6 @@ class TaggableUI extends Component {
     } = this.props;
     const searchPane = (
       <Col xs={3} md={3} className='col-centered searchPaneContainer'>
-        <h1 className='searchTagTitle'>Search Tags</h1>
         <SearchPane
           onSearchStringChange={this.onSearchStringChange.bind(this, 'tag')}
           onTagClick={fetchTagDoc}
@@ -146,17 +145,14 @@ class TaggableUI extends Component {
       updateLongitude,
       saveTagContent
     } = this.props;
-    const tagTitle = createMode ? 'Create a New Tag' : 'Tag Content';
-    const h1Class = createMode ? 'tagContentTitle' : 'tagContentWithoutButton';
     const tagContent = (
-      <Col xs={6} md={6} className='col-centered'>
-          <h1 className={h1Class}>{tagTitle}</h1>
+      <Col xs={6} md={6}>
           <div className='newTagButton'>
-            {!createMode && <AddTagButton
+            <AddTagButton
               className='createTag'
               onClick={this.handleOnCreateClick.bind(this)}
               text='+ Create a new tag'
-            />}
+            />
           </div>
         <ViewPane
           height={'32vh'}
@@ -218,17 +214,18 @@ class TaggableUI extends Component {
     return (
       <div>
         {this.renderNavbar()}
+        <br/>
         <Grid fluid>
           <Row>
-            <Col xs={4}>
+            <Col xs={3} >
               {this.renderSearchPane()}
             </Col>
-            <Col xs={8}>
+            <Col xs={9}>
               {this.renderItemContent()}
             </Col>
           </Row>
         </Grid>
-      </div>
+        </div>
     );
   }
 }

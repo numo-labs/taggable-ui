@@ -16,7 +16,7 @@ class Tag extends Component {
         bsStyle={selected ? 'primary' : 'default'}
         onClick={this.handleOnClick.bind(this)}
       >
-        <p className='tag__name'>{displayName}</p>
+        <p className='tag__name tag__normalWrap'>{displayName}</p>
         <p className='tag__id'>{id}</p>
       </Button>
     );

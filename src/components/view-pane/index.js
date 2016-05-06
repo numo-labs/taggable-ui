@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Input, Row, Col, Nav, NavItem, Button } from 'react-bootstrap';
-import { SymbolButton } from '../button';
+import { Row, Col, Nav, NavItem, Panel } from 'react-bootstrap';
 import LinkedTagsList from '../linked-tags-list';
 import SearchList from '../search-list';
 import './styles.css';
@@ -13,199 +12,11 @@ class ViewPane extends Component {
       activeKey: 1
     };
   }
-  renderTagContentHeader () {
-    const {
-       item,
-       createMode,
-       updateDisplayName,
-       updateId,
-       updateLatitude,
-       updateLongitude
-      } = this.props;
-    const tagContentHeader = (
-      <div>
-        <div>
-          <h4 className='displayName'>Display name:</h4>
-          <Input
-            className='displayNameInput'
-            type='text'
-            labelClassName='col-xs-9'
-            wrapperClassName='col-xs-9'
-            onChange={(e) => updateDisplayName(e.target.value)}
-            value={item.displayName}
-          />
-        </div>
-        <div>
-          <h4 className='tagId'>ID:</h4>
-          <Input
-            className='tagIdInput'
-            type='text'
-            disabled={!createMode}
-            labelClassName='col-xs-9'
-            wrapperClassName='col-xs-9'
-            onChange={(e) => updateId(e.target.value)}
-            value={item._id}
-          />
-        </div>
-        <div>
-            <h4 className='location'>Latitude:</h4>
-            <Input
-              className='locationInput'
-              type='text'
-              labelClassName='col-xs-9'
-              wrapperClassName='col-xs-9'
-              onChange={(e) => updateLatitude(e.target.value)}
-              value={item.location.lat}
-            />
-        </div>
-        <div>
-            <h4 className='location'>Longitude:</h4>
-            <Input
-              className='locationInput'
-              type='text'
-              labelClassName='col-xs-9'
-              wrapperClassName='col-xs-9'
-              onChange={(e) => updateLongitude(e.target.value)}
-              value={item.location.lon}
-            />
-        </div>
-        <Row>
-          <Col xs={2}>
-            <h4>Keys:</h4>
-          </Col>
-          <Col xs={12}>
-            <h4>Values:</h4>
-          </Col>
-        </Row>
-      </div>
-    );
-    return tagContentHeader;
-  }
 
-  renderValues (content, metaIndex) {
-    const { onDeleteValue } = this.props;
-    if (content.values) {
-      return content.values.map((value, index) => {
-        const deleteButton = <SymbolButton
-         className='redButton'
-         onHandleClick={() => onDeleteValue(metaIndex, index)}
-         symbol={'x'}
-        />;
-        return (
-            <div key={index} className='inputGroup'>
-              <Input
-               type='text'
-               className='form-control'
-               value={value}
-               buttonAfter={deleteButton}
-              />
-            </div>
-          );
-      });
-    }
-  }
-
-  renderMetadataContent () {
-    const { item, onAddValue, height } = this.props;
-    if (item.metadata) {
-      const metadataContent = item.metadata.map((content, index) => {
-        const addButton = <SymbolButton
-         onHandleClick={() => onAddValue(index, this.refs[index].getValue())}
-         symbol={'+'}
-        />;
-        return (
-          <Input
-            key={content.key}
-            wrapperClassName='wrapper'
-            className='metaContent'
-          >
-            <Row>
-              <Col xs={6}>
-                <Input
-                  type='text'
-                  className='form-control'
-                  value={content.key}
-                />
-              </Col>
-              <Col xs={6}>
-                {this.renderValues(content, index)}
-                <Input
-                  ref={index}
-                  type='text'
-                  className='form-control'
-                  placeholder='add value'
-                  buttonAfter={addButton}
-                />
-              </Col>
-            </Row>
-          </Input>
-        );
-      });
-      return (
-        <div className='content' style={{height: height}}>
-          {metadataContent}
-        </div>
-      );
-    }
-    return;
-  }
-  renderAddNewKeyValue () {
-    const handleAddKeyValuePair = (key, value) => {
-      addKeyValuePair(key, value);
-    };
-    const {
-      addKeyValuePair,
-      setNewKeyString,
-      setNewValueString,
-      newKey,
-      newValue
-     } = this.props;
-    const disableButton = newKey.length > 0 && newValue.length > 0;
-    const keyValueStyle = disableButton ? 'success' : 'default';
-    const addButton = <Button
-     disabled={!disableButton}
-     className='keyValueButton'
-     bsStyle={keyValueStyle}
-     onClick={() => handleAddKeyValuePair(this.refs.newKey.getValue(), this.refs.newValue.getValue())}
-     symbol={'+'}>+</Button>;
-
-    const addNewKeyValue = (
-      <Row>
-        <div className='keyValueContainer'>
-          <h4 className='keyValuePair'>Add new key value pair:</h4>
-          <div className='keyValueInput'>
-          <Row>
-            <Col xs={6}>
-              <Input
-                type='text'
-                onChange={(e) => setNewKeyString(e.target.value)}
-                ref='newKey'
-                className='form-control'
-                placeholder='add new key'
-              />
-            </Col>
-            <Col xs={6}>
-              <Input
-                type='text'
-                onChange={(e) => setNewValueString(e.target.value)}
-                ref='newValue'
-                className='form-control addNewValue'
-                placeholder='add value'
-                buttonAfter={addButton}
-              />
-            </Col>
-          </Row>
-          </div>
-        </div>
-      </Row>
-    );
-    return addNewKeyValue;
-  }
   renderTabs () {
     return (
       <Nav
-       bsStyle='tabs'
-       justified
+       bsStyle='pills'
        activeKey={this.state.activeKey}
        onSelect={this.handleSelect.bind(this)}
       >
@@ -245,8 +56,10 @@ class ViewPane extends Component {
       if (this.state.activeKey === 1) {
         return (
           <div>
-            {this.renderTabs()}
-            <ContentEditor tagDoc={item} onSubmit={saveTagContent}/>
+            {this.renderTabs()}<br/>
+          <Panel header='Modify tag'>
+              <ContentEditor tagDoc={item} onSubmit={saveTagContent}/>
+            </Panel>
           </div>
         );
       } else {

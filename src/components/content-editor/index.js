@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-// import Form from 'react-json-editor';
 import Form from 'react-jsonschema-form';
 import Schema from './schema.json';
 import './styles.css';
@@ -17,11 +16,12 @@ export default class ContentEditor extends Component {
   render () {
     const { tagDoc } = this.props;
     return (
-      <Form
-        schema={Schema}
-        onSubmit={this.onSubmit.bind(this)}
-        formData={tagDoc}
-      />
+        <Form
+          schema={Schema}
+          onSubmit={this.onSubmit.bind(this)}
+          formData={tagDoc}
+        />
+
     );
   }
 }

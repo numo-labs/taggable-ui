@@ -9,7 +9,7 @@ describe('Component', function () {
     const wrapper = shallow(<SearchBar />);
     const children = wrapper.children().nodes;
     it('should render the <SearchBar /> component', function (done) {
-      expect(children).to.have.length(2);
+      expect(children).to.have.length(1);
       done();
     });
   });
