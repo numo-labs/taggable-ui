@@ -12,6 +12,7 @@ query ($tagid: String) {
         values,
         key
       },
+      active,
       markets,
       tags {
       	node,

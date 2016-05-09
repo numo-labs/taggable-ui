@@ -11,7 +11,8 @@ import {
   REMOVE_PARENT_TAG,
   CLEAN_SEARCH_PANE,
   SAVE_TAG_CONTENT,
-  TOGGLE_SAVE_MODAL_STATE
+  TOGGLE_SAVE_MODAL_STATE,
+  EMPTY_TAG_IN_VIEW
 } from '../constants/action-types.js';
 
 export const initialState = {
@@ -170,6 +171,11 @@ export default function taggable (state = initialState, action) {
       return {
         ...state,
         configurationSaved: true
+      };
+    case EMPTY_TAG_IN_VIEW:
+      return {
+        ...state,
+        tagInView: initialState.tagInView
       };
     case CLEAN_SEARCH_PANE:
       return {
