@@ -36,6 +36,12 @@
      "title": "Active",
      "type": "boolean"
    },
+   "description": {
+     "title": "Description",
+     "type": "string",
+     "minLength": 0,
+     "maxLength": 500
+   },
    "markets": {
      "title": "Search Terms and Labels per market and language",
      "type": "array",
