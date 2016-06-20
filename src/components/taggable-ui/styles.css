@@ -8,10 +8,14 @@ fieldset {
 .ui {
   text-align: center;
 }
+.navbar {
+  min-height: 80px;
+  margin-bottom: 0;
+}
 
 .nav-read-only {
   vertical-align: middle;
-  margin-top: 1.2em;
+  margin-top: 1.3em;
   margin-left: 0.8em;
   color: red;
   font-size: 1.3em;
@@ -62,10 +66,6 @@ div[class*='col'] {
 
 .searchTagTitle {
   margin-bottom: 0.5em;
-}
-
-.navbar {
-  margin-bottom: 0;
 }
 
 .navi {

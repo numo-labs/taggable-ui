@@ -21,12 +21,13 @@ export class SymbolButton extends Component {
 
 export class AddTagButton extends Component {
   render () {
-    const { text, onClick } = this.props;
+    const { text, onClick, disabled } = this.props;
     return (
       <Button
         className='tagList__button'
         bsStyle='success'
         onClick={onClick}
+        disabled={disabled}
       >
         {text}
       </Button>
@@ -41,5 +42,6 @@ SymbolButton.propTypes = {
 
 AddTagButton.propTypes = {
   text: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  disabled: PropTypes.bool
 };

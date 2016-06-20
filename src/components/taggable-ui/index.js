@@ -13,27 +13,27 @@ class TaggableUI extends Component {
   renderNavbar () {
     const { readOnly, logOut } = this.props;
     const navbar = (
-      <nav className='navbar navbar-default navi'>
-        <div className='navbar-header'>
+      <Navbar className='navbar navbar-default navi'>
+        <Navbar.Header style={{width: '100%'}}>
           <Navbar.Brand>
-            <Nav>
+            <Nav className='pull-left'>
               <h2 className='numoTitle'>Numo Labs Tag System</h2>
             </Nav>
           </Navbar.Brand>
-        </div>
-        <Nav className='pull-right'>
-        <NavItem>
-          <Button bsStyle='success' onClick={logOut}>LOGOUT</Button>
-        </NavItem>
-          {
-            readOnly && (
-              <Nav className='nav-read-only'>
-                <div>READ ONLY</div>
-              </Nav>
-            )
-          }
-        </Nav>
-      </nav>
+          <Nav className='pull-right'>
+            <NavItem>
+              <Button bsStyle='success' onClick={logOut}>LOGOUT</Button>
+            </NavItem>
+              {
+                readOnly && (
+                  <Nav className='nav-read-only'>
+                    <div>READ ONLY</div>
+                  </Nav>
+                )
+              }
+          </Nav>
+        </Navbar.Header>
+      </Navbar>
     );
     return navbar;
   }
@@ -112,7 +112,8 @@ class TaggableUI extends Component {
       configurationSaved,
       saveNewConfig,
       modalVisible,
-      toggleSaveModalState
+      toggleSaveModalState,
+      readOnly
     } = this.props;
     const tagContent = (
       <Col xs={6} md={6}>
@@ -121,6 +122,7 @@ class TaggableUI extends Component {
             className='createTag'
             onClick={this.handleOnCreateClick.bind(this)}
             text='+ Create a new tag'
+            disabled={readOnly}
           />
         </div>
         <SavingNotificationModal modalVisible={modalVisible} closeModal={toggleSaveModalState}/>
