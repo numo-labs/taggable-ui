@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ViewPane from '../view-pane';
 import SearchPane from '../search-pane';
-import { Col, Nav, Navbar, Row, Grid } from 'react-bootstrap';
+import { Col, Nav, Navbar, Row, Grid, NavItem, Button } from 'react-bootstrap';
 import { AddTagButton } from '../button';
 import SavingNotificationModal from '../saving-notification-modal';
 
@@ -11,6 +11,7 @@ import './css/normalize.css';
 class TaggableUI extends Component {
 
   renderNavbar () {
+    const { readOnly, logOut } = this.props;
     const navbar = (
       <nav className='navbar navbar-default navi'>
         <div className='navbar-header'>
@@ -20,6 +21,18 @@ class TaggableUI extends Component {
             </Nav>
           </Navbar.Brand>
         </div>
+        <Nav className='pull-right'>
+        <NavItem>
+          <Button bsStyle='success' onClick={logOut}>LOGOUT</Button>
+        </NavItem>
+          {
+            readOnly && (
+              <Nav className='nav-read-only'>
+                <div>READ ONLY</div>
+              </Nav>
+            )
+          }
+        </Nav>
       </nav>
     );
     return navbar;
@@ -204,7 +217,9 @@ TaggableUI.propTypes = {
   tagType: PropTypes.string,
   emptyTagInView: PropTypes.func,
   cleanSearchPane: PropTypes.func,
-  displayDialog: PropTypes.bool
+  displayDialog: PropTypes.bool,
+  logOut: PropTypes.func,
+  readOnly: PropTypes.bool
 };
 
 export default TaggableUI;

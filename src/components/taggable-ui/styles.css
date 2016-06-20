@@ -9,6 +9,14 @@ fieldset {
   text-align: center;
 }
 
+.nav-read-only {
+  vertical-align: middle;
+  margin-top: 1.2em;
+  margin-left: 0.8em;
+  color: red;
+  font-size: 1.3em;
+}
+
 .col-centered {
   display:inline-block;
   float:none;

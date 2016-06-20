@@ -12,7 +12,10 @@ import {
   CLEAN_SEARCH_PANE,
   SAVE_TAG_CONTENT,
   TOGGLE_SAVE_MODAL_STATE,
-  EMPTY_TAG_IN_VIEW
+  EMPTY_TAG_IN_VIEW,
+  SAVE_PERMISSIONS,
+  LOG_OUT,
+  LOGIN_ERROR
 } from '../constants/action-types.js';
 
 export const initialState = {
@@ -62,7 +65,12 @@ export const initialState = {
   // state for the view pane
   configurationSaved: true,
   createMode: true,
-  modalVisible: false
+  modalVisible: false,
+  idToken: '',
+  loggedIn: false,
+  loginError: false,
+  readOnly: false,
+  createEnabled: false
 };
 
 export default function taggable (state = initialState, action) {
@@ -181,6 +189,24 @@ export default function taggable (state = initialState, action) {
       return {
         ...state,
         tag: initialState.tag
+      };
+    case SAVE_PERMISSIONS:
+      return {
+        ...state,
+        idToken: action.idToken,
+        loggedIn: true,
+        readOnly: action.readOnly,
+        createEnabled: action.createEnabled
+      };
+    case LOG_OUT:
+      return {
+        ...state,
+        loggedIn: false
+      };
+    case LOGIN_ERROR:
+      return {
+        ...state,
+        loginError: true
       };
     default:
       return state;
