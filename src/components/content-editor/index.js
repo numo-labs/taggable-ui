@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Form from 'react-jsonschema-form';
 import Schema from './schema.json';
+import { Button } from 'react-bootstrap';
 import './styles.css';
 
 export default class ContentEditor extends Component {
@@ -26,9 +27,10 @@ export default class ContentEditor extends Component {
     return (
       <Form
         schema={Schema}
-        onSubmit={this.onSubmit.bind(this)}
         formData={tagDoc}
-      />
+      >
+        <Button type='submit' onClick={this.onSubmit.bind(this)}>Submit</Button>
+      </Form>
     );
   }
 }
