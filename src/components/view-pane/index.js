@@ -94,7 +94,8 @@ class ViewPane extends Component {
         linkedTags,
         tagType,
         saveTagContent,
-        configurationSaved
+        configurationSaved,
+        readOnly
       }
     } = this;
     const buttonAbility = configurationSaved ? 'default' : 'success';
@@ -104,7 +105,11 @@ class ViewPane extends Component {
           <div>
             {this.renderTabs()}<br/>
           <Panel header='Modify tag'>
-              <ContentEditor tagDoc={item} onSubmit={saveTagContent}/>
+              <ContentEditor
+                tagDoc={item}
+                onSubmit={saveTagContent}
+                readOnly={readOnly}
+              />
             </Panel>
           </div>
         );
@@ -187,7 +192,8 @@ ViewPane.propTypes = {
   saveTagContent: PropTypes.func,
   createMode: PropTypes.bool,
   configurationSaved: PropTypes.bool,
-  saveNewConfig: PropTypes.func
+  saveNewConfig: PropTypes.func,
+  readOnly: PropTypes.bool
 };
 
 ViewPane.defaultProps = {

@@ -113,7 +113,8 @@ class TaggableUI extends Component {
       saveNewConfig,
       modalVisible,
       toggleSaveModalState,
-      createEnabled
+      createEnabled,
+      readOnly
     } = this.props;
     const tagContent = (
       <Col xs={6} md={6}>
@@ -156,6 +157,7 @@ class TaggableUI extends Component {
           fetchTags={fetchTags}
           setTagTypeAndQueryType={setTagTypeAndQueryType}
           createMode={createMode}
+          readOnly={readOnly}
         />
       </Col>
     );

@@ -23,13 +23,20 @@ export default class ContentEditor extends Component {
   }
 
   render () {
-    const { tagDoc } = this.props;
+    const { tagDoc, readOnly } = this.props;
+    console.log('props', this.props);
     return (
       <Form
         schema={Schema}
         formData={tagDoc}
       >
-        <Button type='submit' onClick={this.onSubmit.bind(this)}>Submit</Button>
+        <Button
+          type='submit'
+          onClick={this.onSubmit.bind(this)}
+          disabled={readOnly}
+        >
+          Submit
+        </Button>
       </Form>
     );
   }
@@ -37,5 +44,6 @@ export default class ContentEditor extends Component {
 
 ContentEditor.propTypes = {
   onSubmit: PropTypes.func,
-  tagDoc: PropTypes.object
+  tagDoc: PropTypes.object,
+  readOnly: PropTypes.bool
 };
