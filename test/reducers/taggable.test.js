@@ -7,7 +7,10 @@ import {
   CLEAN_SEARCH_PANE,
   BUSY_SEARCHING,
   SET_SEARCH_RESULTS,
-  SET_TAG_TYPE_AND_QUERY_TYPE
+  SET_TAG_TYPE_AND_QUERY_TYPE,
+  LOG_OUT,
+  SAVE_PERMISSIONS,
+  LOGIN_ERROR
 } from '../../src/constants/action-types.js';
 
 const mockHotelSearchResults = {
@@ -118,6 +121,42 @@ describe('Reducers: Taggable', () => {
       ...initialState,
       tagInView: mockHotelSearchResults[1],
       createMode: false
+    };
+    expect(state).to.deep.equal(expectedState);
+    done();
+  });
+  it('action:SAVE_PERMISSIONS -> sets loggedIn to true and saves the token and readOnly permissions', (done) => {
+    const action = {
+      type: SAVE_PERMISSIONS,
+      idToken: '1234',
+      readOnly: true
+    };
+    const expectedState = {
+      ...initialState,
+      idToken: '1234',
+      readOnly: true,
+      loggedIn: true
+    };
+    const state = taggable(undefined, action);
+    expect(state).to.deep.equal(expectedState);
+    done();
+  });
+  it('action:LOG_OUT -> sets loggedIn to be false', (done) => {
+    const action = {type: LOG_OUT};
+    const state = taggable(undefined, action);
+    const expectedState = {
+      ...initialState,
+      loggedIn: false
+    };
+    expect(state).to.deep.equal(expectedState);
+    done();
+  });
+  it('action:LOGIN_ERROR -> sets loginError to true', (done) => {
+    const action = {type: LOGIN_ERROR};
+    const state = taggable(undefined, action);
+    const expectedState = {
+      ...initialState,
+      loginError: true
     };
     expect(state).to.deep.equal(expectedState);
     done();

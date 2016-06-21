@@ -29,7 +29,7 @@ export class App extends Component {
         console.log('permissions', profile.app_metadata.taggy);
         const permissions = profile.app_metadata.taggy;
         const readOnly = !permissions.C;
-        this.props.savePermissions(idToken, true, readOnly);
+        this.props.savePermissions(idToken, readOnly);
       } else {
         this.props.setLoginError();
       }
