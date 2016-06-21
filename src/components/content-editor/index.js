@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Form from 'react-jsonschema-form';
 import Schema from './schema.json';
+import { Button } from 'react-bootstrap';
 import './styles.css';
 
 export default class ContentEditor extends Component {
@@ -22,18 +23,26 @@ export default class ContentEditor extends Component {
   }
 
   render () {
-    const { tagDoc } = this.props;
+    const { tagDoc, readOnly } = this.props;
     return (
       <Form
         schema={Schema}
-        onSubmit={this.onSubmit.bind(this)}
         formData={tagDoc}
-      />
+        onSubmit={this.onSubmit.bind(this)} // onSubmit handler is on the form level as the form data is passed into the function by the form component
+      >
+        <Button
+          type='submit'
+          disabled={readOnly}
+        >
+          Submit
+        </Button>
+      </Form>
     );
   }
 }
 
 ContentEditor.propTypes = {
   onSubmit: PropTypes.func,
-  tagDoc: PropTypes.object
+  tagDoc: PropTypes.object,
+  readOnly: PropTypes.bool
 };

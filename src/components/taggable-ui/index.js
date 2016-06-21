@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ViewPane from '../view-pane';
 import SearchPane from '../search-pane';
-import { Col, Nav, Navbar, Row, Grid } from 'react-bootstrap';
+import { Col, Nav, Navbar, Row, Grid, NavItem, Button } from 'react-bootstrap';
 import { AddTagButton } from '../button';
 import SavingNotificationModal from '../saving-notification-modal';
 
@@ -11,16 +11,29 @@ import './css/normalize.css';
 class TaggableUI extends Component {
 
   renderNavbar () {
+    const { readOnly, logOut } = this.props;
     const navbar = (
-      <nav className='navbar navbar-default navi'>
-        <div className='navbar-header'>
+      <Navbar className='navbar navbar-default navi'>
+        <Navbar.Header style={{width: '100%'}}>
           <Navbar.Brand>
-            <Nav>
+            <Nav className='pull-left'>
               <h2 className='numoTitle'>Numo Labs Tag System</h2>
             </Nav>
           </Navbar.Brand>
-        </div>
-      </nav>
+          <Nav className='pull-right'>
+            <NavItem>
+              <Button bsStyle='success' onClick={logOut}>LOGOUT</Button>
+            </NavItem>
+              {
+                readOnly && (
+                  <Nav className='nav-read-only'>
+                    <div>READ ONLY</div>
+                  </Nav>
+                )
+              }
+          </Nav>
+        </Navbar.Header>
+      </Navbar>
     );
     return navbar;
   }
@@ -99,7 +112,8 @@ class TaggableUI extends Component {
       configurationSaved,
       saveNewConfig,
       modalVisible,
-      toggleSaveModalState
+      toggleSaveModalState,
+      readOnly
     } = this.props;
     const tagContent = (
       <Col xs={6} md={6}>
@@ -108,6 +122,7 @@ class TaggableUI extends Component {
             className='createTag'
             onClick={this.handleOnCreateClick.bind(this)}
             text='+ Create a new tag'
+            disabled={readOnly}
           />
         </div>
         <SavingNotificationModal modalVisible={modalVisible} closeModal={toggleSaveModalState}/>
@@ -141,6 +156,7 @@ class TaggableUI extends Component {
           fetchTags={fetchTags}
           setTagTypeAndQueryType={setTagTypeAndQueryType}
           createMode={createMode}
+          readOnly={readOnly}
         />
       </Col>
     );
@@ -204,7 +220,9 @@ TaggableUI.propTypes = {
   tagType: PropTypes.string,
   emptyTagInView: PropTypes.func,
   cleanSearchPane: PropTypes.func,
-  displayDialog: PropTypes.bool
+  displayDialog: PropTypes.bool,
+  logOut: PropTypes.func,
+  readOnly: PropTypes.bool
 };
 
 export default TaggableUI;

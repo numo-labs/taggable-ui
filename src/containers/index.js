@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { Provider } from 'react-redux';
 
 // container
-import Taggable from './taggable.js';
+import App from './app.js';
 
 class Root extends Component {
 
@@ -10,7 +10,7 @@ class Root extends Component {
     const { store } = this.props;
     return (
       <Provider store={store}>
-        <Taggable />
+        <App />
       </Provider>
     );
   }

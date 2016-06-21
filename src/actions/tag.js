@@ -214,3 +214,26 @@ export function emptyTagInView () {
 export function cleanSearchPane () {
   return { type: types.CLEAN_SEARCH_PANE };
 }
+
+/**
+* Function that will save the permissions for a user
+*/
+
+export function savePermissions (idToken, readOnly) {
+  return {
+    type: types.SAVE_PERMISSIONS,
+    idToken,
+    readOnly
+  };
+}
+
+export function logOut () {
+  return (dispatch) => {
+    localStorage.clear();
+    return dispatch({type: types.LOG_OUT});
+  };
+}
+
+export function setLoginError () {
+  return { type: types.LOGIN_ERROR };
+}

@@ -58,7 +58,9 @@
   "semistandard": {
     "globals": [
       "describe",
-      "it"
+      "it",
+      "localStorage",
+      "Auth0Lock"
     ]
   },
   "dependencies": {
