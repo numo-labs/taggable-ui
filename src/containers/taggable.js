@@ -19,8 +19,7 @@ function mapStateToProps (state) {
       configurationSaved,
       createMode,
       modalVisible,
-      readOnly,
-      createEnabled
+      readOnly
     }
    } = state;
 
@@ -36,8 +35,7 @@ function mapStateToProps (state) {
     parentTagTagType,
     createMode,
     modalVisible,
-    readOnly,
-    createEnabled
+    readOnly
   };
 }
 

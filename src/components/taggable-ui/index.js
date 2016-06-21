@@ -113,7 +113,6 @@ class TaggableUI extends Component {
       saveNewConfig,
       modalVisible,
       toggleSaveModalState,
-      createEnabled,
       readOnly
     } = this.props;
     const tagContent = (
@@ -123,7 +122,7 @@ class TaggableUI extends Component {
             className='createTag'
             onClick={this.handleOnCreateClick.bind(this)}
             text='+ Create a new tag'
-            disabled={!createEnabled}
+            disabled={readOnly}
           />
         </div>
         <SavingNotificationModal modalVisible={modalVisible} closeModal={toggleSaveModalState}/>
@@ -223,7 +222,6 @@ TaggableUI.propTypes = {
   cleanSearchPane: PropTypes.func,
   displayDialog: PropTypes.bool,
   logOut: PropTypes.func,
-  createEnabled: PropTypes.bool,
   readOnly: PropTypes.bool
 };
 

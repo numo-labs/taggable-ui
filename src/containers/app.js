@@ -28,9 +28,8 @@ export class App extends Component {
       if (profile.app_metadata.taggy && profile.app_metadata.taggy.R) { // permissions exist and read permission exists
         console.log('permissions', profile.app_metadata.taggy);
         const permissions = profile.app_metadata.taggy;
-        const readOnly = !permissions.U;
-        const createEnabled = permissions.C;
-        this.props.savePermissions(idToken, true, readOnly, createEnabled);
+        const readOnly = !permissions.C;
+        this.props.savePermissions(idToken, true, readOnly);
       } else {
         this.props.setLoginError();
       }

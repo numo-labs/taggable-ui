@@ -219,13 +219,12 @@ export function cleanSearchPane () {
 * Function that will save the permissions for a user
 */
 
-export function savePermissions (idToken, loggedIn, readOnly, createEnabled) {
+export function savePermissions (idToken, loggedIn, readOnly) {
   return {
     type: types.SAVE_PERMISSIONS,
     idToken,
     loggedIn,
-    readOnly,
-    createEnabled
+    readOnly
   };
 }
 

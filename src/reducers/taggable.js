@@ -69,8 +69,7 @@ export const initialState = {
   idToken: '',
   loggedIn: false,
   loginError: false,
-  readOnly: false,
-  createEnabled: false
+  readOnly: false
 };
 
 export default function taggable (state = initialState, action) {
@@ -195,8 +194,7 @@ export default function taggable (state = initialState, action) {
         ...state,
         idToken: action.idToken,
         loggedIn: true,
-        readOnly: action.readOnly,
-        createEnabled: action.createEnabled
+        readOnly: action.readOnly
       };
     case LOG_OUT:
       return {
