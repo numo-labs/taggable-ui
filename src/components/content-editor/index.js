@@ -24,15 +24,14 @@ export default class ContentEditor extends Component {
 
   render () {
     const { tagDoc, readOnly } = this.props;
-    console.log('props', this.props);
     return (
       <Form
         schema={Schema}
         formData={tagDoc}
+        onSubmit={this.onSubmit.bind(this)} // onSubmit handler is on the form level as the form data is passed into the function by the form component
       >
         <Button
           type='submit'
-          onClick={this.onSubmit.bind(this)}
           disabled={readOnly}
         >
           Submit
