@@ -33,6 +33,6 @@ npm run deploy -- --env PROD
 
 ## Viewing the Taggable System Editor
 
-CI: [https://www.tcdl.io/utils/graphiql/index.html](www.tcdl.io/isearch/utils/graphiql)
+CI: [https://www.tcdl.io/utils/taggable/index.html](https://www.tcdl.io/isearch/utils/taggable)
 
-PROD: [https://www.tcdl.io/utils/graphiql/prod/index.html](www.tcdl.io/isearch/utils/graphiql/prod)
+PROD: [https://www.tcdl.io/utils/taggable/prod/index.html](https://www.tcdl.io/isearch/utils/taggable/prod)
