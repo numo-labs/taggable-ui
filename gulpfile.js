@@ -23,7 +23,7 @@ gulp.task('deploy', function () {
 });
 
 function deployToProd () {
-  return exec('npm run build', function (error, stdout, stderr) {
+  return exec('npm run build:prod', function (error, stdout, stderr) {
     if (error === null) {
       var s3 = new AWS.S3({region: 'eu-west-1'});
       var filesToUpload = fs.readdirSync(__dirname + '/public');
@@ -53,7 +53,8 @@ function deployToProd () {
 }
 
 function deployToCI () {
-  return exec('npm run build', function (error, stdout, stderr) {
+  return exec('npm run build:ci', function (error, stdout, stderr) {
+    console.log('ERRR', error, stdout, stderr);
     if (error === null) {
       var s3 = new AWS.S3({region: 'eu-west-1'});
       var filesToUpload = fs.readdirSync(__dirname + '/public');

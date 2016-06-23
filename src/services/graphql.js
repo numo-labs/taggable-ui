@@ -1,6 +1,10 @@
 'use strict';
 
 import fetch from 'isomorphic-fetch';
+import configure from 'con.figure';
+import configuration from '../../config';
+
+const config = configure(configuration);
 
 /**
 * Express-graphql accepts request with the parameters
@@ -10,7 +14,7 @@ import fetch from 'isomorphic-fetch';
 **/
 
 export function query (query, variables) {
-  return fetch('https://f0uih51vu0.execute-api.eu-west-1.amazonaws.com/ci/graphql', {
+  return fetch(config.graphqlUrl, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
