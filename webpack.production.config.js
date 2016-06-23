@@ -26,12 +26,18 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      inject: 'body',
       template: 'src/index.template.html'
-    })
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({ comments: false }),
+    new webpack.IgnorePlugin(/^(buffertools)$/) // unwanted "deeper" dependency
   ],
   colors: true,
   progress: true
