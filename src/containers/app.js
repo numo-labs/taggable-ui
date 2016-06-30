@@ -16,20 +16,18 @@ export class App extends Component {
   }
 
   showLock () {
-    let idToken = localStorage.getItem('userToken');
     this.lock.show((err, profile, token) => {
       if (err) {
         console.log('Error signing in', err);
         return null;
-      } else if (!idToken) {
-        idToken = token;
-        localStorage.setItem('userToken', idToken);
+      } else {
+        localStorage.setItem('userToken', token);
       }
       if (profile.app_metadata.taggy && profile.app_metadata.taggy.R) { // permissions exist and read permission exists
         console.log('permissions', profile.app_metadata.taggy);
         const permissions = profile.app_metadata.taggy;
         const readOnly = !permissions.C;
-        this.props.savePermissions(idToken, readOnly);
+        this.props.savePermissions(token, readOnly);
       } else {
         this.props.setLoginError();
       }
