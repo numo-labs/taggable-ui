@@ -11,10 +11,11 @@ export default class ContentEditor extends Component {
       ...data,
       markets: data.markets ? data.markets : [],
       content: data.content ? data.content : [],
-      active: data.active ? data.active : true,
+      active: typeof data.active === 'boolean' ? data.active : true,
       description: data.description ? data.description : ''
     };
   }
+
   onSubmit (data) {
     const tagDoc = this.formatFormData(data.formData);
     if (data.errors.length === 0) {
