@@ -117,6 +117,7 @@ export function fetchTagDoc (tagid) {
         const markets = JSON.parse(tagDoc.markets);
         const doc = {
           ...tagDoc,
+          active: typeof tagDoc.active === 'boolean' ? tagDoc.active : true,
           markets: formatMarketsToEdit(markets)
         };
         return dispatch(setSelectedTagFromSearch(doc));
@@ -173,10 +174,10 @@ function saveTagDoc (tagDoc) {
 
 export function saveNewConfig () {
   return (dispatch, getState) => {
-    const { taggable: { tagInView: { _id: id, displayName, location, tags, metadata, markets, content, description } } } = getState();
+    const { taggable: { tagInView: { _id: id, displayName, active, location, tags, metadata, markets, content, description } } } = getState();
     // const { _id: id, displayName, location, tags, metadata, markets, content } = tagDoc;
     console.log('markets', markets);
-    const variables = {id, displayName, location, tags, metadata, description, markets: JSON.stringify(formatMarketsToSave(markets)), content};
+    const variables = {id, displayName, active, location, tags, metadata, description, markets: JSON.stringify(formatMarketsToSave(markets)), content};
     console.log('tag update request', variables);
     return graphqlService.query(MUTATION_CREATE_TAG, variables)
       .then(json => {
