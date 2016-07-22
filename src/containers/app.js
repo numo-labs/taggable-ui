@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as Actions from '../actions/tag.js';
-import Taggable from './Taggable.js';
+import Taggable from './taggable.js';
 import { Button, PageHeader } from 'react-bootstrap';
 
 export class App extends Component {
