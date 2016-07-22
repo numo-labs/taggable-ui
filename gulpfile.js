@@ -11,7 +11,7 @@ var options = minimist(process.argv);
  */
 
 var bucketName = 'www.tcdl.io';
-var bucketfolder = 'utils/taggable';
+var bucketfolder = 'utils/taggable/';
 
 gulp.task('deploy', function () {
   var env = options.env || 'CI';
@@ -45,7 +45,7 @@ function deployToProd () {
         };
         s3.putObject(params, function (err, data) {
           if (err) console.log('Object upload unsuccessful!', err);
-          else console.log('Object ' + filename + ' was created!');
+          else console.log('Object ' + params.Key + ' was created!');
         });
       });
     }
@@ -72,7 +72,7 @@ function deployToCI () {
         };
         s3.putObject(params, function (err, data) {
           if (err) console.log('Object upload unsuccessful!', err);
-          else console.log('Object ' + filename + ' was created!');
+          else console.log('Object ' + params.Key + ' was created!');
         });
       });
     }
