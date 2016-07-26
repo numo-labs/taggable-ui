@@ -118,7 +118,9 @@ export function fetchTagDoc (tagid) {
         const doc = {
           ...tagDoc,
           active: typeof tagDoc.active === 'boolean' ? tagDoc.active : true,
-          markets: formatMarketsToEdit(markets)
+          markets: formatMarketsToEdit(markets),
+          content: tagDoc.content || [],
+          description: tagDoc.description || ''
         };
         return dispatch(setSelectedTagFromSearch(doc));
       });
